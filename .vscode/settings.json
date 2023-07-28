@@ -1,0 +1,15 @@
+{
+  "files.exclude": {
+    "**/.git": false,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/__pycache__/**": true,
+    "**/*.pyc": true,
+    "**/*.spec.ts": false,
+    "**/*.styled.tsx": false,
+    "**/node_modules": false
+  }
+}
