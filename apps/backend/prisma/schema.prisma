@@ -10,11 +10,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model users {
-  id         Int     @id @default(autoincrement())
+model user {
+  id         String  @unique
   email      String  @unique
   password   String
-  is_active  Boolean @default(true)
-  first_name String?
+  first_name String
   last_name  String?
+
+  @@index([id])
+  @@map("users")
 }
