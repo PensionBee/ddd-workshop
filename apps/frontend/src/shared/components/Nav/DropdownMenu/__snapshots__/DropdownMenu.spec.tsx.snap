@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownMenu should not render hidden sub list items 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bcXHqe cIfdxZ"
+    data-rc="DropdownMenu"
+    data-state="closed"
+  >
+    <li
+      class="sc-hLBbgP JISOz"
+      data-highlighted="true"
+      data-rc="DropdownMenuItem"
+    >
+      <a
+        class="sc-eDvSVe rDWXz"
+        href="/"
+        tabindex="0"
+      >
+        <div
+          class="sc-dkrFOg hTlDyj"
+        >
+          Visible Item
+        </div>
+      </a>
+    </li>
+    <li
+      class="sc-hLBbgP bjcMb"
+      data-rc="DropdownMenuItemWithSubList"
+    >
+      <div
+        class="sc-jSUZER"
+      >
+        <button
+          class="sc-gKPRtg fWpcux"
+          tabindex="0"
+        >
+          SubList Item
+          <span
+            aria-hidden="true"
+            class="sc-gswNZR jBXcUP"
+            data-rc="LargeSystemIcon.ArrowRight"
+          >
+            <svg>
+              arrow-right.svg
+            </svg>
+          </span>
+        </button>
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenu should render correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bcXHqe cIfdxZ"
+    data-rc="DropdownMenu"
+    data-state="closed"
+  >
+    <li
+      class="sc-hLBbgP JISOz"
+      data-highlighted="true"
+      data-rc="DropdownMenuItem"
+    >
+      <a
+        class="sc-eDvSVe rDWXz"
+        href="/"
+        tabindex="0"
+      >
+        <div
+          class="sc-dkrFOg hTlDyj"
+        >
+          Visible Item
+        </div>
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

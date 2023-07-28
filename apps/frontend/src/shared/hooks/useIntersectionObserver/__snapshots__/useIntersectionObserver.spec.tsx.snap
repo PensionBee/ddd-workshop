@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useIntersectionObserver Default should call observe 1`] = `
+<DocumentFragment>
+  <div>
+    false
+  </div>
+</DocumentFragment>
+`;
+
+exports[`useIntersectionObserver Default should default visible with no intersection observer 1`] = `
+<DocumentFragment>
+  <div>
+    true
+  </div>
+</DocumentFragment>
+`;

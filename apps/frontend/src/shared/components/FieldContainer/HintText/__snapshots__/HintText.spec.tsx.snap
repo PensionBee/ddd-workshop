@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldWrapper/HintText should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe TOXwu"
+    data-rc="DisclaimerR"
+  >
+    Hint text
+  </span>
+</DocumentFragment>
+`;

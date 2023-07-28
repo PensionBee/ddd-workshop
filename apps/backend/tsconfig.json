@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
-    "module": "ES2022",
+    "module": "commonjs",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
+    "paths": {
+      "#contexts/*": ["src/contexts/*"],
+      "#shared/*": ["src/shared/*"]
+    },
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,

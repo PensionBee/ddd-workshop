@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldWrapper/Suffix Icon should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR dwYaUp"
+  >
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-rc="SmallSystemIcon.AlertInfo"
+    >
+      <svg>
+        alert-info.svg
+      </svg>
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper/Suffix Text should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR dwYaUp"
+  >
+    <span
+      class="sc-dkrFOg lcwtgS"
+      data-rc="BodySmallB"
+    >
+      Suffix text
+    </span>
+  </div>
+</DocumentFragment>
+`;

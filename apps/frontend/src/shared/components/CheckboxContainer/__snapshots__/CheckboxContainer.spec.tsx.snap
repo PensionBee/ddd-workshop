@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CheckboxContainer Default should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe OZwHh"
+    data-rc="CheckboxContainer"
+  >
+    <div
+      class="sc-gKPRtg chQDqR"
+    >
+      <div
+        class="sc-gKPRtg bxbHsa"
+        data-rc="Checkbox"
+      >
+        <button
+          aria-checked="false"
+          class="sc-hLBbgP foHXdo"
+          data-state="unchecked"
+          role="checkbox"
+          type="button"
+          value="on"
+        />
+      </div>
+    </div>
+    <span
+      class="sc-iBYQkv dvOEjP"
+      data-rc="BodySmallL"
+    >
+      Checkbox content
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CheckboxContainer Error should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe OZwHh"
+    data-rc="CheckboxContainer"
+  >
+    <div
+      class="sc-gKPRtg chQDqR"
+    >
+      <div
+        class="sc-gKPRtg bxbHsa"
+        data-rc="Checkbox"
+      >
+        <button
+          aria-checked="false"
+          class="sc-hLBbgP kaskJB"
+          data-state="unchecked"
+          role="checkbox"
+          type="button"
+          value="on"
+        />
+      </div>
+    </div>
+    <span
+      class="sc-iBYQkv dvOEjP"
+      data-rc="BodySmallL"
+    >
+      Checkbox content
+    </span>
+  </div>
+  <div
+    class="sc-gswNZR jKEHJh"
+  >
+    <span
+      class="sc-iBYQkv kYUYYL"
+      data-rc="DisclaimerR"
+    >
+      An error message
+    </span>
+  </div>
+</DocumentFragment>
+`;

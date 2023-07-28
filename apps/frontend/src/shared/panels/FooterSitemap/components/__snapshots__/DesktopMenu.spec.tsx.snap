@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DesktopList should render 1`] = `[Function]`;
+
+exports[`DesktopListItem should render 1`] = `[Function]`;
+
+exports[`DesktopMenu should render 1`] = `[Function]`;

@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionMenuItem should not render hidden sub list items 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSUZER cGzYVp"
+    data-rc="AccordionMenu"
+  >
+    <button
+      class="sc-gswNZR dmdjWu"
+      data-state="open"
+    >
+      <div
+        class="sc-jSUZER ljdiQH"
+      >
+        Menu
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+          data-rc="LargeSystemIcon.ChevronYellow"
+        >
+          <svg>
+            chevron-yellow.svg
+          </svg>
+        </span>
+      </div>
+    </button>
+    <div
+      class="sc-jSUZER fuBeJn"
+    />
+    <ul
+      class="sc-dkrFOg fXYAxm"
+    >
+      <li
+        class="sc-eDvSVe Jedgj"
+        data-rc="AccordionMenuItem"
+      >
+        <a
+          class="sc-gKPRtg hDcrGb"
+          data-rc="Link"
+          href="/"
+          target="_self"
+        >
+          <div
+            class="sc-jSUZER iKLYLh"
+          >
+            Visible Item
+          </div>
+        </a>
+      </li>
+      <li
+        class="sc-eDvSVe Jedgj"
+        data-rc="AccordionMenuItem"
+      >
+        <button
+          class="sc-gswNZR dmdjWu"
+          data-state="closed"
+        >
+          SubList Item
+          <span
+            aria-hidden="true"
+            class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+            data-rc="LargeSystemIcon.ChevronYellow"
+          >
+            <svg>
+              chevron-yellow.svg
+            </svg>
+          </span>
+        </button>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should not render if hidden 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSUZER cGzYVp"
+    data-rc="AccordionMenu"
+  >
+    <button
+      class="sc-gswNZR dmdjWu"
+      data-state="closed"
+    >
+      <div
+        class="sc-jSUZER ljdiQH"
+      >
+        Menu
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+          data-rc="LargeSystemIcon.ChevronYellow"
+        >
+          <svg>
+            chevron-yellow.svg
+          </svg>
+        </span>
+      </div>
+    </button>
+    <div
+      class="sc-jSUZER fuBeJn"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should render correctly with list 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSUZER cGzYVp"
+    data-rc="AccordionMenu"
+  >
+    <button
+      class="sc-gswNZR dmdjWu"
+      data-state="closed"
+    >
+      <div
+        class="sc-jSUZER ljdiQH"
+      >
+        Menu
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+          data-rc="LargeSystemIcon.ChevronYellow"
+        >
+          <svg>
+            chevron-yellow.svg
+          </svg>
+        </span>
+      </div>
+    </button>
+    <div
+      class="sc-jSUZER fuBeJn"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should render with data attributes 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSUZER cGzYVp"
+    data-rc="AccordionMenu"
+    data-test="test-attribute"
+  >
+    <button
+      class="sc-gswNZR dmdjWu"
+      data-state="closed"
+    >
+      <div
+        class="sc-jSUZER ljdiQH"
+      >
+        Menu
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+          data-rc="LargeSystemIcon.ChevronYellow"
+        >
+          <svg>
+            chevron-yellow.svg
+          </svg>
+        </span>
+      </div>
+    </button>
+    <div
+      class="sc-jSUZER fuBeJn"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should toggle the list on click 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-jSUZER cGzYVp"
+    data-rc="AccordionMenu"
+  >
+    <button
+      class="sc-gswNZR dmdjWu"
+      data-state="closed"
+    >
+      <div
+        class="sc-jSUZER ljdiQH"
+      >
+        Menu
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe lmcdLK sc-hLBbgP cqdzXG"
+          data-rc="LargeSystemIcon.ChevronYellow"
+        >
+          <svg>
+            chevron-yellow.svg
+          </svg>
+        </span>
+      </div>
+    </button>
+    <div
+      class="sc-jSUZER fuBeJn"
+    />
+  </div>
+</DocumentFragment>
+`;

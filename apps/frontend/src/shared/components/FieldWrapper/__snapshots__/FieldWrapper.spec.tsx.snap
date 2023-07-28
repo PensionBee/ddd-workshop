@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldWrapper With prefix icon should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gswNZR cvCIbd"
+  >
+    <div
+      class="sc-bcXHqe ctGgCZ"
+    >
+      <span
+        class="sc-hLBbgP ktrFWh"
+        data-rc="SmallSystemIcon.AlertInfo"
+      >
+        <svg>
+          alert-info.svg
+        </svg>
+      </span>
+    </div>
+    <div
+      class="sc-bcXHqe grQKHY sc-dkrFOg"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper With prefix should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gswNZR cvCIbd"
+  >
+    <div
+      class="sc-bcXHqe ctGgCZ"
+    >
+      <span
+        class="sc-eDvSVe enytKW"
+        data-rc="BodySmallB"
+      >
+        Prefix text
+      </span>
+    </div>
+    <div
+      class="sc-bcXHqe grQKHY sc-dkrFOg"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper With suffix should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gswNZR cvCIbd"
+  >
+    <div
+      class="sc-bcXHqe grQKHY sc-dkrFOg"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-bcXHqe HcrbJ"
+    >
+      <span
+        class="sc-eDvSVe enytKW"
+        data-rc="BodySmallB"
+      >
+        Suffix text
+      </span>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper With suffix should render correctly with suffix icon 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gswNZR cvCIbd"
+  >
+    <div
+      class="sc-bcXHqe grQKHY sc-dkrFOg"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-bcXHqe HcrbJ"
+    >
+      <span
+        class="sc-hLBbgP ktrFWh"
+        data-rc="SmallSystemIcon.AlertInfo"
+      >
+        <svg>
+          alert-info.svg
+        </svg>
+      </span>
+    </div>
+  </span>
+</DocumentFragment>
+`;

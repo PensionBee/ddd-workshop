@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldWrapper/Prefix Icon should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR iKcDWZ"
+  >
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-rc="SmallSystemIcon.AlertInfo"
+    >
+      <svg>
+        alert-info.svg
+      </svg>
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper/Prefix Text should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR iKcDWZ"
+  >
+    <span
+      class="sc-dkrFOg lcwtgS"
+      data-rc="BodySmallB"
+    >
+      Prefix text
+    </span>
+  </div>
+</DocumentFragment>
+`;

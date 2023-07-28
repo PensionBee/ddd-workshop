@@ -1,0 +1,669 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Default Accordion should close open content when an open item's heading is clicked again 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe bSmHjB"
+    data-rc="Accordion"
+  >
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rj:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:ri:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 1
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:ri:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rj:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rl:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rk:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 2
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rk:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rl:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rn:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rm:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 3
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rm:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rn:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Default Accordion should close open content when another heading is clicked 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe bSmHjB"
+    data-rc="Accordion"
+  >
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rd:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rc:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 1
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rc:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rd:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="open"
+    >
+      <h3
+        data-state="open"
+      >
+        <button
+          aria-controls="radix-:rf:"
+          aria-expanded="true"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="open"
+          id="radix-:re:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.MinusYellow"
+          >
+            <svg>
+              minus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 2
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:re:"
+        class="sc-hLBbgP lbVTL"
+        data-state="open"
+        id="radix-:rf:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      >
+        Content 2
+      </div>
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rh:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rg:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 3
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rg:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rh:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Default Accordion should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe bSmHjB"
+    data-rc="Accordion"
+  >
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:r1:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:r0:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 1
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:r0:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:r1:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:r3:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:r2:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 2
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:r2:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:r3:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:r5:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:r4:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 3
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:r4:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:r5:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Default Accordion should show the correct dropdown content when a heading is clicked 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe bSmHjB"
+    data-rc="Accordion"
+  >
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="open"
+    >
+      <h3
+        data-state="open"
+      >
+        <button
+          aria-controls="radix-:r7:"
+          aria-expanded="true"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="open"
+          id="radix-:r6:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.MinusYellow"
+          >
+            <svg>
+              minus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 1
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:r6:"
+        class="sc-hLBbgP lbVTL"
+        data-state="open"
+        id="radix-:r7:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      >
+        Content 1
+      </div>
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:r9:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:r8:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 2
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:r8:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:r9:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rb:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:ra:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 3
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:ra:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rb:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Initially Open Accordion should show the first item content on render 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe bSmHjB"
+    data-rc="Accordion"
+  >
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="open"
+    >
+      <h3
+        data-state="open"
+      >
+        <button
+          aria-controls="radix-:rp:"
+          aria-expanded="true"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="open"
+          id="radix-:ro:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.MinusYellow"
+          >
+            <svg>
+              minus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 1
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:ro:"
+        class="sc-hLBbgP lbVTL"
+        data-state="open"
+        id="radix-:rp:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width); transition-duration: 0s; animation-name: none;"
+      >
+        Content 1
+      </div>
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rr:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rq:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 2
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rq:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rr:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+    <div
+      class="sc-gswNZR eoZMGq"
+      data-state="closed"
+    >
+      <h3
+        data-state="closed"
+      >
+        <button
+          aria-controls="radix-:rt:"
+          aria-expanded="false"
+          class="sc-dkrFOg fYgpNG"
+          data-radix-collection-item=""
+          data-state="closed"
+          id="radix-:rs:"
+          type="button"
+        >
+          <span
+            class="sc-jSUZER TGmAq"
+            data-rc="LargeSystemIcon.PlusYellow"
+          >
+            <svg>
+              plus-yellow.svg
+            </svg>
+          </span>
+          <div
+            class="sc-eDvSVe eErMbn"
+          >
+            Heading 3
+          </div>
+        </button>
+      </h3>
+      <div
+        aria-labelledby="radix-:rs:"
+        class="sc-hLBbgP lbVTL"
+        data-state="closed"
+        hidden=""
+        id="radix-:rt:"
+        role="region"
+        style="--radix-accordion-content-height: var(--radix-collapsible-content-height); --radix-accordion-content-width: var(--radix-collapsible-content-width);"
+      />
+    </div>
+  </div>
+</DocumentFragment>
+`;

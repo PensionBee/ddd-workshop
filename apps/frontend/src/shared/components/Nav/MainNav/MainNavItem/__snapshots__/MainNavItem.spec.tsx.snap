@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainNavItem should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-csuSiG hrlAfi"
+    data-rc="MainNavItem"
+    data-state="closed"
+  >
+    <button
+      class="sc-pyfCe hMxGWU"
+    >
+      Item Content
+      <span
+        aria-hidden="true"
+        class="sc-gswNZR iagQga sc-jrcTuL hgtJKb"
+        data-rc="LargeSystemIcon.ChevronYellow"
+      >
+        <svg>
+          chevron-yellow.svg
+        </svg>
+      </span>
+    </button>
+    <div
+      class="sc-ipEyDJ cPLSnD"
+    />
+  </li>
+</DocumentFragment>
+`;

@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Default should fire click event 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR cNWqhU"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Default should render as link 1`] = `
+<DocumentFragment>
+  <a
+    class="sc-gswNZR cNWqhU"
+    data-rc="Button"
+    data-testid="button-test-id"
+    href="/test"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Button Default should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Default Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Default should render variant correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR cNWqhU"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Disabled should have disabled attribute when disabled 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    disabled=""
+    type="button"
+  >
+    <span>
+      Default Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Icons should render icon on left side 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    type="button"
+  >
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg>
+        copy.svg
+      </svg>
+    </span>
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Icons should render icon on right side (default) 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg>
+        copy.svg
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Icons should render with arrow icon 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-icon="Actions"
+      data-rc="SmallSystemIcon.Actions"
+    >
+      <svg>
+        actions.svg
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button Icons should render with copy icon 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gswNZR kmzXNr"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bcXHqe lnJndv"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg>
+        copy.svg
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;

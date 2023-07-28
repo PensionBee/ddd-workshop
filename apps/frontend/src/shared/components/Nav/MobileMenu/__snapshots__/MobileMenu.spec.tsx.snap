@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MobileMenu should not render hidden sub list items 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bcXHqe jaBEXw"
+  >
+    <li
+      class="sc-gswNZR"
+      data-rc="MobileMenuItem"
+    >
+      <a
+        class="sc-dkrFOg cdXgbd"
+        href="/"
+      >
+        Visible Item
+      </a>
+    </li>
+    <li
+      class="sc-gswNZR"
+    >
+      <div
+        class="sc-hLBbgP"
+      >
+        <button
+          class="sc-eDvSVe hLcQzC"
+        >
+          SubList Item
+          <span
+            aria-hidden="true"
+            class="sc-iBYQkv jlReuQ"
+            data-rc="LargeSystemIcon.ArrowRight"
+          >
+            <svg>
+              arrow-right.svg
+            </svg>
+          </span>
+        </button>
+      </div>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
+
+exports[`MobileMenu should render correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bcXHqe jaBEXw"
+  >
+    <li
+      class="sc-gswNZR"
+      data-rc="MobileMenuItem"
+    >
+      <a
+        class="sc-dkrFOg cdXgbd"
+        href="/"
+      >
+        Visible Item
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;

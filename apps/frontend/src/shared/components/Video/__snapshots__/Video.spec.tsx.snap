@@ -1,0 +1,107 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Video Default should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR jicaaU"
+  >
+    <div
+      class="sc-gswNZR gJxzFG"
+    >
+      <div
+        data-controls="true"
+        data-loop="false"
+        data-muted="false"
+        data-url="example-url"
+      >
+        video-component
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Video Default should render correctly without thumbnail 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR jicaaU"
+  >
+    <div
+      class="sc-gswNZR gJxzFG"
+    >
+      <div
+        data-controls="true"
+        data-loop="false"
+        data-muted="false"
+        data-url="example-url"
+      >
+        video-component
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Video Modal should close correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR jicaaU"
+  >
+    <div
+      class="sc-gswNZR gJxzFG"
+    >
+      <button
+        class="sc-jSUZER iXDapD"
+      >
+        <div
+          class="sc-gswNZR ijzHa-d sc-eDvSVe hSqznv"
+        >
+          <span
+            class="sc-bcXHqe ffJoEj"
+            data-rc="LargeSystemIcon.Play"
+          >
+            <svg>
+              play.svg
+            </svg>
+          </span>
+        </div>
+        <img
+          src="example-thumbnail"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Video Modal should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR jicaaU"
+  >
+    <div
+      class="sc-gswNZR gJxzFG"
+    >
+      <button
+        class="sc-jSUZER iXDapD"
+      >
+        <div
+          class="sc-gswNZR ijzHa-d sc-eDvSVe hSqznv"
+        >
+          <span
+            class="sc-bcXHqe ffJoEj"
+            data-rc="LargeSystemIcon.Play"
+          >
+            <svg>
+              play.svg
+            </svg>
+          </span>
+        </div>
+        <img
+          src="example-thumbnail"
+        />
+      </button>
+    </div>
+  </div>
+</DocumentFragment>
+`;

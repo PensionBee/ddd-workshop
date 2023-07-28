@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    data-state="closed"
+    type="button"
+  >
+    Tooltip
+  </button>
+</DocumentFragment>
+`;

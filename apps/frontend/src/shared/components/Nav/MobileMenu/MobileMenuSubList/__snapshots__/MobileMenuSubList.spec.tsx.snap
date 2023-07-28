@@ -1,0 +1,136 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MobileMenuSubList should not render hidden items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bcXHqe"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gswNZR bshdub"
+      href="/"
+    >
+      Visible Item
+    </a>
+  </li>
+  <li
+    class="sc-bcXHqe"
+  >
+    <div
+      class="sc-dkrFOg"
+    >
+      <button
+        class="sc-hLBbgP eSmwXa"
+      >
+        SubList Item
+        <span
+          aria-hidden="true"
+          class="sc-gKPRtg hFyFWP"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuSubList should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bcXHqe"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gswNZR bshdub"
+      href="/"
+    >
+      Visible Item
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuSubList should render items with href as link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bcXHqe"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gswNZR bshdub"
+      href="/"
+    >
+      Visible Item
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuSubList should render items with subList with subList 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bcXHqe"
+  >
+    <div
+      class="sc-dkrFOg"
+    >
+      <button
+        class="sc-hLBbgP eSmwXa"
+      >
+        SubList Item
+        <span
+          aria-hidden="true"
+          class="sc-gKPRtg hFyFWP"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+      <div
+        class="sc-jSUZER czZcHH"
+        data-motion="from-end"
+      >
+        <ul
+          class="sc-iBYQkv dpCIcP"
+        >
+          <li
+            class="sc-bcXHqe"
+          >
+            <button
+              class="sc-eDvSVe gkKLeg"
+            >
+              <span
+                aria-hidden="true"
+                class="sc-gKPRtg gcWTWd"
+                data-rc="LargeSystemIcon.ArrowRight"
+              >
+                <svg>
+                  arrow-right.svg
+                </svg>
+              </span>
+              SubList Item
+            </button>
+          </li>
+          <li
+            class="sc-bcXHqe"
+            data-rc="MobileMenuItem"
+          >
+            <a
+              class="sc-gswNZR bshdub"
+              href="/"
+            >
+              Visible Item
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</DocumentFragment>
+`;

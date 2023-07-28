@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`useWindowScroll should set the window scroll on initial render 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="scroll-position"
+    data-value="0"
+  />
+</DocumentFragment>
+`;
+
+exports[`useWindowScroll should update the window scroll position on scroll 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="scroll-position"
+    data-value="500"
+  />
+</DocumentFragment>
+`;

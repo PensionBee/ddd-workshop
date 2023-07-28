@@ -1,0 +1,317 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { MultiStepForm } from "./example/ExampleMultiStepForm";
+
+<Meta
+  title="Shared/Multi Step Form/Docs"
+  component={MultiStepForm}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Multi Step Form
+
+## Example
+
+<Canvas>
+  <Story id="shared-multi-step-form--example" />
+</Canvas>
+
+## Table of Contents
+
+- [Multi Step Form](#multi-step-form)
+  - [Example](#example)
+  - [Table of Contents](#table-of-contents)
+  - [Form Setup](#form-setup)
+    - [Config](#config)
+      - [Create Config File](#create-config-file)
+      - [Initial imports](#initial-imports)
+      - [Form Schema](#form-schema)
+      - [Create types](#create-types)
+      - [Create initial state](#create-initial-state)
+      - [Create context](#create-context)
+      - [Create form partial object](#create-form-partial-object)
+    - [Create useMultiStepForm hook](#create-usemultistepform-hook)
+      - [Create useMultiStepForm file](#create-usemultistepform-file)
+      - [Import hook and config](#import-hook-and-config)
+      - [Create hook](#create-hook)
+    - [Partials](#partials)
+      - [Create partials](#create-partials)
+      - [Update partials object](#update-partials-object)
+    - [Form Wrapper](#form-wrapper)
+      - [Create form wrapper file](#create-form-wrapper-file)
+      - [Import dependencies](#import-dependencies)
+      - [Create form wrapper component](#create-form-wrapper-component)
+
+
+## Form Setup
+
+### Config
+
+The config file contains all the information needed to create the multi step form. It is also the source of truth for the form schema, partials and initial state keeping it all in one place.
+
+#### Create Config File
+
+Create a `MultiStepForm.config.ts` file.
+
+#### Initial imports
+
+Import `createMultiStepFormContext` and the MultiStep utility types from `@shared/components` and `{ z }` from `zod`.
+
+```tsx
+import { z } from "zod";
+import {
+  createMultiStepFormContext,
+} from "@shared/components/MultiStepForm";
+import type {
+  MultiStepFormStep,
+  MultiStepFormState,
+  MultiStepFormPartials
+} from "@shared/components/MultiStepForm";
+```
+
+#### Form Schema
+
+Create a `formSchema` using `zod` to define the shape, types and validation of the form.
+
+The `formSchema` should have the steps as the top level keys in uppercase and the values of those keys as objects with the data for that step.
+
+```js
+z.object({
+  STEP_A: z.object({
+    // ... data for step a
+  }),
+  STEP_B: z.object({
+    // ... data for step b
+  }),
+});
+```
+
+The `MultiStepForm` utility types and hook will automatically generate the steps based on the keys in the `formSchema`.
+
+```js
+{
+  STEP_A: {
+    // ... data for step a
+  },
+  STEP_B: {
+    // ... data for step b
+  },
+}
+```
+
+Example:
+
+```tsx
+// Multi-step form schema
+export const FORM_SCHEMA = z.object({
+  STEP_1: z
+    .object({
+      firstName: z.string().min(1, "First name is required"),
+      lastName: z.string().min(1, "Last name is required"),
+      email: z.string().email(),
+      password: z.string().min(8, "Password must be at least 8 characters"),
+      confirmPassword: z
+        .string()
+        .min(8, "Password must be at least 8 characters"),
+    })
+    .refine(({ confirmPassword, password }) => confirmPassword === password, {
+      message: "Passwords do not match",
+      path: ["confirmPassword"],
+    }),
+  STEP_2: z.object({
+    address: z.string().min(1),
+    city: z.string().min(1),
+    state: z.string().min(1),
+    zip: z.string().min(1),
+  }),
+  STEP_3: z.object({
+    cardName: z.string().min(1),
+    cardNumber: z.string().min(1),
+    expiryDate: z.string().min(1),
+    cvv: z.string(),
+  }),
+});
+```
+
+> **Note:** You can validate that `formSchema` is in the correct format by checking the type of `z.infer<typeof FORM_SCHEMA>`.
+
+> **Note:** Find out more about zod schemas here [https://zod.dev/](https://zod.dev/)
+
+#### Create types
+
+Create and export the following types:
+
+```tsx
+export type FormSchema = typeof formSchema;
+export type FormStep = MultiStepFormStep<FormSchema>;
+export type FormState = MultiStepFormState<FormSchema>;
+export type FormPartials = MultiStepFormPartials<FormStep>;
+```
+
+#### Create initial state
+
+Create and export an initial form state object, the object should be in the format of `{ step, data }` where `step` is the initial step and `data` is the initial data for all steps.
+
+> **Note:** The initial state object should be typecast to the `FormState` type created above. This is so that the types are infered properly when passing the state to the context provider.
+
+```tsx
+export const initialFormState: FormState = {
+  step: "STEP_1",
+  data: {
+    STEP_1: {
+      firstName: "Bob",
+    },
+  },
+};
+```
+
+#### Create context
+
+Create and export a context using the `createMultiStepFormContext` function imported above, passing both the `formSchema` and `initialFormState` as arguments.
+
+```tsx
+export const FormContext = createMultiStepFormContext(
+  formSchema,
+  initialFormState
+);
+```
+
+#### Create form partial object
+
+Create and export a form partial object, the object should have the steps as keys and the partials components as values.
+
+> **Note:** We'll be creating the partials later, for now they can just be set as `() => <div />`.
+
+> **Note:** While not required, it's useful to typecast the `formPartials` to the `FormPartials` type created above to type check that we haven't missed any.
+
+```tsx
+// Form partials
+export const formPartials: FormPartials = {
+  STEP_1: () => <div />,
+  STEP_2: () => <div />,
+  STEP_3: () => <div />,
+};
+```
+
+### Create useMultiStepForm hook
+
+Create and export a custom hook to use the multi step form, this will be used inside each of the partials to access and update the state.
+
+#### Create useMultiStepForm file
+
+Next to the `MultiStepForm.config.ts` file create a `useMultiStepForm.ts` file. This file will contain the custom hook to access the context.
+
+#### Import hook and config
+
+Import `useMultiStepForm` from `@shared/components` and `FormStep`, `formSchema` and `FormContext` from `MultiStepForm.config.ts`.
+
+```tsx
+import useMultiStepForm from "@shared/components/MultiStepForm";
+import {
+  type FormStep,
+  formSchema,
+  FormContext,
+} from "./MultiStepForm.config";
+```
+
+#### Create hook
+
+Create and export a custom hook using the `useMultiStepForm` hook.
+
+Create a generic type for the step, this should be the type of the step that the hook will be used for, it is important that this is generic so that the types are infered correctly.
+
+Create a partial schema using the `formSchema`, by using the `.shape` method ans passing in the current step.
+
+Return the `useMultiStepForm` hook passing in the `formSchema`, `partialSchema` and the `FormContext` as arguments.
+
+```tsx
+const useMultiStepFormHook = <Step extends FormStep>(step: Step) => {
+  const partialSchema = formSchema.shape[step];
+  return useMultiStepForm(formSchema, partialSchema, FormContext);
+};
+
+export default useMultiStepFormHook;
+```
+
+### Partials
+
+Partials are the components that will be rendered for each step of the form.
+
+#### Create partials
+
+In the same directory as the `MultiStepForm.config.ts` file create a `partials` directory.
+
+Inside the `partials` directory create a file for each step of the form, the file name should be the step in PascalCase.
+
+For example, if the steps are `STEP_1`, `STEP_2` and `STEP_3` then the partials should be `Step1.tsx`, `Step2.tsx` and `Step3.tsx`.
+
+> **Note:** More information on the partials can be found in the [Partial Setup](#partial-setup) section.
+
+#### Update partials object
+
+Inside the `MultiStepForm.config.ts` file update the `formPartials` object to import and export the partials.
+
+```tsx
+// ...
+
+import { Step1 } from "./partials/Step1";
+import { Step2 } from "./partials/Step2";
+import { Step3 } from "./partials/Step3";
+
+// ...
+
+export const formPartials: FormPartials = {
+  STEP_1: Step1,
+  STEP_2: Step2,
+  STEP_3: Step3,
+};
+```
+
+### Form Wrapper
+
+The form wrapper is the component that will be used to wrap the form partials, it will also render the form navigation.
+
+#### Create form wrapper file
+
+In the same directory as the `MultiStepForm.config.ts` file create a `MultiStepForm.tsx` file.
+
+#### Import dependencies
+
+Import `MultiStepForm` from `@shared/components`.
+
+Import `formSchema`, `FormContext` and `formPartials` and `initialFormState` from `MultiStepForm.config.ts`.
+
+```tsx
+import { MultiStepForm } from "@shared/components/MultiStepForm";
+import {
+  formSchema,
+  FormContext,
+  formPartials,
+  initialFormState,
+} from "./ExampleMultiStepForm.config";
+```
+
+#### Create form wrapper component
+
+Create and export a form wrapper component.
+
+Return the `MultiStepForm` component passing in the `formSchema`, `FormContext`, `formPartials` and `initialFormState` as props.
+
+```tsx
+const ExampleMultiStepForm = () => {
+  return (
+    <MultiStepForm
+      _schema={formSchema}
+      Context={FormContext}
+      partials={formPartials}
+      initialState={initialFormState}
+    />
+  );
+};
+
+export default ExampleMultiStepForm;
+```

@@ -1,0 +1,142 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MobileMenuItemWithSubList should not render hidden items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER iFFlUE"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe cPPIlf"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+      <div
+        class="sc-iBYQkv iPPvzM"
+        data-motion="from-end"
+      >
+        <ul
+          class="sc-gswNZR kZmbGA"
+        >
+          <li
+            class="sc-dkrFOg"
+          >
+            <button
+              class="sc-gKPRtg fkkeDi"
+            >
+              <span
+                aria-hidden="true"
+                class="sc-bcXHqe gxOeTh"
+                data-rc="LargeSystemIcon.ArrowRight"
+              >
+                <svg>
+                  arrow-right.svg
+                </svg>
+              </span>
+              Item Content
+            </button>
+          </li>
+          <li
+            class="sc-dkrFOg"
+            data-rc="MobileMenuItem"
+          >
+            <a
+              class="sc-hLBbgP iybioF"
+              href="/"
+            >
+              Visible Item
+            </a>
+          </li>
+          <li
+            class="sc-dkrFOg"
+          >
+            <div
+              class="sc-eDvSVe"
+            >
+              <button
+                class="sc-jSUZER iFFlUE"
+              >
+                SubList Item
+                <span
+                  aria-hidden="true"
+                  class="sc-bcXHqe cPPIlf"
+                  data-rc="LargeSystemIcon.ArrowRight"
+                >
+                  <svg>
+                    arrow-right.svg
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuItemWithSubList should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER iFFlUE"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe cPPIlf"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuItemWithSubList should toggle subList 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER iFFlUE"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe cPPIlf"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;

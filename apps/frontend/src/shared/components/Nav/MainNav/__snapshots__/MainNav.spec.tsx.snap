@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainNav should not render hidden sub list items 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe fqQwmU"
+    data-rc="MainNav"
+  >
+    <ul
+      class="sc-gswNZR jdAFhG"
+    >
+      <li
+        class="sc-bqWxrE dJvvDl"
+        data-rc="MainNavLink"
+      >
+        <a
+          class="sc-csuSiG lnZrdg"
+          href="/"
+        >
+          Visible Item
+        </a>
+      </li>
+      <li
+        class="sc-bqWxrE dJvvDl"
+        data-rc="MainNavItem"
+        data-state="closed"
+      >
+        <button
+          class="sc-kDvujY iVcEOy"
+        >
+          SubList Item
+          <span
+            aria-hidden="true"
+            class="sc-hLBbgP fEYWcg sc-ipEyDJ guhhVG"
+            data-rc="LargeSystemIcon.ChevronYellow"
+          >
+            <svg>
+              chevron-yellow.svg
+            </svg>
+          </span>
+        </button>
+        <div
+          class="sc-eDWCr haeOkf"
+        />
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`MainNav should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe fqQwmU"
+    data-rc="MainNav"
+  >
+    <ul
+      class="sc-gswNZR jdAFhG"
+    >
+      <li
+        class="sc-bqWxrE dJvvDl"
+        data-rc="MainNavLink"
+      >
+        <a
+          class="sc-csuSiG lnZrdg"
+          href="/"
+        >
+          Visible Item
+        </a>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;

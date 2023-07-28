@@ -1,0 +1,60 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { TextAreaField } from "./TextAreaField";
+import { GridItem } from "@shared/components/Grid"
+
+<Meta
+  title="Shared/Text Area Field/Docs"
+  component={TextAreaField}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Text Area Field
+
+## Props
+
+<ArgsTable of={TextAreaField} />
+
+## Usage & Customisation
+
+### Labels
+
+<Canvas>
+  <Story id="shared-text-area-field--default" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-text-area-field--tooltip" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-text-area-field--link" />
+</Canvas>
+
+### States
+
+<Canvas>
+  <Story id="shared-text-area-field--placeholder" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-text-area-field--default-value" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-text-area-field--error" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-text-area-field--disabled" />
+</Canvas>
+
+### Hint Text
+
+<Canvas>
+  <Story id="shared-text-area-field--hint-text" />
+</Canvas>

@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldContainer Default should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bANfYu sc-iBYQkv dNyaQo"
+  >
+    <div
+      class="sc-gswNZR joFDJF"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer With error message should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bANfYu sc-iBYQkv dNyaQo"
+  >
+    <label
+      class="sc-gswNZR gbpcZv"
+    >
+      <span
+        class="sc-bcXHqe fLXyHo"
+        data-rc="BodySmallB"
+      >
+        Label
+      </span>
+    </label>
+    <div
+      class="sc-gswNZR joFDJF"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-gswNZR bwgTNC sc-dkrFOg kvDetP"
+    >
+      <span
+        class="sc-bcXHqe hVJkQo"
+        data-rc="DisclaimerR"
+      >
+        Error message
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer With hint text should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bANfYu sc-iBYQkv dNyaQo"
+  >
+    <div
+      class="sc-gswNZR joFDJF"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <span
+      class="sc-bcXHqe TOXwu"
+      data-rc="DisclaimerR"
+    >
+      Hint text
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer With label should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gswNZR bANfYu sc-iBYQkv dNyaQo"
+  >
+    <label
+      class="sc-gswNZR gbpcZv"
+    >
+      <span
+        class="sc-bcXHqe fLXyHo"
+        data-rc="BodySmallB"
+      >
+        Label
+      </span>
+    </label>
+    <div
+      class="sc-gswNZR joFDJF"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

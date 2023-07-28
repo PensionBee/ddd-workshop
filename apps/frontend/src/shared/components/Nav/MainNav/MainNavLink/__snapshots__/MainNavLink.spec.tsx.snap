@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MainNavItem should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER dDTVlj"
+    data-rc="MainNavLink"
+  >
+    <a
+      class="sc-hLBbgP japqQX"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MainNavItem should render with href 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER dDTVlj"
+    data-rc="MainNavLink"
+  >
+    <a
+      class="sc-hLBbgP japqQX"
+      href="/example"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;

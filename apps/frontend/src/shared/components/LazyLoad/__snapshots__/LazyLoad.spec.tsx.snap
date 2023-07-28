@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LazyLoad Default should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bcXHqe"
+  >
+    Lazy Content
+  </div>
+</DocumentFragment>
+`;

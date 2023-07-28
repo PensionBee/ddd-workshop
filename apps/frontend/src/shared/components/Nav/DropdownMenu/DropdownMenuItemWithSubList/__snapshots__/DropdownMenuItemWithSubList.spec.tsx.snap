@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownMenuItemWithSubList should not render hidden items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER bdIhA-d"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gswNZR jBXcUP"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+      <div
+        class="sc-iBYQkv dXSGpV"
+        data-motion="from-end"
+      >
+        <ul
+          class="sc-bcXHqe cIfdxZ"
+        >
+          <li
+            class="sc-dkrFOg czKpsH"
+          >
+            <button
+              class="sc-gKPRtg VGqfn"
+              tabindex="0"
+            >
+              <span
+                aria-hidden="true"
+                class="sc-gswNZR bxtTOw"
+                data-rc="LargeSystemIcon.ArrowRight"
+              >
+                <svg>
+                  arrow-right.svg
+                </svg>
+              </span>
+              Item Content
+            </button>
+          </li>
+          <li
+            class="sc-dkrFOg jrdWHL"
+            data-highlighted="true"
+            data-rc="DropdownMenuItem"
+          >
+            <a
+              class="sc-hLBbgP jEcUor"
+              href="/"
+              tabindex="0"
+            >
+              <div
+                class="sc-ftTHYK jaPIrI"
+              >
+                Visible Item
+              </div>
+            </a>
+          </li>
+          <li
+            class="sc-dkrFOg czKpsH"
+            data-rc="DropdownMenuItemWithSubList"
+          >
+            <div
+              class="sc-eDvSVe"
+            >
+              <button
+                class="sc-jSUZER bdIhA-d"
+                tabindex="0"
+              >
+                SubList Item
+                <span
+                  aria-hidden="true"
+                  class="sc-gswNZR jBXcUP"
+                  data-rc="LargeSystemIcon.ArrowRight"
+                >
+                  <svg>
+                    arrow-right.svg
+                  </svg>
+                </span>
+              </button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItemWithSubList should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER bdIhA-d"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gswNZR jBXcUP"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItemWithSubList should toggle subList 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER bdIhA-d"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gswNZR jBXcUP"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;

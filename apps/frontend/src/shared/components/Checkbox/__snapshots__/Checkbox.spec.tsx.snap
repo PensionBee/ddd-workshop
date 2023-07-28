@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox Default should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-eDvSVe cYuVyI"
+    data-rc="Checkbox"
+  >
+    <button
+      aria-checked="false"
+      class="sc-gswNZR cSNIzy"
+      data-state="unchecked"
+      role="checkbox"
+      type="button"
+      value="on"
+    />
+  </div>
+</DocumentFragment>
+`;

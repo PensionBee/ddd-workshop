@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HeaderBeehiveMenu should render on desktop 1`] = `[Function]`;
+
+exports[`HeaderBeehiveMenu should render on mobile 1`] = `[Function]`;

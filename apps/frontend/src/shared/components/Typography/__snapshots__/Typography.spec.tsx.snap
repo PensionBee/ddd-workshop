@@ -1,0 +1,605 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppNav should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kKEFKh"
+    data-rc="AppNav"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`AppNav should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kKEFKh"
+    data-rc="AppNav"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodyLarge should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe dwTOTM"
+    data-rc="BodyLarge"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodyLarge should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe dwTOTM"
+    data-rc="BodyLarge"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodyMedium should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fqYyJl"
+    data-rc="BodyMedium"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodyMedium should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fqYyJl"
+    data-rc="BodyMedium"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallB should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fLXyHo"
+    data-rc="BodySmallB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallB should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fLXyHo"
+    data-rc="BodySmallB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallH should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kcQqRr"
+    data-rc="BodySmallH"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallH should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kcQqRr"
+    data-rc="BodySmallH"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallL should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kZtoHY"
+    data-rc="BodySmallL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallL should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kZtoHY"
+    data-rc="BodySmallL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallM should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe gZSgGG"
+    data-rc="BodySmallM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallM should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe gZSgGG"
+    data-rc="BodySmallM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallR should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kxAKhv"
+    data-rc="BodySmallR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`BodySmallR should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kxAKhv"
+    data-rc="BodySmallR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionB should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe jRnxYS"
+    data-rc="CaptionB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionB should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe jRnxYS"
+    data-rc="CaptionB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionL should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe eDRHYi"
+    data-rc="CaptionL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionL should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe eDRHYi"
+    data-rc="CaptionL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionM should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe iDsPZA"
+    data-rc="CaptionM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionM should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe iDsPZA"
+    data-rc="CaptionM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionR should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe bKYcGN"
+    data-rc="CaptionR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`CaptionR should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe bKYcGN"
+    data-rc="CaptionR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Category should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe iMRdcZ"
+    data-rc="Category"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Category should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe iMRdcZ"
+    data-rc="Category"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Default Typography should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe kZtoHY"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerB should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe lmdtRy"
+    data-rc="DisclaimerB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerB should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe lmdtRy"
+    data-rc="DisclaimerB"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerL should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fYHDQO"
+    data-rc="DisclaimerL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerL should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe fYHDQO"
+    data-rc="DisclaimerL"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerM should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe ghfmMo"
+    data-rc="DisclaimerM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerM should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe ghfmMo"
+    data-rc="DisclaimerM"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerR should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe isXsVB"
+    data-rc="DisclaimerR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`DisclaimerR should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe isXsVB"
+    data-rc="DisclaimerR"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display1 should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe jiNgzy"
+    data-rc="Display1"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display1 should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe jiNgzy"
+    data-rc="Display1"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display2 should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe lnybUR"
+    data-rc="Display2"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display2 should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe lnybUR"
+    data-rc="Display2"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display3 should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe hVKojE"
+    data-rc="Display3"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display3 should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe hVKojE"
+    data-rc="Display3"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display4 should render as correct element 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe hgxPqg"
+    data-rc="Display4"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Display4 should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bcXHqe hgxPqg"
+    data-rc="Display4"
+  >
+    Default text
+  </span>
+</DocumentFragment>
+`;
+
+exports[`Heading 1 should render as correct element 1`] = `
+<DocumentFragment>
+  <h1
+    class="sc-bcXHqe iVzFjF"
+    data-rc="Heading1"
+  >
+    Default text
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`Heading 1 should render correctly 1`] = `
+<DocumentFragment>
+  <h1
+    class="sc-bcXHqe iVzFjF"
+    data-rc="Heading1"
+  >
+    Default text
+  </h1>
+</DocumentFragment>
+`;
+
+exports[`Heading 2 El should render as correct element 1`] = `
+<DocumentFragment>
+  <h2
+    class="sc-bcXHqe fAuqat"
+    data-rc="Heading2El"
+  >
+    Default text
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading 2 El should render correctly 1`] = `
+<DocumentFragment>
+  <h2
+    class="sc-bcXHqe fAuqat"
+    data-rc="Heading2El"
+  >
+    Default text
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading 2 should render as correct element 1`] = `
+<DocumentFragment>
+  <h2
+    class="sc-bcXHqe fWEGuj"
+    data-rc="Heading2"
+  >
+    Default text
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading 2 should render correctly 1`] = `
+<DocumentFragment>
+  <h2
+    class="sc-bcXHqe fWEGuj"
+    data-rc="Heading2"
+  >
+    Default text
+  </h2>
+</DocumentFragment>
+`;
+
+exports[`Heading 3 El should render as correct element 1`] = `
+<DocumentFragment>
+  <h3
+    class="sc-bcXHqe iHDnkX"
+    data-rc="Heading3El"
+  >
+    Default text
+  </h3>
+</DocumentFragment>
+`;
+
+exports[`Heading 3 El should render correctly 1`] = `
+<DocumentFragment>
+  <h3
+    class="sc-bcXHqe iHDnkX"
+    data-rc="Heading3El"
+  >
+    Default text
+  </h3>
+</DocumentFragment>
+`;
+
+exports[`Heading 3 should render as correct element 1`] = `
+<DocumentFragment>
+  <h3
+    class="sc-bcXHqe cLLxIR"
+    data-rc="Heading3"
+  >
+    Default text
+  </h3>
+</DocumentFragment>
+`;
+
+exports[`Heading 3 should render correctly 1`] = `
+<DocumentFragment>
+  <h3
+    class="sc-bcXHqe cLLxIR"
+    data-rc="Heading3"
+  >
+    Default text
+  </h3>
+</DocumentFragment>
+`;
+
+exports[`Heading 4 should render as correct element 1`] = `
+<DocumentFragment>
+  <h4
+    class="sc-bcXHqe ksUGjS"
+    data-rc="Heading4"
+  >
+    Default text
+  </h4>
+</DocumentFragment>
+`;
+
+exports[`Heading 4 should render correctly 1`] = `
+<DocumentFragment>
+  <h4
+    class="sc-bcXHqe ksUGjS"
+    data-rc="Heading4"
+  >
+    Default text
+  </h4>
+</DocumentFragment>
+`;

@@ -1,0 +1,73 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { SelectField } from "./SelectField";
+
+<Meta
+  title="Shared/Select Field/Docs"
+  component={SelectField}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Input Field
+
+## Props
+
+<ArgsTable of={SelectField} />
+
+## Usage & Customisation
+
+### Labels
+
+<Canvas>
+  <Story id="shared-select-field--default" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--tooltip" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--link" />
+</Canvas>
+
+### Prefix
+
+<Canvas>
+  <Story id="shared-select-field--prefix-text" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--prefix-icon" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--prefix-icon-fill" />
+</Canvas>
+
+### States
+
+<Canvas>
+  <Story id="shared-select-field--placeholder" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--default-value" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--error" />
+</Canvas>
+
+<Canvas>
+  <Story id="shared-select-field--disabled" />
+</Canvas>
+
+### Hint Text
+
+<Canvas>
+  <Story id="shared-select-field--hint-text" />
+</Canvas>

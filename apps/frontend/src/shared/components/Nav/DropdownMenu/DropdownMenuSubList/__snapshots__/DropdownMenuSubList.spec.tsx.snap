@@ -1,0 +1,165 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownMenuSubList should not render hidden items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg jrdWHL"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER bdIhA-d"
+        tabindex="0"
+      >
+        SubList Item
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe kkyZir"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuSubList should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg jrdWHL"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuSubList should render items with href as link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg jrdWHL"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuSubList should render items with subList with subList 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eDvSVe"
+    >
+      <button
+        class="sc-jSUZER bdIhA-d"
+        tabindex="0"
+      >
+        SubList Item
+        <span
+          aria-hidden="true"
+          class="sc-bcXHqe kkyZir"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg>
+            arrow-right.svg
+          </svg>
+        </span>
+      </button>
+      <div
+        class="sc-iBYQkv dXSGpV"
+        data-motion="from-end"
+      >
+        <ul
+          class="sc-ftTHYK dEXyYo"
+        >
+          <li
+            class="sc-dkrFOg czKpsH"
+          >
+            <button
+              class="sc-gKPRtg VGqfn"
+              tabindex="0"
+            >
+              <span
+                aria-hidden="true"
+                class="sc-bcXHqe eKoNFk"
+                data-rc="LargeSystemIcon.ArrowRight"
+              >
+                <svg>
+                  arrow-right.svg
+                </svg>
+              </span>
+              SubList Item
+            </button>
+          </li>
+          <li
+            class="sc-dkrFOg jrdWHL"
+            data-highlighted="true"
+            data-rc="DropdownMenuItem"
+          >
+            <a
+              class="sc-hLBbgP jEcUor"
+              href="/"
+              tabindex="0"
+            >
+              <div
+                class="sc-gswNZR jRiSyp"
+              >
+                Visible Item
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </li>
+</DocumentFragment>
+`;

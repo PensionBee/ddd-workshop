@@ -1,0 +1,33 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { FixedTextField } from "./FixedTextField";
+
+<Meta
+  title="Shared/Fixed Text Field/Docs"
+  component={FixedTextField}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Fixed Text Field
+
+## Props
+
+<ArgsTable of={FixedTextField} />
+
+## Usage & Customisation
+
+### Default
+
+<Canvas>
+  <Story id="shared-fixed-text-field--default" />
+</Canvas>
+
+### With Toolip
+
+<Canvas>
+  <Story id="shared-fixed-text-field--with-tooltip" />
+</Canvas>

@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`elevation should pass boxShadow based on default elevation 1`] = `<DocumentFragment />`;
+
+exports[`elevation should pass boxShadow based on elevation 1`] = `<DocumentFragment />`;

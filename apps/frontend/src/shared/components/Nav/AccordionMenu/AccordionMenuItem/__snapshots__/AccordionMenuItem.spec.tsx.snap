@@ -1,0 +1,146 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionMenuItem should not render hidden sub list items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+  >
+    <button
+      class="sc-dkrFOg fidVCs"
+      data-state="open"
+    >
+      Link text
+      <span
+        aria-hidden="true"
+        class="sc-gswNZR iagQga sc-eDvSVe fjnYyG"
+        data-rc="LargeSystemIcon.ChevronYellow"
+      >
+        <svg>
+          chevron-yellow.svg
+        </svg>
+      </span>
+    </button>
+    <ul
+      class="sc-hLBbgP bzkRai"
+    />
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should not render if hidden 1`] = `<DocumentFragment />`;
+
+exports[`AccordionMenuItem should render correctly with sub list 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+  >
+    <a
+      class="sc-bcXHqe bcuffv"
+      data-rc="Link"
+      target="_self"
+    >
+      <div
+        class="sc-gKPRtg bWvUsp"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should render correctly with sub list 2`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+  >
+    <button
+      class="sc-dkrFOg fidVCs"
+      data-state="closed"
+    >
+      Link text
+      <span
+        aria-hidden="true"
+        class="sc-gswNZR iagQga sc-eDvSVe fjnYyG"
+        data-rc="LargeSystemIcon.ChevronYellow"
+      >
+        <svg>
+          chevron-yellow.svg
+        </svg>
+      </span>
+    </button>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should render with data attributes 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+    data-test="test-attribute"
+  >
+    <a
+      class="sc-bcXHqe bcuffv"
+      data-rc="Link"
+      target="_self"
+    >
+      <div
+        class="sc-gKPRtg bWvUsp"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should render with link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+  >
+    <a
+      class="sc-bcXHqe bcuffv"
+      data-rc="Link"
+      href="/example-link"
+      target="_self"
+    >
+      <div
+        class="sc-gKPRtg bWvUsp"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem should toggle the sub list on click 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSUZER eVVLfZ"
+    data-rc="AccordionMenuItem"
+  >
+    <button
+      class="sc-dkrFOg fidVCs"
+      data-state="closed"
+    >
+      Link text
+      <span
+        aria-hidden="true"
+        class="sc-gswNZR iagQga sc-eDvSVe fjnYyG"
+        data-rc="LargeSystemIcon.ChevronYellow"
+      >
+        <svg>
+          chevron-yellow.svg
+        </svg>
+      </span>
+    </button>
+  </li>
+</DocumentFragment>
+`;

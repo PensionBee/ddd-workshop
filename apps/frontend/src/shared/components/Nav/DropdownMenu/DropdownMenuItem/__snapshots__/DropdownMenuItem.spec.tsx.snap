@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownMenuItem should be highlighted if href matches pathname 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg jrdWHL"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      href="/example"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItem should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-highlighted="false"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItem should render with href 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkrFOg czKpsH"
+    data-highlighted="false"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hLBbgP jEcUor"
+      href="/example"
+      tabindex="0"
+    >
+      <div
+        class="sc-gswNZR jRiSyp"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;

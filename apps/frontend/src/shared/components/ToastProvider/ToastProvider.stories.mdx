@@ -1,0 +1,91 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import ToastProvider from "./ToastProvider";
+
+<Meta
+  title="Shared/Toast Notifications/Docs"
+  component={ToastProvider}
+  parameters={{
+    viewMode: "docs",
+    previewTabs: {
+      canvas: { hidden: true },
+    },
+  }}
+/>
+
+# Toast Notifications
+
+## Usage & Customisation
+
+### Success
+
+#### Usage
+
+```js
+import { emitToastSuccess } from "@shared/utils/toast";
+
+emitToastSuccess("Event was successful!");
+```
+
+#### Example
+
+<Canvas>
+  <Story id="shared-toast-notifications--success" />
+</Canvas>
+
+### Error
+
+#### Usage
+
+```js
+import { emitToastError } from "@shared/utils/toast";
+
+emitToastError("Event had an error!")
+```
+
+#### Example
+
+<Canvas>
+  <Story id="shared-toast-notifications--error" />
+</Canvas>
+
+### Info
+
+#### Usage
+
+```js
+import { emitToastInfo } from "@shared/utils/toast";
+
+emitToastInfo("Some useful information.")
+```
+
+#### Example
+
+<Canvas>
+  <Story id="shared-toast-notifications--info" />
+</Canvas>
+
+### Promise
+
+#### Usage
+
+```js
+import { emitToastPromise } from "@shared/utils/toast";
+
+emitToastPromise(asyncWaitThenSuccess(), {
+  pending: "Loading... (5 Seconds)",
+  success: "Success!",
+  error: "Failed!",
+})
+```
+
+#### Example Success
+
+<Canvas>
+  <Story id="shared-toast-notifications--promise-success" />
+</Canvas>
+
+#### Example Error
+
+<Canvas>
+  <Story id="shared-toast-notifications--promise-error" />
+</Canvas>

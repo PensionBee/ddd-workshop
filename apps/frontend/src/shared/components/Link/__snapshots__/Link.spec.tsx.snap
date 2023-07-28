@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link Default should render correctly 1`] = `
+<DocumentFragment>
+  <a
+    class="sc-bcXHqe gDMKLX"
+    data-rc="Link"
+    href="/test"
+    target="_self"
+  >
+    Link text
+  </a>
+</DocumentFragment>
+`;
