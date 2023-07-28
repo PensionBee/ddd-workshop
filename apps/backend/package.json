@@ -1,8 +1,7 @@
 {
   "name": "l-and-ddd-backend",
   "scripts": {
-    "prisma:generate-client": "prisma generate",
-    "prisma:sync-db": "prisma db push",
+    "prisma:sync-db": "prisma db push && prisma generate",
     "start": "nodemon --exec 'node --inspect -r ts-node/register/transpile-only -r tsconfig-paths/register ./src/bootstrap.ts'"
   },
   "devDependencies": {
@@ -17,6 +16,7 @@
     "@types/passport": "^1.0.12",
     "@types/passport-local": "^1.0.35",
     "nodemon": "^3.0.1",
+    "prisma": "^5.0.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.6"
