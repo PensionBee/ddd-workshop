@@ -2,23 +2,21 @@ type ParseDataFn<TData extends Record<string, unknown>> = (
   data: TData
 ) => TData;
 
-type GetOutputDataFn<
-  TInputData extends Record<string, unknown>,
-  TOutputData extends Record<string, unknown>
-> = (data: TInputData) => Promise<TOutputData>;
+type GetOutputFn<
+  TData extends Record<string, unknown>,
+  TOutput extends Record<string, unknown>
+> = (data: TData) => Promise<TOutput>;
 
 export const createQueryHandler = <
-  TInputData extends Record<string, unknown>,
-  TOutputData extends Record<string, unknown>
+  TData extends Record<string, unknown>,
+  TOutput extends Record<string, unknown>
 >(handlerFns: {
-  parseInputData: ParseDataFn<TInputData>;
-  getOutputData: GetOutputDataFn<TInputData, TOutputData>;
-  parseOutputData: ParseDataFn<TOutputData>;
+  parseData: ParseDataFn<TData>;
+  getOutput: GetOutputFn<TData, TOutput>;
 }) => {
-  return async function (rawInputData: TInputData): Promise<TOutputData> {
-    const { parseInputData, getOutputData, parseOutputData } = handlerFns;
-    const inputData = parseInputData(rawInputData);
-    const outputData = await getOutputData(inputData);
-    return parseOutputData(outputData);
+  return async function (rawData: TData): Promise<TOutput> {
+    const { parseData, getOutput } = handlerFns;
+    const data = parseData(rawData);
+    return await getOutput(data);
   };
 };

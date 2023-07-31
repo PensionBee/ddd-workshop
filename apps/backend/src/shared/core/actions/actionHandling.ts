@@ -14,9 +14,11 @@ export const createActionHandler =
   }) =>
   async (rawData: TData): Promise<TOutcome> => {
     const { parseData, fetchState, deriveOutcome, updateState } = handlerFns;
+
     const data = parseData(rawData);
     const state = await fetchState(data);
     const outcome = deriveOutcome(data, state);
     await updateState(state, outcome);
+
     return outcome;
   };

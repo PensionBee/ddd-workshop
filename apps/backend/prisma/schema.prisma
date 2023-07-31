@@ -10,13 +10,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
-  id         String  @unique
-  email      String  @unique
-  password   String
-  first_name String
-  last_name  String?
+model account {
+  id       String @unique
+  email    String @unique
+  username String @unique
+  password String
 
   @@index([id])
-  @@map("users")
+  @@map("accounts")
 }

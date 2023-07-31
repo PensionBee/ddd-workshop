@@ -1,25 +1,29 @@
 import type { Request, Response } from "express";
 
-import { logInAction } from "#contexts/auth/core/actions/logInAction";
+import { logIntoAccount } from "#contexts/accounts/core/actions/logIntoAccount";
 import { throwOnDefaultCase } from "#shared/common/typeUtils";
 import {
   successResponse,
   unauthorizedResponse,
 } from "#shared/interface/routes/apiResponses";
 
-export const handleLogIn = async (req: Request, res: Response) => {
+export const handleLogIntoAccountRequest = async (
+  req: Request,
+  res: Response
+) => {
   const { body } = req as any;
 
-  const outcome = await logInAction({
+  const outcome = await logIntoAccount({
     email: body.email,
     password: body.password,
+    username: body.username,
   });
 
   switch (outcome.type) {
-    case "USER_LOGIN_FAILED/INCORRECT_EMAIL":
-    case "USER_LOGIN_FAILED/INCORRECT_PASSWORD":
-      return unauthorizedResponse(res, "Incorrect username or password");
-    case "USER_LOGGED_IN":
+    case "ACCOUNT_LOGIN_FAILED/INCORRECT_EMAIL_OR_USERNAME":
+    case "ACCOUNT_LOGIN_FAILED/INCORRECT_PASSWORD":
+      return unauthorizedResponse(res, "Incorrect email, username or password");
+    case "ACCOUNT_LOGIN_SUCCEEDED":
       res.cookie("accessToken", outcome.payload.accessToken, {
         maxAge: 100000,
       });

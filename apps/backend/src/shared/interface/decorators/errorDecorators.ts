@@ -6,10 +6,7 @@ import {
   ActionDataInvalidError,
   InvalidStateError,
 } from "#shared/core/actions/actionErrors";
-import {
-  QueryInputDataInvalidError,
-  QueryOutputDataInvalidError,
-} from "#shared/core/queries/queryErrors";
+import { QueryDataInvalidError } from "#shared/core/queries/queryErrors";
 import {
   badRequestResponse,
   internalServerErrorResponse,
@@ -29,9 +26,8 @@ export const withErrorHandling =
       if (error instanceof BaseError) {
         switch ((error as BaseError).constructor) {
           case ActionDataInvalidError:
-          case QueryInputDataInvalidError:
+          case QueryDataInvalidError:
             return badRequestResponse(res, error.properties.clientMessage);
-          case QueryOutputDataInvalidError:
           case EntityInvalidError:
           case InvalidStateError:
             return internalServerErrorResponse(res);
