@@ -1,7 +1,8 @@
-import { fireEvent, render, vi } from "@shared/testUtils";
+import { fireEvent, render } from "@shared/testUtils";
 import { act } from "react-dom/test-utils";
 import type { ReactPlayerProps } from "react-player";
 import { Video } from "./Video";
+import { vi } from 'vitest'
 
 const COMPONENT = "video-component";
 const EXAMPLE_URL = "example-url";

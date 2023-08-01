@@ -2,7 +2,7 @@ import { render } from "@shared/testUtils";
 import { useRef } from "react";
 import {
   MockIntersectionObserver,
-  mockObserve,
+  // mockObserve,
 } from "./mockIntersectionObserver";
 import { useIntersectionObserver } from "./useIntersectionObserver";
 

@@ -2,7 +2,7 @@ import type { BreakpointValues } from "@shared/utils/types";
 import type { Breakpoints } from "../breakpoints";
 import { mediaDisplay } from "./mediaDisplay";
 import { css } from "styled-components";
-import { vi } from "@shared/testUtils";
+import { vi } from "vitest";
 
 vi.mock("styled-components", () => ({ css: vi.fn() }));
 vi.mock("./createMediaValue", () => ({

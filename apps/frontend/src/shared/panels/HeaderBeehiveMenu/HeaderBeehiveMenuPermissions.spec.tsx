@@ -1,5 +1,6 @@
-import { mockMediaMatches, routerRender, vi } from "@shared/testUtils";
+import { mockMediaMatches, routerRender } from "@shared/testUtils";
 import { HeaderBeehiveMenu } from "./HeaderBeehiveMenu";
+import { vi } from "vitest";
 
 vi.mock("@modules/_app/api/appQueries", () => ({
   _esModule: true,

@@ -1,5 +1,6 @@
-import { render, vi } from "@shared/testUtils";
+import { render } from "@shared/testUtils";
 import { Card, getBoxShadow } from "../Card";
+import { vi } from "vitest";
 
 vi.mock("../../Box/Box", () => ({
   __esModule: true,

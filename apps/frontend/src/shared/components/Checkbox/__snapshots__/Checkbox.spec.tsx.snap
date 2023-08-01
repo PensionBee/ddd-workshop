@@ -1,4 +1,22 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Checkbox > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-eCYdKt gJDuSr"
+    data-rc="Checkbox"
+  >
+    <button
+      aria-checked="false"
+      class="sc-gsnScm dNaquf"
+      data-state="unchecked"
+      role="checkbox"
+      type="button"
+      value="on"
+    />
+  </div>
+</DocumentFragment>
+`;
 
 exports[`Checkbox Default should render correctly 1`] = `
 <DocumentFragment>

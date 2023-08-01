@@ -1,4 +1,80 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`CheckboxContainer > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bczSft hpkFBl"
+    data-rc="CheckboxContainer"
+  >
+    <div
+      class="sc-gKXNOb dCWoxL"
+    >
+      <div
+        class="sc-gKXNOb fMouIk"
+        data-rc="Checkbox"
+      >
+        <button
+          aria-checked="false"
+          class="sc-hKMtDE lefQuz"
+          data-state="unchecked"
+          role="checkbox"
+          type="button"
+          value="on"
+        />
+      </div>
+    </div>
+    <span
+      class="sc-iBkiHk fUcqyE"
+      data-rc="BodySmallL"
+    >
+      Checkbox content
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CheckboxContainer > Error > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bczSft hpkFBl"
+    data-rc="CheckboxContainer"
+  >
+    <div
+      class="sc-gKXNOb dCWoxL"
+    >
+      <div
+        class="sc-gKXNOb fMouIk"
+        data-rc="Checkbox"
+      >
+        <button
+          aria-checked="false"
+          class="sc-hKMtDE eqsvsm"
+          data-state="unchecked"
+          role="checkbox"
+          type="button"
+          value="on"
+        />
+      </div>
+    </div>
+    <span
+      class="sc-iBkiHk fUcqyE"
+      data-rc="BodySmallL"
+    >
+      Checkbox content
+    </span>
+  </div>
+  <div
+    class="sc-gsnScm kyJyUj"
+  >
+    <span
+      class="sc-iBkiHk lgdqQg"
+      data-rc="DisclaimerR"
+    >
+      An error message
+    </span>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`CheckboxContainer Default should render correctly 1`] = `
 <DocumentFragment>

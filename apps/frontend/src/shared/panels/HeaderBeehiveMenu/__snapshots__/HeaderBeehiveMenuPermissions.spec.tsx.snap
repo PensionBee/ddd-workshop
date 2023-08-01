@@ -1,3 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`HeaderBeehiveMenu > Permissions > should load basic content without permissions 1`] = `[Function]`;
+
 exports[`HeaderBeehiveMenu Permissions should load basic content without permissions 1`] = `[Function]`;
