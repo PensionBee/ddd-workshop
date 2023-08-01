@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@shared/testUtils";
+import { fireEvent, render, vi } from "@shared/testUtils";
 import { act } from "react-dom/test-utils";
 import type { ReactPlayerProps } from "react-player";
 import { Video } from "./Video";
@@ -12,7 +12,7 @@ const CLICK_EVENT = new MouseEvent("click", {
   cancelable: true,
 });
 
-jest.mock("react-player/lazy", () => ({
+vi.mock("react-player/lazy", () => ({
   __esModule: true,
   default: ({ url, muted, controls, loop, fallback }: ReactPlayerProps) => (
     <div

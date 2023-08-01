@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { ErrorMessage } from "./ErrorMessage";
 
 const ERROR_MESSAGE = "Error message";

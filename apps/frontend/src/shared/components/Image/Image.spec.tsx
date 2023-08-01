@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { Image } from "./Image";
 
 describe("Image", () => {

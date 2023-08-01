@@ -1,6 +1,6 @@
-export const mockDisconnect = jest.fn();
-export const mockObserve = jest.fn();
-export const mockUnobserve = jest.fn();
+export const mockDisconnect = vi.fn();
+export const mockObserve = vi.fn();
+export const mockUnobserve = vi.fn();
 
 export class MockIntersectionObserver {
   readonly root: Element | null;

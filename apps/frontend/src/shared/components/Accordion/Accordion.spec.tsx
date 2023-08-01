@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@shared/testUtils";
+import { fireEvent, render, vi } from "@shared/testUtils";
 import { Accordion } from "./Accordion";
 
 const accordionItems = [

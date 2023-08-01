@@ -1,4 +1,69 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropdownMenuItem > should be highlighted if href matches pathname 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb icZywR"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      href="/example"
+      tabindex="0"
+    >
+      <div
+        class="sc-gsnScm dgpPRb"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItem > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-highlighted="false"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      tabindex="0"
+    >
+      <div
+        class="sc-gsnScm dgpPRb"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItem > should render with href 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-highlighted="false"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      href="/example"
+      tabindex="0"
+    >
+      <div
+        class="sc-gsnScm dgpPRb"
+      >
+        Item Content
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`DropdownMenuItem should be highlighted if href matches pathname 1`] = `
 <DocumentFragment>

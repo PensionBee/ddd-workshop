@@ -1,9 +1,9 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { Card, getBoxShadow } from "../Card";
 
-jest.mock("../../Box/Box", () => ({
+vi.mock("../../Box/Box", () => ({
   __esModule: true,
-  Box: jest.fn(() => null),
+  Box: vi.fn(() => null),
 }));
 
 import { Box } from "../../Box/Box";

@@ -1,4 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FieldWrapper/Suffix > Text > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm RnNrb"
+  >
+    <span
+      class="sc-dkzCjb cGViLk"
+      data-rc="BodySmallB"
+    >
+      Suffix text
+    </span>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`FieldWrapper/Suffix Icon should render correctly 1`] = `
 <DocumentFragment>

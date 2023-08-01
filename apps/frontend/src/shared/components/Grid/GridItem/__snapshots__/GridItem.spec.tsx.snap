@@ -1,4 +1,26 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`GridItem > Default > should render as elements 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-bczSft biLoSk"
+    data-rc="GridItem"
+  >
+    GridItem Content
+  </span>
+</DocumentFragment>
+`;
+
+exports[`GridItem > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bczSft biLoSk"
+    data-rc="GridItem"
+  >
+    GridItem Content
+  </div>
+</DocumentFragment>
+`;
 
 exports[`GridItem Default should render as elements 1`] = `
 <DocumentFragment>

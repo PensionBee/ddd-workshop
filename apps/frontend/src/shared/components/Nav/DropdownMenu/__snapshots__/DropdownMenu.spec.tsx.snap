@@ -1,4 +1,32 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropdownMenu > should render correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bczSft fNlQyJ"
+    data-rc="DropdownMenu"
+    data-state="closed"
+  >
+    <li
+      class="sc-hKMtDE nSxIU"
+      data-highlighted="true"
+      data-rc="DropdownMenuItem"
+    >
+      <a
+        class="sc-eCYdKt bTavwg"
+        href="/"
+        tabindex="0"
+      >
+        <div
+          class="sc-dkzCjb hZLQpO"
+        >
+          Visible Item
+        </div>
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
 
 exports[`DropdownMenu should not render hidden sub list items 1`] = `
 <DocumentFragment>

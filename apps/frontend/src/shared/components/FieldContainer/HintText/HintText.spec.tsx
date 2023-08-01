@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { HintText } from "./HintText";
 
 const HINT_TEXT = "Hint text";

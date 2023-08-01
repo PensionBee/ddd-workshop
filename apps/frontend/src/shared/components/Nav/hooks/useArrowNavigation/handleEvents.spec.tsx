@@ -1,9 +1,9 @@
-import { act, render } from "@shared/testUtils";
+import { act, render, vi } from "@shared/testUtils";
 import { handleEvents } from "./handleEvents";
 
-jest.mock("./handleKeys.ts", () => ({
-  handleHorizontalKeys: jest.fn(),
-  handleVerticalKeys: jest.fn(),
+vi.mock("./handleKeys.ts", () => ({
+  handleHorizontalKeys: vi.fn(),
+  handleVerticalKeys: vi.fn(),
 }));
 
 import { handleHorizontalKeys, handleVerticalKeys } from "./handleKeys";

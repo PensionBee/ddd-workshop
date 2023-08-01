@@ -1,3 +1,5 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`HeaderBeehiveMenu > isLoading > should not render when loading 1`] = `[Function]`;
 
 exports[`HeaderBeehiveMenu isLoading should not render when loading 1`] = `[Function]`;

@@ -1,4 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Link > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <a
+    class="sc-bczSft bjeQlT"
+    data-rc="Link"
+    href="/test"
+    target="_self"
+  >
+    Link text
+  </a>
+</DocumentFragment>
+`;
 
 exports[`Link Default should render correctly 1`] = `
 <DocumentFragment>

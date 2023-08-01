@@ -1,4 +1,56 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FieldWrapper > With prefix > should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gsnScm bgFqSI"
+  >
+    <div
+      class="sc-bczSft eblhFG"
+    >
+      <span
+        class="sc-eCYdKt hUJlhy"
+        data-rc="BodySmallB"
+      >
+        Prefix text
+      </span>
+    </div>
+    <div
+      class="sc-bczSft ghPjgr sc-dkzCjb"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper > With suffix > should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gsnScm bgFqSI"
+  >
+    <div
+      class="sc-bczSft ghPjgr sc-dkzCjb"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-bczSft fNJJm"
+    >
+      <span
+        class="sc-eCYdKt hUJlhy"
+        data-rc="BodySmallB"
+      >
+        Suffix text
+      </span>
+    </div>
+  </span>
+</DocumentFragment>
+`;
 
 exports[`FieldWrapper With prefix icon should render correctly 1`] = `
 <DocumentFragment>

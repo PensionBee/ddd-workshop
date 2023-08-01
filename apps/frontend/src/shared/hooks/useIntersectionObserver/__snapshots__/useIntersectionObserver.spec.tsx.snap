@@ -1,4 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useIntersectionObserver > Default > should call observe 1`] = `
+<DocumentFragment>
+  <div>
+    false
+  </div>
+</DocumentFragment>
+`;
 
 exports[`useIntersectionObserver Default should call observe 1`] = `
 <DocumentFragment>

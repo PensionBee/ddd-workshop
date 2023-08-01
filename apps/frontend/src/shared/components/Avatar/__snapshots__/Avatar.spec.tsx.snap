@@ -1,4 +1,18 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Default Avatar > should render correctly when no variant is passed 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-hKMtDE htSYYE"
+    data-rc="Avatar"
+  >
+    <img
+      class="sc-bczSft feSCpf"
+      src="https://res.cloudinary.com/pensionbee/image/upload/w_200,h_200/v1611330623/Jasper_new_headshot_hrywvw.png"
+    />
+  </div>
+</DocumentFragment>
+`;
 
 exports[`Default Avatar should render correctly when no variant is passed 1`] = `
 <DocumentFragment>
@@ -8,6 +22,20 @@ exports[`Default Avatar should render correctly when no variant is passed 1`] = 
   >
     <img
       class="sc-bcXHqe dmpMIL"
+      src="https://res.cloudinary.com/pensionbee/image/upload/w_200,h_200/v1611330623/Jasper_new_headshot_hrywvw.png"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Highlighted Avatar > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-hKMtDE ZDrSG"
+    data-rc="Avatar"
+  >
+    <img
+      class="sc-bczSft feSCpf"
       src="https://res.cloudinary.com/pensionbee/image/upload/w_200,h_200/v1611330623/Jasper_new_headshot_hrywvw.png"
     />
   </div>

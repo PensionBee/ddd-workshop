@@ -10,17 +10,17 @@ import {
   mediaNoWrap,
   mediaFlexItemOrder,
 } from "./mediaFlex";
+import { css } from "styled-components";
+import { vi } from "vitest";
 
-jest.mock("styled-components", () => ({ css: jest.fn() }));
-jest.mock("./createMediaValue", () => ({
+vi.mock("styled-components", () => ({ css: vi.fn() }));
+vi.mock("./createMediaValue", () => ({
   createMediaValue: <T>(createMedia: (value: T) => null) => {
     return (breakpoint: Breakpoints, value: BreakpointValues<T>) => {
       return createMedia(value[breakpoint] as T);
     };
   },
 }));
-
-import { css } from "styled-components";
 
 describe("mediaAlign", () => {
   it("should return css", () => {

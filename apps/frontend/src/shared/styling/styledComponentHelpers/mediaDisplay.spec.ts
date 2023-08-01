@@ -1,17 +1,17 @@
 import type { BreakpointValues } from "@shared/utils/types";
 import type { Breakpoints } from "../breakpoints";
 import { mediaDisplay } from "./mediaDisplay";
+import { css } from "styled-components";
+import { vi } from "@shared/testUtils";
 
-jest.mock("styled-components", () => ({ css: jest.fn() }));
-jest.mock("./createMediaValue", () => ({
+vi.mock("styled-components", () => ({ css: vi.fn() }));
+vi.mock("./createMediaValue", () => ({
   createMediaValue: <T>(createMedia: (value: T) => null) => {
     return (breakpoint: Breakpoints, value: BreakpointValues<T>) => {
       return createMedia(value[breakpoint] as T);
     };
   },
 }));
-
-import { css } from "styled-components";
 
 describe("mediaDisplay", () => {
   it("should return css", () => {

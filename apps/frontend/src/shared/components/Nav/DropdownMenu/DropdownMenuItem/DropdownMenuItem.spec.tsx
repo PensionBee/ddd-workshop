@@ -1,4 +1,4 @@
-import { routerRender } from "@shared/testUtils";
+import { routerRender, vi } from "@shared/testUtils";
 import { DropdownMenuItem } from "./DropdownMenuItem";
 
 const ITEM_CONTENT = "Item Content";

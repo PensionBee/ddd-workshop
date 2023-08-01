@@ -1,8 +1,8 @@
-import { act, fireEvent, render } from "@shared/testUtils";
+import { act, fireEvent, render, vi } from "@shared/testUtils";
 import { useRef } from "react";
 import { useClickOutside } from "./useClickOutside";
 
-const MOCK_CALLBACK = jest.fn();
+const MOCK_CALLBACK = vi.fn();
 
 const MOUSE_DOWN_EVENT = new MouseEvent("mousedown", {
   bubbles: true,

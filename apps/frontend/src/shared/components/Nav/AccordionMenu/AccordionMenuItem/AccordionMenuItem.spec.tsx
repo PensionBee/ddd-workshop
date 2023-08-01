@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@shared/testUtils";
+import { fireEvent, render, vi } from "@shared/testUtils";
 import { LIST_WITH_HIDDEN_LINK, LIST } from "../../Nav.content";
 import { AccordionMenuItem } from "./AccordionMenuItem";
 

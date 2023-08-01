@@ -1,4 +1,23 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useFocusOutside > should fire callback when focusing outside the element 1`] = `
+<DocumentFragment>
+  <div
+    data-testid="parent-element"
+  >
+    <div
+      data-testid="ref-element"
+    >
+      <div
+        data-testid="child-element"
+      />
+    </div>
+    <div
+      data-testid="outside-element"
+    />
+  </div>
+</DocumentFragment>
+`;
 
 exports[`useFocusOutside should NOT fire callback when focusing on the element 1`] = `
 <DocumentFragment>

@@ -1,4 +1,4 @@
-import { routerRender } from "@shared/testUtils";
+import { routerRender, vi } from "@shared/testUtils";
 import { MainNavLink } from "./MainNavLink";
 
 const ITEM_CONTENT = "Item Content";

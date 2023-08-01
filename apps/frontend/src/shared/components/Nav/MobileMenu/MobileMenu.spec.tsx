@@ -1,4 +1,4 @@
-import { routerRender } from "@shared/testUtils";
+import { routerRender, vi } from "@shared/testUtils";
 import { MobileMenu } from "./MobileMenu";
 import { LIST, LIST_WITH_MIXED_ITEMS } from "../Nav.content";
 

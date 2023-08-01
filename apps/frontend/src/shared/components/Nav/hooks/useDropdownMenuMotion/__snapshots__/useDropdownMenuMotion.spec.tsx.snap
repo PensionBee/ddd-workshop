@@ -1,4 +1,55 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useDropdownMenuMotion > should return default values 1`] = `
+<DocumentFragment>
+  <span
+    data-value="false"
+  >
+    visibleValue
+  </span>
+  <span
+    data-value="null"
+  >
+    motionValue
+  </span>
+</DocumentFragment>
+`;
+
+exports[`useDropdownMenuMotion > should take defaultOpen prop 1`] = `
+<DocumentFragment>
+  <span
+    data-value="true"
+  >
+    visibleValue
+  </span>
+</DocumentFragment>
+`;
+
+exports[`useDropdownMenuMotion > should take delay prop 1`] = `
+<DocumentFragment>
+  <span
+    data-value="false"
+  >
+    visibleValue
+  </span>
+  <button>
+    toggleButton
+  </button>
+</DocumentFragment>
+`;
+
+exports[`useDropdownMenuMotion > should toggle isVisible 1`] = `
+<DocumentFragment>
+  <span
+    data-value="false"
+  >
+    visibleValue
+  </span>
+  <button>
+    toggleButton
+  </button>
+</DocumentFragment>
+`;
 
 exports[`useDropdownMenuMotion should return default values 1`] = `
 <DocumentFragment>

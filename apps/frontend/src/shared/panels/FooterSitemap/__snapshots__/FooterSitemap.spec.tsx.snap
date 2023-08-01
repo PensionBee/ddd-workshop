@@ -1,4 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FooterSitemap > should render on lg 1`] = `[Function]`;
+
+exports[`FooterSitemap > should render on xl 1`] = `[Function]`;
 
 exports[`FooterSitemap should render on lg 1`] = `[Function]`;
 

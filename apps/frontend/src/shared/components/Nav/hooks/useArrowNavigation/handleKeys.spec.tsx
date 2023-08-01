@@ -1,4 +1,4 @@
-import { act, render } from "@shared/testUtils";
+import { act, render, vi } from "@shared/testUtils";
 import { handleHorizontalKeys, handleVerticalKeys } from "./handleKeys";
 
 const PARENT_NODE = "parent-node";
@@ -18,10 +18,10 @@ const Component = () => {
   );
 };
 
-const onExitTop = jest.fn();
-const onExitBottom = jest.fn();
-const onExitLeft = jest.fn();
-const onExitRight = jest.fn();
+const onExitTop = vi.fn();
+const onExitBottom = vi.fn();
+const onExitLeft = vi.fn();
+const onExitRight = vi.fn();
 
 describe("handleHorizontalKeys", () => {
   it("should focus the first element if current index is 0", () => {

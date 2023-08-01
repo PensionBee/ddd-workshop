@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { LazyLoad } from "./LazyLoad";
 
 describe("LazyLoad", () => {

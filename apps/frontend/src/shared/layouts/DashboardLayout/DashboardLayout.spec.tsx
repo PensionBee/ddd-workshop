@@ -1,33 +1,33 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { DashboardLayout } from "./DashboardLayout";
 
-jest.mock("@shared/panels/HeaderBeehiveMenu", () => ({
+vi.mock("@shared/panels/HeaderBeehiveMenu", () => ({
   HeaderBeehiveMenu: () => <div data-testid="HeaderBeehiveMenu" />,
 }));
-jest.mock("@shared/panels/HeaderMainNavbar", () => ({
+vi.mock("@shared/panels/HeaderMainNavbar", () => ({
   HeaderMainNavbar: () => <div data-testid="HeaderMainNavbar" />,
 }));
-jest.mock("@shared/panels/FooterContactSection", () => ({
+vi.mock("@shared/panels/FooterContactSection", () => ({
   FooterContactSection: () => <div data-testid="FooterContactSection" />,
 }));
-jest.mock("@shared/panels/FooterCopyrightSection", () => ({
+vi.mock("@shared/panels/FooterCopyrightSection", () => ({
   FooterCopyrightSection: () => <div data-testid="FooterCopyrightSection" />,
 }));
-jest.mock("@shared/panels/FooterCredentialsSection", () => ({
+vi.mock("@shared/panels/FooterCredentialsSection", () => ({
   FooterCredentialsSection: () => (
     <div data-testid="FooterCredentialsSection" />
   ),
 }));
-jest.mock("@shared/panels/FooterFcaSection", () => ({
+vi.mock("@shared/panels/FooterFcaSection", () => ({
   FooterFcaSection: () => <div data-testid="FooterFcaSection" />,
 }));
-jest.mock("@shared/panels/FooterQuestionSection", () => ({
+vi.mock("@shared/panels/FooterQuestionSection", () => ({
   FooterQuestionSection: () => <div data-testid="FooterQuestionSection" />,
 }));
-jest.mock("@shared/panels/FooterSitemap", () => ({
+vi.mock("@shared/panels/FooterSitemap", () => ({
   FooterSitemap: () => <div data-testid="FooterSitemap" />,
 }));
-jest.mock("@shared/panels/FooterSocialMediaList", () => ({
+vi.mock("@shared/panels/FooterSocialMediaList", () => ({
   FooterSocialMediaList: () => <div data-testid="FooterSocialMediaList" />,
 }));
 

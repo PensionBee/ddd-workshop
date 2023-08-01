@@ -1,4 +1,29 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainNav > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bczSft dNgwqX"
+    data-rc="MainNav"
+  >
+    <ul
+      class="sc-gsnScm eQnjpn"
+    >
+      <li
+        class="sc-bretMz dBffNv"
+        data-rc="MainNavLink"
+      >
+        <a
+          class="sc-crXcXV cxxyeD"
+          href="/"
+        >
+          Visible Item
+        </a>
+      </li>
+    </ul>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`MainNav should not render hidden sub list items 1`] = `
 <DocumentFragment>

@@ -1,4 +1,4 @@
-import { mockMediaMatches, render } from "@shared/testUtils";
+import { mockMediaMatches, render, vi } from "@shared/testUtils";
 import { FooterSitemap } from "./FooterSitemap";
 
 describe("FooterSitemap", () => {

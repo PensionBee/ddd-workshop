@@ -1,4 +1,36 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MobileMenuSubList > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bczSft"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gsnScm lctdZe"
+      href="/"
+    >
+      Visible Item
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuSubList > should render items with href as link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bczSft"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gsnScm lctdZe"
+      href="/"
+    >
+      Visible Item
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`MobileMenuSubList should not render hidden items 1`] = `
 <DocumentFragment>

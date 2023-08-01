@@ -1,4 +1,77 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Button > Default > should fire click event 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm dSnHhb"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Default > should render as link 1`] = `
+<DocumentFragment>
+  <a
+    class="sc-gsnScm dSnHhb"
+    data-rc="Button"
+    data-testid="button-test-id"
+    href="/test"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </a>
+</DocumentFragment>
+`;
+
+exports[`Button > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Default Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Default > should render variant correctly 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm dSnHhb"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Disabled > should have disabled attribute when disabled 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    disabled=""
+    type="button"
+  >
+    <span>
+      Default Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
 
 exports[`Button Default should fire click event 1`] = `
 <DocumentFragment>

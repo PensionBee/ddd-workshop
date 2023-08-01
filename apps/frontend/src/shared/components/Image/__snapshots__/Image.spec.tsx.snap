@@ -1,4 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Image > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <img
+    alt="Image"
+    class="sc-bczSft kbIDUj"
+    src="./__tests__/test-image.svg"
+  />
+</DocumentFragment>
+`;
 
 exports[`Image Default should render correctly 1`] = `
 <DocumentFragment>

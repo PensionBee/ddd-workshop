@@ -1,4 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Container > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <section
+    class="sc-bczSft hVNnBN"
+    data-rc="GridContainer"
+  >
+    <div
+      class="sc-bczSft hlbvid"
+    >
+      Container Content
+    </div>
+  </section>
+</DocumentFragment>
+`;
 
 exports[`Container Default should render correctly 1`] = `
 <DocumentFragment>

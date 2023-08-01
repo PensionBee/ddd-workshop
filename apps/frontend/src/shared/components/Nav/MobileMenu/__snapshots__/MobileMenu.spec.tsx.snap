@@ -1,4 +1,24 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MobileMenu > should render correctly 1`] = `
+<DocumentFragment>
+  <ul
+    class="sc-bczSft hgrCSw"
+  >
+    <li
+      class="sc-gsnScm"
+      data-rc="MobileMenuItem"
+    >
+      <a
+        class="sc-dkzCjb ksNgRn"
+        href="/"
+      >
+        Visible Item
+      </a>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
 
 exports[`MobileMenu should not render hidden sub list items 1`] = `
 <DocumentFragment>

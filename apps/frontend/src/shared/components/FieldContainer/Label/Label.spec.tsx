@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { Label } from "./Label";
 
 const LABEL_TEXT = "Label text";

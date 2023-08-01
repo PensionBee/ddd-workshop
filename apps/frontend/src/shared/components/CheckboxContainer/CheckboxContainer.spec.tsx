@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { useForm } from "react-hook-form";
 import { CheckboxContainer } from "./CheckboxContainer";
 

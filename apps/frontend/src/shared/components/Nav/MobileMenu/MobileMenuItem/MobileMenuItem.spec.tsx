@@ -1,4 +1,4 @@
-import { routerRender } from "@shared/testUtils";
+import { routerRender, vi } from "@shared/testUtils";
 import { MobileMenuItem } from "./MobileMenuItem";
 
 const ITEM_CONTENT = "Item Content";

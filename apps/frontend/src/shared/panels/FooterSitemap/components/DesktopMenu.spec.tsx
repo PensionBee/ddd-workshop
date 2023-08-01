@@ -1,4 +1,4 @@
-import { render } from "@shared/testUtils";
+import { render, vi } from "@shared/testUtils";
 import { FOOTER_MENU_SECTIONS } from "../FooterSitemap.content";
 import { DesktopMenu, DesktopListItem, DesktopList } from "./DesktopMenu";
 

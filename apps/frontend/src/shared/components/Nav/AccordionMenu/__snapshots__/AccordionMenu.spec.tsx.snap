@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`AccordionMenuItem should not render hidden sub list items 1`] = `
 <DocumentFragment>

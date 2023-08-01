@@ -1,4 +1,35 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MainNavItem > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSMdHm iSfdEk"
+    data-rc="MainNavLink"
+  >
+    <a
+      class="sc-hKMtDE cQvbKs"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MainNavItem > should render with href 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSMdHm iSfdEk"
+    data-rc="MainNavLink"
+  >
+    <a
+      class="sc-hKMtDE cQvbKs"
+      href="/example"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`MainNavItem should render correctly 1`] = `
 <DocumentFragment>

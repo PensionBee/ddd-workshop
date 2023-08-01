@@ -1,4 +1,48 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`DropdownMenuSubList > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb icZywR"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-gsnScm dgpPRb"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuSubList > should render items with href as link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb icZywR"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-gsnScm dgpPRb"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`DropdownMenuSubList should not render hidden items 1`] = `
 <DocumentFragment>

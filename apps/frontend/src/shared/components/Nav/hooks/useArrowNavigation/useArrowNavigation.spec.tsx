@@ -1,4 +1,4 @@
-import { act, fireEvent, routerRender } from "@shared/testUtils";
+import { act, fireEvent, routerRender, vi } from "@shared/testUtils";
 import { useRef } from "react";
 import { StyledContentList } from "../../DropdownMenu/DropdownMenu.styled";
 import { DropdownMenuSubList } from "../../DropdownMenu/DropdownMenuSubList/DropdownMenuSubList";

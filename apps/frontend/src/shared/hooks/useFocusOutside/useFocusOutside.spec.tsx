@@ -1,8 +1,8 @@
-import { act, fireEvent, render } from "@shared/testUtils";
+import { act, fireEvent, render, vi } from "@shared/testUtils";
 import { useRef } from "react";
 import { useFocusOutside } from "./useFocusOutside";
 
-const MOCK_CALLBACK = jest.fn();
+const MOCK_CALLBACK = vi.fn();
 
 const FOCUS_EVENT = new MouseEvent("focusin", {
   bubbles: true,

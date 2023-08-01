@@ -1,4 +1,35 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`MobileMenuItem > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bczSft"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gsnScm lctdZe"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`MobileMenuItem > should render with href 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-bczSft"
+    data-rc="MobileMenuItem"
+  >
+    <a
+      class="sc-gsnScm lctdZe"
+      href="/example"
+    >
+      Item Content
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`MobileMenuItem should render correctly 1`] = `
 <DocumentFragment>

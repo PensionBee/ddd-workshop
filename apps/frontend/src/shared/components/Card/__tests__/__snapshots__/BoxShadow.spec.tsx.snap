@@ -1,4 +1,8 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`elevation > should pass boxShadow based on default elevation 1`] = `<DocumentFragment />`;
+
+exports[`elevation > should pass boxShadow based on elevation 1`] = `<DocumentFragment />`;
 
 exports[`elevation should pass boxShadow based on default elevation 1`] = `<DocumentFragment />`;
 

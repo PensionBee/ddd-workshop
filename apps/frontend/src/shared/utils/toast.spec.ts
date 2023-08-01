@@ -1,14 +1,14 @@
+import { vi } from "vitest";
 import { emitToastError, emitToastInfo, emitToastSuccess } from "./toast";
+import { toast } from "react-toastify";
 
-jest.mock("react-toastify", () => ({
+vi.mock("react-toastify", () => ({
   toast: {
-    success: jest.fn(),
-    error: jest.fn(),
-    info: jest.fn(),
+    success: vi.fn(),
+    error: vi.fn(),
+    info: vi.fn(),
   },
 }));
-
-import { toast } from "react-toastify";
 
 describe("emitToastError", () => {
   it("should emit error toast", () => {

@@ -4,11 +4,13 @@ import { ThemeProvider } from "styled-components";
 import type { Breakpoints } from "./styling/breakpoints";
 import { BREAKPOINTS } from "./styling/breakpoints";
 import { theme } from "./styling/theme";
+import { vi } from "vitest"
 
 type ReactTestingLibraryProviderProps = {
   children: React.ReactNode;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 const ReactTestingLibraryProviders: React.FC<
   ReactTestingLibraryProviderProps
 > = ({ children }) => {
@@ -21,10 +23,11 @@ const customRender = (ui: React.ReactElement, options?: any) => {
 };
 
 // re-export everything
+// eslint-disable-next-line react-refresh/only-export-components
 export * from "@testing-library/react";
 
 // override render method
-export { customRender as render };
+export { customRender as render, vi };
 
 export const sleep = (delay: number) => {
   return new Promise((resolve) => setTimeout(resolve, delay));
@@ -44,8 +47,8 @@ export const mockMediaMatches = (breakpoint: Breakpoints) => {
       }
       return {
         matches: queryValue <= breakpointValue,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
       };
     },
   });

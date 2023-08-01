@@ -1,7 +1,7 @@
-import { mockMediaMatches, routerRender } from "@shared/testUtils";
+import { mockMediaMatches, routerRender, vi } from "@shared/testUtils";
 import { HeaderBeehiveMenu } from "./HeaderBeehiveMenu";
 
-jest.mock("@modules/_app/api/appQueries", () => ({
+vi.mock("@modules/_app/api/appQueries", () => ({
   _esModule: true,
   usePermissionsQuery: () => ({
     isLoading: false,

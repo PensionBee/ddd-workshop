@@ -1,4 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Card > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bczSft sqXHT"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+  </div>
+</DocumentFragment>
+`;
 
 exports[`Card Default should render correctly 1`] = `
 <DocumentFragment>

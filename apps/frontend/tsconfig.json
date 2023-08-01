@@ -20,11 +20,27 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "alwaysStrict": true,
+    "baseUrl": "",
+    "composite": false,
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "inlineSources": false,
+    "noEmitOnError": true,
+    "noImplicitAny": true,
     "paths": {
-      "@shared/*": ["./src/shared/*"],
-      "@components/*": ["./src/components/*"]
-    }
+      "@assets/*": ["src/assets/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@shared/*": ["src/shared/*"]
+    },
+    "preserveWatchOutput": true,
+    "sourceMap": true,
+    "strictBindCallApply": true,
   },
-  "include": ["src"],
+  "include": ["src", "reset.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

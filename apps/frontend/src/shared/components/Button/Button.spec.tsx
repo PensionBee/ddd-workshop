@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@shared/testUtils";
+import { fireEvent, render, vi } from "@shared/testUtils";
 import {
   Button,
   _ButtonBaseComponent,
@@ -44,7 +44,7 @@ describe("Button", () => {
 
     it("should fire click event", () => {
       const buttonText = "Variant Button";
-      const onClick = jest.fn();
+      const onClick = vi.fn();
       const { getByText, asFragment } = render(
         <Button onClick={onClick} variant="primary-black">
           {buttonText}

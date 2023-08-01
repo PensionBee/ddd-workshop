@@ -1,4 +1,71 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AccordionMenuItem > should not render if hidden 1`] = `<DocumentFragment />`;
+
+exports[`AccordionMenuItem > should render correctly with sub list 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSMdHm iQpfTW"
+    data-rc="AccordionMenuItem"
+  >
+    <a
+      class="sc-bczSft fiULbX"
+      data-rc="Link"
+      target="_self"
+    >
+      <div
+        class="sc-gKXNOb jeAieT"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem > should render with data attributes 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSMdHm iQpfTW"
+    data-rc="AccordionMenuItem"
+    data-test="test-attribute"
+  >
+    <a
+      class="sc-bczSft fiULbX"
+      data-rc="Link"
+      target="_self"
+    >
+      <div
+        class="sc-gKXNOb jeAieT"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`AccordionMenuItem > should render with link 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-jSMdHm iQpfTW"
+    data-rc="AccordionMenuItem"
+  >
+    <a
+      class="sc-bczSft fiULbX"
+      data-rc="Link"
+      href="/example-link"
+      target="_self"
+    >
+      <div
+        class="sc-gKXNOb jeAieT"
+      >
+        Link text
+      </div>
+    </a>
+  </li>
+</DocumentFragment>
+`;
 
 exports[`AccordionMenuItem should not render hidden sub list items 1`] = `
 <DocumentFragment>

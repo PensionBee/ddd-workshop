@@ -1,4 +1,34 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`useWindowSize > should set the window width and height on initial render 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="width"
+      data-value="1024"
+    />
+    <div
+      data-testid="height"
+      data-value="768"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`useWindowSize > should update the window width and height on resize 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      data-testid="width"
+      data-value="600"
+    />
+    <div
+      data-testid="height"
+      data-value="400"
+    />
+  </div>
+</DocumentFragment>
+`;
 
 exports[`useWindowSize should set the window width and height on initial render 1`] = `
 <DocumentFragment>

@@ -1,4 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FieldWrapper/ErrorMessage > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm cUcvaQ sc-dkzCjb kZxHOV"
+  >
+    <span
+      class="sc-bczSft imQpyU"
+      data-rc="DisclaimerR"
+    >
+      Error message
+    </span>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`FieldWrapper/ErrorMessage should render correctly 1`] = `
 <DocumentFragment>
