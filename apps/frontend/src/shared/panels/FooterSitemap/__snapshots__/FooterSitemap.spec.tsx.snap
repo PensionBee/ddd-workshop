@@ -2,7 +2,13 @@
 
 exports[`FooterSitemap > should render on lg 1`] = `[Function]`;
 
+exports[`FooterSitemap > should render on md 1`] = `[Function]`;
+
+exports[`FooterSitemap > should render on sm 1`] = `[Function]`;
+
 exports[`FooterSitemap > should render on xl 1`] = `[Function]`;
+
+exports[`FooterSitemap > should render on xs 1`] = `[Function]`;
 
 exports[`FooterSitemap should render on lg 1`] = `[Function]`;
 

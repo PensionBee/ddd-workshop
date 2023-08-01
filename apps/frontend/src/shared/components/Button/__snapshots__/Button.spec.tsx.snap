@@ -73,6 +73,142 @@ exports[`Button > Disabled > should have disabled attribute when disabled 1`] = 
 </DocumentFragment>
 `;
 
+exports[`Button > Icons > should render icon on left side 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    type="button"
+  >
+    <span
+      class="sc-bczSft cdEVLw"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 0C2.79086 0 1 1.79086 1 4V12C1 14.2091 2.79086 16 5 16H5.42857C5.98086 16 6.42857 15.5523 6.42857 15C6.42857 14.4477 5.98086 14 5.42857 14H5C3.89543 14 3 13.1046 3 12V4C3 2.89543 3.89543 2 5 2H11C12.1046 2 13 2.89543 13 4V4.5C13 5.05228 13.4477 5.5 14 5.5C14.5523 5.5 15 5.05228 15 4.5V4C15 1.79086 13.2091 0 11 0H5ZM13 8C10.7909 8 9 9.79086 9 12V20C9 22.2091 10.7909 24 13 24H19C21.2091 24 23 22.2091 23 20V12C23 9.79086 21.2091 8 19 8H13ZM11 12C11 10.8954 11.8954 10 13 10H19C20.1046 10 21 10.8954 21 12V20C21 21.1046 20.1046 22 19 22H13C11.8954 22 11 21.1046 11 20V12Z"
+          fill="#F9C000"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+    <span>
+      Variant Button
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Icons > should render icon on right side (default) 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bczSft cdEVLw"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 0C2.79086 0 1 1.79086 1 4V12C1 14.2091 2.79086 16 5 16H5.42857C5.98086 16 6.42857 15.5523 6.42857 15C6.42857 14.4477 5.98086 14 5.42857 14H5C3.89543 14 3 13.1046 3 12V4C3 2.89543 3.89543 2 5 2H11C12.1046 2 13 2.89543 13 4V4.5C13 5.05228 13.4477 5.5 14 5.5C14.5523 5.5 15 5.05228 15 4.5V4C15 1.79086 13.2091 0 11 0H5ZM13 8C10.7909 8 9 9.79086 9 12V20C9 22.2091 10.7909 24 13 24H19C21.2091 24 23 22.2091 23 20V12C23 9.79086 21.2091 8 19 8H13ZM11 12C11 10.8954 11.8954 10 13 10H19C20.1046 10 21 10.8954 21 12V20C21 21.1046 20.1046 22 19 22H13C11.8954 22 11 21.1046 11 20V12Z"
+          fill="#F9C000"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Icons > should render with arrow icon 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bczSft cdEVLw"
+      data-icon="Actions"
+      data-rc="SmallSystemIcon.Actions"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M17 4C17.3985 3.61761 18.0315 3.63067 18.4139 4.02916L21.7215 7.30762C22.0928 7.69454 22.0928 8.30545 21.7215 8.69237L18.4139 12C18.0315 12.3985 17.3985 12.4116 17 12.0292C16.6015 11.6468 16.5884 11.0138 16.9708 10.6153L18.624 9.03173H5.00007C4.44779 9.03173 4.00007 8.58402 4.00007 8.03173C4.00007 7.47945 4.44779 7.03173 5.00007 7.03173H18.6849L16.9708 5.41391C16.5884 5.01542 16.6015 4.38239 17 4ZM7 12C6.60151 11.6176 5.96847 11.6307 5.58609 12.0292L2.27846 15.3076C1.90718 15.6945 1.90718 16.3054 2.27846 16.6924L5.58609 20C5.96847 20.3985 6.60151 20.4116 7 20.0292C7.39849 19.6468 7.41155 19.0138 7.02916 18.6153L5.37597 17.0317H18.9999C19.5522 17.0317 19.9999 16.584 19.9999 16.0317C19.9999 15.4794 19.5522 15.0317 18.9999 15.0317H5.31505L7.02916 13.4139C7.41155 13.0154 7.39849 12.3824 7 12Z"
+          fill="#F9C000"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Button > Icons > should render with copy icon 1`] = `
+<DocumentFragment>
+  <button
+    class="sc-gsnScm kJWOUY"
+    data-rc="Button"
+    type="button"
+  >
+    <span>
+      Variant Button
+    </span>
+    <span
+      class="sc-bczSft cdEVLw"
+      data-icon="Copy"
+      data-rc="SmallSystemIcon.Copy"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 24 24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 0C2.79086 0 1 1.79086 1 4V12C1 14.2091 2.79086 16 5 16H5.42857C5.98086 16 6.42857 15.5523 6.42857 15C6.42857 14.4477 5.98086 14 5.42857 14H5C3.89543 14 3 13.1046 3 12V4C3 2.89543 3.89543 2 5 2H11C12.1046 2 13 2.89543 13 4V4.5C13 5.05228 13.4477 5.5 14 5.5C14.5523 5.5 15 5.05228 15 4.5V4C15 1.79086 13.2091 0 11 0H5ZM13 8C10.7909 8 9 9.79086 9 12V20C9 22.2091 10.7909 24 13 24H19C21.2091 24 23 22.2091 23 20V12C23 9.79086 21.2091 8 19 8H13ZM11 12C11 10.8954 11.8954 10 13 10H19C20.1046 10 21 10.8954 21 12V20C21 21.1046 20.1046 22 19 22H13C11.8954 22 11 21.1046 11 20V12Z"
+          fill="#F9C000"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </span>
+  </button>
+</DocumentFragment>
+`;
+
 exports[`Button Default should fire click event 1`] = `
 <DocumentFragment>
   <button

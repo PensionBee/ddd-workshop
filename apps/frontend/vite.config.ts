@@ -13,7 +13,9 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@shared': '/src/shared'
+      '@shared': '/src/shared',
+      '@assets': '/src/assets',
+      '@contexts': '/src/contexts'
     }
   },
 })

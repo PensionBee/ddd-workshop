@@ -1,3 +1,5 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`HeaderMainNavbar > should render 1`] = `[Function]`;
+
 exports[`HeaderMainNavbar should render 1`] = `[Function]`;

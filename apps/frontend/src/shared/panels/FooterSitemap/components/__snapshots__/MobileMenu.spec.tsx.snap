@@ -1,5 +1,9 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`MobileAccordion > should render 1`] = `[Function]`;
+
+exports[`MobileAccordion > should render with content when open 1`] = `[Function]`;
+
 exports[`MobileAccordion should render 1`] = `[Function]`;
 
 exports[`MobileAccordion should render with content when open 1`] = `[Function]`;
@@ -7,6 +11,10 @@ exports[`MobileAccordion should render with content when open 1`] = `[Function]`
 exports[`MobileLinkItem > should render 1`] = `[Function]`;
 
 exports[`MobileLinkItem should render 1`] = `[Function]`;
+
+exports[`MobileMenu > should open and close accordions 1`] = `[Function]`;
+
+exports[`MobileMenu > should render 1`] = `[Function]`;
 
 exports[`MobileMenu should open and close accordions 1`] = `[Function]`;
 

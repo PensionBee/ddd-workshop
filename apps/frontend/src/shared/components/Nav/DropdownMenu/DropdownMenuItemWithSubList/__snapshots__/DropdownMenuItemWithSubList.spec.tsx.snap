@@ -1,5 +1,210 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`DropdownMenuItemWithSubList > should not render hidden items 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eCYdKt"
+    >
+      <button
+        class="sc-jSMdHm kfeOep"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gsnScm kqpRYF"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg
+            fill="none"
+            height="32"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.1869 16.5875L12.1295 27.4801C11.4897 28.1733 10.4524 28.1733 9.81295 27.4801C9.17343 26.7874 9.17343 25.664 9.81295 24.9714L18.7122 15.3332L9.81321 5.69523C9.17369 5.0023 9.17369 3.87902 9.81321 3.18638C10.4527 2.49346 11.49 2.49346 12.1297 3.18638L22.1872 14.0791C22.5069 14.4256 22.6666 14.8793 22.6666 15.3331C22.6666 15.7872 22.5066 16.2412 22.1869 16.5875Z"
+              fill="#F9C000"
+              stroke="#F9C000"
+            />
+          </svg>
+        </span>
+      </button>
+      <div
+        class="sc-iBkiHk hjsdXq"
+        data-motion="from-end"
+      >
+        <ul
+          class="sc-bczSft fNlQyJ"
+        />
+      </div>
+    </div>
+  </li>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+  >
+    <button
+      class="sc-gKXNOb dEXefi"
+      tabindex="0"
+    >
+      <span
+        aria-hidden="true"
+        class="sc-gsnScm kCemQi"
+        data-rc="LargeSystemIcon.ArrowRight"
+      >
+        <svg
+          fill="none"
+          height="32"
+          viewBox="0 0 32 32"
+          width="32"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M22.1869 16.5875L12.1295 27.4801C11.4897 28.1733 10.4524 28.1733 9.81295 27.4801C9.17343 26.7874 9.17343 25.664 9.81295 24.9714L18.7122 15.3332L9.81321 5.69523C9.17369 5.0023 9.17369 3.87902 9.81321 3.18638C10.4527 2.49346 11.49 2.49346 12.1297 3.18638L22.1872 14.0791C22.5069 14.4256 22.6666 14.8793 22.6666 15.3331C22.6666 15.7872 22.5066 16.2412 22.1869 16.5875Z"
+            fill="#F9C000"
+            stroke="#F9C000"
+          />
+        </svg>
+      </span>
+      Item Content
+    </button>
+  </li>
+  <li
+    class="sc-dkzCjb icZywR"
+    data-highlighted="true"
+    data-rc="DropdownMenuItem"
+  >
+    <a
+      class="sc-hKMtDE hvvSDT"
+      href="/"
+      tabindex="0"
+    >
+      <div
+        class="sc-ftvSNZ hIbuqj"
+      >
+        Visible Item
+      </div>
+    </a>
+  </li>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eCYdKt"
+    >
+      <button
+        class="sc-jSMdHm kfeOep"
+        tabindex="0"
+      >
+        SubList Item
+        <span
+          aria-hidden="true"
+          class="sc-gsnScm kqpRYF"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg
+            fill="none"
+            height="32"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.1869 16.5875L12.1295 27.4801C11.4897 28.1733 10.4524 28.1733 9.81295 27.4801C9.17343 26.7874 9.17343 25.664 9.81295 24.9714L18.7122 15.3332L9.81321 5.69523C9.17369 5.0023 9.17369 3.87902 9.81321 3.18638C10.4527 2.49346 11.49 2.49346 12.1297 3.18638L22.1872 14.0791C22.5069 14.4256 22.6666 14.8793 22.6666 15.3331C22.6666 15.7872 22.5066 16.2412 22.1869 16.5875Z"
+              fill="#F9C000"
+              stroke="#F9C000"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItemWithSubList > should render correctly 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eCYdKt"
+    >
+      <button
+        class="sc-jSMdHm kfeOep"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gsnScm kqpRYF"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg
+            fill="none"
+            height="32"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.1869 16.5875L12.1295 27.4801C11.4897 28.1733 10.4524 28.1733 9.81295 27.4801C9.17343 26.7874 9.17343 25.664 9.81295 24.9714L18.7122 15.3332L9.81321 5.69523C9.17369 5.0023 9.17369 3.87902 9.81321 3.18638C10.4527 2.49346 11.49 2.49346 12.1297 3.18638L22.1872 14.0791C22.5069 14.4256 22.6666 14.8793 22.6666 15.3331C22.6666 15.7872 22.5066 16.2412 22.1869 16.5875Z"
+              fill="#F9C000"
+              stroke="#F9C000"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
+exports[`DropdownMenuItemWithSubList > should toggle subList 1`] = `
+<DocumentFragment>
+  <li
+    class="sc-dkzCjb hCEFCJ"
+    data-rc="DropdownMenuItemWithSubList"
+  >
+    <div
+      class="sc-eCYdKt"
+    >
+      <button
+        class="sc-jSMdHm kfeOep"
+        tabindex="0"
+      >
+        Item Content
+        <span
+          aria-hidden="true"
+          class="sc-gsnScm kqpRYF"
+          data-rc="LargeSystemIcon.ArrowRight"
+        >
+          <svg
+            fill="none"
+            height="32"
+            viewBox="0 0 32 32"
+            width="32"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M22.1869 16.5875L12.1295 27.4801C11.4897 28.1733 10.4524 28.1733 9.81295 27.4801C9.17343 26.7874 9.17343 25.664 9.81295 24.9714L18.7122 15.3332L9.81321 5.69523C9.17369 5.0023 9.17369 3.87902 9.81321 3.18638C10.4527 2.49346 11.49 2.49346 12.1297 3.18638L22.1872 14.0791C22.5069 14.4256 22.6666 14.8793 22.6666 15.3331C22.6666 15.7872 22.5066 16.2412 22.1869 16.5875Z"
+              fill="#F9C000"
+              stroke="#F9C000"
+            />
+          </svg>
+        </span>
+      </button>
+    </div>
+  </li>
+</DocumentFragment>
+`;
+
 exports[`DropdownMenuItemWithSubList should not render hidden items 1`] = `
 <DocumentFragment>
   <li

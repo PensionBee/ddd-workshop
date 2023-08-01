@@ -26,6 +26,45 @@ exports[`FieldWrapper > With prefix > should render correctly 1`] = `
 </DocumentFragment>
 `;
 
+exports[`FieldWrapper > With prefix icon > should render correctly 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gsnScm bgFqSI"
+  >
+    <div
+      class="sc-bczSft eblhFG"
+    >
+      <span
+        class="sc-hKMtDE jzIOA-d"
+        data-rc="SmallSystemIcon.AlertInfo"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12ZM12 6C12.5523 6 13 6.44772 13 7V12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12V7C11 6.44772 11.4477 6 12 6ZM13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16V16.5C11 17.0523 11.4477 17.5 12 17.5C12.5523 17.5 13 17.0523 13 16.5V16Z"
+            fill="#F9C000"
+            fill-rule="evenodd"
+          />
+        </svg>
+      </span>
+    </div>
+    <div
+      class="sc-bczSft ghPjgr sc-dkzCjb"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
 exports[`FieldWrapper > With suffix > should render correctly 1`] = `
 <DocumentFragment>
   <span
@@ -46,6 +85,45 @@ exports[`FieldWrapper > With suffix > should render correctly 1`] = `
         data-rc="BodySmallB"
       >
         Suffix text
+      </span>
+    </div>
+  </span>
+</DocumentFragment>
+`;
+
+exports[`FieldWrapper > With suffix > should render correctly with suffix icon 1`] = `
+<DocumentFragment>
+  <span
+    class="sc-gsnScm bgFqSI"
+  >
+    <div
+      class="sc-bczSft ghPjgr sc-dkzCjb"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-bczSft fNJJm"
+    >
+      <span
+        class="sc-hKMtDE jzIOA-d"
+        data-rc="SmallSystemIcon.AlertInfo"
+      >
+        <svg
+          fill="none"
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM0 12C0 5.37258 5.37258 0 12 0C18.6274 0 24 5.37258 24 12C24 18.6274 18.6274 24 12 24C5.37258 24 0 18.6274 0 12ZM12 6C12.5523 6 13 6.44772 13 7V12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12V7C11 6.44772 11.4477 6 12 6ZM13 16C13 15.4477 12.5523 15 12 15C11.4477 15 11 15.4477 11 16V16.5C11 17.0523 11.4477 17.5 12 17.5C12.5523 17.5 13 17.0523 13 16.5V16Z"
+            fill="#F9C000"
+            fill-rule="evenodd"
+          />
+        </svg>
       </span>
     </div>
   </span>
