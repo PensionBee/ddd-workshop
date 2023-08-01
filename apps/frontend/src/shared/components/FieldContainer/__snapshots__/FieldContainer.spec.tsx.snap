@@ -1,4 +1,104 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FieldContainer > Default > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm hcHchc sc-iBkiHk jlUpdZ"
+  >
+    <div
+      class="sc-gsnScm gHKBVn"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer > With error message > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm hcHchc sc-iBkiHk jlUpdZ"
+  >
+    <label
+      class="sc-gsnScm dmxLJN"
+    >
+      <span
+        class="sc-bczSft iwUwuA"
+        data-rc="BodySmallB"
+      >
+        Label
+      </span>
+    </label>
+    <div
+      class="sc-gsnScm gHKBVn"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <div
+      class="sc-gsnScm cUcvaQ sc-dkzCjb kZxHOV"
+    >
+      <span
+        class="sc-bczSft imQpyU"
+        data-rc="DisclaimerR"
+      >
+        Error message
+      </span>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer > With hint text > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm hcHchc sc-iBkiHk jlUpdZ"
+  >
+    <div
+      class="sc-gsnScm gHKBVn"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+    <span
+      class="sc-bczSft jqHUNi"
+      data-rc="DisclaimerR"
+    >
+      Hint text
+    </span>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`FieldContainer > With label > should render correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-gsnScm hcHchc sc-iBkiHk jlUpdZ"
+  >
+    <label
+      class="sc-gsnScm dmxLJN"
+    >
+      <span
+        class="sc-bczSft iwUwuA"
+        data-rc="BodySmallB"
+      >
+        Label
+      </span>
+    </label>
+    <div
+      class="sc-gsnScm gHKBVn"
+    >
+      <div>
+        Input content
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
 
 exports[`FieldContainer Default should render correctly 1`] = `
 <DocumentFragment>

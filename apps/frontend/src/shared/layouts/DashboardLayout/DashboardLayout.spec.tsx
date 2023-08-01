@@ -1,5 +1,6 @@
-import { render, vi } from "@shared/testUtils";
+import { render } from "@shared/testUtils";
 import { DashboardLayout } from "./DashboardLayout";
+import { vi } from "vitest";
 
 vi.mock("@shared/panels/HeaderBeehiveMenu", () => ({
   HeaderBeehiveMenu: () => <div data-testid="HeaderBeehiveMenu" />,

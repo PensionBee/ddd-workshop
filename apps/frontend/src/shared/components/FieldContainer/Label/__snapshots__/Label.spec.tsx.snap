@@ -1,4 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`FieldWrapper/Label > should render correctly 1`] = `
+<DocumentFragment>
+  <label
+    class="sc-bczSft jJehPQ"
+  >
+    <span
+      class="sc-dkzCjb cGViLk"
+      data-rc="BodySmallB"
+    >
+      Label text
+    </span>
+  </label>
+</DocumentFragment>
+`;
 
 exports[`FieldWrapper/Label should render correctly 1`] = `
 <DocumentFragment>
