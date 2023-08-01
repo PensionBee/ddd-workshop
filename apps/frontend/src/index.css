@@ -1,3 +1,7 @@
+#root {
+  all: unset;
+}
+
 *:where(
     :not(html, iframe, canvas, img, svg, video, audio):not(svg *, symbol *)
   ) {
@@ -86,6 +90,6 @@ code {
     monospace;
 }
 
-#root {
-  padding: unset;
+html {
+  background-color: #fefefe;
 }
