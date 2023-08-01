@@ -1,8 +1,8 @@
-import { HomePage } from "./pages/Home";
 import "./App.css";
+import Router from "./Router";
 
 const App = () => {
-  return <HomePage />;
+  return <Router />;
 };
 
 export default App;

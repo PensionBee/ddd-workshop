@@ -4,7 +4,7 @@ import { GridContainer, GridRow, GridItem } from "@shared/components/Grid";
 import { LargeSystemIcon } from "@shared/components/Svg";
 import { BodySmallL, Heading1, Heading2 } from "@shared/components/Typography";
 
-export const HomePage = () => {
+const HomePage = () => {
   return (
     <>
       <header></header>
@@ -26,3 +26,5 @@ export const HomePage = () => {
     </>
   );
 };
+
+export default HomePage;
