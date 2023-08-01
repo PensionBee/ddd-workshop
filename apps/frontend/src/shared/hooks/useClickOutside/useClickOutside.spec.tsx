@@ -1,4 +1,5 @@
-import { act, fireEvent, render, vi } from "@shared/testUtils";
+import { act, fireEvent, render } from "@shared/testUtils";
+import { vi } from "vitest";
 import { useRef } from "react";
 import { useClickOutside } from "./useClickOutside";
 

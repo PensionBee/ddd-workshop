@@ -1,4 +1,4 @@
-import { render, vi } from "@shared/testUtils";
+import { render } from "@shared/testUtils";
 import { FieldWrapper } from "./FieldWrapper";
 
 const INPUT_CONTENT = "Input content";

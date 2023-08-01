@@ -1,4 +1,5 @@
-import { render, vi } from "@shared/testUtils";
+import { render } from "@shared/testUtils";
+import { vi } from "vitest";
 import { GridRow } from "./GridRow";
 
 describe("GridRow", () => {

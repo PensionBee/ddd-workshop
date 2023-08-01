@@ -1,5 +1,6 @@
-import { act, render, vi } from "@shared/testUtils";
+import { act, render } from "@shared/testUtils";
 import { handleHorizontalKeys, handleVerticalKeys } from "./handleKeys";
+import { vi } from "vitest";
 
 const PARENT_NODE = "parent-node";
 const FIRST_ELEMENT = "first-element";

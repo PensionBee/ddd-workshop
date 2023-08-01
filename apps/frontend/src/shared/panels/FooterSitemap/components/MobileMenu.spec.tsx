@@ -1,4 +1,5 @@
-import { act, fireEvent, queryByText, render, vi } from "@shared/testUtils";
+import { act, fireEvent, queryByText, render } from "@shared/testUtils";
+import { vi } from "vitest";
 import { FOOTER_MENU_SECTIONS } from "../FooterSitemap.content";
 import { MobileMenu, MobileLinkItem, MobileAccordion } from "./MobileMenu";
 

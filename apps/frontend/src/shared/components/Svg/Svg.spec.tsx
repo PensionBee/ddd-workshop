@@ -1,4 +1,5 @@
-import { render, vi } from "@shared/testUtils";
+import { render } from "@shared/testUtils";
+import { vi } from "vitest";
 import React from "react";
 import * as ComponentIcons from "./components/ComponentIcons";
 import * as FooterSystemIcons from "./components/FooterSystemIcons";

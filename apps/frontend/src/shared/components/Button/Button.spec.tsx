@@ -1,4 +1,5 @@
-import { fireEvent, render, vi } from "@shared/testUtils";
+import { fireEvent, render } from "@shared/testUtils";
+import { vi } from "vitest";
 import {
   Button,
   _ButtonBaseComponent,
