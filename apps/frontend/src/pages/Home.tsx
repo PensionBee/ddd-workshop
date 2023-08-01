@@ -1,5 +1,8 @@
+import { Box } from "@shared/components/Box";
+import { Button } from "@shared/components/Button";
 import { GridContainer, GridRow, GridItem } from "@shared/components/Grid";
-import { BodySmallL } from "@shared/components/Typography";
+import { LargeSystemIcon } from "@shared/components/Svg";
+import { BodySmallL, Heading1, Heading2 } from "@shared/components/Typography";
 
 export const HomePage = () => {
   return (
@@ -9,7 +12,12 @@ export const HomePage = () => {
         <GridContainer>
           <GridRow>
             <GridItem>
+              <Heading1>Welcome!</Heading1>
+              <Heading2>Demo App</Heading2>
               <BodySmallL>Hello world!</BodySmallL>
+              <Box w="100%" borderBottom={1} borderColor="black"/>
+              <LargeSystemIcon icon="Account"/>
+              <Button onClick={() => alert('Hello!')}>Click me!</Button>
             </GridItem>
           </GridRow>
         </GridContainer>

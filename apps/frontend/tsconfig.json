@@ -41,6 +41,6 @@
     "sourceMap": true,
     "strictBindCallApply": true,
   },
-  "include": ["src", "reset.d.ts"],
+  "include": ["src", "reset.d.ts", "svg.d.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

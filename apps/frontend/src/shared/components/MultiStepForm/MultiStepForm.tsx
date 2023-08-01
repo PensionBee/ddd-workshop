@@ -55,6 +55,8 @@ export const createMultiStepFormContext = <FormSchema extends z.AnyZodObject>(
   createContext<MultiStepFormReducer<FormSchema>>([initialState, () => null]);
 
 export const MultiStepForm = <FormSchema extends z.AnyZodObject>({
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   _schema, // Required to infer the type of the form schema
   Context,
   partials,
