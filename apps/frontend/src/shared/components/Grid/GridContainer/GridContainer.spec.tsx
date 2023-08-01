@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { GridContainer } from "./GridContainer";
 
 describe("Container", () => {

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React from "react";
 import { asBreakpointObject } from "@shared/utils/asBreakpointObject";
 import type { ValueOrBreakpointValues } from "@shared/utils/types";

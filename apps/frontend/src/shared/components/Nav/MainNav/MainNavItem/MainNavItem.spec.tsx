@@ -1,4 +1,4 @@
-import { routerRender, vi } from "@shared/testUtils";
+import { routerRender } from "@shared/testUtils";
 import { MainNavItem } from "./MainNavItem";
 
 const ITEM_CONTENT = "Item Content";

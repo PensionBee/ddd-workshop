@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import type { BoxProps } from "../Box/Box";
 import { Box } from "../Box/Box";
 import { theme } from "@shared/styling/theme";

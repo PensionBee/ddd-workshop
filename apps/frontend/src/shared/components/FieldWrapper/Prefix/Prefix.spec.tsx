@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { Prefix } from "./Prefix";
 
 const PREFIX_TEXT = "Prefix text";

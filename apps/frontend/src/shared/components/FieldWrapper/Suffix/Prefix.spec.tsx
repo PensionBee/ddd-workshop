@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { Suffix } from "./Suffix";
 
 const SUFFIX_TEXT = "Suffix text";

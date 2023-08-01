@@ -1,4 +1,4 @@
-import { routerRender, vi } from "@shared/testUtils";
+import { routerRender } from "@shared/testUtils";
 import { DropdownMenu } from "./DropdownMenu";
 import { LIST, LIST_WITH_MIXED_ITEMS } from "../Nav.content";
 

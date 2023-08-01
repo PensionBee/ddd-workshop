@@ -1,5 +1,4 @@
 import { fireEvent, render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { Accordion } from "./Accordion";
 
 const accordionItems = [

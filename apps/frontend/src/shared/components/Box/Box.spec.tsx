@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { Box } from "./Box";
 
 describe("Box", () => {

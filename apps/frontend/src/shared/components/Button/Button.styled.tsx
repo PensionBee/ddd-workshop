@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import styled, { css } from "styled-components";
 import type { MediaWidthType } from "@shared/styling/styledComponentHelpers";
 import {

@@ -1,5 +1,4 @@
 import { mockMediaMatches, render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { FooterSitemap } from "./FooterSitemap";
 
 describe("FooterSitemap", () => {

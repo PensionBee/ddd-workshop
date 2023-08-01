@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { FieldContainer } from "./FieldContainer";
 
 const INPUT_CONTENT = "Input content";

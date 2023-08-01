@@ -1,5 +1,4 @@
 import { act, render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { useWindowSize } from "./useWindowSize";
 
 const RESIZE_EVENT = new Event("resize");

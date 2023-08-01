@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import type { NavMenuItem } from "./Nav.types";
 
 // Example content used in tests and stories

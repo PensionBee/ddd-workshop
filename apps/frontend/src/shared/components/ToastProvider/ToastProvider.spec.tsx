@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { ToastProvider } from "./ToastProvider";
 
 describe("ToastProvider", () => {

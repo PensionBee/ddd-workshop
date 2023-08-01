@@ -1,5 +1,4 @@
 import { act, render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { useWindowScroll } from "./useWindowScroll";
 
 const SCROLL_EVENT = new Event("scroll");

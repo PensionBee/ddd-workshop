@@ -1,5 +1,4 @@
 import { render } from "@shared/testUtils";
-import { vi } from "vitest";
 import { ErrorMessage } from "./ErrorMessage";
 
 const ERROR_MESSAGE = "Error message";
