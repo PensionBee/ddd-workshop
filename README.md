@@ -2,47 +2,54 @@
 
 ## Context
 
-You've just been hired at `SocialBee` - the next big social media app (I promise).
+It's your first day at `SocialBuzz`, the next big social media app (promise).
 
-The company has big plans to revolutionise this space but first they've got to get on the radar, which means they need an MVP out the door ASAP, with the ability to respond to change quickly and support increasingly complex business requirements in the future
+The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door ASAP, with the ability to respond to change quickly and support increasingly complex business requirements in the future.
 
-Your product manager comes to you on day 1 with a small list of requirements.
+The CEO apprehends you at the water cooler...
 
-> "Right, here's what we need:
+> "Right, here's what we're going to need ASAP:
 >
-> 1. New customers should be able to create a new account with just an email, username and password. Plus the usual login, logout stuff too.
->
-> What? Someone's already done that? Nice! In that case:
->
-> 2. They should be able to post updates, a 'Post' I suppose it'd be called, and they should be visible to everyone on the platform via some central feed
-> 3. People should also be able to follow accounts they like. The feed should have an 'All Posts' filter and a 'Following Posts' filter.
+> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Sam already did that before she went of holiday? Nice! In that case...
+> 2. Users should be able to post updates that are visible to everyone on the platform via some central feed.
+> 3. They also need to be able to follow accounts they like. And the feed should have a filter so folk can pick between all posts or just posts for accounts they're following.
 > 4. Ohh, comments are important too. Anyone can comment on any other post.
 >
-> That's about it I suppose so you can probably get cracking. Oh yeah, the design doesn't matter too much at this point so go wild... We do have access to this 'component library' thing though so you can probably use that."
+> That's about it I suppose so you can probably get cracking. Oh yeah, the design doesn't really matter too much at this point so go wild... Sam already started using this "component library" thing though so might be worth using that."
 
-## Overview
+## Training Overview
 
-### Pre-Build
+***Note: Branch names are in branckets***
+### Prerequisites
 
-1. Getting to grips with Typescript
+1. Typescript (`typescript`)
 
 ### Building the Backend
 
-1. Values, Entities & Parsers
-2. DB Tables & Repositories
-3. Derivers & Action Handlers
+1. Values, Entities & Parsers (`values-entities-and-parsers`)
+2. DB & Repositories (`db-and-repositories`)
+3. Action Handlers & Derivers (`action-handlers-and-derivers`)
+4. Query Handlers (`query-handlers`)
+5. Creating the API Endpoints (`api-endpoints`)
 
 ### Building the Frontend
 
-1. Building a shared component
-2. Building out a new page
+1. Building Shared Components (`shared-components`)
+2. Building Pages (`feed-page`)
+3. Hooking up the Backend (`hook-up-api`)
 
-### Handling New Business Requirements
+### Responding to New Business Requirements Part 1
 
-1. ?
+1. Not Following Account = Can't Comment on Account Posts (`comment-restrictions`)
+2. On a Basic Account = Max 5 Posts Per Day (`post-restrictions`)
 
-### Improving the Backend
+### Supercharging the Backend
 
-1. Modular Programming & Abstractions
-2. Event-Driven Architectures
-3. Dependency Inversion, Partial Application & Awesome Tests
+1. Modular Programming & Abstractions (`modular-programming`)
+2. Dependency Inversion, Partial Application & Great Testing (`dependency-inversion`)
+   - rehttps://www.youtube.com/watch?v=JubdZIdLQ4M
+3. Event-Driven Architecture (`event-driven-helpers`)
+
+### Responding to New Business Requirements Part 2
+
+1. Created First Post = A Free Month of Premium (`free-month-of-premium`)
