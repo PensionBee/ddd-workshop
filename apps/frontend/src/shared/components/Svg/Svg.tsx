@@ -1,24 +1,33 @@
 import type { ValueOrBreakpointValues } from "@shared/utils/types";
 import { asBreakpointObject } from "@shared/utils/asBreakpointObject";
-import * as ComponentIcons from "./components/ComponentIcons";
-import * as FooterSystemIcons from "./components/FooterSystemIcons";
+// import * as ComponentIcons from "./components/ComponentIcons";
+// import * as FooterSystemIcons from "./components/FooterSystemIcons";
 import * as LargeSystemIcons from "./components/LargeSystemIcons";
 import * as SmallSystemIcons from "./components/SmallSystemIcons";
-import * as PlanIcons from "./components/PlanIcons";
-import * as SocialIcons from "./components/SocialIcons";
-import * as RiskProfileIcons from "./components/RiskProfileIcons";
-import * as Logos from "./components/Logos";
+// import * as PlanIcons from "./components/PlanIcons";
+// import * as SocialIcons from "./components/SocialIcons";
+// import * as RiskProfileIcons from "./components/RiskProfileIcons";
+// import * as Logos from "./components/Logos";
+
+// const ComponentIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const FooterSystemIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const SmallSystemIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const PlanIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const SocialIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const RiskProfileIcons = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+// const Logos = [] as  React.FC<React.SVGProps<SVGSVGElement>>[];
+
 import { StyledSvg } from "./Svg.styled";
 import type {
-  ComponentIconType,
-  FooterSystemIconType,
+  // ComponentIconType,
+  // FooterSystemIconType,
   LargeSystemIconType,
   SmallSystemIconType,
-  SocialIconType,
-  LogoType,
+  // SocialIconType,
+  // LogoType,
   SVGColors,
-  PlanIconsType,
-  RiskProfileIconsType,
+  // PlanIconsType,
+  // RiskProfileIconsType,
 } from "./Svg.types";
 import type {
   MediaHeightType,
@@ -145,27 +154,27 @@ export type SvgProps<T> = Omit<BaseSvgProps, "component"> & {
   icon: T;
 };
 
-export const ComponentIcon: React.FC<SvgProps<ComponentIconType>> = ({
-  icon,
-  ...props
-}) => (
-  <BaseSvg
-    data-rc={`ComponentIcon.${icon}`}
-    {...props}
-    component={ComponentIcons[icon]}
-  />
-);
+// export const ComponentIcon: React.FC<SvgProps<ComponentIconType>> = ({
+//   icon,
+//   ...props
+// }) => (
+//   <BaseSvg
+//     data-rc={`ComponentIcon.${icon}`}
+//     {...props}
+//     component={ComponentIcons[icon]}
+//   />
+// );
 
-export const FooterSystemIcon: React.FC<SvgProps<FooterSystemIconType>> = ({
-  icon,
-  ...props
-}) => (
-  <BaseSvg
-    data-rc={`FooterSystemIcon.${icon}`}
-    {...props}
-    component={FooterSystemIcons[icon]}
-  />
-);
+// export const FooterSystemIcon: React.FC<SvgProps<FooterSystemIconType>> = ({
+//   icon,
+//   ...props
+// }) => (
+//   <BaseSvg
+//     data-rc={`FooterSystemIcon.${icon}`}
+//     {...props}
+//     component={FooterSystemIcons[icon]}
+//   />
+// );
 
 export const LargeSystemIcon: React.FC<SvgProps<LargeSystemIconType>> = ({
   icon,
@@ -189,39 +198,39 @@ export const SmallSystemIcon: React.FC<SvgProps<SmallSystemIconType>> = ({
   />
 );
 
-export const PlanIcon: React.FC<SvgProps<PlanIconsType>> = ({
-  icon,
-  ...props
-}) => (
-  <BaseSvg
-    data-rc={`PlanIcon.${icon}`}
-    {...props}
-    component={PlanIcons[icon]}
-  />
-);
+// export const PlanIcon: React.FC<SvgProps<PlanIconsType>> = ({
+//   icon,
+//   ...props
+// }) => (
+//   <BaseSvg
+//     data-rc={`PlanIcon.${icon}`}
+//     {...props}
+//     component={PlanIcons[icon]}
+//   />
+// );
 
-export const RiskProfileIcon: React.FC<SvgProps<RiskProfileIconsType>> = ({
-  icon,
-  ...props
-}) => (
-  <BaseSvg
-    data-rc={`RiskProfileIcon.${icon}`}
-    {...props}
-    component={RiskProfileIcons[icon]}
-  />
-);
+// export const RiskProfileIcon: React.FC<SvgProps<RiskProfileIconsType>> = ({
+//   icon,
+//   ...props
+// }) => (
+//   <BaseSvg
+//     data-rc={`RiskProfileIcon.${icon}`}
+//     {...props}
+//     component={RiskProfileIcons[icon]}
+//   />
+// );
 
-export const SocialIcon: React.FC<SvgProps<SocialIconType>> = ({
-  icon,
-  ...props
-}) => (
-  <BaseSvg
-    data-rc={`SocialIcon.${icon}`}
-    {...props}
-    component={SocialIcons[icon]}
-  />
-);
+// export const SocialIcon: React.FC<SvgProps<SocialIconType>> = ({
+//   icon,
+//   ...props
+// }) => (
+//   <BaseSvg
+//     data-rc={`SocialIcon.${icon}`}
+//     {...props}
+//     component={SocialIcons[icon]}
+//   />
+// );
 
-export const LogoSvg: React.FC<SvgProps<LogoType>> = ({ icon, ...props }) => (
-  <BaseSvg data-rc={`LogoSvg.${icon}`} {...props} component={Logos[icon]} />
-);
+// export const LogoSvg: React.FC<SvgProps<LogoType>> = ({ icon, ...props }) => (
+//   <BaseSvg data-rc={`LogoSvg.${icon}`} {...props} component={Logos[icon]} />
+// );
