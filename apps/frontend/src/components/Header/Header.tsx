@@ -3,6 +3,7 @@ import { MainNav } from "../../shared/components/Nav/MainNav/MainNav";
 import { Button } from "../../shared/components/Button";
 import { StyledHeader } from "./Header.styled";
 import { useMediaQueryMd } from "../../shared/hooks/useMediaQuery";
+import { useAuthState } from "../../AuthContext";
 
 const mainMenu = [
   {
@@ -21,6 +22,7 @@ const mainMenu = [
 
 const Header = () => {
   const isMd = useMediaQueryMd();
+  const [{ user }, dispatchAuthState] = useAuthState();
   return (
     <StyledHeader>
       <GridContainer>
@@ -32,7 +34,13 @@ const Header = () => {
             </GridItem>
           ) : null}
           <GridItem span={{ xs: 6, md: 3 }} align="end">
-            <Button onClick={() => alert("Clicked")}>Log In</Button>
+            {!user ? (
+              <Button href="/login">Log In</Button>
+            ) : (
+              <Button onClick={() => dispatchAuthState({ type: "LOG_OUT" })}>
+                Log out
+              </Button>
+            )}
           </GridItem>
         </GridRow>
       </GridContainer>

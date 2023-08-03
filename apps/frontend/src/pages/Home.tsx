@@ -4,14 +4,18 @@ import { GridContainer, GridRow, GridItem } from "@shared/components/Grid";
 import { LargeSystemIcon } from "@shared/components/Svg";
 import { BodySmallL, Heading1, Heading2 } from "@shared/components/Typography";
 import { MainLayout } from "../layouts/MainLayout/MainLayout";
+import { useAuthState } from "../AuthContext";
 
 const HomePage = () => {
+  const [{ user }, _dispatchAuthState] = useAuthState();
+  const { username } = user || {};
+
   return (
     <MainLayout>
       <GridContainer>
         <GridRow>
           <GridItem>
-            <Heading1>Welcome!</Heading1>
+            <Heading1>{username ? `Welcome ${username}!` : `Welcome!`}</Heading1>
             <Heading2>Demo App</Heading2>
             <BodySmallL>Hello world!</BodySmallL>
             <Box w="100%" borderBottom={1} borderColor="black" />
