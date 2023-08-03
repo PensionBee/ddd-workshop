@@ -1,4 +1,5 @@
 import { Dispatch, createContext, useContext, useReducer } from "react";
+import { throwOnDefaultCase } from "./utils/typeUtils";
 
 type AuthState = {
   user?: {
@@ -37,6 +38,7 @@ export const authReducer = (state: AuthState, action: AuthAction) => {
         user: undefined,
       };
     default:
+      throwOnDefaultCase(action);
       return state;
   }
 };
