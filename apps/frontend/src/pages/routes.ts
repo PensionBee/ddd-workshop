@@ -1,10 +1,12 @@
 import { RouteType } from "@shared/utils/createRoutes";
-import { lazy } from "react";
 
-const HomePage = lazy(() => import("./Home"));
-const LoginPage = lazy(() => import("./Login"));
+import HomePage from './Home';
+import LoginPage from './Login';
+import ErrorPage from './404';
 
 export const routes: RouteType[] = [
   { path: "/", component: HomePage },
   { path: "/login", component: LoginPage },
+  { path: "/profile", component: ErrorPage },
+  { path: "/settings", component: ErrorPage },
 ];
