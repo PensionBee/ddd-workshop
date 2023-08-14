@@ -19,18 +19,22 @@ The CEO apprehends you at the water cooler...
 
 ## Training Overview
 
-***Note: Branch names are in branckets***
+***Note: Branch names are in brackets***
+
 ### Prerequisites
 
 1. Typescript (`typescript`)
+2. TDD (`tdd`)
 
 ### Building the Backend
 
-1. Values, Entities & Parsers (`values-entities-and-parsers`)
-2. DB & Repositories (`db-and-repositories`)
-3. Action Handlers & Derivers (`action-handlers-and-derivers`)
-4. Query Handlers (`query-handlers`)
-5. Creating the API Endpoints (`api-endpoints`)
+
+1. Writing the tests (`writing-the-tests`)
+2. Values, Entities & Parsers (`values-entities-and-parsers`)
+3. DB & Repositories (`db-and-repositories`)
+4. Action Handlers & Derivers (`action-handlers-and-derivers`)
+5. Query Handlers (`query-handlers`)
+6. Creating the API Endpoints (`api-endpoints`)
 
 ### Building the Frontend
 
