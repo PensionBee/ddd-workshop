@@ -1,6 +1,6 @@
 // THIS PROBLEM SET FOCUSES ON GENERICS, MAPPED TYPES, CONDITIONAL TYPES AND OTHER ADVANCED TS CONCEPTS
 
-import { Post, User, post1, user1 } from "./part1.problems";
+import { Post, User, post1, user1 } from "./part1";
 
 /**
  * Part 1: Write a utility type that converts a specific entity type into an array of that entity type
