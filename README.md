@@ -10,12 +10,12 @@ The CEO apprehends you at the water cooler...
 
 > "Right, here's what we're going to need ASAP:
 >
-> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Sam already did that before she went of holiday? Nice! In that case...
+> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Sarah already did that before she went on holiday? Nice! In that case...
 > 2. Users should be able to post updates that are visible to everyone on the platform via some central feed.
 > 3. They also need to be able to follow accounts they like. And the feed should have a filter so folk can pick between all posts or just posts for accounts they're following.
 > 4. Ohh, comments are important too. Anyone can comment on any other post.
 >
-> That's about it I suppose so you can probably get cracking. Oh yeah, the design doesn't really matter too much at this point so go wild... Sam already started using this "component library" thing though so might be worth using that."
+> That's about it I suppose so you can probably get cracking. Oh yeah, the design doesn't really matter too much at this point so go wild... Sarah already started using this "component library" thing though so might be worth using that."
 
 ## Training Overview
 
@@ -28,13 +28,11 @@ The CEO apprehends you at the water cooler...
 
 ### Building the Backend
 
-
-1. Writing the tests (`writing-the-tests`)
-2. Values, Entities & Parsers (`values-entities-and-parsers`)
-3. DB & Repositories (`db-and-repositories`)
-4. Action Handlers & Derivers (`action-handlers-and-derivers`)
-5. Query Handlers (`query-handlers`)
-6. Creating the API Endpoints (`api-endpoints`)
+1. Values, Entities & Parsers (`values-entities-and-parsers`)
+2. Persistence & Repositories (`persistence-and-repositories`)
+3. Action Handlers & Derivers (`action-handlers-and-derivers`)
+4. Query Handlers (`query-handlers`)
+5. Creating the API Endpoints (`api-endpoints`)
 
 ### Building the Frontend
 
@@ -51,7 +49,6 @@ The CEO apprehends you at the water cooler...
 
 1. Modular Programming & Abstractions (`modular-programming`)
 2. Dependency Inversion, Partial Application & Great Testing (`dependency-inversion`)
-   - rehttps://www.youtube.com/watch?v=JubdZIdLQ4M
 3. Event-Driven Architecture (`event-driven-helpers`)
 
 ### Responding to New Business Requirements Part 2
