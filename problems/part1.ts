@@ -126,6 +126,7 @@ const maybeProcessRequestWithUserId = (data: DataWithExpectedValue): any => {
  * Part 7: Change the types in the following code from 'any' to a more specific type
  *
  * Hint: Search for 'TS ReturnType utility'... Maybe also have a look at the other utilities available in TS?
+ * Hint: Search for 'TS typeof'
  */
 
 const pretendImADatabaseOfUsers = [
