@@ -133,7 +133,7 @@ const pretendImADatabaseOfUsers = [
   { userId: "def456", followers: [], blockedUsers: ["abc123"] },
 ];
 
-const followUser = (followerId: any, toFollowId: any): any => {
+const followUser = (followerId: any, toFollowId: any) => {
   const toFollowUser = pretendImADatabaseOfUsers.find(
     (user) => user.userId === toFollowId
   );
