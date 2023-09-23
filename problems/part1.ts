@@ -122,4 +122,32 @@ const maybeProcessRequestWithUserId = (data: DataWithExpectedValue): any => {
   return `Hey ${data.userId}`;
 };
 
+/**
+ * Part 7: Change the types in the following code from 'any' to a more specific type
+ *
+ * Hint: Search for 'TS ReturnType utility'... Maybe also have a look at the other utilities available in TS?
+ */
+
+const pretendImADatabaseOfUsers = [
+  { userId: "abc123", followers: [], blockedUsers: [] },
+  { userId: "def456", followers: [], blockedUsers: ["abc123"] },
+];
+
+const followUser = (followerId: any, toFollowId: any): any => {
+  const toFollowUser = pretendImADatabaseOfUsers.find(
+    (user) => user.userId === toFollowId
+  );
+  if (toFollowUser?.blockedUsers.includes(followerId)) {
+    return "FAIL/USER_BLOCKED";
+  }
+
+  // This is where we'd normally update the user's followers and then save the user back into the DB (skipping since not important here)
+
+  return "SUCCESS/USER_FOLLOWED";
+};
+
+followUser("abc123", "def456");
+
+type FollowUserPossibleOutcomes = any; // Hovering over 'FollowUserPossibleOutcomes' should show "FAIL/USER_BLOCKED" | "SUCCESS/USER_FOLLOWED"
+
 export {};
