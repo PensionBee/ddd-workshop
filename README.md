@@ -19,38 +19,33 @@ The CEO apprehends you at the water cooler...
 
 ## Training Overview
 
-***Note: Branch names are in brackets***
-
 ### Prerequisites
 
-1. Typescript (`typescript`)
-2. TDD (`tdd`)
+1. [Typescript](https://github.com/PensionBee/l-and-ddd/tree/typescript) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/typescript-solutions)
+2. [Test Driven Development (TDD)](https://github.com/PensionBee/l-and-ddd/tree/tdd) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/tdd-solutions)
 
-### Building the Backend
+### Building out the Backend
 
-1. Values, Entities & Parsers (`values-entities-and-parsers`)
-2. Persistence & Repositories (`persistence-and-repositories`)
-3. Action Handlers & Derivers (`action-handlers-and-derivers`)
-4. Query Handlers (`query-handlers`)
-5. Creating the API Endpoints (`api-endpoints`)
+1. [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
+2. [Persistence & Repositories](https://github.com/PensionBee/l-and-ddd/tree/persistence-and-repositories)
+3. [Action Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/action-handlers-and-derivers)
+4. [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
+5. [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
 
-### Building the Frontend
+### Building out the Frontend
 
-1. Building Shared Components (`shared-components`)
-2. Building Pages (`feed-page`)
-3. Hooking up the Backend (`hook-up-api`)
-
-### Responding to New Business Requirements Part 1
-
-1. Not Following Account = Can't Comment on Account Posts (`comment-restrictions`)
-2. On a Basic Account = Max 5 Posts Per Day (`post-restrictions`)
+1. [Building Shared Components](https://github.com/PensionBee/l-and-ddd/tree/shared-components)
+2. [Building the Feed Page](https://github.com/PensionBee/l-and-ddd/tree/feed-page)
+3. [Hooking up the Backend](https://github.com/PensionBee/l-and-ddd/tree/hook-up-api)
 
 ### Supercharging the Backend
 
-1. Modular Programming & Abstractions (`modular-programming`)
-2. Dependency Inversion, Partial Application & Great Testing (`dependency-inversion`)
-3. Event-Driven Architecture (`event-driven-helpers`)
+1. [Creating Abstractions](https://github.com/PensionBee/l-and-ddd/tree/abstractions)
+2. [Dependency Inversion, Partial Application & Great Testing](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion)
+3. [Event-Driven Architecture](https://github.com/PensionBee/l-and-ddd/tree/event-driven-helpers)
 
-### Responding to New Business Requirements Part 2
+### Responding to New Business Requirements
 
-1. Created First Post = A Free Month of Premium (`free-month-of-premium`)
+1. [Not Following Account = Post Comment requires Approval](https://github.com/PensionBee/l-and-ddd/tree/comment-restrictions)
+2. [On a Basic Account = Max 5 Posts per Day](https://github.com/PensionBee/l-and-ddd/tree/post-restrictions)
+3. [Created First Post = A Free Month of Premium](https://github.com/PensionBee/l-and-ddd/tree/free-month-of-premium)
