@@ -27,25 +27,26 @@ The CEO apprehends you at the water cooler...
 ### Building out the Backend
 
 1. [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
-2. [Persistence & Repositories](https://github.com/PensionBee/l-and-ddd/tree/persistence-and-repositories)
-3. [Action Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/action-handlers-and-derivers)
+2. [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
+3. [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
 4. [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
 5. [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
+
+### Supercharging the Backend
+
+1. [Standardising Command Handlers](https://github.com/PensionBee/l-and-ddd/tree/standardising-command-handlers)
+2. [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion-injection)
+
+### Intra- & Inter-Context Communication
+
+1. [Inter-Context Data Fetching](https://github.com/PensionBee/l-and-ddd/tree/inter-context-data-fetching) (Business Requirement: If basic account then max 5 posts per day)
+2. [Supporting an Event-Driven Architecture](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-helpers)
+3. [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/comment-restrictions) (Business Requirement: If post has 5+ comments then mark post as 'hot')
+4. [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/free-month-of-premium)
+Business Requirement: If first account post created then A Free Month of Premium
 
 ### Building out the Frontend
 
 1. [Building Shared Components](https://github.com/PensionBee/l-and-ddd/tree/shared-components)
 2. [Building the Feed Page](https://github.com/PensionBee/l-and-ddd/tree/feed-page)
 3. [Hooking up the Backend](https://github.com/PensionBee/l-and-ddd/tree/hook-up-api)
-
-### Supercharging the Backend
-
-1. [Creating Abstractions](https://github.com/PensionBee/l-and-ddd/tree/abstractions)
-2. [Dependency Inversion, Partial Application & Great Testing](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion)
-3. [Event-Driven Architecture](https://github.com/PensionBee/l-and-ddd/tree/event-driven-helpers)
-
-### Responding to New Business Requirements
-
-1. [Not Following Account = Post Comment requires Approval](https://github.com/PensionBee/l-and-ddd/tree/comment-restrictions)
-2. [On a Basic Account = Max 5 Posts per Day](https://github.com/PensionBee/l-and-ddd/tree/post-restrictions)
-3. [Created First Post = A Free Month of Premium](https://github.com/PensionBee/l-and-ddd/tree/free-month-of-premium)
