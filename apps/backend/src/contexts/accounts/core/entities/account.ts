@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { createEntityParser } from "#shared/core/entities/entityParsing";
+import { createEntityParser } from "#/shared/core/entities/entityParsing";
 
 export type Account = z.infer<typeof accountSchema>;
 

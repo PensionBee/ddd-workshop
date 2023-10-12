@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 
-import { logIntoAccount } from "#contexts/accounts/core/actions/logIntoAccount";
-import { throwOnDefaultCase } from "#shared/common/typeUtils";
+import { logIntoAccount } from "#/contexts/accounts/core/actions/logIntoAccount";
+import { throwOnDefaultCase } from "#/shared/common/typeUtils";
 import {
   successResponse,
   unauthorizedResponse,
-} from "#shared/interface/routes/apiResponses";
+} from "#/shared/interface/routes/apiResponses";
 
 export const handleLogIntoAccountRequest = async (
   req: Request,

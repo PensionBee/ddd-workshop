@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { BaseError } from "#shared/common/errors";
+import { BaseError } from "#/shared/common/errors";
 
 export class QueryDataInvalidError extends BaseError {
   constructor(zodError: z.ZodError) {

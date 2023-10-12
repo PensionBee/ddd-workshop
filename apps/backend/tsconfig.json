@@ -10,8 +10,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "paths": {
-      "#contexts/*": ["src/contexts/*"],
-      "#shared/*": ["src/shared/*"]
+      "#/*": ["src/*"]
     },
     "skipLibCheck": true,
     "strict": true,

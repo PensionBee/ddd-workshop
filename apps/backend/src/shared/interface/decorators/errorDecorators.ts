@@ -1,12 +1,12 @@
 import { RequestHandler } from "express";
 
-import { EntityInvalidError } from "#shared/core/entities/entityErrors";
-import { BaseError } from "#shared/common/errors";
+import { BaseError } from "#/shared/common/errors";
 import {
   ActionDataInvalidError,
   InvalidStateError,
-} from "#shared/core/actions/actionErrors";
-import { QueryDataInvalidError } from "#shared/core/queries/queryErrors";
+} from "#/shared/core/actions/actionErrors";
+import { EntityInvalidError } from "#/shared/core/entities/entityErrors";
+import { QueryDataInvalidError } from "#/shared/core/queries/queryErrors";
 import {
   badRequestResponse,
   internalServerErrorResponse,

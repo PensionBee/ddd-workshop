@@ -1,10 +1,10 @@
 import type { account } from "@prisma/client";
 
-import prisma from "#shared/infra/prisma";
 import {
   Account,
   parseAccount,
-} from "#contexts/accounts/core/entities/account";
+} from "#/contexts/accounts/core/entities/account";
+import prisma from "#/shared/infra/prisma";
 
 const PrismaAccount = prisma["account"];
 

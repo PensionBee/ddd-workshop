@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-import { accountRepository } from "#contexts/accounts/infra/repositories/accountRepository";
-import { createQueryHandler } from "#shared/core/queries/queryHandling";
-import { createQueryDataParser } from "#shared/core/queries/queryParsing";
+import { accountRepository } from "#/contexts/accounts/infra/repositories/accountRepository";
+import { createQueryHandler } from "#/shared/core/queries/queryHandling";
+import { createQueryDataParser } from "#/shared/core/queries/queryParsing";
 
 type Data = z.infer<typeof dataSchema>;
 

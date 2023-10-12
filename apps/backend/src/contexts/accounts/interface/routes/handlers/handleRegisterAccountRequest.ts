@@ -1,11 +1,11 @@
 import type { Request, Response } from "express";
 
-import { registerAccount } from "#contexts/accounts/core/actions/registerAccount";
-import { throwOnDefaultCase } from "#shared/common/typeUtils";
+import { registerAccount } from "#/contexts/accounts/core/actions/registerAccount";
+import { throwOnDefaultCase } from "#/shared/common/typeUtils";
 import {
   forbiddenResponse,
   successResponse,
-} from "#shared/interface/routes/apiResponses";
+} from "#/shared/interface/routes/apiResponses";
 
 export const handleRegisterAccountRequest = async (
   req: Request,

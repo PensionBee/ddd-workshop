@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { BaseError } from "#shared/common/errors";
+import { BaseError } from "#/shared/common/errors";
 
 export class ActionDataInvalidError extends BaseError {
   constructor(zodError: z.ZodError) {

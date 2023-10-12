@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 
-import { getAccountById } from "#contexts/accounts/core/queries/getAccountById";
+import { getAccountById } from "#/contexts/accounts/core/queries/getAccountById";
 
 export const authenticateRequest = async (
   req: Request,
