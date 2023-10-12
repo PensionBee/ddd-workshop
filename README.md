@@ -55,7 +55,6 @@ As part of this business use case (the customer registration use case) we need t
 - [Domain-Driven Design: Entities, Value Objects, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
 - [Entities & Value Objects (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
 
-
 ## A Note on Project Structure
 
 Although we'll go into more detail about the directory structure and layers used in this project a little later on, it's worth touching upon it at a high level right off the bat. Each of our 2 bounded contexts (accounts and posts) follows the following structure:
@@ -73,17 +72,22 @@ Although we'll go into more detail about the directory structure and layers used
   - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the type defined in the previous step.
   - Create a `parsePost` function which takes a `data` argument (an unknown object/record type) and parses it using [zod](https://github.com/colinhacks/zod#basic-usage), returning a valid `Post` entity if the data is valid or throwing an error if the data is invalid.
   - Replace the manually created `Post` type by using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` entity is, so manually defining a type is just double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date.
-  - Export the `parsePost` function and the `Post` type so they can be used in other parts of the system.
+  - Export the `Post` type and the `parsePost` function so they can be used in other parts of the system.
 
 ### Modelling a Post Comment
 
 - In ***src/contexts/posts/core/entities/postComment.ts***:
   - Define `type PostComment`, `const postCommentSchema` and `const parsePostComment` like we did for the `Post` entity.
+  - Export the `PostComment` type and the `parsePostComment` function so they can be used in other parts of the system.
 
-### Updating the Account model
+### Modelling Account Following
 
 - In ***src/contexts/accounts/core/entities/account.ts***:
-  - Update the `Account` entity to include a list of other accounts that an account follows
+  - Update the `Account` entity parser to include a `following` value object, which holds information about which accounts an account follows.
+
+### Writing Tests
+
+- TODO
 
 ## Further Reading
 
