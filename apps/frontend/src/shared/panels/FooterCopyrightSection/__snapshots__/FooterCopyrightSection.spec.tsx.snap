@@ -1,5 +1,0 @@
-// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
-
-exports[`FooterCopyrightSection > should render 1`] = `[Function]`;
-
-exports[`FooterCopyrightSection should render 1`] = `[Function]`;
