@@ -2,10 +2,6 @@ import type { Request, Response } from "express";
 
 import { registerAccount } from "#/contexts/accounts/core/actions/registerAccount";
 import { errorOnDefaultCase } from "#/shared/common/typeUtils";
-import {
-  forbiddenResponse,
-  successResponse,
-} from "#/shared/interface/routes/apiResponses";
 
 export const handleRegisterAccountRequest = async (
   req: Request,
@@ -22,12 +18,11 @@ export const handleRegisterAccountRequest = async (
   switch (outcome.type) {
     case "ACCOUNT_REGISTRATION_FAILED/EMAIL_ALREADY_IN_USE":
     case "ACCOUNT_REGISTRATION_FAILED/USERNAME_ALREADY_IN_USE":
-      return forbiddenResponse(
-        res,
-        "An account already exists with this email or username"
-      );
+      return res.status(400).json({
+        error: "An account already exists with this email or username",
+      });
     case "ACCOUNT_CREATED":
-      return successResponse(res);
+      return res.status(200);
     default:
       return errorOnDefaultCase(outcome);
   }
