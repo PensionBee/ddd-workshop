@@ -1,7 +1,5 @@
 import { z } from "zod";
 
-import { createEntityParser } from "#/shared/core/entities/entityParsing";
-
 export type Account = z.infer<typeof accountSchema>;
 
 const accountSchema = z.object({
@@ -11,4 +9,5 @@ const accountSchema = z.object({
   password: z.string().min(8).max(64),
 });
 
-export const parseAccount = createEntityParser(accountSchema);
+export const parseAccount = (data: Record<string, unknown>): Account =>
+  accountSchema.parse(data);

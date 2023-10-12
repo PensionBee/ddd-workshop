@@ -12,9 +12,9 @@
  *     do something
  *     break
  *   default:
- *     throwOnDefaultCase(x); // TS Error - case "C" is unhandled
+ *     errorOnDefaultCase(x); // TS Error - case "C" is unhandled
  */
-export const throwOnDefaultCase = (value: never): never => {
+export const errorOnDefaultCase = (value: never): never => {
   throw new Error(
     `${value} was unexpectedly handled by a default switch block`
   );

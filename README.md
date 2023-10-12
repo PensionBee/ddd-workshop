@@ -66,27 +66,25 @@ Although we'll go into more detail about the directory structure and layers used
 
 ## The Practical Bit
 
+### Modelling a Post
+
 - In ***src/contexts/posts/core/entities/post.ts***:
-  - Use the `zod` parsing library ([1](#references),[2](#references)) to create a *schema* defining what a `Post` is. You may want to mock up the definition of a `Post` in raw JSON or as a Typescript type before writing the schema.
-  - Use the `zod` parsing library ([3](#references)) to infer the `Post` type. Export this type for use in other parts of the system.
-  - Create a function called `parsePost` which takes in some raw data (unknown object/record type), parses it using `zod` ([4](#references)) and returns a valid `Post` entity. Export this function for use in other parts of the system.
+  - Create a `Post` type which represents the `Post` entity. This should be an object with an ID, plus any other value objects you think are necessary to capture the essence of a `Post`, e.g. `title`, `content`, etc.
+  - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the type defined in the previous step.
+  - Create a `parsePost` function which takes a `data` argument (an unknown object/record type) and parses it using [zod](https://github.com/colinhacks/zod#basic-usage), returning a valid `Post` entity if the data is valid or throwing an error if the data is invalid.
+  - Replace the manually created `Post` type by using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` entity is, so manually defining a type is just double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date.
+  - Export the `parsePost` function and the `Post` type so they can be used in other parts of the system.
+
+### Modelling a Post Comment
+
 - In ***src/contexts/posts/core/entities/postComment.ts***:
-  - Repeat the above steps for a `PostComment` entity.
-- Finally, in ***src/contexts/accounts/core/entities/account.ts***:
-  - Update the `Account` entity to contain a list of other accounts that an account follows
+  - Define `type PostComment`, `const postCommentSchema` and `const parsePostComment` like we did for the `Post` entity.
 
-## Questions Worth Pondering (but not necessarily needing to be answered)
+### Updating the Account model
 
-1. Why are `PostComments` not part of the `Post` entity? Could/should it be done differently?
-2. Why are `Accounts` that an `Account` follows part of the the `Account` entity? Could/should it be done differently?
+- In ***src/contexts/accounts/core/entities/account.ts***:
+  - Update the `Account` entity to include a list of other accounts that an account follows
 
 ## Further Reading
 
 - [?](https://...)
-
-## References
-
-1. [Zod Primitives](https://github.com/colinhacks/zod#primitives)
-2. [Zod Objects](https://github.com/colinhacks/zod#objects)
-3. [Zod Type Inference](https://github.com/colinhacks/zod#type-inference)
-4. [Zod Parsing](https://github.com/colinhacks/zod#basic-usage)

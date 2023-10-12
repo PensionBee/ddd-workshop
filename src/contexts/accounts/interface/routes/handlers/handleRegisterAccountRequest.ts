@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
 import { registerAccount } from "#/contexts/accounts/core/actions/registerAccount";
-import { throwOnDefaultCase } from "#/shared/common/typeUtils";
+import { errorOnDefaultCase } from "#/shared/common/typeUtils";
 import {
   forbiddenResponse,
   successResponse,
@@ -29,6 +29,6 @@ export const handleRegisterAccountRequest = async (
     case "ACCOUNT_CREATED":
       return successResponse(res);
     default:
-      return throwOnDefaultCase(outcome);
+      return errorOnDefaultCase(outcome);
   }
 };

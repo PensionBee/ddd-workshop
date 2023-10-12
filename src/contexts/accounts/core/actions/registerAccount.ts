@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
 import { accountRepository } from "#/contexts/accounts/infra/repositories/accountRepository";
-import { throwOnDefaultCase } from "#/shared/common/typeUtils";
+import { errorOnDefaultCase } from "#/shared/common/typeUtils";
 import { createActionHandler } from "#/shared/core/actions/actionHandling";
 import { createActionDataParser } from "#/shared/core/actions/actionParsing";
 
@@ -70,7 +70,7 @@ const updateState = async (_state: State, outcome: Outcome) => {
       await accountRepository.create(outcome.payload);
       break;
     default:
-      throwOnDefaultCase(outcome);
+      errorOnDefaultCase(outcome);
   }
 };
 

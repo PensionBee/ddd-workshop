@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import { z } from "zod";
 
 import { accountRepository } from "#/contexts/accounts/infra/repositories/accountRepository";
-import { throwOnDefaultCase } from "#/shared/common/typeUtils";
+import { errorOnDefaultCase } from "#/shared/common/typeUtils";
 import { createActionHandler } from "#/shared/core/actions/actionHandling";
 import { createActionDataParser } from "#/shared/core/actions/actionParsing";
 
@@ -73,7 +73,7 @@ const updateState = async (_state: State, outcome: Outcome) => {
     case "ACCOUNT_LOGIN_SUCCEEDED":
       break; // Do nothing
     default:
-      throwOnDefaultCase(outcome);
+      errorOnDefaultCase(outcome);
   }
 };
 

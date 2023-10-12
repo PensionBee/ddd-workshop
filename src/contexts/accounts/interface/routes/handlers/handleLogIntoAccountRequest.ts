@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
 import { logIntoAccount } from "#/contexts/accounts/core/actions/logIntoAccount";
-import { throwOnDefaultCase } from "#/shared/common/typeUtils";
+import { errorOnDefaultCase } from "#/shared/common/typeUtils";
 import {
   successResponse,
   unauthorizedResponse,
@@ -29,6 +29,6 @@ export const handleLogIntoAccountRequest = async (
       });
       return successResponse(res);
     default:
-      return throwOnDefaultCase(outcome);
+      return errorOnDefaultCase(outcome);
   }
 };
