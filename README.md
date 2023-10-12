@@ -1,90 +1,114 @@
-# L&DDD - Values, Entities & Parsers
+# L&DDD - Repositories & Persistence
 
 [Back to the training overview](https://github.com/PensionBee/l-and-ddd/tree/main#training-overview)
 
+**Note: Solutions to the previous lesson have been implemented on this branch and serve as the starting point for this lesson - go check out the files you worked on previously to see what's there. Don't worry if the solutions here are different from what you ended up with - there are multiple ways to model the same problem and some solutions include deliberate decisions in order to support future lessions. As long as the approaches are conceptually similar then view that as a big ol' win!**
+
 ## Context
 
-### What are entities and values?
+### What is a repository?
 
-In Domain Driven Design, 'value objects' and 'entities' are core concepts used to represent the 'things' that exists in your domain. In it's simplest form, entities are things with unique identifiers and values are things that don't. For example, a customer might be made up of a unique ID, an email address, phone number, address, etc. Here, the cser is an entity (it has a unique identifier) whereas everything else that makes up a user is a value object (they don't have unique IDs of their own). Note that value objects can be 'complex', for example an address value object might be made up of a street, city and postcode.
+A repository is a chunk of code with 2 main responsibilities:
 
-Generally, JSON is super useful for modelling entities and value objects. You probably do it all the time; DDD just has a specific naming to distinguish the different concepts, which makes it easy to talk about this with fellow developers and business people. Here's an example of a customer in JSON:
+1. Provide a simple interface for fetching and saving entities
+2. Map persistence data to/from domain entities
 
-```json
-{
-  "customer": {
-    "id": "abc123",
-    "email": "abc123@test.com",
-    "phoneNumber": "01234567890",
-    "address": {
-      "street": "Main Street",
-      "city": "London",
-      "postcode": "EC1 1AA"
-    }
-  }
+Let's break those down...
+
+#### Responsibility 1: Provide a simple interface for fetching and saving entities
+
+When we need to create/use/modify entities in our software, we need to fetch them from persistence (if they already exist), do some processing then save them. We can do this in multiple ways, including writing raw SQL, directly accessing files on disc or directly using an ORM or Query Builder. However, with these methods, persistence specific code can leak into the core of our application. This isn't always a problem but over time core application code can become increasingly coupled to the persistence technology it relies on, making it difficult to refactor and easy to introduce bugs. A repository prevents this leakage by capturing all persistence access code in one place and provides a set of simple functions that core application code can use to fetch the entities it needs to process changes in the system, as well as save the entities it creates/updates. From the perspective of the application core, the repository could be an in memory store - it has no concept of persistence at all, it just know that repositories store domain entities.
+
+In it's simplest form, a repository might look something like this:
+
+```ts
+type EntityXRepository = {
+  save: (entity: EntityX): void,
+  getById: (id: string): EntityX,
 }
 ```
 
-How abstract the 'things' you need to model are depends on several factors, such as **a)** the domain you're modelling and **b)** how you (plural you: developers plus business folk) *choose* to model reality - there are often multiple ways to model a problem. For example, in a banking application, we might have a Bank Account entity which isn't too abstract and most people can picture a bank account in some form (like as a big safe with all your hard earned gold inside). When it comes to modelling the process of moving money between two bank accounts, we have a couple of options. One option is to simply substract an amount from the 'balance' value object of one account and add the same amount to the 'balance' value object the another account. on the other hand, we could model the flow of money between two accounts as a separate 'Transaction' entity, which has it's own unique identifier and contains all the necessary information to capture the process. This new entity is a little more abstract; picturing a transaction as a physical thing in the world doesn't really make much sense - but that doesn't mean it can't be modelled as an entity. Both methods have their own pros and cons so it's useful to explore these ideas as a team when modelling new problems.
+Or
 
-### Persistence agnostic entities
-
-DDD communities generally advocate for creating 'domain models' independently from persistence concerns (how stuff is stored in a database or on disk or in another system). Taking this approach, we can think primarily about how best to represent the 'things' in our domain in the way that's most useful for the business' use cases, and we can defer storage considerations to a point in the future. This way, we are able to build a useful model of our domain, then choose our persistence technology and approach to fit our domain model, rather than the other way about.
-
-This might feel a little strange if you're used to thinking primarily about how to store data in a database, but a little practice will show that it can provide much more clarity in the software systems you build, especially more complex ones.
-
-***Note: We can't ignore the database entirely. Our system is still going to have to persist and reconstruct entities somehow... This will be covered in the 'Repository' lesson***.
-
-### Parsing
-
-In this context, parsing refers to turning a blob of **unvalidated data** into a **valid domain entity**. This process may or may not involve transforming the input data so that it conforms to the shape of the domain entity. As an example, let's say we have a `/register` endpoint which creates a customer in our system. The payload send to that endpoint by a client might look like this:
-
-```json
-{
-  "email": "abc123@test.com",
-  "street": "Main Street",
-  "city": "London",
-  "postcode": "1234 567"
+```ts
+type EntityXRepository = {
+  create: (entity: EntityX): void,
+  update: (entity: EntityX): void,
+  getById: (id: string): EntityX,
+  getBySomethingElse: (somethingElse: number): EntityX,
 }
 ```
 
-As part of this business use case (the customer registration use case) we need to generate a valid domain entity which conforms to our definition of a Customer (see above). In this case, we need to validate the incoming data (we might need a phone number to be present and postcodes should to be in a certain format to be acceptable) as well as transform the data into a form which matches the internal definition of a customer entity. This can be done in several ways such as rolling your own validation functions and directly manipulating data into the correct format or using a dedicated parsing library (which is what we'll do below).
+This can be sufficient in a lot of cases but there may be need for additional repository methods dependening on the business capabilities.
+
+#### Responsibility 2: Map persistence data to/from domain entities
+
+As touched upon in the previous lesson, DDD communities advocate for separating domain entities from persistence concerns. This allows each to evolve independently and enables us to create and modify entities however we want while using existing/legacy persistence schemas. We may also want to create rollup fields on an entity itself to make processing simpler in our code. For example, an Account entity may have 3 possible states: `Unverified`, `Verified` and `Deactivated`. However, maybe the database still has some accounts in legacy states such as `Pending`, `active` or `Closed`. In an ideal world, we'd run a data migration to map the legacy states to the current states. However, this removes some flexibility from our development workflow (it's likely a blocker so we'll need to divert resources to this task) and forces us to carry out that work now when it could reasonably be deferred. There might also be legitimate cases where we want to preserve historical data in our database, such as for compliance reasons. The core idea is the same in all cases though; we want to be flexible and move fast without our persistence decisions getting in the way.
+
+The solution to these challenges is to utilise two `mappers` in our repositories. The first mapper converts a valid domain entity into data which can be inserted into whatever persistence technology we're using, in whatever shape it expects. Note that this could mean storing a single entity across 3 different database tables - there's no limit to what we can do here and there are definitely valid reasons for choosing an approach like this. This mapper is useful when persisting a new or updated domain entity. The second mapper takes raw data from whatever persistence technology we're using and reconstructs a valid domain entity from it. This mapper is useful when client code utilises one of the read-based repository methods to fetch an existing entity.
 
 ## Pre-Reading/Watching (Optional)
 
-- [Domain-Driven Design: Entities, Value Objects, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
-- [Entities & Value Objects (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
-
-
-## A Note on Project Structure
-
-Although we'll go into more detail about the directory structure and layers used in this project a little later on, it's worth touching upon it at a high level right off the bat. Each of our 2 bounded contexts (accounts and posts) follows the following structure:
-
-- **core**: This is our 'application core', where we'll model our entities and build out our business use cases / system capabilities. We'll try to keep this as independent from our other two layers as much as possible (more on this in a later lesson).
-- **infra**: Short for 'infrastructure' - this is where we'll write the code which connects our software to persistence infrastructure (e.g. databases or the file system) and external systems (if we have any). Think of infra as containing everything your application needs to interact with the external world.
-- **interface**: This is the opposite of infrastructure; a way for the outside world to interact with your application. This directory could include REST API code, GraphQL API code, gRPC code, Command Line Interface (CLI) code or any other methods you want to support for interacting with your system. The idea here is that we could build multiple interfaces to support different clients, which all utilise the underlying code in the `core` directory.
+- [The Repository Pattern (n minutes read)](https://)
+- [The Repository Pattern (n minute video)](https://)
 
 ## The Practical Bit
 
-### Modelling a Post
+### Setting up the Persistence Access Layer
 
-- In ***src/contexts/posts/core/entities/post.ts***:
-  - Create a `Post` type which represents the `Post` entity. This should be an object with an ID, plus any other value objects you think are necessary to capture the essence of a `Post`, e.g. `title`, `content`, etc.
-  - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the type defined in the previous step.
-  - Create a `parsePost` function which takes a `data` argument (an unknown object/record type) and parses it using [zod](https://github.com/colinhacks/zod#basic-usage), returning a valid `Post` entity if the data is valid or throwing an error if the data is invalid.
-  - Replace the manually created `Post` type by using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` entity is, so manually defining a type is just double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date.
-  - Export the `parsePost` function and the `Post` type so they can be used in other parts of the system.
+This project uses [Prisma](https://www.prisma.io) with a SQLite development database. Check out **prisma/schema.prisma** for details of the current DB schema. Also, head over to the [Prisma docs for info about writing schemas](https://www.prisma.io/docs/concepts/components/prisma-schema).
 
-### Modelling a Post Comment
+There's currently an Account model in the Prisma schema but we'll need to add more tables to support the other entities created in the previous lesson.
 
-- In ***src/contexts/posts/core/entities/postComment.ts***:
-  - Define `type PostComment`, `const postCommentSchema` and `const parsePostComment` like we did for the `Post` entity.
+Before we get to that though, let's set up our database. First, copy **.env.example** into the same directory - rename this file to **.env**. Next, run `npm run prisma:push` (defined in the `scripts` section of **package.json**). This script will create our SQLite DB at **prisma/dev.db** and push our schema definition to it. Finally, it will generate a prisma client that we can import from the prisma library itself to use in our code for accessing the database. We're importing and initialising this client in **src/shared/infra/prisma.ts** - go check it out. The exported `prisma` instance is what provides us with everything we need to read from and write to the tables in our database. This is what we'll be using in our repositories.
 
-### Updating the Account model
+- Let's update the database schema with a `posts` table... In **prisma/schema.prisma**, add the following chunk of code:
 
-- In ***src/contexts/accounts/core/entities/account.ts***:
-  - Update the `Account` entity to include a list of other accounts that an account follows
+```prisma
+model Post {
+  id           String @unique
+  post_title   String
+  post_content String
+  image_url    String
+
+  @@index([id])
+  @@map("posts")
+}
+```
+
+Note that we're using `post_title`, `post_content` and `image_url` here, even though they don't match the value object names in our `Post` model. This is a simple example of (more on this in a bit).
+
+- Next, create a `post_comments` table for storing `PostComment` entities (you have complete freedom here to define the model however you want)
+- Finally, update the database and Prisma client by running `npm run prisma:sync`
+
+### Setting up the Repositories
+
+- Let's start off by creating a `postsRepository` in **contexts/posts/infra/repositories/postsRepository.ts**. Here's the basic structure you'll need to get started:
+
+```ts
+import { type Post as PrismaPost } from "@prisma/client"; // Prisma generates type definitions from our schema that we can use
+
+import { Post } from "#/contexts/posts/core/entities/post"; // # is configured in tsconfig.json to map to the 'src/' directory
+import prisma from "#/shared/infra/prisma"; // We can use this to access our tables via prisma.post.findOne(...), etc.
+
+// Mappers
+const toPost = (prismaPost: PrismaPost): Post => { ... }
+const toPersistenceData = (post: Post): PrismaPost => { ... }
+
+// Repository
+export const postsRepository = {
+  save: async (post: Post): Promise<void> => {...},
+  getById: async (id: string) => {...}
+};
+```
+
+- Next, let's make it really difficult to save bad data to the database or return corrupt entities to client code using our repository. In each of the mapper functions, call the `parsePost` function we defined in the previous lesson, make sure all posts passing through our repository are actually valid posts. If you need to, feel free to reference **src/contexts/accounts/infra/repositories/accountsRepository.ts**.
+- Finally, create a `postCommentsRepository` in **contexts/posts/infra/repositories/postCommentsRepository.ts**
+
+### Writing Tests
+
+- TODO
 
 ## Further Reading
 
-- [?](https://...)
+- [?](https://)
