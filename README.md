@@ -21,13 +21,13 @@ The CEO apprehends you at the water cooler...
 
 ### Prerequisites
 
-1. [Typescript](https://github.com/PensionBee/l-and-ddd/tree/typescript) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/typescript-solutions)
-2. [Test Driven Development (TDD)](https://github.com/PensionBee/l-and-ddd/tree/tdd) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/tdd-solutions)
+1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/l-and-ddd/tree/typescript) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/typescript-solutions)
+2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/l-and-ddd/tree/tdd) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/tdd-solutions)
 
 ### Building out the Backend
 
-1. [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
-2. [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
+1. (READY FOR REVIEW) [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
+2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
 3. [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
 4. [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
 5. [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
