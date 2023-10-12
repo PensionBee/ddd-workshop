@@ -47,7 +47,7 @@ Business Requirement: If first account post created then A Free Month of Premium
 
 ### Building the Frontend
 
-1. [Building Out the Frontend Components](https://github.com/PensionBee/l-and-ddd/tree/building-the-frontend)
+1. [Building the Frontend](https://github.com/PensionBee/l-and-ddd/tree/building-the-frontend)
    1. Creating a shared component
    2. Building the feed page
    3. Hooking up the backend
