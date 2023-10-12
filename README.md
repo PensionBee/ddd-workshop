@@ -2,12 +2,6 @@
 
 [Back to the training overview](https://github.com/PensionBee/l-and-ddd/tree/main#training-overview)
 
-## Context
-
-?
-
-## The Practical Bit
-
 First, install the `node_modules` with `npm install`. This should provide the necessary `typescript` support to work through this section.
 
 In the `problems` directory you'll find two problem sets. The first one is the 'If you can do this then you can work effectively in Typescript codebases' set. There's a lot to Typescript and you probably won't need most of it 99% of the time. The basics are where it's at - seriously! Check out the hints in each exercise which should guide you towards a solution - use any resources you need as much as you want.
