@@ -40,13 +40,14 @@ The CEO apprehends you at the water cooler...
 ### Intra- & Inter-Context Communication
 
 1. [Inter-Context Data Fetching](https://github.com/PensionBee/l-and-ddd/tree/inter-context-data-fetching) (Business Requirement: If basic account then max 5 posts per day)
-2. [Supporting an Event-Driven Architecture](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-helpers)
-3. [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/comment-restrictions) (Business Requirement: If post has 5+ comments then mark post as 'hot')
-4. [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/free-month-of-premium)
+2. [Event-Driven Architecture Utilities](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-utils)
+3. [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/domain-events) (Business Requirement: If post has 5+ comments then mark post as 'hot')
+4. [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/integration-events)
 Business Requirement: If first account post created then A Free Month of Premium
 
-### Building out the Frontend
+### Building the Frontend
 
-1. [Building Shared Components](https://github.com/PensionBee/l-and-ddd/tree/shared-components)
-2. [Building the Feed Page](https://github.com/PensionBee/l-and-ddd/tree/feed-page)
-3. [Hooking up the Backend](https://github.com/PensionBee/l-and-ddd/tree/hook-up-api)
+1. [Building Out the Frontend Components](https://github.com/PensionBee/l-and-ddd/tree/building-the-frontend)
+   1. Creating a shared component
+   2. Building the feed page
+   3. Hooking up the backend
