@@ -2,22 +2,26 @@
 
 ## Context
 
-It's your first day at `SocialBuzz`, the next big social media app (promise), as a "Server-Side Engineering Wizard".
+It's your first day at `SocialBuzz`, the next big social media app (promise).
 
-The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door. ASAP. And preferably one that makes it easy to respond to increasingly complex business requirements in the future.
+The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door. ASAP. Preferably one that's easy to change as increasingly complex business requirements arise.
 
 The CEO apprehends you at the water cooler...
 
-> "Right, here's what we're gonna need ASAP:
+> "Right, here's what we're gonna need from you ASAP:
 >
-> 1. People should be able to create an account with their email, a username and a password. Plus the usual login, logout stuff too... What's that? Agnes already did that before he went on holiday? Smashing! In that case...
-> 2. Users should be able to write short posts that'll be visible on some feed page.
-> 3. Folk also need to be able to follow accounts they like.
-> 4. Ohh, comments are important too. Anyone can comment on any other post.
+> 1. The usual account stuff. Folk can register an account with their email and a password. Plus the usual login, logout stuff too.
+> 2. Users should be able to write short posts that are going to be visible on the main 'Feed' page.
+> 3. People also need to be able to follow accounts they like.
+> 4. Ohh, comments are important too.
 >
 > That's about it I reckon so chop chop, let's get to it."
 
-## Training Overview
+Huh, what? You just started this job 18 minutes ago and already they're expecting you to build the core functionality. Well I suppose this is what you signed up for...
+
+Anyway, not to worry, Alex has your back. They started 1 day and 18 minutes ago and were hired as a "Server-Side Engineering Wizard". Apparently they've got some pretty nifty ideas about how to build this thing so it scales to 14 billion users and changes can be made instantaneously. They keep saying "DeeDeeDee", whatever that is - maybe something the younger generations say?. Anyway, it seems they're happy to get you up to speed so you can do all the work while they sit back with a cup or 5 of self-roasted specialty coffee...
+
+## Workshop Overview
 
 ### Prerequisites
 
@@ -26,7 +30,7 @@ The CEO apprehends you at the water cooler...
 
 ### Modelling the Problem
 
-1. (WIP) [Event Storming](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
+1. (WIP) [Event Storming](https://github.com/PensionBee/l-and-ddd/tree/event-storming)
 
 ### Building out the Backend
 
@@ -34,7 +38,7 @@ The CEO apprehends you at the water cooler...
 2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
 3. (WIP) [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
 4. (WIP) [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
-5. (WIP) [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
+5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/adding-api-endpoints)
 
 ### Supercharging the Backend
 
