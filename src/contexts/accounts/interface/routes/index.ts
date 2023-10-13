@@ -4,7 +4,7 @@ import {
   ActionRouteDefinitions,
   QueryRouteDefinitions,
   setUpAPIRoutes,
-} from "#/shared/interface/routes/utils";
+} from "~/shared/interface/routes/utils";
 import { handleLogIntoAccountRequest } from "./handlers/handleLogIntoAccountRequest";
 import { handleLogOutOfAccountRequest } from "./handlers/handleLogOutOfAccountRequest";
 import { handleRegisterAccountRequest } from "./handlers/handleRegisterAccountRequest";

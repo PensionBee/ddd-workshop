@@ -3,8 +3,8 @@ import type { account } from "@prisma/client";
 import {
   Account,
   parseAccount,
-} from "#/contexts/accounts/core/entities/account";
-import prisma from "#/shared/infra/prisma";
+} from "~/contexts/accounts/core/entities/account";
+import prisma from "~/shared/infra/prisma";
 
 const PrismaAccount = prisma["account"];
 

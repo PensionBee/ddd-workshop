@@ -1,7 +1,7 @@
 import type { Request, Response } from "express";
 
-import { registerAccount } from "#/contexts/accounts/core/actions/registerAccount";
-import { errorOnDefaultCase } from "#/shared/common/typeUtils";
+import { registerAccount } from "~/contexts/accounts/core/actions/registerAccount";
+import { errorOnDefaultCase } from "~/shared/common/typeUtils";
 
 export const handleRegisterAccountRequest = async (
   req: Request,

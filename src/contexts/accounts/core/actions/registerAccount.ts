@@ -1,10 +1,10 @@
 import { v4 as uuidv4 } from "uuid";
 import { z } from "zod";
 
-import { accountRepository } from "#/contexts/accounts/infra/repositories/accountRepository";
-import { errorOnDefaultCase } from "#/shared/common/typeUtils";
-import { createActionHandler } from "#/shared/core/actions/actionHandling";
-import { createActionDataParser } from "#/shared/core/actions/actionParsing";
+import { accountRepository } from "~/contexts/accounts/infra/repositories/accountRepository";
+import { errorOnDefaultCase } from "~/shared/common/typeUtils";
+import { createActionHandler } from "~/shared/core/actions/actionHandling";
+import { createActionDataParser } from "~/shared/core/actions/actionParsing";
 
 type Data = z.infer<typeof dataSchema>;
 type State = Awaited<ReturnType<typeof fetchState>>;

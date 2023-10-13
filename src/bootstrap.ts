@@ -3,8 +3,8 @@ import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
-import { accountsRouter } from "#/contexts/accounts/interface/routes";
-import { authenticateRequest } from "#/shared/interface/middleware/authentication";
+import { accountsRouter } from "~/contexts/accounts/interface/routes";
+import { authenticateRequest } from "~/shared/interface/middleware/authentication";
 
 const createExpressApp = async () => {
   const app = express();
