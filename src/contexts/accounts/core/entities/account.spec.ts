@@ -1,4 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
+
 import { parseAccount } from "./account";
 
 describe("parseAccount", () => {
