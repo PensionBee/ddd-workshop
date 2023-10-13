@@ -71,6 +71,8 @@ Feel free to check these out now or after completing the practical bit below.
 
 ## The Practical Bit
 
+*Note: each lesson builds upon the previous one. You can check your solutions against the code found in the following lesson.*
+
 ### A Quick Note on Project Structure & Layers
 
 We'll go into more detail on this in a future lesson but for now, it's worth touching upon it at a high level. Our project has 2 Bounded Contexts (Accounts and Posts) which live in **src/contexts/**. Both of these follow the same structure:
