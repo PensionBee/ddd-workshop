@@ -1,4 +1,4 @@
-# L&DDD - Repositories & Persistence
+# DDD Workshop - Repositories & Persistence
 
 [Back to the training overview](https://github.com/PensionBee/l-and-ddd/tree/main#training-overview)
 
@@ -6,9 +6,9 @@
 
 ### What is a repository?
 
-A repository is a chunk of code with 2 main responsibilities:
+A repository is simply a chunk of code with 2 primary responsibilities:
 
-1. Provide a simple interface for fetching and saving entities
+1. Provide a simple interface for fetching and saving entities (hiding the complexities of persistence technology access from calling code)
 2. Map persistence data to/from domain entities
 
 Let's break those down...
@@ -37,7 +37,7 @@ type EntityXRepository = {
 }
 ```
 
-This can be sufficient in a lot of cases but there may be need for additional repository methods dependening on the business capabilities.
+This can be sufficient in a lot of cases but there may be need for additional repository methods depending on business use cases being modelled.
 
 #### Responsibility 2: Map persistence data to/from domain entities
 
@@ -56,15 +56,15 @@ Feel free to check these out now or after completing 'The Practical Bit' below.
 
 ## The Practical Bit
 
-*Note: each lesson builds upon the previous one. You can check your solutions against the code found in the following lesson.*
+*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the following section.*
 
-### Part 1: Setting up the Dtatabase and Database Access Layer
+### Part 1: Setting up a Database and Database Access Layer
 
 This project uses [Prisma](https://www.prisma.io) with a SQLite development database. Check out **prisma/schema.prisma** for details of the current DB schema. Also, head over to the [Prisma docs for info about writing schemas](https://www.prisma.io/docs/concepts/components/prisma-schema).
 
 **Note: your editor likely has a prisma extension which may be useful for syntax highlighting, autoformatting, etc.**
 
-There's currently an Account model/table defined in the Prisma schema but we'll need to add more models/tables to support the additional entities created in the previous lesson.
+There's currently an Account model/table defined in the Prisma schema but we'll need to add more models/tables to support the additional entities created in the previous section of the workshop...
 
 - First, copy **.env.example** into the same directory and rename it to **.env**. Next, run `npm run prisma:push`. This script will create our SQLite DB at **prisma/dev.db** and push our schema definition to it. Finally, it will generate a 'Prisma Client' that we can import from the prisma library itself so we can easily query the database. We're importing and initialising this client in **src/shared/infra/prisma.ts** - go check it out. The exported `prisma` instance is what provides us with everything we need to read from and write to the tables in our database.
 
@@ -83,8 +83,6 @@ model Post {
   @@map("posts") // Tells Prisma to map the Post model to a DB table called 'posts'
 }
 ```
-
-*Note: you can also add `posts Post[]` to the `Account` model in the same file, which enables reverse relationship lookups (i.e. so we can fetch an account with all it's posts in a single query). Check out [the docs](https://www.prisma.io/docs/concepts/components/prisma-schema/relations) for more info on relations.*
 
 Note that we're using `post_title`, `post_content`, `image` and `author_id` here, even though they don't perfectly match the value objects in our `Post` model. This is a simple, contrived example of how our persistence schema can differ from our domain entity schema, which we'll need to handle in our repository.
 
@@ -119,7 +117,7 @@ export const postsRepository = {
 Next, let's make it really difficult to save invalid entities to the database or return invalid entities to client code...
 
 - In **contexts/posts/infra/repositories/postsRepository.ts**:
-  - In each of the mapper functions, call the `parsePost` function we defined in the previous lesson, ensuring all posts passing in and out of our repository are valid. If you need to, feel free to reference **src/contexts/accounts/infra/repositories/accountsRepository.ts**.
+  - In each of the mapper functions, call the `parsePost` function we defined in the previous section of the workshop, ensuring all posts passing in and out of our repository are valid. If you need to, feel free to reference **src/contexts/accounts/infra/repositories/accountsRepository.ts**.
 
 ### Part 3: Creating the Post Comments Repository
 
@@ -133,10 +131,12 @@ This is where things get a little gnarly. Our `Account` entity includes a list o
 - In **contexts/accounts/infra/repositories/accountsRepository.ts**:
   - Update the repository and mappers to handle account followers.
 
-### Writing Tests
+### Part 5: Testing Our Repositories
 
-- TODO
+- For each repository, write some tests to make sure the implementation is working as expected. lYou have complete freedom here to write whatever tests you see fit.
 
 ## Conclusion
 
-At first, the repository pattern might feel like a lot of overhead given we can just fetch data directly from a database/file. Also, why not just fetch the accounts an account follows separately from fetching the account itself? Good question and like every other architecture decision, there are trade-offs. With the repository pattern you can end up with a lot of complexity in the repository itself but what you gain is the ability to model entities in the most effective way, plus a single, logical place for the complexity to live. We can't always remove complexity but we can manage it. The end result? Simplicity and clarity in the code that matters, the application core, which we'll see in action in the next lesson.
+At first, the repository pattern might feel like overhead given we can just fetch data directly from a database/file, with or without a layer of abstraction (e.g. an ORM). Also, why not just fetch the accounts an account follows separately from fetching the `Account` entity itself when we need that data? In reality, there are probably multiple ways to model the domain we're working in - this approach may turn out to be a poor one over time and with further exploration of the domain (this is why early domain exploration is really important). However, it's certainly not unrealistic for this kind of approach to be a really GOOD way to model the entities in the domains we're working in.
+
+Ultimately, like every other architecture decision, there are trade-offs. With the repository pattern you can end up with a lot of complexity in the repository itself but what you gain is the ability to model entities in a way that models your business domain in the most accurate way. In addition, we get a single, logical place for the complexity to live - we can't always reduce complexity but we can certainly manage it.
