@@ -10,12 +10,12 @@ The CEO apprehends you at the water cooler...
 
 > "Right, here's what we're going to need ASAP:
 >
-> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Sarah already did that before she went on holiday? Nice! In that case...
-> 2. Users should be able to post updates that are visible to everyone on the platform via some central feed.
-> 3. They also need to be able to follow accounts they like. And the feed should have a filter so folk can pick between all posts or just posts for accounts they're following.
+> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Gary already did that before he went on holiday? Nice! In that case...
+> 2. Users should be able to write short posts that'll be visible on some feed page.
+> 3. Folk also need to be able to follow accounts they like.
 > 4. Ohh, comments are important too. Anyone can comment on any other post.
 >
-> That's about it I suppose so you can probably get cracking. Oh yeah, the design doesn't really matter too much at this point so go wild... Sarah already started using this "component library" thing though so might be worth using that."
+> That's about it I suppose so chop chop."
 
 ## Training Overview
 
@@ -24,30 +24,26 @@ The CEO apprehends you at the water cooler...
 1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/l-and-ddd/tree/typescript) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/typescript-solutions)
 2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/l-and-ddd/tree/tdd) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/tdd-solutions)
 
+### Modelling the Problem
+
+1. (WIP) [Event Storming](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
+
 ### Building out the Backend
 
 1. (READY FOR REVIEW) [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
 2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
-3. [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
-4. [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
-5. [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
+3. (WIP) [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
+4. (WIP) [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
+5. (WIP) [Creating the API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/api-endpoints)
 
 ### Supercharging the Backend
 
-1. [Standardising Command Handlers](https://github.com/PensionBee/l-and-ddd/tree/standardising-command-handlers)
-2. [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion-injection)
+1. (WIP) [Standardising Command Handlers](https://github.com/PensionBee/l-and-ddd/tree/standardising-command-handlers)
+2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion-injection)
 
-### Intra- & Inter-Context Communication
+### Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
 
-1. [Inter-Context Data Fetching](https://github.com/PensionBee/l-and-ddd/tree/inter-context-data-fetching) (Business Requirement: If basic account then max 5 posts per day)
-2. [Event-Driven Architecture Utilities](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-utils)
-3. [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/domain-events) (Business Requirement: If post has 5+ comments then mark post as 'hot')
-4. [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/integration-events)
-Business Requirement: If first account post created then A Free Month of Premium
-
-### Building the Frontend
-
-1. [Building the Frontend](https://github.com/PensionBee/l-and-ddd/tree/building-the-frontend)
-   1. Creating a shared component
-   2. Building the feed page
-   3. Hooking up the backend
+1. (WIP) [Inter-Context Data Fetching](https://github.com/PensionBee/l-and-ddd/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
+2. (WIP) [Event-Driven Architecture Utilities](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-utils)
+3. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
+4. (WIP) [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
