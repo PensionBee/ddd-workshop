@@ -1,5 +1,5 @@
 type ErrorProperties = {
-  debugDetails: string;
+  debugMessage: string;
   clientMessage: string;
   severity: "error" | "info";
 };
@@ -8,7 +8,7 @@ export class BaseError extends Error {
   properties: ErrorProperties;
 
   constructor(properties: ErrorProperties) {
-    super(properties.debugDetails);
+    super(properties.debugMessage);
 
     this.properties = properties;
 
