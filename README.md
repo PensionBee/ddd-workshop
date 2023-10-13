@@ -25,29 +25,29 @@ Anyway, not to worry, Alex has your back. They started 1 day and 18 minutes ago 
 
 ### Prerequisites
 
-1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/l-and-ddd/tree/typescript) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/typescript-solutions)
-2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/l-and-ddd/tree/tdd) / [Solutions](https://github.com/PensionBee/l-and-ddd/tree/tdd-solutions)
+1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/ddd-workshop/tree/typescript) / [Solutions](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions)
+2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/ddd-workshop/tree/tdd) / [Solutions](https://github.com/PensionBee/ddd-workshop/tree/tdd-solutions)
 
 ### Modelling the Problem
 
-1. (WIP) [Event Storming](https://github.com/PensionBee/l-and-ddd/tree/event-storming)
+1. (WIP) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming)
 
 ### Building out the Backend
 
-1. (READY FOR REVIEW) [Values, Entities & Parsers](https://github.com/PensionBee/l-and-ddd/tree/values-entities-and-parsers)
-2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/l-and-ddd/tree/repositories-and-persistence)
-3. (WIP) [Command Handlers & Derivers](https://github.com/PensionBee/l-and-ddd/tree/command-handlers-and-derivers)
-4. (WIP) [Query Handlers](https://github.com/PensionBee/l-and-ddd/tree/query-handlers)
-5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/l-and-ddd/tree/adding-api-endpoints)
+1. (READY FOR REVIEW) [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
+2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
+3. (WIP) [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
+4. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
+5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
 
 ### Supercharging the Backend
 
-1. (WIP) [Standardising Command Handlers](https://github.com/PensionBee/l-and-ddd/tree/standardising-command-handlers)
-2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/l-and-ddd/tree/dependency-inversion-injection)
+1. (WIP) [Standardising Command Handlers](https://github.com/PensionBee/ddd-workshop/tree/standardising-command-handlers)
+2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/ddd-workshop/tree/dependency-inversion-injection)
 
 ### Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
 
-1. (WIP) [Inter-Context Data Fetching](https://github.com/PensionBee/l-and-ddd/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
-2. (WIP) [Event-Driven Architecture Utilities](https://github.com/PensionBee/l-and-ddd/tree/event-driven-architecture-utils)
-3. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
-4. (WIP) [Integration Events for Inter-Context Communication](https://github.com/PensionBee/l-and-ddd/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
+1. (WIP) [Inter-Context Data Fetching](https://github.com/PensionBee/ddd-workshop/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
+2. (WIP) [Event-Driven Architecture Utilities](https://github.com/PensionBee/ddd-workshop/tree/event-driven-architecture-utils)
+3. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
+4. (WIP) [Integration Events for Inter-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
