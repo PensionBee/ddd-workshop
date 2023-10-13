@@ -1,4 +1,4 @@
-# L&DDD
+# DDD Workshop
 
 ## Context
 
