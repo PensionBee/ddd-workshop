@@ -4,7 +4,7 @@
 
 ## Resources
 
-Feel free to check these out now or after completing 'The Practical Bit' below.
+Feel free to check these out before or after completing 'The Practical Bit' below.
 
 - [TS in 100 Seconds, 2 minute video](https://www.youtube.com/watch?v=zQnBQ4tB3ZA)
 - [Official TS Overview, 2 minute read](https://www.typescriptlang.org/)
