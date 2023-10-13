@@ -2,20 +2,20 @@
 
 ## Context
 
-It's your first day at `SocialBuzz`, the next big social media app (promise).
+It's your first day at `SocialBuzz`, the next big social media app (promise), as a "Server-Side Engineering Wizard".
 
-The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door ASAP, with the ability to respond to change quickly and support increasingly complex business requirements in the future.
+The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door. ASAP. And preferably one that makes it easy to respond to increasingly complex business requirements in the future.
 
 The CEO apprehends you at the water cooler...
 
-> "Right, here's what we're going to need ASAP:
+> "Right, here's what we're gonna need ASAP:
 >
-> 1. New customers should be able to create a new account with an email, username and password. Plus the usual login, logout stuff too... What's that Agnes? Gary already did that before he went on holiday? Nice! In that case...
+> 1. People should be able to create an account with their email, a username and a password. Plus the usual login, logout stuff too... What's that? Agnes already did that before he went on holiday? Smashing! In that case...
 > 2. Users should be able to write short posts that'll be visible on some feed page.
 > 3. Folk also need to be able to follow accounts they like.
 > 4. Ohh, comments are important too. Anyone can comment on any other post.
 >
-> That's about it I suppose so chop chop."
+> That's about it I reckon so chop chop, let's get to it."
 
 ## Training Overview
 
