@@ -1,10 +1,6 @@
 {
-  "name": "ddd-training",
-  "version": "1.0.0",
-  "description": "",
+  "name": "ddd-workshop",
   "scripts": {},
-  "author": "",
-  "license": "ISC",
   "dependencies": {},
   "devDependencies": {
     "@types/node": "^20.4.2",
