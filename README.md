@@ -2,7 +2,15 @@
 
 [Back to the training overview](https://github.com/PensionBee/l-and-ddd/tree/main#training-overview)
 
-First, install the `node_modules` with `npm install`. This should provide the necessary `typescript` support to work through this section.
+
+## Pre-Reading/Watching (Optional)
+
+- [TS in 100 Seconds, 2 minute video](https://www.youtube.com/watch?v=zQnBQ4tB3ZA)
+- [Official TS Overview, 2 minute read](https://www.typescriptlang.org/)
+
+## The Practical Bit
+
+First, install `node_modules` with `npm install`. This should provide the necessary `typescript` support to work through this lesson.
 
 In the `problems` directory you'll find two problem sets. The first one is the 'If you can do this then you can work effectively in Typescript codebases' set. There's a lot to Typescript and you probably won't need most of it 99% of the time. The basics are where it's at - seriously! Check out the hints in each exercise which should guide you towards a solution - use any resources you need as much as you want.
 
@@ -13,4 +21,3 @@ The second problem set focuses on generics and some other advanced TS concepts, 
 ## Additional Resources
 
 - [Total Typescript: Beginner's Typescript (Free course)](https://www.totaltypescript.com/tutorials/beginners-typescript)
-- [Total Typescript: React with Typescript (Free course)](https://www.totaltypescript.com/tutorials/react-with-typescript)
