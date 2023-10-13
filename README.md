@@ -6,89 +6,112 @@
 
 ### What are entities and values?
 
-In Domain Driven Design, 'value objects' and 'entities' are core concepts used to represent the 'things' that exists in your domain. In it's simplest form, entities are things with unique identifiers and values are things that don't. For example, a customer might be made up of a unique ID, an email address, phone number, address, etc. Here, the cser is an entity (it has a unique identifier) whereas everything else that makes up a user is a value object (they don't have unique IDs of their own). Note that value objects can be 'complex', for example an address value object might be made up of a street, city and postcode.
+In Domain Driven Design, Value Objects and Entities are used to model core concepts in a domain. Entities are defined by a unique ID present throughout it's entire lifecycle. Value Objects are defined by whatever the current value is:
 
-Generally, JSON is super useful for modelling entities and value objects. You probably do it all the time; DDD just has a specific naming to distinguish the different concepts, which makes it easy to talk about this with fellow developers and business people. Here's an example of a customer in JSON:
-
-```json
-{
-  "customer": {
-    "id": "abc123",
-    "email": "abc123@test.com",
-    "phoneNumber": "01234567890",
-    "address": {
-      "street": "Main Street",
-      "city": "London",
-      "postcode": "EC1 1AA"
-    }
-  }
-}
+```sh
+Customer           # Remains the same entity even when email, phone, etc. change
+  ID               # Constant throughout entity lifecycle
+  Email            # Becomes a different value object each time it changes
+  Address          # Nested value objects are allowed
+    Number
+    Street
+    City
+    Postcode
 ```
 
-How abstract the 'things' you need to model are depends on several factors, such as **a)** the domain you're modelling and **b)** how you (plural you: developers plus business folk) *choose* to model reality - there are often multiple ways to model a problem. For example, in a banking application, we might have a Bank Account entity which isn't too abstract and most people can picture a bank account in some form (like as a big safe with all your hard earned gold inside). When it comes to modelling the process of moving money between two bank accounts, we have a couple of options. One option is to simply substract an amount from the 'balance' value object of one account and add the same amount to the 'balance' value object the another account. on the other hand, we could model the flow of money between two accounts as a separate 'Transaction' entity, which has it's own unique identifier and contains all the necessary information to capture the process. This new entity is a little more abstract; picturing a transaction as a physical thing in the world doesn't really make much sense - but that doesn't mean it can't be modelled as an entity. Both methods have their own pros and cons so it's useful to explore these ideas as a team when modelling new problems.
+The above is an example of an entity we can easily imagine in the physical world, i.e. we can imagine a customer. However, there are situations where we need to model abstract concepts as entities too. For example, in a banking application, we might decide to model the process of moving money between two Bank Account entities using a dedicated Transaction entity, which might look something like this:
 
-### Persistence agnostic entities
+```sh
+Transaction
+  ID
+  Amount
+  Sending Account
+  Receiving Account
+```
 
-DDD communities generally advocate for creating 'domain models' independently from persistence concerns (how stuff is stored in a database or on disk or in another system). Taking this approach, we can think primarily about how best to represent the 'things' in our domain in the way that's most useful for the business' use cases, and we can defer storage considerations to a point in the future. This way, we are able to build a useful model of our domain, then choose our persistence technology and approach to fit our domain model, rather than the other way about.
-
-This might feel a little strange if you're used to thinking primarily about how to store data in a database, but a little practice will show that it can provide much more clarity in the software systems you build, especially more complex ones.
-
-***Note: We can't ignore the database entirely. Our system is still going to have to persist and reconstruct entities somehow... This will be covered in the 'Repository' lesson***.
+A Transaction doesn't represent a physical thing we can easily imagine but it is still very much an entity in our domain - it has a unique ID that defines it throughout it's lifecycle and that is enough.
 
 ### Parsing
 
-In this context, parsing refers to turning a blob of **unvalidated data** into a **valid domain entity**. This process may or may not involve transforming the input data so that it conforms to the shape of the domain entity. As an example, let's say we have a `/register` endpoint which creates a customer in our system. The payload send to that endpoint by a client might look like this:
+In this context, parsing refers to turning a blob of **unvalidated data** into a **valid domain entity**. This process may also involve transforming or reshaping the input data so that it conforms to the structure of the domain entity. As an example, let's say we have a `/register` API endpoint which creates an Account entity in our system. The payload send to that endpoint by a client might look like this:
 
 ```json
 {
   "email": "abc123@test.com",
-  "street": "Main Street",
-  "city": "London",
+  "houseNumber": "1",
+  "streetName": "Main Street",
+  "city": null,
   "postcode": "1234 567"
 }
 ```
 
-As part of this business use case (the customer registration use case) we need to generate a valid domain entity which conforms to our definition of a Customer (see above). In this case, we need to validate the incoming data (we might need a phone number to be present and postcodes should to be in a certain format to be acceptable) as well as transform the data into a form which matches the internal definition of a customer entity. This can be done in several ways such as rolling your own validation functions and directly manipulating data into the correct format or using a dedicated parsing library (which is what we'll do below).
+However, a Customer is modelled in our domain like this:
 
-## Pre-Reading/Watching (Optional)
+```ts
+type Customer = {
+  id: string;         // Required - generated internally
+  email: string;      // Required
+  address: {
+    number: number;   // Required
+    street: string;   // Required
+    city: string;     // Required
+    postcode: string; // Required - should be in the format AB12 1AB
+  }
+}
+```
+
+When creating a new Customer entity in our system, we need to validate the data used to create it, and make sure it's in the correct structure. We can do this by rolling our own validation/transformation functions or using a dedicated parsing library (which is what we'll do below).
+
+## Resources
+
+Feel free to check these out now or after completing the practical bit below.
 
 - [Domain-Driven Design: Entities, Value Objects, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
 - [Entities & Value Objects (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
 
-## A Note on Project Structure
-
-Although we'll go into more detail about the directory structure and layers used in this project a little later on, it's worth touching upon it at a high level right off the bat. Each of our 2 bounded contexts (accounts and posts) follows the following structure:
-
-- **core**: This is our 'application core', where we'll model our entities and build out our business use cases / system capabilities. We'll try to keep this as independent from our other two layers as much as possible (more on this in a later lesson).
-- **infra**: Short for 'infrastructure' - this is where we'll write the code which connects our software to persistence infrastructure (e.g. databases or the file system) and external systems (if we have any). Think of infra as containing everything your application needs to interact with the external world.
-- **interface**: This is the opposite of infrastructure; a way for the outside world to interact with your application. This directory could include REST API code, GraphQL API code, gRPC code, Command Line Interface (CLI) code or any other methods you want to support for interacting with your system. The idea here is that we could build multiple interfaces to support different clients, which all utilise the underlying code in the `core` directory.
-
 ## The Practical Bit
 
-### Modelling a Post
+### A Quick Note on Project Structure & Layers
 
-- In ***src/contexts/posts/core/entities/post.ts***:
-  - Create a `Post` type which represents the `Post` entity. This should be an object with an ID, plus any other value objects you think are necessary to capture the essence of a `Post`, e.g. `title`, `content`, etc.
-  - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the type defined in the previous step.
-  - Create a `parsePost` function which takes a `data` argument (an unknown object/record type) and parses it using [zod](https://github.com/colinhacks/zod#basic-usage), returning a valid `Post` entity if the data is valid or throwing an error if the data is invalid.
-  - Replace the manually created `Post` type by using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` entity is, so manually defining a type is just double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date.
-  - Export the `Post` type and the `parsePost` function so they can be used in other parts of the system.
+We'll go into more detail on this in a future lesson but for now, it's worth touching upon it at a high level. Our project has 2 Bounded Contexts (Accounts and Posts) which live in **src/contexts/**. Both of these follow the same structure:
 
-### Modelling a Post Comment
+- **core/**: This is our 'application core', where we'll model our entities and build out the capabilities in our system (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. *If you're already familiar with onion-esque architectures, this layer is essentially the 'domain' and 'application' layers squashed into one.*
+- **infra/**: Short for 'infrastructure' - this is where we'll write the code which connects our application core to persistence infrastructure (e.g. databases or the file system) and external systems we rely on (if we have any). Think of infra as everything your application needs to interact with the external world.
+- **interface/**: This is the opposite of infrastructure - a way for the outside world to interact with our application core. This directory could include code for a REST API, GraphQL API, gRPC, Command Line Interface (CLI), etc. The main idea here is that we could build multiple interfaces to support different clients and each interface would utilise the same functionality in our application core.
 
-- In ***src/contexts/posts/core/entities/postComment.ts***:
-  - Define `type PostComment`, `const postCommentSchema` and `const parsePostComment` like we did for the `Post` entity.
+### Part 1: Modelling a Post Entity
+
+- In **src/contexts/posts/core/entities/post.ts**:
+  - Create a `Post` type which models your understanding of what a `Post` is. This should be an object type with some kind of ID, plus any other value objects you think are necessary to capture the essence of a `Post`, e.g. `title`, `content`, etc.
+  - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the `Post` type defined in the previous step.
+  - Create a `parsePost` function which takes a `data` argument (an unknown object/record type) and parses it using the schema defined in the previous step (see [here](https://github.com/colinhacks/zod#basic-usage) for an example of parsing data with a schema). This function should return a valid `Post` entity if the data passed to it is valid and throw an error if the data is invalid.
+  - Let's make our lives a little simpler by replacing the manually created `Post` type from step 1, using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` entity is, so manually defining a type is double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date. *Note that this is personal preference - some people love the clarity you get from modelling entities with explicitly defined types, rather than inferring from a schema.*
+  - Finally, export the `Post` type and the `parsePost` function so they can be used in other parts of the system.
+
+Congratulations! You've just modelled your first entity in only a few lines of code, which will serve as a powerful foundation for the code we write in future lessons.
+
+### Part 2: Modelling a Post Comment Entity
+
+Let's keep up the momentum and model our `Post Entity` like we did with the `Post` entity above
+
+- In **src/contexts/posts/core/entities/postComment.ts**:
+  - Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
   - Export the `PostComment` type and the `parsePostComment` function so they can be used in other parts of the system.
 
-### Modelling Account Following
+### Part 3: Modelling Account Following
 
-- In ***src/contexts/accounts/core/entities/account.ts***:
-  - Update the `Account` entity parser to include a `following` value object, which holds information about which accounts an account follows.
+We already have an existing `Account` entity in our `Accounts` Bounded Context but it's missing the concept of 'account following'. Let's rectify that...
 
-### Writing Tests
+- In **src/contexts/accounts/core/entities/account.ts**:
+  - Update the `Account` entity parser to include a `following` value object. This will hold information about all the accounts an account follows. *Tip: When creating references to other entities, it's good practice to only reference the entity ID rather than the entire entity.*
 
-- TODO
+### Testing our Implementation
 
-## Further Reading
+Although test-driven-development is super valuable, we'll defer using it until we're comfortable with the core technical concepts in DDD. However, tests are still super important for a scalable software system, so let's add a couple to make sure our parsers do what we expect them to do.
 
-- [?](https://...)
+- In **src/contexts/posts/core/entities/post.spec.ts**:
+  - Complete the tests to ensure our `parsePost` function works as expected.
+In **src/contexts/posts/core/entities/postComment.spec.ts**:
+  - Write the tests to ensure our `parsePostComment` function works as expected.
+- In **src/contexts/accounts/core/entities/account.spec.ts**:
+  - Update the tests to ensure our `parseAccount` function works as expected
