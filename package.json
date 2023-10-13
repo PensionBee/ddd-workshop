@@ -3,7 +3,7 @@
   "scripts": {
     "prisma:push": "prisma db push && prisma generate",
     "start": "nodemon --exec 'node --inspect -r ts-node/register/transpile-only -r tsconfig-paths/register ./src/bootstrap.ts'",
-    "test": "jest"
+    "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
