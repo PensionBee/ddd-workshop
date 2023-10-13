@@ -64,7 +64,7 @@ When creating a new Customer entity in our system, we need to validate the data 
 
 ## Resources
 
-Feel free to check these out now or after completing the practical bit below.
+Feel free to check these out now or after completing 'The Practical Bit' below.
 
 - [Domain-Driven Design: Entities, Value Objects, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
 - [Entities & Value Objects (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
