@@ -2,24 +2,22 @@
 
 ## Context
 
-It's your first day at `SocialBuzz`, the next big social media app (promise).
+It's your first day at `SocialBuzz`, the next big social media app. Promise.
 
-The company has big plans to revolutionise this space but first they've got to get on the radar, which means an MVP out the door. ASAP. Preferably one that's easy to change as increasingly complex business requirements arise.
+The company has big plans to revolutionise this space but first they've got to get on the radar, which means they need an MVP out the door ASAP.
 
-The CEO apprehends you at the water cooler...
+The CEO apprehends you at the coffee machine, just as you're on the verge of figuring out how it work...
 
-> "Right, here's what we're gonna need from you ASAP:
+> "Right, here's what we're going to need from you pronto:
 >
-> 1. The usual account stuff. Folk can register an account with their email and a password. Plus the usual login, logout stuff too.
-> 2. Users should be able to write short posts that are going to be visible on the main 'Feed' page.
-> 3. People also need to be able to follow accounts they like.
-> 4. Ohh, comments are important too.
+> 1. The usual account stuff - people can register with their email address and a password and then they can log in and log out of the the system.
+> 2. Users should be able to write short posts, possibly including images, that are going to be visible on the main 'Feed' page.
+> 3. Folk also need to be able to follow accounts they like.
+> 4. Ohh, being able to comment on a post is important too.
 >
-> That's about it I reckon so chop chop, let's get to it."
+> That's about it for now but I've got load of ideas that'll keep you on your toes so make sure you build something that scales well. Alright, chop chop, let's get to it."
 
-Huh, what? You just started this job 18 minutes ago and already they're expecting you to build the core functionality. Well I suppose this is what you signed up for...
-
-Anyway, not to worry, Alex has your back. They started 1 day and 18 minutes ago and were hired as a "Server-Side Engineering Wizard". Apparently they've got some pretty nifty ideas about how to build this thing so it scales to 14 billion users and changes can be made instantaneously. They keep saying "DeeDeeDee", whatever that is - maybe something the younger generations say?. Anyway, it seems they're happy to get you up to speed so you can do all the work while they sit back with a cup or 5 of self-roasted specialty coffee...
+You head back to your desk (coffeeless) and have a chat with your manager, Jess. She's got some pretty nifty ideas about how to build this thing so it'll scale to 100 billion users and code changes can be made in "like, no time". She also keeps overenthusiastically saying "DeeDeeDee", whatever that is. Anyway, she offers to help get you up to speed and guide you through the process...
 
 ## Workshop Overview
 
