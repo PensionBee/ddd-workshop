@@ -69,17 +69,17 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 - [Domain-Driven Design: Entities, Value Objects, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
 - [Entities & Value Objects (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
 
-## The Practical Bit
-
-*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the following section.*
-
-### A Quick Note on Project Structure & Layers
+## Project Structure Overview
 
 We'll go into more detail on this in a future section of the workshop but for now, it's worth touching upon it at a high level. Our project has 2 Bounded Contexts (Accounts and Posts) which live in **src/contexts/**. Both of these follow the same structure:
 
 - **core/**: This is our 'application core', where we'll model our entities and build out the capabilities in our system (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. *If you're already familiar with onion-esque architectures, this layer is essentially the 'domain' and 'application' layers squashed into one.*
 - **infra/**: Short for 'infrastructure' - this is where we'll write the code which connects our application core to persistence infrastructure (e.g. databases or the file system) and external systems we rely on (if we have any). Think of infra as everything your application needs to interact with the external world.
 - **interface/**: This is the opposite of infrastructure - a way for the outside world to interact with our application core. This directory could include code for a REST API, GraphQL API, gRPC, Command Line Interface (CLI), etc. The main idea here is that we could build multiple interfaces to support different clients and each interface would utilise the same functionality in our application core.
+
+## The Practical Bit
+
+*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the following section.*
 
 ### Part 1: Modelling Posts
 
