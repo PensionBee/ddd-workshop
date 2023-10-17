@@ -28,7 +28,7 @@ You head back to your desk (coffeeless) and have a chat with your manager, Jess.
 
 ### Modelling the Problem
 
-1. (WIP) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming)
+1. (READY FOR REVIEW) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming) >>> [Solutions](https://github.com/PensionBee/ddd-workshop/tree/event-storming-solutions)
 
 ### Building out the Backend
 
