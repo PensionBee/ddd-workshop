@@ -1,5 +1,3 @@
-// THIS PROBLEM SET FOCUSES ON DEFINING THE CORRECT TYPES FOR A GIVEN SET OF VALUES
-
 /**
  * Part 1: Change the types in the following code from 'any' to a more specific type
  *

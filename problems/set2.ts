@@ -1,6 +1,4 @@
-// THIS PROBLEM SET FOCUSES ON GENERICS, MAPPED TYPES, CONDITIONAL TYPES AND OTHER ADVANCED TS CONCEPTS
-
-import { Post, User, post1, user1 } from "./part1";
+import { Post, User, post1, user1 } from "./set1";
 
 /**
  * Part 1: Write a utility type that converts a specific entity type into an array of that entity type
@@ -68,4 +66,4 @@ type EntityWithNoCarBrand = EntityWithNullInsteadOfEmptyString<{
   carBrand: '',
 }>; // Hovering over 'EntityWithNoCarBrand' should show a User type containing 'carBrand: null'
 
-export {};
+export { };
