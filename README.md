@@ -17,8 +17,6 @@ The CEO apprehends you at the coffee machine, just as you're on the verge of fig
 >
 > That's about it for now but I've got loads of ideas that'll keep you on your toes so make sure you build something that scales well. Alright, chop chop, let's get to it."
 
-You head back to your desk (coffeeless) and have a chat with your colleague, Jess. She's got some pretty nifty ideas about how to build this thing so it'll scale to 100 billion users and new features can be added in "like, no time". She also keeps overenthusiastically saying "DeeDeeDee" - whatever that is. Anyway, she offers to help get you up to speed and guide you through the process...
-
 ## Workshop Overview
 
 ### Prerequisites
