@@ -46,8 +46,6 @@ It's recommended you at least skim through these before tackling 'The Practical 
 
 ## The Practical Bit
 
-*Note: There are solutions to this exercise [here](https://github.com/PensionBee/ddd-workshop/tree/event-storming-solutions).*
-
 *Note: You can do this activity with a sheet of paper and some sticky notes, or digitally using a whiteboarding tool.*
 
 *Note: In real-world scenarios, **EventStorming** works best in collaboration with a group of developers, domain experts AND business stakeholders. If that's available to you, take advantage of it. If not, no worries; the focus here is on becoming familiar with the process and the core elements so feel free do this with whoever's available or even on your own.*
