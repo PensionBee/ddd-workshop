@@ -2,22 +2,24 @@
 
 ## Context
 
-It's your first day at `SocialBuzz`, the next big social media app. Promise.
+It’s your first day at `SocialBuzz`, the next big social media app. Promise.
 
-The company has big plans to revolutionise this space but first they've got to get on the radar, which means they need an MVP out the door ASAP.
+The company has big plans to revolutionise this space but first they’ve got to get on the radar, which means they need to get an MVP out the door ASAP.
 
-The CEO apprehends you at the coffee machine, just as you're on the verge of figuring out how it works...
+You’re apprehended by the CEO you at the coffee machine, just as you’re on the verge of figuring out how the damn thing works...
 
-> "Right, here's what we're going to need from you pronto:
+> Right, here’s what I’m going to need from you pronto:
 >
 > 1. People need to be able to register with their email address and a password.
-> 2. Users should be able to write short posts, possibly including images, which we're going to display on the 'Feed' page of our app.
+> 2. Users should be able to write short posts, possibly including images, which we’re going to display on the ‘Feed’ page of our app.
 > 3. Folk also need to be able to follow accounts they like.
-> 4. Ohh, being able to comment on a post is important too.
+> 4. Ohh, and comments. Being able to comment on a post is important too.
 >
-> That's about it for now but I've got loads of ideas that'll keep you on your toes so make sure you build something that scales well. Alright, chop chop, let's get to it."
+> That’s about it for now but I’ve got loads of ideas that’ll keep you on your toes so make sure you build something that’s easy to change when I innevitably chuck some curveballs at you. Alright then, chop chop, let’s get to it.
 
-## Workshop Overview
+You return to your desk (coffeeless) looking dazed and confused, worried about how you’re going to get started - how you’re going to show that you can do this well - when one of your colleagues turns to you and whispers three words: Domain. Driven. Design. Those 3 words lead you down a Google rabbit hole and, eventually, to the DDD Workshop…
+
+## DDD Workshop Overview
 
 ### Prerequisites
 
