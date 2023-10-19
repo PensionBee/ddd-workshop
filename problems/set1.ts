@@ -79,7 +79,7 @@ const getPostById = async (id: any): any => {
   if (typeof id === "string") {
     return allPosts.find((post) => post.id === parseInt(id));
   }
-  return allPosts.find((post) => post.id === id)[0];
+  return allPosts.find((post) => post.id === id);
 };
 
 const postByNumberId = getPostById(1);
@@ -107,7 +107,7 @@ type DataWithExpectedValue = any;
 
 const processRequestWithUserId = (data: DataWithExpectedValue): any => {
   if (!data.userId) {
-    return "Expected a User ID";
+    return "Hey";
   }
   return `Hey ${data.userId}`;
 };
