@@ -6,18 +6,18 @@ It's your first day at `SocialBuzz`, the next big social media app. Promise.
 
 The company has big plans to revolutionise this space but first they've got to get on the radar, which means they need an MVP out the door ASAP.
 
-The CEO apprehends you at the coffee machine, just as you're on the verge of figuring out how it work...
+The CEO apprehends you at the coffee machine, just as you're on the verge of figuring out how it works...
 
 > "Right, here's what we're going to need from you pronto:
 >
-> 1. The usual account stuff - people can register with their email address and a password and then they can log in and log out of the the system.
-> 2. Users should be able to write short posts, possibly including images, that are going to be visible on the main 'Feed' page.
+> 1. People need to be able to register with their email address and a password.
+> 2. Users should be able to write short posts, possibly including images, which we're going to display on the 'Feed' page of our app.
 > 3. Folk also need to be able to follow accounts they like.
 > 4. Ohh, being able to comment on a post is important too.
 >
-> That's about it for now but I've got load of ideas that'll keep you on your toes so make sure you build something that scales well. Alright, chop chop, let's get to it."
+> That's about it for now but I've got loads of ideas that'll keep you on your toes so make sure you build something that scales well. Alright, chop chop, let's get to it."
 
-You head back to your desk (coffeeless) and have a chat with your manager, Jess. She's got some pretty nifty ideas about how to build this thing so it'll scale to 100 billion users and code changes can be made in "like, no time". She also keeps overenthusiastically saying "DeeDeeDee", whatever that is. Anyway, she offers to help get you up to speed and guide you through the process...
+You head back to your desk (coffeeless) and have a chat with your colleague, Jess. She's got some pretty nifty ideas about how to build this thing so it'll scale to 100 billion users and new features can be added in "like, no time". She also keeps overenthusiastically saying "DeeDeeDee" - whatever that is. Anyway, she offers to help get you up to speed and guide you through the process...
 
 ## Workshop Overview
 
