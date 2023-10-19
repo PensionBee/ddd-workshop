@@ -23,12 +23,12 @@ You head back to your desk (coffeeless) and have a chat with your manager, Jess.
 
 ### Prerequisites
 
-1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/ddd-workshop/tree/typescript) >>> [Solutions](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions)
-2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/ddd-workshop/tree/tdd) >>> [Solutions](https://github.com/PensionBee/ddd-workshop/tree/tdd-solutions)
+1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/ddd-workshop/tree/typescript)
+2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/ddd-workshop/tree/tdd)
 
 ### Modelling the Problem
 
-1. (READY FOR REVIEW) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming) >>> [Solutions](https://github.com/PensionBee/ddd-workshop/tree/event-storming-solutions)
+1. (READY FOR REVIEW) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming)
 
 ### Building out the Backend
 
