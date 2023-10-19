@@ -17,10 +17,9 @@ type ArrayOfPosts = EntityArray<Post>; // Hovering over 'ArrayOfPosts' should sh
  * 
  * The function 'modifyEntity' takes two arguments:
  * 
- * entity: either a User or a Post (imports are allowed)
+ * entity: either a User or a Post
  * modifyFn: a function which takes an entity, adds some data and returns the modified entity
  *
- * Hint: Search for 'TS ?'
  * Hint: Search for 'TS as const'
  */
 
