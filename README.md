@@ -23,8 +23,7 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ### Prerequisites
 
-1. (READY FOR REVIEW) [Typescript](https://github.com/PensionBee/ddd-workshop/tree/typescript)
-2. (READY FOR REVIEW) [Test Driven Development (TDD)](https://github.com/PensionBee/ddd-workshop/tree/tdd)
+1. (READY FOR REVIEW) [Typescript (the basics)](https://github.com/PensionBee/ddd-workshop/tree/typescript)
 
 ### Modelling the Problem
 
