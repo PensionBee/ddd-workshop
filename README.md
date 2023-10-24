@@ -21,19 +21,19 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ## DDD Workshop Overview
 
-### Prerequisites
+### Prerequisite Knowledge
 
-1. (READY FOR REVIEW) [Typescript (the basics)](https://github.com/PensionBee/ddd-workshop/tree/typescript)
+1. [Typescript (the basics)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop treats Typescript as a supplimentary, useful tool when compared with the core DDD content. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across.
 
 ### Modelling the Problem
 
-1. (READY FOR REVIEW) [Event Storming](https://github.com/PensionBee/ddd-workshop/tree/event-storming)
+1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
 
 ### Building out the Backend
 
-1. (READY FOR REVIEW) [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
-2. (READY FOR REVIEW) [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
-3. (READY FOR REVIEW) [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
+1. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
+2. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
+3. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
 4. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
 5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
 
