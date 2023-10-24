@@ -82,26 +82,21 @@ We'll go into more detail on this in a later section of the workshop but for now
 ### Part 1: Modelling Posts
 
 - In **src/contexts/posts/core/entities/post.ts**:
-  - Create a `Post` type which models a `Post` **Entity**. This should be a record type with an ID, plus any other value objects you think are necessary to capture the essence of a `Post`.
-  - Create a `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)) - this should look structurally similar to the `Post` type defined in the previous step.
-  - Create a `parsePost` function which takes a `data` argument (an unknown record type) and parses it using the schema defined in the previous step (see [here](https://github.com/colinhacks/zod#basic-usage) for an example of parsing data with a schema). This function should return a valid `Post` entity if the data is valid and throw an error if the data is invalid.
-  - Let's make our lives a little simpler by replacing the manually created `Post` type from step 1, using **zod's** [type inference functionality](https://github.com/colinhacks/zod#type-inference). Our `postSchema` now serves as a pretty good source of truth for what a `Post` **Entity** is, so manually defining a type is double the work. Now, any time we update the `postSchema`, our `Post` type will automatically be kept up to date. *Note that this is personal preference - you might prefer the clarity you get from modelling entities with explicitly defined types, rather than inferring from a schema.*
-  - Finally, export the `Post` type and the `parsePost` function so they can be used in other parts of the system.
+  - Complete the `postSchema` using the **zod** parsing library ([primitives](https://github.com/colinhacks/zod#primitives) and [objects](https://github.com/colinhacks/zod#objects)).
+  - Complete the `parsePost` function which takes a `data` argument (an unknown record type) and parses it using the schema defined in the previous step (see [here](https://github.com/colinhacks/zod#basic-usage) for an example of parsing data with a schema). This function should return a valid `Post` entity if the data is valid and throw an error if the data is invalid.
 
 ### Part 2: Modelling Post Comments
 
-Let's keep up the momentum and model the `Post Comment` **Entity** like we did with the `Post` **Entity** above
-
 - In **src/contexts/posts/core/entities/postComment.ts**:
   - Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
-  - Export the `PostComment` type and the `parsePostComment` function so they can be used in other parts of the system.
+  - Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the system.
 
 ### Part 3: Modelling Account Following
 
-We already have an existing `Account` **Entity** in our `Accounts` **Bounded Context** but it's missing the concept of 'account following'. Let's rectify that...
+We already have an existing `Account` **Entity** in our `Accounts` **Bounded Context** but we're missing the concept of 'account following'. Let's rectify that...
 
 - In **src/contexts/accounts/core/entities/account.ts**:
-  - Update the `Account` entity parser to include a `following` value object. This will hold information about all the accounts an account follows. *Tip: When creating references to other entities, it's good practice to only reference the entity ID rather than the entire entity.*
+  - Update the `Account` entity parser to include a `following` value object. This will hold information about all the accounts an account follows. *Tip: When creating references to other entities, it's good practice to only reference the entity ID rather than the entire entity structure (like how you would model a foreign key in a database table).*
 
 ### Part 4: Testing Parsers
 
