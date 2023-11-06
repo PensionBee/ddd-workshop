@@ -49,20 +49,14 @@ const childFriendlyPost = modifyEntity(post1, markPostAsChildFriendly);
 type ChildFriendlyPost = typeof childFriendlyPost; // Hovering over 'ChildFriendlyPost' should show a Post type containing 'isChildFriendly: true'
 
 /**
- * Part 3: Write a utility type, using generics, mapped types and conditional types, which transforms the type of all empty strings in an entity to 'null', rather than string
+ * Part 3: Write a utility type, using generics, mapped types and conditional types, which transforms string array type into a union of a string array and a string, i.e. string[] ---> string[] | string.
  *
  * Hint: Search for 'TS mapped types'
  * Hint: Search for 'TS conditional types'
  */
 
-type EntityWithNullInsteadOfEmptyString<...> = ...;
+type TransformStringArraysInObjectToIncludeStringsToo<...> = ...;
 
-type EntityWithNoCarBrand = EntityWithNullInsteadOfEmptyString<{
-  id: 1,
-  email: "user1@test.com",
-  backupEmail: '',
-  isVerified: true,
-  favouriteTopics: ["World Politics", "Sports", "The Environment"],
-}>; // Hovering over 'EntityWithNoCarBrand' should show a User type containing 'backupEmail: null'
+type UserWhereFavouriteTopicsCanBeAString = TransformStringArraysInObjectToIncludeStringsToo<User>; // Hovering over 'UserWhereFavouriteTopicsCanBeAString' should show a User type where 'favouriteTopics: string[] | string'
 
 export { };
