@@ -7,8 +7,7 @@
 const id: any = 1;
 const email: any = "user@test.com";
 const isVerified: any = true;
-const favouriteFood: any = ["Pizza", "Hot Dogs", "Burgers"];
-const carBrand: any = null;
+const favouriteTopics: any = ["World Politics", "Sports", "The Environment"];
 
 /**
  * Part 2: Change the types in the following code from 'any' to a more specific object type
@@ -22,17 +21,17 @@ export type User = any;
 export const user1: User = {
   id: 1,
   email: "user1@test.com",
+  backupEmail: null,
   isVerified: true,
-  favouriteFood: ["Ice Cream"],
-  carBrand: null,
+  favouriteTopics: ["World Politics", "Sports", "The Environment"],
 };
 
 const user2: User = {
   id: 2,
   email: "user2@test.com",
+  backupEmail: "user2Backup@test.com",
   isVerified: false,
-  favouriteFood: ["Bacon"],
-  carBrand: "BMW",
+  favouriteTopics: [],
 };
 
 /**

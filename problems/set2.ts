@@ -49,7 +49,7 @@ const childFriendlyPost = modifyEntity(post1, markPostAsChildFriendly);
 type ChildFriendlyPost = typeof childFriendlyPost; // Hovering over 'ChildFriendlyPost' should show a Post type containing 'isChildFriendly: true'
 
 /**
- * Part 3: Write a utility type, using generics, which changes all empty strings in an entity to null types
+ * Part 3: Write a utility type, using generics, mapped types and conditional types, which transforms the type of all empty strings in an entity to 'null', rather than string
  *
  * Hint: Search for 'TS mapped types'
  * Hint: Search for 'TS conditional types'
@@ -60,9 +60,9 @@ type EntityWithNullInsteadOfEmptyString<...> = ...;
 type EntityWithNoCarBrand = EntityWithNullInsteadOfEmptyString<{
   id: 1,
   email: "user1@test.com",
+  backupEmail: '',
   isVerified: true,
-  favouriteFood: ["Ice Cream"],
-  carBrand: '',
-}>; // Hovering over 'EntityWithNoCarBrand' should show a User type containing 'carBrand: null'
+  favouriteTopics: ["World Politics", "Sports", "The Environment"],
+}>; // Hovering over 'EntityWithNoCarBrand' should show a User type containing 'backupEmail: null'
 
 export { };
