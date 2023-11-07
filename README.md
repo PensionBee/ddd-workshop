@@ -4,38 +4,74 @@
 
 ## Context
 
-### What are Value Object & Entities?
+### What are Value Objects & Entities?
 
-In Domain-Driven Design, **Value Objects** and **Entities** are used to model core concepts in a **Domain**. **Entities** are defined by a unique ID present throughout it's entire lifecycle. **Value Objects** are defined by whatever the current value is. For example:
+In Domain-Driven Design, **Value Objects** and **Entities** are used to model core concepts in a **Domain**. You can think of an **Entities** as anything which has a unique ID that's present throughout it's lifecycle, whereas **Value Objects** are either simple or complex/nested values without a unique ID. For example:
 
 ```sh
-Customer           # A customer remains the same entity throughout it's lifecycle, even when it's attributes change
-  ID               # Constant throughout the entity lifecycle
-  Email            # Becomes a different value object each time it changes
-  Address          # Nested value objects are valid
+Order                 # 'Order' is an Entity - even when it's attributes change, it's still the same Entity.
+  ID                  # 'ID' is a simple Value Object that remains constant throughout the Entity's lifecycle
+  Email               # 'Email' is a simple Value Object that can change throughout the Entity's lifecycle
+  Delivery Address    # 'Delivery Address' is a complex/nested Value Object that can change throughout the Entity's lifecycle
     Number
     Street
     City
     Postcode
+  ...
 ```
 
-The above is an example of an **Entity** we can easily imagine in the physical world, i.e. we can picture what a customer is. However, there are situations where we need to model abstract concepts as **Entities** too. For example, in a banking application, we might decide to model the process of moving money between two `Bank Account` **Entities** using a dedicated `Transaction` **Entity**, which might look something like this:
+The above is an example of an **Entity** we can easily imagine in the physical world. However, there are situations where we need to model abstract concepts in our domain as **Entities** too. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` **Entities** using a separate `Transaction` **Entity**, which might look something like this:
 
 ```sh
 Transaction
   ID
   Amount
+  Status
   Sending Account ID
   Receiving Account ID
 ```
 
+A `Transaction` might be more difficult to imagine in the physical world than a `Customer`, but it's still a perfectly valid **Entity**.
+
+### Sidebar: A Note on 'Aggregates'
+
+In the wild, you'll often see the concept of an **Aggregate** thrown around in DDD communities. An **Aggregate** is essentially a group of related **Entities** which should **always** be processed/modified as a single unit.
+
+Let's update our `Order` **Entity** above by adding a collection of nested `Order Line` **Entities**:
+
+```sh
+Order
+  ID
+  Email
+  Delivery Address
+    ...
+  Order Lines          # 'Order Lines' is a collection of 'Order Line' Entities (each with its own unique ID)
+    Order Line 1
+      ID
+      Product ID
+      Product Price
+      Quantity
+      Total Price
+    Order Line 2
+      ID
+      Product ID
+      Product Price
+      Quantity
+      Total Price
+```
+
+In some domains, it might be useful, or even necessary, to model **Entities** like this. If we were to draw a virtual boundary around the above, we'd end up with an `Order` **Aggregate**, where the `Order` **Entity** is the primary **Entity** in the **Aggregate**, also known as the **Aggregate Root**. Generally, aggregates should always be loaded from from persistence in their entirety and changes to an **Aggregate** should be persisted using some kind of transaction to maintain data consistency across all **Entities** in the **Aggregate**.
+
+In this workshop, we're going to steer clear of using **Aggregates** because they add an extra layer of complexity that can be added later, when you find yourself struggling to model a domain effectively using independent **Entities**. Just be aware that this concept exists and that you're likely to come across it when using other DDD resources.
+
 ### Parsing
 
-In this context, parsing refers to turning a 'blob' of unvalidated data into a valid **Entity**. This process may also involve transforming or reshaping the input data so that it conforms to the structure of the **Entity**. As an example, let's say we have a `/register` API endpoint which creates an `Account` **Entity** in our system. The payload sent to that endpoint by a client might look like this:
+In this context, parsing refers to turning a 'blob' of unvalidated data into a valid **Entity** through validation and, potentially, data transformation. As an example, let's say we have a `/register` API endpoint which creates an `Account` **Entity** in our system. The payload sent to that endpoint by a client (browser, mobile app, etc.) might look like this:
 
 ```json
 {
   "email": "abc123@test.com",
+  "password": "password1",
   "houseNumber": "1",
   "streetName": "Main Street",
   "city": null,
@@ -43,12 +79,13 @@ In this context, parsing refers to turning a 'blob' of unvalidated data into a v
 }
 ```
 
-However, an `Account` **Entity** is modelled in our system like this:
+However, an internal representation of an `Account` **Entity** might look like this:
 
 ```ts
 type Account = {
-  id: string;         // Required - generated internally
+  id: string;         // Required but generated internally
   email: string;      // Required
+  password: string;   // Required
   address: {
     number: number;   // Required
     street: string;   // Required
@@ -58,7 +95,7 @@ type Account = {
 }
 ```
 
-When creating a new `Customer` **Entity** in our system, we need to validate the data used to create it, and make sure it's in the correct structure. We can do this by rolling our own validation/transformation functions or by using a parsing library (which is what we'll do below).
+When creating a new `Account` **Entity**, we'd need to validate the data used to create it, and make sure it's in the correct structure. In practice, this can be done by rolling your own validation/transformation functions or by using a parsing library (which is what we'll do in the 'The Practical Bit' below).
 
 ## Resources
 
@@ -69,11 +106,11 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 
 ## Project Structure Overview
 
-We'll go into more detail on this in a later section of the workshop but for now, it's worth touching upon it at a high level. Our project has 2 **Bounded Contexts** (`Accounts` and `Posts`) which live in **src/contexts/**. Both of these follow the same structure:
+We'll go into more detail on this in a later section of the workshop but for now, it's worth touching upon it at a high level. Our project has 2 **Bounded Contexts** (`Accounts` and `Posts`) which live in **src/contexts/**. Both of these have the same directories/structure:
 
-- **core/**: This is our 'application core', where we'll model our entities and build out our system's capabilities (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. *If you're already familiar with onion-esque architectures, this layer is essentially the 'domain' and 'application' layers squashed into one for simplicity.*
-- **infra/**: Short for 'infrastructure' - this is where we'll write the code which connects our 'application core' to persistence technology (e.g. databases or the file system) and external systems our contexts rely on (if any). Think of infra as everything your application needs to interact with the external world.
-- **interface/**: This is the opposite of infrastructure; a way for the outside world to interact with our application. This is where we'll write our API code. The primary idea here is that we could create multiple interfaces (a REST API, a graphQL API, a CLI, etc.) and each one would utilise the same functionality exposed in our application core.
+- **core/**: This is our 'application core', where we'll model our entities and build out our system's capabilities (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. *If you're already familiar with onion/clean/hexagonal/ports-and-adapter architecture, this layer is essentially the 'domain' and 'application' layers squashed into one for simplicity.*
+- **infra/**: Short for 'infrastructure' - this is where we'll write the code which connects our 'application core' to persistence technology (e.g. databases or the file system) and external systems (if required). Think of infra as the code your application needs to interact with the external world.
+- **interface/**: This is the opposite of infrastructure; a way for the outside world to interact with our application. This is where we'll write our API code. The primary idea here is that we could create multiple interfaces (a REST API, a GraphQL API, a CLI, etc.) and each could utilise the same functionality exposed in our 'application core'.
 
 ## The Practical Bit
 
