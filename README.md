@@ -116,7 +116,7 @@ The sweet spot is somewhere in the middle.
 
 ### Part 6: Group Entities into their Bounded Contexts
 
-Let's go back to [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html). The first diagram there shows two bounded contexts, each containg multiple entities with lines connecting them together. This is a great way of condensing all the information in our EventStorming diagram down into a simple overview of the core elements in a bounded context and the relationships between them.
+Let's go back to [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html). The first diagram there shows two bounded contexts, each containg multiple entities with lines connecting some of them together. This is a great way of condensing all the information in our EventStorming diagram down into a simple overview of the core elements in a bounded context and the relationships between them.
 
 1. Create a second diagram which contains only the context boundaries you created in the EventStorming diagram. This time, there should only be one of each.
 2. Add each entity from the EventStorming diagram to the relevant bounded context
