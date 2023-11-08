@@ -94,32 +94,29 @@ Generally, there's a strong relationship between entities and commands. Specific
 Now each section of the diagram reads like this:
 > **Actor X** issues **Command X** which affects **Entity X** resulting in **Event X**.
 
-### Part 5: Adding Context Boundaries
+### Part 5: Identifying Context Boundaries
 
-*In DDD, a bounded context is an important concept, if a little abstract. [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html) (2 minute read) does a great job of illustrating what they are. Go check it out.*
+In DDD, a bounded context is a really important concept, if a little abstract. [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html) (2 minute read) does a great job of illustrating what they are - go check it out.
 
-*EventStorming diagrams are great for identifying bounded contexts because we have a high level overview of the entities and capabilities in our business processes, as well as how they relate to each other. There are some specific techniques for identifying bounded contexts but the easiest (if a little crude) is to simply draw lines around areas that instinctively feel related to each other, e.g. everything to do with `Accounts`, everything to do with `Shipping`, etc. This can be a great starting point for having the discussions necessary to design effective context boundaries.*
+EventStorming diagrams are great for identifying bounded contexts because we gain a high level overview of the entities and capabilities in our business processes, as well as how they relate to each other.
 
-1. Looking at the EventStorming diagram as a whole, try to identify boundaries around groups of related entities / capabilities. Draw lines/circles/boxes around those areas and give them meaningful names. (note that the same bounded context can appear in several places along the timeline - it's not uncommon for business processes to move from one bounded context to another and then back again.)
+There are a couple of techniques for identifying bounded contexts but let's look at 2:
 
-To sanity check the bounded contexts you've identified/chosen, try these two thought experiments:
+- Use your eyeballs and your instinct to draw lines around areas that feel related to each other, e.g. everything to do with `Accounts`, everything to do with `Shipping`, etc. This can be a great starting point for defining context boundaries that can later be refined, even if the method is a little crud.
+- Make a copy of the timeline then group related entities/behaviours together. Context boundaries often become clear as a result.
 
-- Imagine each bounded context is owned by a different team and only the owning team can change anything about a bounded context (conceptually or in the code that will eventually represent that bounded context). Ask yourself if the current design would result in a lot of *unneccessary* cross-team meetings and bottlenecks.
-- Imagine each bounded context as an independently deployed service which has to communicate with all other bounded contexts via API calls. Ask yourself if the current design would result in a lot of *unneccessary* cross-team meetings and bottlenecks.
+Let's use the second approach to try to define our context boundaries.
 
-There are two extremes when identifying/choosing bounded contexts:
+1. Make a copy of the EventStorming diagram, excluding **Actor** stickies/elements (they just add clutter)
+2. Remove duplicate **Entity** stickies/elements then group **Command**/**Event** pairs together that belong to the same entity.
+3. Move related **Entity** stickies/elements close to each other.
+4. Draw lines/circles/boxes around groups of related entities and give those areas meaningful names
+5. Draw lines between entities indicating their relationship with one another (kind of like foreign keys in a database, if that's a useful analogy for you). Don't worry if lines cross contexts at this point, we'll resolve those issues later.
+6. Now that you've identified the bounded contexts you're working with, you can port those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
 
-- One large bounded context which encapsulates everything
-- Many tiny bounded contexts which each encapsulate a very small number of entities/behaviours
+Note that this is an art more than a science and there are two traps you might fall into, namely:
 
-The sweet spot is somewhere in the middle.
+- Creating one large bounded context which encapsulates everything
+- Creating lots of tiny bounded contexts which each encapsulate a very small number of entities/behaviours
 
-### Part 6: Group Entities into their Bounded Contexts
-
-Let's go back to [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html). The first diagram there shows two bounded contexts, each containg multiple entities with lines connecting some of them together. This is a great way of condensing all the information in our EventStorming diagram down into a simple overview of the core elements in a bounded context and the relationships between them.
-
-1. Create a second diagram which contains only the context boundaries you created in the EventStorming diagram. This time, there should only be one of each.
-2. Add each entity from the EventStorming diagram to the relevant bounded context
-3. Draw lines connecting entities which have some kind of relationship with each other. If it helps, imagine how you would model foreign keys in a database between these Entities. Also, don't worry if any of the lines cross between bounded contexts - we'll resolve that in a later section
-
-That's it! Now we've got a simple, clear diagram illustrating the context boundaries, entities and relationships in our business.
+The sweet spot is somewhere in the middle...
