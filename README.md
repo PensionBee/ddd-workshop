@@ -4,10 +4,18 @@
 
 *Do NOT treat this as a definitive solution. This is one approach which may serve as useful reference. Saying that, we *do* need a source of truth to build upon in the rest of the workshop so this diagram will serve as the foundation for later sections in the workshop.*
 
-## EventStorming Solution Diagram
+## EventStorming Timeline
 
-![EventStorming Solution Diagram](./images/eventstorming-solution.png)
+![EventStorming Timeline](./images/eventstorming-timeline.png)
 
-## Bounded Context Solution Diagram
+## Bounded Context Groups
 
-![Bounded Context Solution Diagram](./images/bounded-context-solution.png)
+![Bounded Context Groups](./images/bounded-context-groups.png)
+
+## Bounded Context Groups with Relationships
+
+![Bounded Context Groups with Relationships](./images/bounded-context-groups-with-relationships.png)
+
+## EventStorming Timeline with Bounded Contexts
+
+![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
