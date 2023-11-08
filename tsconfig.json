@@ -1,16 +1,27 @@
 {
   "compilerOptions": {
     "baseUrl": "./",
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "module": "ES2022",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
-    "noImplicitAny": true,
-    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "noImplicitAny": true,
     "strictNullChecks": true,
-    "strictFunctionTypes": true
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
+    "paths": {
+      "~/*": ["src/*"]
+    }
   },
   "include": ["src"]
 }
