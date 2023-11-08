@@ -1,6 +1,6 @@
 # Typescript: The Useful Bits
 
-[Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#workshop-overview)
+[Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
 ## Resources
 
