@@ -1,6 +1,6 @@
-# DDD Workshop - Repositories & Persistence
+# Repositories & Persistence
 
-[Back to the training overview](https://github.com/PensionBee/ddd-workshop/tree/main#training-overview)
+[Back to the training overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
 ## Context
 
