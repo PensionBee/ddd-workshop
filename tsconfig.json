@@ -1,21 +1,27 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "isolatedModules": true,
-    "module": "commonjs",
+    "module": "ESNext",
     "moduleResolution": "node",
     "noEmit": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true,
+    "skipLibCheck": true,
     "paths": {
       "~/*": ["src/*"]
-    },
-    "skipLibCheck": true,
-    "strict": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true
+    }
   },
   "include": ["src"]
 }

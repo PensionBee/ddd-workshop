@@ -16,6 +16,6 @@
  */
 export const errorOnDefaultCase = (value: never): never => {
   throw new Error(
-    `${value} was unexpectedly handled by a default switch block`
+    `${value} was unexpectedly handled by a default block in a switch statement`
   );
 };
