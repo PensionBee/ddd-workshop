@@ -21,15 +21,15 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ## DDD Workshop Overview
 
-### Prerequisite Knowledge
+### Part 1: Prerequisites
 
 1. [Typescript (the basics)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop treats Typescript as a supplimentary, useful tool when compared with the core DDD content. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across.
 
-### Modelling the Problem
+### Part 2: Modelling the Problem
 
 1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
 
-### Building out the Backend
+### Part 3: Building out the Backend
 
 1. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
 2. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
@@ -37,14 +37,13 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 4. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
 5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
 
-### Supercharging the Backend
+### Part 4: Supercharging the Backend
 
 1. (WIP) [Standardising Command Handlers](https://github.com/PensionBee/ddd-workshop/tree/standardising-command-handlers)
 2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/ddd-workshop/tree/dependency-inversion-injection)
 
-### Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
+### Part 5: Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
 
 1. (WIP) [Inter-Context Data Fetching](https://github.com/PensionBee/ddd-workshop/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
-2. (WIP) [Event-Driven Architecture Utilities](https://github.com/PensionBee/ddd-workshop/tree/event-driven-architecture-utils)
-3. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
-4. (WIP) [Integration Events for Inter-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
+2. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
+3. (WIP) [Integration Events for Inter-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
