@@ -37,10 +37,7 @@ This section will focus on 5 key elements of EventStorming:
 
 Feel free to check out these resources before or after tackling 'The Practical Bit' below.
 
-- mrpicky.dev articles:
-  - [Big Picture Event Storming, 10 minute read](https://mrpicky.dev/this-could-be-the-biggest-post-about-big-picture-event-storming-ever-and-with-examples/)
-  - [Process Level EventStorming Example, 10 minute read](https://mrpicky.dev/process-level-event-storming-lets-get-this-process-started/)
-  - [Design Level EventStorming Example, 10 minute read](https://mrpicky.dev/design-level-event-storming-with-examples/)
+- [eventstorming.com](https://www.eventstorming.com/resources/) (Careful! This resource is a rabbit hole)
 
 ## The Practical Bit
 
