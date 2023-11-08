@@ -73,12 +73,12 @@ function getPostsByUserId(userId: any): any {
 // Example usage
 const userPosts = getPostsByUserId(1);
 
-async function getPostById (id: any): any {
+async function getPostById(id: any): any {
   if (typeof id === "string") {
     return allPosts.find((post) => post.id === parseInt(id));
   }
   return allPosts.find((post) => post.id === id);
-};
+}
 
 // Example usage
 const postByNumberId = getPostById(1);
@@ -94,9 +94,9 @@ const postByStringId = getPostById("1");
 
 type UnknownData = any;
 
-function processAPIRequest (data: UnknownData): any {
+function processAPIRequest(data: UnknownData): any {
   return `API request processed with data: ${JSON.stringify(data)}`;
-};
+}
 
 // Example usage
 processAPIRequest({
@@ -117,7 +117,7 @@ processAPIRequest({
  *
  * Hovering over the 'followUser' function below should show the following:
  *   function followUser(followerId: any, userToFollowId: any): "FAIL/USER_BLOCKED" | "SUCCESS/USER_FOLLOWED"
- * 
+ *
  * Here the TS compiler figured out that this function can only ever return "FAIL/USER_BLOCKED" or "SUCCESS/USER_FOLLOWED"
  */
 
@@ -128,10 +128,8 @@ const usersData = [
   { userId: "user-2", followers: [], blockedUsers: ["user-1"] },
 ];
 
-function followUser (followerId: any, userToFollowId: any) {
-  const toFollowUser = usersData.find(
-    (user) => user.userId === userToFollowId
-  );
+function followUser(followerId: any, userToFollowId: any) {
+  const toFollowUser = usersData.find((user) => user.userId === userToFollowId);
   if (toFollowUser?.blockedUsers.includes(followerId)) {
     return "FAIL/USER_BLOCKED";
   }
@@ -139,43 +137,39 @@ function followUser (followerId: any, userToFollowId: any) {
   // This is where we'd normally update the user's followers and persist the change (skipping here since the implementation isn't important)
 
   return "SUCCESS/USER_FOLLOWED";
-};
+}
 
 // Example usage
 followUser("user-1", "user-2"); // user with ID 'user-1' wants to follow user with ID 'user-2'
 
 /**
  * BONUS PROBLEM
- * 
+ *
  * -----------------------------------------------------------------------------------------------------
- * 
+ *
  * This part introduces 'generics', which goes beyond Typescript basics...
- * 
+ *
  * Generics can take a little time to wrap your head around but they're an extremely powerful tool for
  * building libraries or shared utilities where you don't know what specific types are going to be used
  * ahead of time.
- * 
+ *
  * You won't need to write anything with generics in the rest of the workshop but some
  * utility functions we'll use in later sections will use generics under the hood, so this is here
  * for completeness in case you're interested in exploring those functions more when you reach them.
- * 
+ *
  * -----------------------------------------------------------------------------------------------------
- * 
- * Write a utility type that takes any object type and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
+ *
+ * Write a utility type that takes any type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
  *
  * Hint: Search for 'TS generics'
  * Hint: Search for 'TS custom utility types with generics'
  */
 
-type Nullish<...> = ...;
+type Nullish<T> = any;
 
 // Example usage
 type NullishUser = Nullish<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
 type NullishPost = Nullish<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
 
-type ErrorTest1 = Nullish<1>; // This should be an error because 1 is not an object
-type ErrorTest2 = Nullish<'test'>; // This should be an error because 'test' is not an object
-type ErrorTest3 = Nullish<[5, 6, 7]>; // This should be an error because [5, 6, 7] is not an object
-
 // Export to make TS happy
-export { };
+export {};
