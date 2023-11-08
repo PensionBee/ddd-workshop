@@ -114,7 +114,7 @@ There are two extremes when identifying/choosing bounded contexts:
 
 The sweet spot is somewhere in the middle.
 
-### Part 6: Condensed Views of Bounded Contexts
+### Part 6: Group Entities into their Bounded Contexts
 
 Let's go back to [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html). The first diagram there shows two bounded contexts, each containg multiple entities with lines connecting them together. This is a great way of condensing all the information in our EventStorming diagram down into a simple overview of the core elements in a bounded context and the relationships between them.
 
