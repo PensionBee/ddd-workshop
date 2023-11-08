@@ -159,17 +159,21 @@ followUser("user-1", "user-2"); // user with ID 'user-1' wants to follow user wi
  *
  * -----------------------------------------------------------------------------------------------------
  *
- * Write a utility type that takes any type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
+ * Write a utility type that takes any OBJECT type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
  *
  * Hint: Search for 'TS generics'
  * Hint: Search for 'TS custom utility types with generics'
  */
 
-type Nullish<T> = any;
+type NullishObject<T> = any;
 
 // Example usage
-type NullishUser = Nullish<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
-type NullishPost = Nullish<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
+type NullishUser = NullishObject<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
+type NullishPost = NullishObject<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
+
+type ErrorTest1 = NullishObject<1>; // This should be an error because 1 is not an object
+type ErrorTest2 = NullishObject<"test">; // This should be an error because 'test' is not an object
+type ErrorTest3 = NullishObject<[5, 6, 7]>; // This should be an error because [5, 6, 7] is not an object
 
 // Export to make TS happy
 export {};
