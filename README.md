@@ -1,4 +1,4 @@
-# DDD Workshop - Typescript: The Useful Bits
+# Typescript: The Useful Bits
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#workshop-overview)
 
