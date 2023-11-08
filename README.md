@@ -1,6 +1,6 @@
-# DDD Workshop - Values, Entities & Parsers
+# Values, Entities & Parsers
 
-[Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#workshop-overview)
+[Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
 ## Context
 
