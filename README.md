@@ -102,19 +102,19 @@ EventStorming diagrams are great for identifying bounded contexts because we gai
 
 There are a couple of techniques for identifying bounded contexts but let's look at 2:
 
-- Use your eyeballs and your instinct to draw lines around areas that feel related to each other, e.g. everything to do with `Accounts`, everything to do with `Shipping`, etc. This can be a great starting point for defining context boundaries that can later be refined, even if the method is a little crud.
-- Make a copy of the timeline then group related entities/behaviours together. Context boundaries often become clear as a result.
+- Simply use your eyeballs and your instinct to draw lines around areas that feel related to each other, e.g. everything to do with `Accounts`, everything to do with `Shipping`, etc. This can be a great starting point for defining context boundaries that can later be refined (even if the method is a little crude).
+- Visually group related entities with their behaviours together. Context boundaries often become clear as a result.
 
-Let's use the second approach to try to define our context boundaries.
+Let's use the second approach to try and identify/choose our context boundaries.
 
-1. Make a copy of the EventStorming diagram, excluding **Actor** stickies/elements (they just add clutter)
+1. Make a copy of the EventStorming diagram, omitting **Actor** stickies/elements (they just add clutter).
 2. Remove duplicate **Entity** stickies/elements then group **Command**/**Event** pairs together that belong to the same entity.
 3. Move related **Entity** stickies/elements close to each other.
-4. Draw lines/circles/boxes around groups of related entities and give those areas meaningful names
-5. Draw lines between entities indicating their relationship with one another (kind of like foreign keys in a database, if that's a useful analogy for you). Don't worry if lines cross contexts at this point, we'll resolve those issues later.
-6. Now that you've identified the bounded contexts you're working with, you can port those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
+4. Draw lines/circles/boxes around groups of related entities and give those areas meaningful names.
+5. Draw lines between entities indicating their relationship with one another (kind of like foreign keys in a database, if you find that to be a useful analogy). Don't worry if lines cross contexts at this point, we'll resolve that issue in a later section.
+6. Now that you've identified the bounded contexts you're working with, port those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
 
-Note that this is an art more than a science and there are two traps you might fall into, namely:
+Note that this is an art more than a science but there are two easy traps you might fall into:
 
 - Creating one large bounded context which encapsulates everything
 - Creating lots of tiny bounded contexts which each encapsulate a very small number of entities/behaviours
