@@ -6,16 +6,26 @@
 
 ## EventStorming Timeline
 
-![EventStorming Timeline](./images/eventstorming-timeline.png)
+![EventStorming Timeline Option 1](./images/eventstorming-timeline-option-1.png)
+
+OR
+
+![EventStorming Timeline Option 2](./images/eventstorming-timeline-option-2.png)
 
 ## Bounded Context Groups
 
+Without relationships...
+
 ![Bounded Context Groups](./images/bounded-context-groups.png)
 
-## Bounded Context Groups with Relationships
+With relationships...
 
 ![Bounded Context Groups with Relationships](./images/bounded-context-groups-with-relationships.png)
 
 ## EventStorming Timeline with Bounded Contexts
 
-![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+![EventStorming Timeline with Bounded Contexts Option 1](./images/eventstorming-timeline-with-bounded-contexts-option-1.png)
+
+OR
+
+![EventStorming Timeline with Bounded Contexts Option 2](./images/eventstorming-timeline-with-bounded-contexts-option-2.png)
