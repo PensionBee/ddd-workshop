@@ -23,7 +23,7 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ### Part 1: Prerequisites
 
-1. [Typescript (the basics)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop treats Typescript as a supplimentary, useful tool when compared with the core DDD content. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across.
+1. [Typescript (foundations)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop is written in Typescript (TS) but is secondary ompared with the core DDD content, i.e. you don't have to be particularly competent working with TS. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across. ([SOLUTIONS](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions))
 
 ### Part 2: Modelling the Problem
 
