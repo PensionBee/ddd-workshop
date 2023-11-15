@@ -96,26 +96,24 @@ Now each section of the diagram reads like this:
 
 In DDD, a Bounded Context (BC) is a very important concept (althought it's a little bit abstract). [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html) (2 minute read) does a great job of illustrating what a BC is - go check it out...
 
-EventStorming diagrams are great for identifying bounded contexts because we end up with a high level overview of the entities and capabilities in our business processes, as well as how they relate to each other.
+There are a few different techniques that can be used to identify bounded contexts from EventStorming diagrams. Here are two of them:
 
-There are a few of techniques for identifying bounded contexts but let's highlight 2:
-
-1. Simply use your eyeballs and your instincts to draw lines/circles/boxes around areas that feel related to each other, e.g. draw a line around everything related to `Accounts`, a separate line around everything to do with `Shipping`, and so on. This method is a little crude but it can be a great starting point for defining context boundaries that can later be refined.
-2. Visually group related entities and their behaviours together. Context boundaries often become clear as a result.
+1. Simply use your eyeballs and your instincts to draw lines/circles/boxes around areas that feel related to each other, e.g. draw a line around everything related to `Accounts`, a separate line around everything to do with `Shipping`, and so on. This method is a little crude but, in some scenarios (usually with smaller diagrams), it can be a reasonable approach.
+2. Visually group related entities and their behaviours together. Context boundaries often become clear as a result. (this is easier on virtual EventStorming diagrams)
 
 Let's use the second approach to try and identify/choose our context boundaries.
 
-1. Make a copy of the EventStorming diagram, omitting **Actor** stickies/elements (they just add clutter).
-2. Remove duplicate **Entity** stickies/elements (keeping only 1) then group **Command**/**Event** stickies/elements next to their corresponding entity.
-3. Move related **Entity** stickies/elements (plus their associated **Command**/**Event** stickies/elements) close to each other.
-4. Draw lines/circles/boxes around groups of related entities
-5. Give meaningful names to the groups you've identified.
-6. (Optional) Draw lines between any entities which have a relationship with each another (think about foreign keys in a database, if you find that to be a useful analogy). Don't worry if lines cross contexts at this point, we'll resolve that issue in a later section.
-7. Now that you've identified the bounded contexts you're working with, you can 'port' those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
+1. Make a copy of the EventStorming diagram.
+2. Remove **Actor** stickies/elements (they just add clutter).
+3. Remove duplicate **Entity** stickies/elements (but keep one), then group **Command**/**Event** stickies/elements next to their corresponding entities.
+4. Move related **Entity** stickies/elements (plus corresponding **Command**/**Event** stickies/elements) near each other.
+5. Draw lines/circles/boxes around groups of related entities.
+6. Give meaningful names to the groups you've identified.
+7. That's it - bounded contexts identified! Now, you can 'port' those bounded contexts back to the original timeline. This *might* result in the same bounded context appearing multiple times, which is perfectly fine.
 
-Althought this is halfway between an art and a science, there are two common traps you might fall into:
+Althought this process is halfway between an art and a science, there are two traps you might fall into (neither of which scales well):
 
-1. Creating one large bounded context which encapsulates everything
+1. Creating one large bounded context which encapsulates all entities/behaviours
 2. Creating lots of tiny bounded contexts which each encapsulate very few entities/behaviours
 
 The sweet spot is somewhere in between...
