@@ -4,9 +4,17 @@
 
 ## Context
 
-EventStorming is a workshop format which helps us to quickly design effective solutions before we write any code. The key idea behind this approach is that we, as a team, preferably with business stakeholders and domain experts in the room, collaboratively model the **events** that make up business processes we're interested in.
+EventStorming is a powerful workshop format which helps us to achieve the following before we write a single line of code:
 
-For example, in an E-commerce business, we might want to exploring and model the end-to-end customer shopping experience in order to build our first prototype. Some of the events we might identify are:
+- **Reach a shared understanding** of the problem/solution space, helping to reduce knowledge silos.
+- **Create a shared language** that we can use to communicate effectively with the rest of the team, domain experts and business stakeholders.
+- **Quickly design effective solutions** to complex business problems.
+- **Identify Bounded Contexts** that we can use to build scalable software systems.
+- **(Optionally) Create living documentation** that we can iterate on as our understanding of a business domain improves or as business requirements change (digitised EventStorming diagrams work best for this).
+
+The key idea behind this approach is that we, as a team, preferably with business stakeholders and domain experts in the room, collaboratively model the events that make up business processes we're interested in.
+
+For example, in an E-commerce business, we might explore and model the end-to-end customer shopping experience in order to build our first prototype. Some of the events we might identify are:
 
 - `Product Added to Basket`
 - `Shipping Address Added`
@@ -17,15 +25,7 @@ For example, in an E-commerce business, we might want to exploring and model the
 
 We can model a process using a single EventStorming diagram or, depending on the size and complexity of the process, break it down into smaller sub-processes, each with its own diagram.
 
-When done well, EventStorming is a powerful tool that helps us to:
-
-- **Reach a shared understanding** of the problem/solution space, helping to reduce knowledge silos.
-- **Create a shared language** we can use to communicate effectively with the rest of our team, domain experts and business stakeholders.
-- **Quickly design effective solutions** to complex business problems.
-- **Identify Bounded Contexts** that we can use to build scalable software systems (more on this in a later section).
-- **(Optionally) Create living documentation** that we can iterate on as our understanding of a business domain improves or as business requirements change (digitised EventStorming diagrams work best for this).
-
-This section will focus on 5 key elements of EventStorming:
+This section will focus on 5 of the main EventStorming elements:
 
 - Events
 - Commands
@@ -41,7 +41,7 @@ Feel free to check out these resources before or after tackling 'The Practical B
 
 ## The Practical Bit
 
-*Note: You can do this activity with a sheet of paper and some sticky notes, or digitally using a whiteboarding tool.*
+*Note: You can do this activity with a sheet of paper and some sticky notes, or digitally using any whiteboarding tool.*
 
 Let's revisit our CEO's initial requirements as the focus for our EventStorming session. Here's a reminder of those requirements:
 
@@ -61,62 +61,61 @@ Let's revisit our CEO's initial requirements as the focus for our EventStorming 
 
 While events capture things that have changed in the system, commands capture intent (by someone or something) to change the system. For example, it's likely the `Passport Verified` event would be the direct result of a `Verify Passport` command.
 
-1. Working from left to right through the canvas, add a **Command** sticky/element on the left of each **Event** sticky/element.
+1. Working across the canvas from left to right, add a relevant **Command** sticky/element on the left of each **Event** sticky/element.
 
 Now each section of the diagram reads like this:
 > **Command X** results in **Event X**.
 
 (Note that 'X' is just a placeholder - it doesn't represent anything specific)
 
-**Commands** might seem worthless at this stage but they'll make our diagrams much clearer as we add more elements, especially *policies* (which we'll add in a later workshop section).
+**Commands** might seem a bit useless at this stage but they'll make our diagrams much clearer as we add more elements later, especially *policies* which we'll get to in a later section of the workshop. They'll also help us out when we start writing code.
 
 ### Part 3: Adding Actors
 
-An actor is anyone who issues commands to our systems (usually via some kind of user interface). For example, a `Customer`, a `Warehouse Operative` and a `Sales Rep` could all be actors in our business.
+An actor is anyone who issues commands to our systems (usually via a user interface of some kind). For example, a `Customer`, a `Warehouse Operative` and a `Sales Rep` could all be actors in our business.
 
-1. Working from left to right, for each **Command**/**Event** pair, add an **Actor** sticky/element underneath the **Command** sticky/element.
+1. Working from left to right, add a relevant **Actor** sticky/element underneath each **Command** sticky/element.
 
 Now each section of the diagram reads like this:
 > **Actor X** issues **Command X** resulting in **Event X**.
 
 ### Part 4: Adding Domain Entities
 
-Many EventStorming examples out in the wild incorporate an **Aggregate** sticky/element. However, let's ignore the concept of an aggregate for now and instead focus on the concept of an 'entity'.
+Many EventStorming examples in the wild incorporate an **Aggregate** sticky/element. However, let's ignore the concept of an aggregate for now and instead focus on the concept of an 'entity', which is very similar but less abstract.
 
-An entity is anything in our domain which can be modelled using a unique identifier (an ID) and also has a 'lifecyle' (it's attributes can change over time). In the E-commerce example above, `Basket`, `Order`, `Payment` and `Shipment` are examples of entities in our business, since they can all be modelled with a unique ID and their attributes can change over time while still being the same `Basket`, `Order`, etc.
+An entity is anything in our domain which can be modelled with a ID attribute and goes through some kind of 'lifecyle' (it's attributes/state can change over time). In the E-commerce example above, `Basket`, `Order`, `Payment` and `Shipment` are all examples of entities that we might identify in our business. For example, the `status` attribute of a `Payment` entity with ID `payment-123` could change from `pending` to either `succeeded` or `failed` - it's state/sttributes have changed but it's still conceptually the same payment.
 
-As a concrete example, the `status` attribute of a `Payment` entity with the ID `payment-123` can change from `pending` to either `succeeded` or `failed` - it's the same payment in both cases but it evolves over time.
+Generally, there's a strong relationship between entities and commands. Specifically, Each entity will have 1 or more commands associated with it. For example, the `Basket` entity might have the following commands associated with it: `Add Product to Basket`, `Remove Product from Basket` and `Empty Basket`.
 
-Generally, there's a strong relationship between entities and commands. Specifically, Each entity will have 1 or more commands associated with it. For example, the `Basket` entity could have the following commands associated with it: `Add Product to Basket`, `Remove Product from Basket` and `Empty Basket`.
-
-1. Working from left to right, for each **Command**/**Event**/**Actor** group, add an **Entity** sticky/element above the **Command** sticky/element.
+1. Working from left to right, add a relevant **Entity** sticky/element above each **Command** sticky/element.
 
 Now each section of the diagram reads like this:
 > **Actor X** issues **Command X** which affects **Entity X** resulting in **Event X**.
 
 ### Part 5: Identifying Context Boundaries
 
-In DDD, a bounded context is a really important concept, if a little abstract. [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html) (2 minute read) does a great job of illustrating what they are - go check it out.
+In DDD, a Bounded Context (BC) is a very important concept (althought it's a little bit abstract). [Martin Fowler's Bounded Context overview](https://martinfowler.com/bliki/BoundedContext.html) (2 minute read) does a great job of illustrating what a BC is - go check it out...
 
-EventStorming diagrams are great for identifying bounded contexts because we gain a high level overview of the entities and capabilities in our business processes, as well as how they relate to each other.
+EventStorming diagrams are great for identifying bounded contexts because we end up with a high level overview of the entities and capabilities in our business processes, as well as how they relate to each other.
 
-There are a couple of techniques for identifying bounded contexts but let's look at 2:
+There are a few of techniques for identifying bounded contexts but let's highlight 2:
 
-- Simply use your eyeballs and your instinct to draw lines around areas that feel related to each other, e.g. everything to do with `Accounts`, everything to do with `Shipping`, etc. This can be a great starting point for defining context boundaries that can later be refined (even if the method is a little crude).
-- Visually group related entities with their behaviours together. Context boundaries often become clear as a result.
+1. Simply use your eyeballs and your instincts to draw lines/circles/boxes around areas that feel related to each other, e.g. draw a line around everything related to `Accounts`, a separate line around everything to do with `Shipping`, and so on. This method is a little crude but it can be a great starting point for defining context boundaries that can later be refined.
+2. Visually group related entities and their behaviours together. Context boundaries often become clear as a result.
 
 Let's use the second approach to try and identify/choose our context boundaries.
 
 1. Make a copy of the EventStorming diagram, omitting **Actor** stickies/elements (they just add clutter).
-2. Remove duplicate **Entity** stickies/elements then group **Command**/**Event** pairs together that belong to the same entity.
-3. Move related **Entity** stickies/elements close to each other.
-4. Draw lines/circles/boxes around groups of related entities and give those areas meaningful names.
-5. Draw lines between entities indicating their relationship with one another (kind of like foreign keys in a database, if you find that to be a useful analogy). Don't worry if lines cross contexts at this point, we'll resolve that issue in a later section.
-6. Now that you've identified the bounded contexts you're working with, port those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
+2. Remove duplicate **Entity** stickies/elements (keeping only 1) then group **Command**/**Event** stickies/elements next to their corresponding entity.
+3. Move related **Entity** stickies/elements (plus their associated **Command**/**Event** stickies/elements) close to each other.
+4. Draw lines/circles/boxes around groups of related entities
+5. Give meaningful names to the groups you've identified.
+6. (Optional) Draw lines between any entities which have a relationship with each another (think about foreign keys in a database, if you find that to be a useful analogy). Don't worry if lines cross contexts at this point, we'll resolve that issue in a later section.
+7. Now that you've identified the bounded contexts you're working with, you can 'port' those boundaries back to the original timeline. This might result in the same bounded context appearing multiple times on the timeline.
 
-Note that this is an art more than a science but there are two easy traps you might fall into:
+Althought this is halfway between an art and a science, there are two common traps you might fall into:
 
-- Creating one large bounded context which encapsulates everything
-- Creating lots of tiny bounded contexts which each encapsulate a very small number of entities/behaviours
+1. Creating one large bounded context which encapsulates everything
+2. Creating lots of tiny bounded contexts which each encapsulate very few entities/behaviours
 
-The sweet spot is somewhere in the middle...
+The sweet spot is somewhere in between...
