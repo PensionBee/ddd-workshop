@@ -109,7 +109,7 @@ Let's use the second approach to try and identify/choose our context boundaries.
 4. Move related **Entity** stickies/elements (plus corresponding **Command**/**Event** stickies/elements) near each other.
 5. Draw lines/circles/boxes around groups of related entities.
 6. Give meaningful names to the groups you've identified.
-7. That's it - bounded contexts identified! Now, you can 'port' those bounded contexts back to the original timeline. This *might* result in the same bounded context appearing multiple times, which is perfectly fine.
+7. That's it - bounded contexts identified! Now you can 'port' those bounded contexts back to the original timeline. This *might* result in the same bounded context appearing multiple times, which is perfectly fine.
 
 Althought this process is halfway between an art and a science, there are two traps you might fall into (neither of which scales well):
 
