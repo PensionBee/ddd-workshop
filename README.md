@@ -31,7 +31,7 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ### Part 3: Building out the Backend
 
-1. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
+1. [Values, Entities, Aggregates & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-aggregates-and-parsers)
 2. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
 3. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
 4. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
