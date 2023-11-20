@@ -1,4 +1,4 @@
-# Entities, Aggregates & Parsers
+# Values, Entities, Aggregates & Parsers
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
