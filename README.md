@@ -68,7 +68,7 @@ In order to stay away from specific persistence technologies and highlight how r
 
 Also, let's assume that each in-memory array represents a single SQL database table, i.e. we can't store different entity types in one array (this condition will only be relevent for part 3 below)
 
-### Part 1: Creating the Posts Repository
+### Part 1: Completing the Posts Repository
 
 - In **contexts/posts/infra/repositories/postsRepository.ts**:
   - Complete the `postsRepository` so that other code can save new/updated `Post` entities and fetch existing `Post` entities by their ID.
