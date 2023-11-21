@@ -4,20 +4,21 @@ import { parseAccount } from "./account";
 
 describe("parseAccount", () => {
   test("It returns a valid entity if the data to parse is valid", () => {
-    const account = parseAccount({
+    const data = {
       id: "account-1",
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
-      following: ["account-2"],
-    });
-    expect(account).toEqual({
-      id: "account-1",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      following: ["account-2"],
-    });
+      followers: [
+        {
+          id: "accountFollower-1",
+          followerId: "account-2",
+          followedAt: "2008-09-10T12:34:56Z",
+        },
+      ],
+    };
+    const account = parseAccount(data);
+    expect(account).toEqual(data);
   });
   test("It throws an error if required data is missing", () => {
     const validData = {
@@ -25,7 +26,7 @@ describe("parseAccount", () => {
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
-      following: [],
+      followers: [],
     };
     expect(() => parseAccount({ ...validData, id: undefined })).toThrowError();
     expect(() =>
@@ -38,7 +39,7 @@ describe("parseAccount", () => {
       parseAccount({ ...validData, password: undefined })
     ).toThrowError();
     expect(() =>
-      parseAccount({ ...validData, following: undefined })
+      parseAccount({ ...validData, followers: undefined })
     ).toThrowError();
   });
   test("It throws an error if data is invalid", () => {
@@ -47,7 +48,7 @@ describe("parseAccount", () => {
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
-      following: [],
+      followers: [],
     };
     expect(() => parseAccount({ ...validData, id: "abc123" })).toThrowError();
     expect(() =>
@@ -60,7 +61,7 @@ describe("parseAccount", () => {
       parseAccount({ ...validData, password: "passwd" })
     ).toThrowError();
     expect(() =>
-      parseAccount({ ...validData, following: ["abc123"] })
+      parseAccount({ ...validData, followers: ["abc123"] })
     ).toThrowError();
   });
 });
