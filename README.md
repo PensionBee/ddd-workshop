@@ -66,19 +66,19 @@ Okay, but how and where do we actually do this? One practical solution to this p
 
 In order to stay away from specific persistence technologies and highlight how repositories help us to create quick prototypes that we can iterate on before going live with new/updated features, we're going to use in-memory arrays to store our entities.
 
-Also, let's assume that each in-memory array represents a single SQL database table, i.e. we can't store different entity types in one array (this condition will only be relevent for part 3 below)
+Also, let's assume that each in-memory array represents a single SQL database table, i.e. we can't store different entity types in one array (this condition will only be relevant for part 3 below)
 
 ### Part 1: Completing the Posts Repository
 
 - In **contexts/posts/infra/repositories/postsRepository.ts**:
   - Complete the `postsRepository` so that other code can save new/updated `Post` entities and fetch existing `Post` entities by their ID.
-  - Call `parsePost` in the relevent parts of the repository, ensuring all `Post` entities passing through our repository are in a valid state.
+  - Call `parsePost` in the relevant parts of the repository, ensuring all `Post` entities passing through our repository are in a valid state.
 
 ### Part 2: Creating the Post Comments Repository
 
 - In **contexts/posts/infra/repositories/postCommentsRepository.ts**:
   - Create a `postCommentsRepository` so that other code can save new/updated `PostComment` entities and fetch existing `PostComment` entities by their ID.
-  - Call `parsePostComment` in the relevent parts of the repository, ensuring all `PostComment` entities passing through our repository are in a valid state.
+  - Call `parsePostComment` in the relevant parts of the repository, ensuring all `PostComment` entities passing through our repository are in a valid state.
 
 ### Part 3: Updating the Accounts Repository
 
