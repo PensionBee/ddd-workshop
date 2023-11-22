@@ -21,28 +21,25 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ## DDD Workshop Overview
 
-### Part 1: Prerequisites
+### Prerequisites
 
 1. [Typescript (foundations)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop is written in Typescript (TS) but is secondary ompared with the core DDD content, i.e. you don't have to be particularly competent working with TS. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across. ([SOLUTIONS](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions))
 
-### Part 2: Modelling the Problem
+### Part 1: Foundations
 
 1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
+2. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
+3. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
+4. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
+5. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
+6. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
 
-### Part 3: Building out the Backend
-
-1. [Values, Entities, Aggregates & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-aggregates-and-parsers)
-2. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
-3. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
-4. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
-5. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
-
-### Part 4: Supercharging the Backend
+### Part 2: Useful Abstractions
 
 1. (WIP) [Standardising Command Handlers](https://github.com/PensionBee/ddd-workshop/tree/standardising-command-handlers)
 2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/ddd-workshop/tree/dependency-inversion-injection)
 
-### Part 5: Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
+### Part 3: Intra- & Inter-Context Communication (& Adapting to Changes in Business Rules)
 
 1. (WIP) [Inter-Context Data Fetching](https://github.com/PensionBee/ddd-workshop/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
 2. (WIP) [Domain Events for Intra-Context Communication](https://github.com/PensionBee/ddd-workshop/tree/domain-events) (Business Rule: If post has 5+ comments then mark post as 'hot')
