@@ -155,6 +155,8 @@ At this point, it's worth touching upon the directory structure we're using. We 
 
 Let's have another look at the EventStorming diagram we're using to guide the code we write...
 
+![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+
 Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn those concepts into code.
 
 ### Part 1: Modelling Posts
