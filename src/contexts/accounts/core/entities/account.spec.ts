@@ -9,12 +9,14 @@ describe("parseAccount", () => {
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
+      // TODO: COMPLETE ME!
     });
     expect(account).toEqual({
       id: "account-1",
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
+      // TODO: COMPLETE ME!
     });
   });
   test("It throws an error if required data is missing", () => {
@@ -23,6 +25,7 @@ describe("parseAccount", () => {
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
+      // TODO: COMPLETE ME!
     };
     expect(() => parseAccount({ ...validData, id: undefined })).toThrowError();
     expect(() =>
@@ -34,6 +37,7 @@ describe("parseAccount", () => {
     expect(() =>
       parseAccount({ ...validData, password: undefined })
     ).toThrowError();
+    // TODO: COMPLETE ME!
   });
   test("It throws an error if data is invalid", () => {
     const validData = {
@@ -41,6 +45,7 @@ describe("parseAccount", () => {
       email: "testemail@test.com",
       username: "testusername",
       password: "password123",
+      // TODO: COMPLETE ME!
     };
     expect(() => parseAccount({ ...validData, id: "abc123" })).toThrowError();
     expect(() =>
@@ -52,5 +57,6 @@ describe("parseAccount", () => {
     expect(() =>
       parseAccount({ ...validData, password: "passwd" })
     ).toThrowError();
+    // TODO: COMPLETE ME!
   });
 });

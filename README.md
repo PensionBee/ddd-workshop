@@ -1,14 +1,12 @@
-# Values, Entities, Aggregates & Parsers
+# Values, Entities & Parsers
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
 ## Context
 
-### Values & Entities
+### What is an Entity?
 
-#### What is an Entity?
-
-In Domain-Driven Design, an **entity** is a representation of anything in a domain which can be defined by a unique identifier that remains constant throughout it's lifecycle. A simple entity can be made up of primitive **values** (attributes) some of which will change  throughout the entity's lifecycle. For example:
+In Domain-Driven Design, an **entity** is a representation of anything in a domain which can be defined by a unique identifier that remains constant throughout it's lifecycle. A simple entity can be made up of primitive **values** (attributes), some of which will change throughout the entity's lifecycle. For example:
 
 ```sh
 Order                      # 'Order' is an entity - even when the attributes of an order change, it's still the same order
@@ -25,7 +23,7 @@ Order
   ID
   Buyer ID
   Estimated Delivery Date
-  Delivery Address    # 'Delivery Address' is a nested value that could change throughout the Order's lifecycle
+  Delivery Address         # 'Delivery Address' is a nested value that could change throughout the Order's lifecycle
     Number
     Street
     City
@@ -33,13 +31,9 @@ Order
   ...
 ```
 
-### Aggregates
+### Nested Entities (Aggregates)
 
-#### What is an Aggregate?
-
-An aggregate is essentially a group of closely related entities which **always** need to be consistent with each other and **always** need to be used, processed or persisted as a single unit.
-
-Let's update the above `Order` entity by including additional (relevant) entities inside it:
+A nested entity is essentially a group of closely related entities which **always** need to change as a single unit (think ACID transactions if that's useful) because they **always** need to be immediately consistent with each other. For example:
 
 ```sh
 Order
@@ -68,28 +62,30 @@ Order
   ...
 ```
 
-In the above example, we have an `Order` aggregate (the consistency boundary), which is made up of an `Order` entity (the primary entity, commonly known as the "aggregate root") and a collection of `Order Line` entities. Note that aggregates often take on the name of the aggregate root entity, e.g. `Order` entity -> `Order` aggregate.
+Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's values as well as a collection of `Order Line` entities.
 
-But why do we need this?
+**IN THE WILD, YOU'LL LIKELY COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN DDD BOOKS/POSTS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' FOR CONVENIENCE.**
 
-Let's say we have several business rules focused on orders:
+But why do we need this? Why can't we just model all our entities in isolation?
+
+Good question! There's nothing stopping us doing exactly that. But there can be some downsides to this approach...
+
+Let's say we have several business rules focused around orders:
 
 - Spend more than £50 and get speedy delivery
-- Buy the same item 5 times and get 5% off
+- Buy 5 or more of the same item and get 15% off that item item
 - Spend more than £100 and get 10% off 'special' items
 - Discounts are capped at £50
-- Customers with an 'Eco' status pay £1 extra per delivery, after discounts
+- Customers with an 'Eco' status pay £1 extra per delivery, after discounts, to support the environment
 - etc.
 
-As the number of business rules increases, it becomes easier for our `order` entities and `Order line` entities to get into an inconsistent state if we treat them all as independent units. To reduce the chances of this happening, we can process the `Order` as a single unit, i.e. everything within the aggregate's consistency boundary.
+As the number of business rules increases, it becomes easier for our `Order` and `Order line` entities to get into an inconsistent state and we might end up with some gnarly bugs or confusing code kicking about, especially if we treat them all as independent units. To reduce the chances of this happening, we can group these entities together and treat them as a single unit any time anything about those entities needs to change. This makes it easier to enforce our business rules across all relevant entities.
 
-#### Single-Entity Aggregates
+*Note: 'invariants' is a fancy word for business rules you'll often come across in the wild.*
 
-It's not unreasonable to have entities which only need to be used/modified/persisted on their own. In these cases, we essentially have a single-entity aggregate which we can name after the entity itself, e.g. `Profile` entity -> `Profile` aggregate. In the future, we might find that we need to add more entities to the `Profile` aggregate or move the `Profile` entity to be part of another aggregate - it all depends on how the domain and business rules evolve over time.
+### Abstract Entities
 
-#### Abstract Aggregates
-
-Aggregates (and entities) all fall somewhere on an 'abstractness' scale. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` aggregate) whereas others are more difficult. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` aggregates using a seaprate `Transaction` aggregate, which might look something like this:
+Entities all fall somewhere on an 'abstractness' scale. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` entity) whereas others are more difficult - but that doesn't mean they aren't valid entities. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` entities using a seaprate `Transaction` entity, which might look something like this:
 
 ```sh
 Transaction
@@ -101,13 +97,9 @@ Transaction
   ...
 ```
 
-A `Transaction` may be more difficult to imagine in the physical world than a `Customer` but it's still a perfectly valid aggregate.
+### What is a Parser?
 
-### Parsers
-
-#### What is a Parser?
-
-In the context of DDD aggregates, a parser turns some unknown, unvalidated data into a valid aggregate. As an example, let's say we have a `/register` API endpoint which creates an `Account` aggregate in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
+In the context of DDD entities, a parser turns some unknown, unvalidated data into a valid entity (or throws/returns an error). As an example, let's say we have a `/register` API endpoint which internally creates an `Account` entity in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
 
 ```json
 {
@@ -120,7 +112,7 @@ In the context of DDD aggregates, a parser turns some unknown, unvalidated data 
 }
 ```
 
-However, internally, an `Account` aggregate might look like this:
+However, internally, an `Account` entity might look like this:
 
 ```ts
 type Account = {
@@ -137,7 +129,9 @@ type Account = {
 }
 ```
 
-When creating a new `Account` aggregate, we need to validate the data used to create it, and make sure it's in the correct structure (or transform it to the correct structure) - this is where parsers come in. In practice, this can be done by rolling your own validation/transformation functions or by using a parsing library (which is what we'll do in the 'The Practical Bit' below).
+When creating a new `Account` entity, we need to validate the incoming data used to create it, potentially transforming the structure/format/data types to match our internal representation of that entity. This is exactly what parsers are for!
+
+In practice, we can roll your own validation/transformation functions or use an off-the-shelf parsing library (which is what we'll do in the 'The Practical Bit' below).
 
 ## Resources
 
@@ -161,40 +155,41 @@ At this point, it's worth touching upon the directory structure we're using. We 
 
 Let's have another look at the EventStorming diagram we're using to guide the code we write...
 
-Note that we have 3 aggregates: `Account`, `Post` and `Post Comment`. Let's turn those concepts into code.
+Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn those concepts into code.
 
 ### Part 1: Modelling Posts
 
-When modelling aggregates, we're trying to capture the essential attributes which uniquely define a particular domain concept. Too few attributes and we miss out important information. Too many and we clutter our aggregates with redundant information, especially when that information lives on related aggregates.
+When modelling entities, we're trying to capture the essential attributes which uniquely define a particular domain concept. Too few attributes and we miss out important information. Too many and we clutter our entities with redundant information, especially when that information lives on related entities.
 
-- In **src/contexts/posts/core/aggregates/post.ts**:
-  - Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)). This will serve as the primary 'definition' of our `Post` aggregate while providing us with the aboility to perform runtime validation.
-  - Complete the `parsePost` function which takes a `data` argument (an unknown record type) and parses it using the schema defined in the previous step ([zod parsing](https://github.com/colinhacks/zod#basic-usage)). This function should return a valid `Post` aggregate if the data is valid or throw an error if the data is invalid.
+- In **src/contexts/posts/core/entities/post.ts**:
+  - Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)). This will serve as the primary 'definition' of what a `Post` entity actually is, while providing us with the ability to perform runtime parsing.
 
-*Note that we're using `zod`'s `infer` utility type to generate a `Post` aggregate type that we can use in other parts of our system in future sections.*
+*Note that we're using `zod`'s `infer` utility type to generate a `Post` entity type that we can use in other areas of code in future sections.*
 
 ### Part 2: Modelling Post Comments
 
-- In **src/contexts/posts/core/aggregates/postComment.ts**:
+- In **src/contexts/posts/core/entities/postComment.ts**:
   - Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
   - Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the system.
 
 ### Part 3: Modelling Account Followers
 
-We already have an existing `Account` aggregate in our `Accounts` bounded context but it doesn't currently capture the concept of 'account followers'. Let's rectify that...
+We already have an existing `Account` entity in our `Accounts` bounded context but it doesn't currently capture the concept of 'account followers'. Let's rectify that...
 
-- In **src/contexts/accounts/core/aggregates/account.ts**:
-  - Update `accountSchema` to include a `follower` attribute. This will hold information about all the followers of an account. (Hint: This could be a simple list of account IDs or a list of `Account Follower` entities. Feel free to explore this concept a little)
+- In **src/contexts/accounts/core/entities/account.ts**:
+  - Update `accountSchema` to include a `follower` attribute that holds information about all the followers of an account.
 
 ### Part 4: Testing our Parsers
 
 Although tests are really important in software, it's not always obvious what we should be testing. Should we test every piece of functionality in isolation? Should we only write tests against API endpoints? What about integration and end-to-end tests?
 
-In this workshop, we'll cover some of these questions by writing tests at various levels and then comparing them to each other to see how much value we're really getting out of each. Let's start by testing our low-level parser functions.
+In this workshop, we'll cover some of these questions by writing tests at various levels and then comparing them to each other to see how much value we're really getting out of each.
 
-- In **src/contexts/posts/core/aggregates/post.spec.ts**:
+Let's start by testing our low-level parser functions.
+
+- In **src/contexts/posts/core/entities/post.spec.ts**:
   - Complete the tests to ensure the `parsePost` function works as expected.
-- In **src/contexts/posts/core/aggregates/postComment.spec.ts**:
+- In **src/contexts/posts/core/entities/postComment.spec.ts**:
   - Write the tests to ensure the `parsePostComment` function works as expected.
-- In **src/contexts/accounts/core/aggregates/account.spec.ts**:
+- In **src/contexts/accounts/core/entities/account.spec.ts**:
   - Update the tests to ensure the `parseAccount` function works as expected
