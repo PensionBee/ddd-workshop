@@ -1,26 +1,22 @@
-import { Post } from "~/contexts/posts/core/aggregates/post";
+import { Post } from "~/contexts/posts/core/entities/post";
 
 // Types
 // -----
 
 type PostRepository = {
-  save: (post: Post) => Promise<void>;
-  getById: (id: string) => Promise<Post | null>;
+  // TODO: COMPLETE ME!
+  save: (post: any) => Promise<void>;
+  getById: (id: any) => Promise<any>;
 };
 
-// In-memory persistence
-// ---------------------
+// In-memory store
+// ---------------
 
-const posts: Post[] = [];
+const accounts: Post[] = [];
 
 // Repository
 // ----------
 
 export const postRepository: PostRepository = {
-  save: async (post) => {
-    // Complete me - I should be able to create and update posts
-  },
-  getById: async (id) => {
-    // Complete me
-  },
+  // TODO: COMPLETE ME!
 };

@@ -10,19 +10,12 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
     "prettier",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "no-unused-vars": [
-      "error",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
     "@typescript-eslint/no-explicit-any": 2
   }
 }

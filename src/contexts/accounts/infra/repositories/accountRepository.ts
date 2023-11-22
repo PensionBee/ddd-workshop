@@ -1,25 +1,24 @@
-import { Account } from "~/contexts/accounts/core/aggregates/account";
+import { Account } from "~/contexts/accounts/core/entities/account";
 
 // Types
 // -----
 
-type AccountEntities = Omit<Account, "followers">[];
-type AccountFollowersEntities = Array<
-  Account["followers"][0] & {
-    followingId: Account["id"];
-  }
->;
+type AccountRepository = {
+  save: (account: Account) => Promise<void>;
+  getById: (id: string) => Promise<Account | null>;
+  getByEmail: (email: string) => Promise<Account | null>;
+  getByUsername: (username: string) => Promise<Account | null>;
+};
 
-// In-memory persistence
-// ---------------------
+// In-memory store
+// ---------------
 
-const accounts: AccountEntities = [];
-const accountFollowers: AccountFollowersEntities = [];
+const accounts: Account[] = [];
 
 // Mappers
 // -------
 
-const mapToAggregate = (persistenceData: any): Account => {
+const maptoEntity = (persistenceData: any): Account => {
   // complete me
 };
 
@@ -30,17 +29,17 @@ const mapToPersistenceData = (account: Account): any => {
 // Repository
 // ----------
 
-export const accountRepository = {
-  save: async (account: Account): Promise<void> => {
+export const accountRepository: AccountRepository = {
+  save: async (account) => {
     // Complete me
   },
-  getById: async (id: string): Promise<Account> => {
+  getById: async (id) => {
     // Complete me
   },
-  getByEmail: async (email: string): Promise<Account> => {
+  getByEmail: async (email) => {
     // Complete me
   },
-  getByUsername: async (username: string): Promise<Account> => {
+  getByUsername: async (username) => {
     // Complete me
   },
 };
