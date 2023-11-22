@@ -62,9 +62,9 @@ Order
   ...
 ```
 
-Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's values as well as a collection of `Order Line` entities.
+Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's own values as well as a collection of `Order Line` entities.
 
-**IN THE WILD, YOU'LL LIKELY COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN DDD BOOKS/POSTS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' FOR CONVENIENCE.**
+**IN THE WILD, YOU'LL LIKELY COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN DDD BOOKS/POSTS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' SO WE DON'T HAVE TO EXPLICITLY DISTINGUISH BETWEEN AGGREGATES AND ENTITIES.**
 
 But why do we need this? Why can't we just model all our entities in isolation?
 
@@ -137,7 +137,7 @@ In practice, we can roll your own validation/transformation functions or use an 
 
 Feel free to check these out before or after completing 'The Practical Bit' below.
 
-- [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
+- [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects)
 - [Entities & values (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
 - [The One Question To Haunt Everyone: What is a DDD Aggregate? (25 minute video)](https://www.youtube.com/watch?v=zlFqjD2LKlE)
 
