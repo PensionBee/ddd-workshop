@@ -2,7 +2,7 @@
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
-*This is one approach to the EventStorming exercise - DO NOT treat the below diagrams as definitive solutions; whatever you came up with is likely more representative and accurate than the solutions here... However, we *do* need a source of truth to build upon in the rest of the workshop so we'll use the solutions below as that source of truth to maintain consistency throughout the following sections.
+**DO NOT** treat the following diagrams as definitive solutions to the EventStorming exercise! They are purposefully naive, which we'll use to faciliate discussions around entity design in the next section, especially around the `Account` entity associated with the `Follow Account` command (hint: maybe something more abstract like `Subscription` or `Follower` or `Follow` or `Connection` would be better?).
 
 ## EventStorming Timeline
 
