@@ -60,7 +60,7 @@ const post2: Post = {
 /**
  * PROBLEM 4: Change the types in the following code from 'any' to something more specific.
  *
- * Hint: Search for 'TS typing empty array'
+ * Hint: Search for 'TS typing empty arrays'
  * Hint: Search for 'TS promise types'
  */
 
@@ -89,12 +89,12 @@ const postByStringId = getPostById("1");
  *
  * Assume 'processAPIRequest' can handle any data as long as it's an object.
  *
- * Hint: Search for 'TS unknown objects'
+ * Hint: Search for 'TS Record types'
  */
 
 type UnknownData = any;
 
-function processAPIRequest(data: UnknownData): any {
+function processAPIRequest(data: UnknownData): string {
   return `API request processed with data: ${JSON.stringify(data)}`;
 }
 
@@ -128,7 +128,7 @@ const usersData = [
   { userId: "user-2", followers: [], blockedUsers: ["user-1"] },
 ];
 
-function followUser(followerId: any, userToFollowId: any) {
+function followUser(followerId: string, userToFollowId: string) {
   const toFollowUser = usersData.find((user) => user.userId === userToFollowId);
   if (toFollowUser?.blockedUsers.includes(followerId)) {
     return "FAIL/USER_BLOCKED";
@@ -159,9 +159,10 @@ followUser("user-1", "user-2"); // user with ID 'user-1' wants to follow user wi
  *
  * -----------------------------------------------------------------------------------------------------
  *
- * Write a utility type that takes any OBJECT type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
+ * Write a utility type that takes a type that conforms to Record<string, unknown> type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
  *
  * Hint: Search for 'TS generics'
+ * Hint: Search for 'TS generics extends'
  * Hint: Search for 'TS custom utility types with generics'
  */
 
