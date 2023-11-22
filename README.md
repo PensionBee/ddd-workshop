@@ -4,7 +4,9 @@
 
 ## Context
 
-### What is an Entity?
+### Values & Entities
+
+#### What is an Entity?
 
 In Domain-Driven Design, an **entity** is a representation of anything in a domain which can be defined by a unique identifier that remains constant throughout it's lifecycle. A simple entity can be made up of primitive **values** (attributes) some of which will change  throughout the entity's lifecycle. For example:
 
@@ -31,7 +33,9 @@ Order
   ...
 ```
 
-### What is an Aggregate?
+### Aggregates
+
+#### What is an Aggregate?
 
 An aggregate is essentially a group of closely related entities which **always** need to be consistent with each other and **always** need to be used, processed or persisted as a single unit.
 
@@ -73,18 +77,19 @@ Let's say we have several business rules focused on orders:
 - Spend more than £50 and get speedy delivery
 - Buy the same item 5 times and get 5% off
 - Spend more than £100 and get 10% off 'special' items
-- Discounts are capped at £50 off
+- Discounts are capped at £50
+- Customers with an 'Eco' status pay £1 extra per delivery, after discounts
 - etc.
 
-As the number of business rules increases, it becomes easier for our `order` entities and `Order line` entities to get into a consistent state, especially if we treat them all as independent units. To reduce the chances of this happening, we can process the `Order` as a single unit, i.e. everything within the aggregate's consistency boundary.
+As the number of business rules increases, it becomes easier for our `order` entities and `Order line` entities to get into an inconsistent state if we treat them all as independent units. To reduce the chances of this happening, we can process the `Order` as a single unit, i.e. everything within the aggregate's consistency boundary.
 
-### Single-Entity Aggregates
+#### Single-Entity Aggregates
 
-It's not unreasonable to have entities which only need to be used/modified/persisted on on their own. In that case, we simply have a single-entity aggregate which will be named after the entity itself, e.g. `Profile` entity -> `Profile` aggregate. In the future, we might find that we need to add more entities to this `Profile` aggregate or move the `Profile` entity to be part of another aggregate - it all depends on how the domain and business rules evolve over time.
+It's not unreasonable to have entities which only need to be used/modified/persisted on their own. In these cases, we essentially have a single-entity aggregate which we can name after the entity itself, e.g. `Profile` entity -> `Profile` aggregate. In the future, we might find that we need to add more entities to the `Profile` aggregate or move the `Profile` entity to be part of another aggregate - it all depends on how the domain and business rules evolve over time.
 
-### Abstract Aggregates
+#### Abstract Aggregates
 
-Aggregates all fall somewhere on an 'abstractness' scale. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` aggregate) whereas others are more difficult to reason about and/or visualise in the physical world. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` aggregates using a `Transaction` aggregate, which might look something like this:
+Aggregates (and entities) all fall somewhere on an 'abstractness' scale. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` aggregate) whereas others are more difficult. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` aggregates using a seaprate `Transaction` aggregate, which might look something like this:
 
 ```sh
 Transaction
@@ -96,11 +101,13 @@ Transaction
   ...
 ```
 
-A `Transaction` may be more difficult to imagine in the physical world than a `Customer`, but it's still a perfectly valid aggregate.
+A `Transaction` may be more difficult to imagine in the physical world than a `Customer` but it's still a perfectly valid aggregate.
 
-### What is Parsing?
+### Parsers
 
-In this context, parsing refers to turning a 'blob' of unvalidated data into a valid aggregate. As an example, let's say we have a `/register` API endpoint which creates an `Account` aggregate in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
+#### What is a Parser?
+
+In the context of DDD aggregates, a parser turns some unknown, unvalidated data into a valid aggregate. As an example, let's say we have a `/register` API endpoint which creates an `Account` aggregate in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
 
 ```json
 {
@@ -130,7 +137,7 @@ type Account = {
 }
 ```
 
-When creating a new `Account` aggregate, we need to validate the data used to create it, and make sure it's in the correct structure. In practice, this can be done by rolling your own validation/transformation functions or by using a parsing library (which is what we'll do in the 'The Practical Bit' below).
+When creating a new `Account` aggregate, we need to validate the data used to create it, and make sure it's in the correct structure (or transform it to the correct structure) - this is where parsers come in. In practice, this can be done by rolling your own validation/transformation functions or by using a parsing library (which is what we'll do in the 'The Practical Bit' below).
 
 ## Resources
 
@@ -138,6 +145,7 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 
 - [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)]([https://...](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects))
 - [Entities & values (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
+- [The One Question To Haunt Everyone: What is a DDD Aggregate? (25 minute video)](https://www.youtube.com/watch?v=zlFqjD2LKlE)
 
 ## Directory Structure Overview
 
