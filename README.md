@@ -23,11 +23,11 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ### Prerequisites
 
-1. [Typescript (foundations)](https://github.com/PensionBee/ddd-workshop/tree/typescript): This workshop is written in Typescript (TS) but is secondary ompared with the core DDD content, i.e. you don't have to be particularly competent working with TS. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across. ([SOLUTIONS](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions))
+1. [Typescript foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript) ([solutions](https://github.com/PensionBee/ddd-workshop/tree/typescript-solutions)): This workshop is written in Typescript (TS) but is secondary ompared with the core DDD content, i.e. you don't have to be particularly competent working with TS. However, it's useful to have a basic foundation in the language so you can make sense of any TS you do come across.
 
 ### Part 1: Foundations
 
-1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
+1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) ([example solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions))
 2. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
 3. [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
 4. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
