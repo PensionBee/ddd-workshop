@@ -10,20 +10,38 @@ type AccountRepository = {
   getByUsername: (username: string) => Promise<Account | null>;
 };
 
+/**
+ * Let's assume that LegacyAccount is an old version of our `Account` entity
+ * and that some persisted entities still match this version.
+ *
+ * Note: The only difference is that 'username' used to be called 'tag'
+ */
+type LegacyAccount = {
+  id: string;
+  email: string;
+  tag: string;
+  password: string;
+  followers: {
+    id: string;
+    followerId: string;
+    followedAt: string;
+  }[];
+};
+
 // In-memory store
 // ---------------
 
-const accounts: Account[] = [];
+const accounts: Account | LegacyAccount[] = [];
 
 // Mappers
 // -------
 
-const maptoEntity = (persistenceData: any): Account => {
-  // complete me
+const mapToEntity = (persistenceData: any): Account => {
+  // TODO: COMPLETE ME!
 };
 
 const mapToPersistenceData = (account: Account): any => {
-  // complete me
+  // TODO: COMPLETE ME!
 };
 
 // Repository
@@ -31,15 +49,15 @@ const mapToPersistenceData = (account: Account): any => {
 
 export const accountRepository: AccountRepository = {
   save: async (account) => {
-    // Complete me
+    // TODO: COMPLETE ME!
   },
   getById: async (id) => {
-    // Complete me
+    // TODO: COMPLETE ME!
   },
   getByEmail: async (email) => {
-    // Complete me
+    // TODO: COMPLETE ME!
   },
   getByUsername: async (username) => {
-    // Complete me
+    // TODO: COMPLETE ME!
   },
 };
