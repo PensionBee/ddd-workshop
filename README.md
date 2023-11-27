@@ -4,7 +4,7 @@
 
 ## Context
 
-In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used **Events**, **Commands** and **Entities** to design a solution for the problems our business is currently focused on.
+In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used events, commands and entities to design a solution for the problems our business is currently focused on.
 
 ![EventStorming Diagram](./images/event-storming-solution.png)
 
@@ -12,7 +12,7 @@ In this section, we're going translate this solution into code...
 
 ### Commands... With Payloads
 
-When we were **EventStorming**, we described **Commands** as an intent to change the state of our system. Let's complete the picture here and acknowledge that most **Commands** will also require a payload (a fancy word for data) to be meaningful. For example:
+When we were EventStorming, we described commands as an intent to change the state of our system. Let's complete the picture here and acknowledge that most commands will also require a payload (a fancy word for data) to be meaningful. For example:
 
 ```ts
 // An arbitrary representation of a command
@@ -28,14 +28,14 @@ type SettleInvoiceCommand = {
 
 ### Command Handlers
 
-A **Command Handler** is simply a function or method which processes a specific **Command**. **Command Handlers** primarily operate on a single **Entity**, resulting in an **Event** (or an error, or a no-op, which we'll see below).
+A command handler is simply a function or method which processes a specific command. command handlers primarily operate on a single entity, resulting in an event (or an error, or a no-op, which we'll see below).
 
-For this section of the workshop we'll define a **Command Handler** as a function which performs the following 4 steps:
+For this section of the workshop we'll define a command handler as a function which performs the following 4 steps:
 
-1. Validate the **Command Data**
-2. Use the **Command Data** to fetch any **Entities** from persistence required to make the change in our system - going forward, let's refer to everything fetched from the existing system as **State** for convenience
-3. Using the **Command Data** and **State**, derive an **Outcome** (an **Event**, an error or a no-op)
-4. If the **Outcome** is an **Event**, update the state of the system
+1. Validate the command data
+2. Use the command data to fetch any entities from persistence required to make the change in our system - going forward, let's refer to everything fetched from the existing system as state for convenience
+3. Using the command data and state, derive an outcome (an event, an error or a no-op)
+4. If the outcome is an event, update the state of the system
 
 As an alternative visualisation of this process, check out the following example function:
 
@@ -57,15 +57,15 @@ const handleSettleInvoice = (unvalidatedData: Record<string, unknown>) => {
 
 That's a lot to unpack but it will make more sense once you've gone through 'The Practical Bit' below.
 
-Before we get to that though, let's talk about **Derivers**...
+Before we get to that though, let's talk about derivers...
 
 ### Derivers
 
-Of the 4 steps highlighted above, the one that ***really*** matters is step 3 - the 'derive outcome' step. In this step, we want to enforce all the business rules that apply to a given **Command**, such as `Invoices cannot be paid with the first 5 days of being issued`. This is where a large part of the *essential complexity* in our code comes from (as opposed to *accidental complexity*) so it can be useful to centralise it as an independent function - a **Deriver** function.
+Of the 4 steps highlighted above, the one that ***really*** matters is step 3 - the 'derive outcome' step. In this step, we want to enforce all the business rules that apply to a given command, such as `Invoices cannot be paid with the first 5 days of being issued`. This is where a large part of the *essential complexity* in our code comes from (as opposed to *accidental complexity*) so it can be useful to centralise it as an independent function - a deriver function.
 
-In general, **Derivers** simply take **Data** and **State** as arguments and return an **Outcome**.
+In general, derivers simply take data and state as arguments and return an outcome.
 
-Before we move on, let's quickly touch on the format of an **Outcome**, which might help clarify this concept. To keep things consistent, let's assume our **Deriver** will return an **Outcome** matching the following structure:
+Before we move on, let's cover the format of an outcome, which might help clarify this concept. To keep things consistent, let's assume our deriver will return an outcome matching the following structure:
 
 ```ts
 type Outcome = {
@@ -74,7 +74,7 @@ type Outcome = {
 }
 ```
 
-An **Event Outcome** might look like this:
+An event outcome might look like this:
 
 ```ts
 type EventOutcome = {
@@ -86,7 +86,7 @@ type EventOutcome = {
 }
 ```
 
-An error **Outcome** might look like this:
+An error outcome might look like this:
 
 ```ts
 type ErrorOutcome = {
@@ -98,7 +98,7 @@ type ErrorOutcome = {
 }
 ```
 
-An no-op **Outcome** might look like this:
+An no-op outcome might look like this:
 
 ```ts
 type NoOpOutcome = {
@@ -129,31 +129,31 @@ Feel free to check these out now or after completing 'The Practical Bit' below.
 ### Part 2: Fetching State
 
 - In **src/contexts/posts/core/commands/createPost.handler**:
-  - Use the repositories we built previously to fetch the **State** we need to properly process this command.
+  - Use the repositories we built previously to fetch the state we need to properly process this command.
 
 ### Part 3: Deriving an Outcome
 
 - In **src/contexts/posts/core/commands/createPost.handler.ts**:
-  - Update the argument types in the `deriveOutcome` function to match the **Data** and **State** we need in order to derive an **Outcome**.
-  - Create and return the necessary **Outcome(s)** for this **Command**, using the format defined above. *Hint: Since the payload for an **Event Outcome** is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new **Entities** we create.*
+  - Update the argument types in the `deriveOutcome` function to match the data and state we need in order to derive an outcome.
+  - Create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create.*
 
 ### Part 4: Updating State
 
 - In **src/contexts/posts/core/commands/createPost.handler.ts**:
-  - Complete the switch statement in the `handleCreatePost` function, creating/modifying and persisting **Entities** via **Repositories** for any **Event Outcomes**.
-  - Return the **Outcome** from the handler so it can be used in our tests and by calling code in later sections of the workshop.
+  - Complete the switch statement in the `handleCreatePost` function, creating/modifying and persisting entities via repositories for any event outcomes.
+  - Return the outcome from the handler so it can be used in our tests and by calling code in later sections of the workshop.
 
-### Part 5: Testing **Command Handlers**
+### Part 5: Testing command handlers
 
 In general, writing great tests is a challenge for many developers and teams. However, we've just made it a lot easier by creating a standalone function, `handleCreatePost`, which independent of any API concerns and fully encapsulates a single, logical, scoped change within our system, including all the business rules we should be testing.
 
 - In **src/contexts/posts/core/commands/createPost.handler.spec.ts**:
   - Write tests using the 'Arrange - Act - Assert' testing approach:
-    - Arrange: Set up the initial **State** (if any) required for the test using the available **Repositories**.
+    - Arrange: Set up the initial state (if any) required for the test using the available repositories.
     - Act: Trigger `handleCreatePost` with some relevant data.
     - Assert:
-      - Check that the **Command Handler** outcome is as expected.
-      - Check that **Entities** were correctly persisted or not persisted, depending on the test.
+      - Check that the command handler outcome is as expected.
+      - Check that entities were correctly persisted or not persisted, depending on the test.
 
 That's it! Theoretically, at this point, we could get rid of our `parsePost` tests and `postsRepository` tests and still have high confidence that the core functionality of our system works.
 
@@ -165,21 +165,21 @@ Actually, let's be empowered and go ahead and do it since we hardly ever get to 
 
 ### Part 6: Repeat
 
-This can be a lot to take in so let's go through the process again, this time with the `Create Post Comment` **Command**. We're going to revisit these a few more times in later sections of the workshop so it's worth becoming familiar with how they work.
+This can be a lot to take in so let's go through the process again, this time with the `Create Post Comment` command. We're going to revisit these a few more times in later sections of the workshop so it's worth becoming familiar with how they work.
 
 - In **src/contexts/posts/core/commands/CommentOnPost.handler.ts**:
-  - Repeat steps 1 to 4 above, this time starting with step 3.
+  - Repeat steps 1 to 4, this time starting with step 3.
 - In **src/contexts/posts/core/commands/CommentOnPost.handler.spec.ts**:
-  - Repeat step 5 above.
+  - Repeat step 5.
 
 ### Part 7: Repeat w/ TDD
 
-We've saved the best for last - incorporating Test-Driven Development (TDD) into our workflow. Let's flip the process on it's head and write our tests before we write the code, this time for the `Follow Account` command.
+Let's incorporate Test-Driven Development (TDD) into our workflow, by flipping the process on it's head and writing our tests before we write the code. This time we'll focus on the `Follow Account` command.
 
 - In **src/contexts/accounts/core/commands/followAccount.handler.spec.ts**:
-  - Repeat step 5. (You'll get a bunch of errors and test failures at this point)
+  - Repeat step 5. (Your tests should all be failing because we haven't written the code yet)
 - In **src/contexts/accounts/core/commands/followAccount.handler.ts**:
-  - Repeat steps 1 to 4 above.
+  - Repeat steps 1 to 4.
 
 ## Questions Worth Pondering
 
