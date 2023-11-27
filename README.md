@@ -1,110 +1,186 @@
-# Repositories & Persistence
+# Command Handlers & Derivers
 
-[Back to the training overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
+[Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
 ## Context
 
-### What is a Repository?
+In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used **Events**, **Commands** and **Entities** to design a solution for the problems our business is currently focused on.
 
-A repository is a piece of 'facade' code with a couple of responsibilities:
+![EventStorming Diagram](./images/event-storming-solution.png)
 
-1. Provide a simple interface for fetching and saving entities (hiding the complexities of persistence technology access from calling code)
-2. *(optional)* Verify entities are valid before writing to persistence or after reconstructing from persistence
-3. *(if necessary)* Map persistence data to/from domain entities
+In this section, we're going translate this solution into code...
 
-Let's break those down...
+### Commands... With Payloads
 
-#### Responsibility 1: Provide a simple interface for fetching and saving entities
-
-Whatever domain we're working in, our application core always needs a way to fetch and persist entities. We can do this via database driver with a raw query, or via a layer of abstraction such as an ORM or Query Builder. However, with these methods, persistence specific code tends to leak into the core of our application. This isn't always a problem but over time our code can become increasingly coupled to the persistence technology it's using, making it difficult to refactor and easy to introduce bugs.
-
-A repository prevents this leakage by capturing persistence access code in one location and providing a simple interface that our core application code can use to fetch existing entities or save new/modified entities.
-
-In it's simplest form, a repository might look like this:
+When we were **EventStorming**, we described **Commands** as an intent to change the state of our system. Let's complete the picture here and acknowledge that most **Commands** will also require a payload (a fancy word for data) to be meaningful. For example:
 
 ```ts
-type UserRepository = {
-  save: (user: User): void,
-  getById: (id: string): User,
+// An arbitrary representation of a command
+
+type SettleInvoiceCommand = {
+  type: "SETTLE_INVOICE",
+  payload: {
+    invoiceId: string,
+    paymentDetails: string
+  }
 }
 ```
 
-Or
+### Command Handlers
+
+A **Command Handler** is simply a function or method which processes a specific **Command**. **Command Handlers** primarily operate on a single **Entity**, resulting in an **Event** (or an error, or a no-op, which we'll see below).
+
+For this section of the workshop we'll define a **Command Handler** as a function which performs the following 4 steps:
+
+1. Validate the **Command Data**
+2. Use the **Command Data** to fetch any **Entities** from persistence required to make the change in our system - going forward, let's refer to everything fetched from the existing system as **State** for convenience
+3. Using the **Command Data** and **State**, derive an **Outcome** (an **Event**, an error or a no-op)
+4. If the **Outcome** is an **Event**, update the state of the system
+
+As an alternative visualisation of this process, check out the following example function:
 
 ```ts
-type UserRepository = {
-  create: (user: User): void,
-  update: (user: User): void,
-  getById: (id: string): User,
-  getByEmail: (email: string): User,
+const handleSettleInvoice = (unvalidatedData: Record<string, unknown>) => {
+  const data = ... // Do some validation on unvalidatedData
+
+  const state = ... // Fetch necessary entities via repositories. In this case we'll likely fetch the specific 'Invoice' entity but we might need others too
+
+  const outcome = ... // Check some business rules and generate an event outcome, error outcome or no-op outcome
+
+  // Update state on a successful/event outcome
+  switch (outcome.type) {
+    case 'INVOICE_SETTLED':
+      // Update and persist our Invoice entity
+  }
 }
 ```
 
-In many cases, this will likely be sufficient but there may be a need for additional repository methods depending on the domain and business requirements.
+That's a lot to unpack but it will make more sense once you've gone through 'The Practical Bit' below.
 
-#### Responsibility 2: *(optional)* Verify entities are valid before writing to persistence or after reconstructing from persistence
+Before we get to that though, let's talk about **Derivers**...
 
-One of the core ideas in DDD is that entities should **always** be in a valid state. One way to achieve this is to always check entities are valid in the repository before persisting them or after reconstructing them from persistence. We can do this by utilising **parser** functions, like the ones we created in the previous section of the workshop.
+### Derivers
 
-#### Responsibility 3: *(if necessary)* Map persistence data to/from domain entities
+Of the 4 steps highlighted above, the one that ***really*** matters is step 3 - the 'derive outcome' step. In this step, we want to enforce all the business rules that apply to a given **Command**, such as `Invoices cannot be paid with the first 5 days of being issued`. This is where a large part of the *essential complexity* in our code comes from (as opposed to *accidental complexity*) so it can be useful to centralise it as an independent function - a **Deriver** function.
 
-Persistence data often doesn't perfectly match our domain models for various reasons. Let's look at a few examples where this might happen:
+In general, **Derivers** simply take **Data** and **State** as arguments and return an **Outcome**.
 
-- Imagine we have an `Account` entity with 3 possible states: `Unverified`, `Verified` and `Deactivated`. However, our database contains some old accounts with the following legacy states: `Unchecked`, `Checked` and `Closed`. In an ideal world, we'd run a data migration to update the legacy states to the current states. However, there are cases where migrating legacy data is either impossible, too risky or too time consuming given project constraints. What we need in these situations is an approach to map data between our persistence technology and our domain entities at runtime.
-- Imagine we have an `Order` entity comprising an `Order` entity (the entity root) and a collection of `Order Line` entities. If we were using a NoSQL database to store this entity, we'd likely be able to serialize/jsonify the entity and store it directly without further processing. But what if we're using a SQL database? Chances are we're going to have to store our `Order` entity in an `orders` table and all of the `Order Line` entities in an `order_lines` table. When we need to persist an `Order` entity, we need to map it to data that matches the underlying database structure before persisting it. Likewise, when fetching/reconstructing an `Order` entity from the database, we need to map the underlying database table data back to the structure of an `Order` entity.
-- Imagine we were **really bad** at DDD when we designed our first `Account` entity, so much so that it contained 20 entities and hundreds of attributes, which we stored in a NoSQL database. After a couple of years working with this nightmare, we decide to split it into 10 different entities which is a lot easier to work with. However, we don't have the time at the moment to migrate all the data from the `accounts` collection in our database into 10 different collections. What do we do? In this case, we could design our 10 entities, model them in our code and then build repositories for each one that all map different parts of the data from the `accounts` collection to the relevant entity. Likewise, when persisting each new entity, it could write the relevant data to the specific parts of the `accounts` collection.
+Before we move on, let's quickly touch on the format of an **Outcome**, which might help clarify this concept. To keep things consistent, let's assume our **Deriver** will return an **Outcome** matching the following structure:
 
-Okay, but how and where do we actually do this? One practical solution to this problem is to utilise two **mappers** in each of our repositories. The first mapper converts an entity into data which can be inserted into whatever persistence technology we're using, in whatever shape it expects. The second mapper takes data from whatever persistence technology we're using and reconstructs a valid entity from it.
+```ts
+type Outcome = {
+  type: Uppercase<string> | `ERROR/${Uppercase<string>}` | `NO_OP/${Uppercase<string>}`,
+  payload: Record<string, unknown>
+}
+```
+
+An **Event Outcome** might look like this:
+
+```ts
+type EventOutcome = {
+  type: 'INVOICE_SETTLED',
+  payload: {
+    invoiceId: string,
+    invoiceStatus: 'SETTLED'
+  } // Event Outcome payloads contain all relevant information about the state change in our system
+}
+```
+
+An error **Outcome** might look like this:
+
+```ts
+type ErrorOutcome = {
+  type: 'ERROR/CANNOT_SETTLE_INVOICE',
+  payload: {
+    invoiceId: string,
+    reason: 'Invoices cannot be paid with the first 5 days of being issued'
+  } // Error Outcome payloads contain relevant information related to the error
+}
+```
+
+An no-op **Outcome** might look like this:
+
+```ts
+type NoOpOutcome = {
+  type: 'NO_OP/INVOICE_ALREADY_PAID',
+  payload: {
+    invoiceId: string,
+  } // No-Op Outcome payloads contain basic information related to the no-op
+}
+```
 
 ## Resources
 
-[Martin Fowler: Repository (1 minute read)](https://martinfowler.com/eaaCatalog/repository.html)
+Feel free to check these out now or after completing 'The Practical Bit' below.
+
+- [Functional Domain Driven Design: Simplified (15 minute read)](https://antman-does-software.com/functional-domain-driven-design-simplified)
+- [Functional Event Sourcing Decider (15 minute read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) (this one get's pretty gnarly in the second half)
 
 ## The Practical Bit
 
-*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
+*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the following section.*
 
-In the following tasks, we're going to store our entities in memory for two reasons:
+### Part 1: Validating Data
 
-- It keeps us away from specific persistence technologies at this point, allowing us to focus more on the DDD principles.
-- It highlights a nice benefit of using the repository pattern, namely that it allows us to quickly prototype and iterate on features in development, without having to touch any persistence infrastructure. At some point in the future, when our feature is ready to ship, we can introduce real persistence infrastructure and the only code we'll need to change is the code in our repository methods/mappers.
+- In **src/contexts/posts/core/commands/createPost.handler**:
+  - Complete the zod schema assigned to the `dataSchema` variable - think about what data is necessary for posting a comment. *Hint: it will likely be similar to the `postSchema` we defined previously.*
+  - In the `handleCreatePost` function, validate the incoming data using the schema and assign the result to the `data` variable.
 
-### Part 1: Complete the Post Repository
+### Part 2: Fetching State
 
-Let's focus on the first repository responsibility:
+- In **src/contexts/posts/core/commands/createPost.handler**:
+  - Use the repositories we built previously to fetch the **State** we need to properly process this command.
 
-> Provide a simple interface for fetching and saving entities
+### Part 3: Deriving an Outcome
 
-- In **contexts/posts/infra/repositories/postRepository.ts**:
-  - Complete the `postRepository` so that other code can save new/updated `Post` entities and fetch existing `Post` entities by their ID.
+- In **src/contexts/posts/core/commands/createPost.handler.ts**:
+  - Update the argument types in the `deriveOutcome` function to match the **Data** and **State** we need in order to derive an **Outcome**.
+  - Create and return the necessary **Outcome(s)** for this **Command**, using the format defined above. *Hint: Since the payload for an **Event Outcome** is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new **Entities** we create.*
 
-### Part 2: Create a Post Comment Repository
+### Part 4: Updating State
 
-Let's add the second repository responsibility on top of the first:
+- In **src/contexts/posts/core/commands/createPost.handler.ts**:
+  - Complete the switch statement in the `handleCreatePost` function, creating/modifying and persisting **Entities** via **Repositories** for any **Event Outcomes**.
+  - Return the **Outcome** from the handler so it can be used in our tests and by calling code in later sections of the workshop.
 
-> *(optional)* Verify entities are valid before writing to persistence or after reconstructing from persistence
+### Part 5: Testing **Command Handlers**
 
-- In **contexts/posts/infra/repositories/postCommentRepository.ts**:
-  - Create a `postCommentRepository` so that other code can save new/updated `PostComment` entities and fetch existing `PostComment` entities by their ID.
-  - Call `parsePostComment` in the relevant parts of the repository, ensuring all `PostComment` entities passing through our repository are in a valid state.
+In general, writing great tests is a challenge for many developers and teams. However, we've just made it a lot easier by creating a standalone function, `handleCreatePost`, which independent of any API concerns and fully encapsulates a single, logical, scoped change within our system, including all the business rules we should be testing.
 
-### Part 3: Complete the Account Repository
+- In **src/contexts/posts/core/commands/createPost.handler.spec.ts**:
+  - Write tests using the 'Arrange - Act - Assert' testing approach:
+    - Arrange: Set up the initial **State** (if any) required for the test using the available **Repositories**.
+    - Act: Trigger `handleCreatePost` with some relevant data.
+    - Assert:
+      - Check that the **Command Handler** outcome is as expected.
+      - Check that **Entities** were correctly persisted or not persisted, depending on the test.
 
-Let's add the third repository responsibility on top of the other two:
+That's it! Theoretically, at this point, we could get rid of our `parsePost` tests and `postsRepository` tests and still have high confidence that the core functionality of our system works.
 
-> *(if necessary)* Map persistence data to/from domain entities
+Actually, let's be empowered and go ahead and do it since we hardly ever get to delete tests in real projects...
 
-- In **contexts/accounts/infra/repositories/accountRepository.ts**:
-  - Complete the `accountRepository` so that other code can save new/updated `Account` entities and fetch existing `Account` entities by their ID.
-  - Call `parseAccount` in the relevant parts of the repository, ensuring all `Account` entities passing through our repository are in a valid state (hint: calling `parseAccount` in the mappers *may* make your repository methods cleaner.
+- Delete **src/contexts/accounts/core/entities/account.spec.ts** and **src/contexts/posts/core/entities/post.spec.ts**
 
-### Part 4: Write Tests
+*Caveat: There are (probably a lot of) times when you want the confidence you get from having these extra, low-level tests. The thing to take away from this is that some tests ARE more valuable than others and focusing on the high value ones is a better use of your time than the low value ones.*
 
-- For each repository, write some tests to make sure the implementation is working as expected. You have complete freedom here to write whatever tests you see fit but remember to try and focus on input/output.
+### Part 6: Repeat
+
+This can be a lot to take in so let's go through the process again, this time with the `Create Post Comment` **Command**. We're going to revisit these a few more times in later sections of the workshop so it's worth becoming familiar with how they work.
+
+- In **src/contexts/posts/core/commands/CommentOnPost.handler.ts**:
+  - Repeat steps 1 to 4 above, this time starting with step 3.
+- In **src/contexts/posts/core/commands/CommentOnPost.handler.spec.ts**:
+  - Repeat step 5 above.
+
+### Part 7: Repeat w/ TDD
+
+We've saved the best for last - incorporating Test-Driven Development (TDD) into our workflow. Let's flip the process on it's head and write our tests before we write the code, this time for the `Follow Account` command.
+
+- In **src/contexts/accounts/core/commands/followAccount.handler.spec.ts**:
+  - Repeat step 5. (You'll get a bunch of errors and test failures at this point)
+- In **src/contexts/accounts/core/commands/followAccount.handler.ts**:
+  - Repeat steps 1 to 4 above.
 
 ## Questions Worth Pondering
 
-- What are the trade-offs of using the repository pattern?
-- Is using the repository pattern worth the trade-offs?
-- How do SQL databases compare with NoSQL databases when dealing with nested entities?****
-- Could the repository pattern be used in testing somehow to write tests independently of a real database? What if we had a 'real' repository and a 'fake' (in-memory) repository?
+- ?
