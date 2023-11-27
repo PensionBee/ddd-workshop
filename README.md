@@ -71,11 +71,18 @@ In the following tasks, we're going to store our entities in memory for two reas
 
 ### Part 1: Complete the Post Repository
 
+Let's focus on the first repository responsibility:
+
+> Provide a simple interface for fetching and saving entities
+
 - In **contexts/posts/infra/repositories/postRepository.ts**:
   - Complete the `postRepository` so that other code can save new/updated `Post` entities and fetch existing `Post` entities by their ID.
-  - Call `parsePost` in the relevant parts of the repository, ensuring all `Post` entities passing through our repository are in a valid state.
 
 ### Part 2: Create a Post Comment Repository
+
+Let's add the second repository responsibility on top of the first:
+
+> *(optional)* Verify entities are valid before writing to persistence or after reconstructing from persistence
 
 - In **contexts/posts/infra/repositories/postCommentRepository.ts**:
   - Create a `postCommentRepository` so that other code can save new/updated `PostComment` entities and fetch existing `PostComment` entities by their ID.
@@ -83,15 +90,19 @@ In the following tasks, we're going to store our entities in memory for two reas
 
 ### Part 3: Complete the Account Repository
 
+Let's add the third repository responsibility on top of the other two:
+
+> *(if necessary)* Map persistence data to/from domain entities
+
 - In **contexts/accounts/infra/repositories/accountRepository.ts**:
   - Complete the `accountRepository` so that other code can save new/updated `Account` entities and fetch existing `Account` entities by their ID.
-  - Call `parseAccount` in the relevant parts of the repository, ensuring all `Account` entities passing through our repository are in a valid state.
+  - Call `parseAccount` in the relevant parts of the repository, ensuring all `Account` entities passing through our repository are in a valid state (hint: calling `parseAccount` in the mappers *may* make your repository methods cleaner.
 
 ### Part 4: Write Tests
 
 - For each repository, write some tests to make sure the implementation is working as expected. You have complete freedom here to write whatever tests you see fit but remember to try and focus on input/output.
 
-## Questions Worth Pondering...
+## Questions Worth Pondering
 
 - What are the trade-offs of using the repository pattern?
 - Is using the repository pattern worth the trade-offs?

@@ -1,6 +1,12 @@
-// Types
-// -----
+// In-memory data store
+// --------------------
 
+/**
+ * Represents a database schema. The in-memory data store
+ * below only accepts account entity data in this format,
+ * which requires us to map between the two formats in our
+ * repository.
+ */
 type PersistedAccount = {
   id__c: string;
   email__c: string;
@@ -12,9 +18,6 @@ type PersistedAccount = {
     followed_at__c: string;
   }[];
 };
-
-// In-memory store
-// ---------------
 
 const accounts: PersistedAccount[] = [];
 
@@ -33,16 +36,16 @@ const mapToPersistenceData = (account: any): any => {
 // ----------
 
 export const accountRepository = {
-  save: async (account) => {
+  save: async (account: any) => {
     // TODO: COMPLETE ME!
   },
-  getById: async (id) => {
+  getById: async (id: any) => {
     // TODO: COMPLETE ME!
   },
-  getByEmail: async (email) => {
+  getByEmail: async (email: any) => {
     // TODO: COMPLETE ME!
   },
-  getByUsername: async (username) => {
+  getByUsername: async (username: any) => {
     // TODO: COMPLETE ME!
   },
 };
