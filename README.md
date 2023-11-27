@@ -195,3 +195,7 @@ Let's start by testing our low-level parser functions.
   - Write the tests to ensure the `parsePostComment` function works as expected.
 - In **src/contexts/accounts/core/entities/account.spec.ts**:
   - Update the tests to ensure the `parseAccount` function works as expected
+
+## Questions Worth Pondering
+
+- ?
