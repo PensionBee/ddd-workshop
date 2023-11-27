@@ -95,5 +95,5 @@ In the following tasks, we're going to store our entities in memory for two reas
 
 - What are the trade-offs of using the repository pattern?
 - Is using the repository pattern worth the trade-offs?
-- How do SQL databases compare with NoSQL databases when dealing with nested entities?
+- How do SQL databases compare with NoSQL databases when dealing with nested entities?****
 - Could the repository pattern be used in testing somehow to write tests independently of a real database? What if we had a 'real' repository and a 'fake' (in-memory) repository?

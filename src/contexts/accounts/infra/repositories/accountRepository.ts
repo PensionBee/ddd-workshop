@@ -1,53 +1,38 @@
-import { Account } from "~/contexts/accounts/core/entities/account";
-
 // Types
 // -----
 
-type AccountRepository = {
-  save: (account: Account) => Promise<void>;
-  getById: (id: string) => Promise<Account | null>;
-  getByEmail: (email: string) => Promise<Account | null>;
-  getByUsername: (username: string) => Promise<Account | null>;
-};
-
-/**
- * Let's assume that LegacyAccount is an old version of our `Account` entity
- * and that some persisted entities still match this version.
- *
- * Note: The only difference is that 'username' used to be called 'tag'
- */
-type LegacyAccount = {
-  id: string;
-  email: string;
-  tag: string;
-  password: string;
-  followers: {
-    id: string;
-    followerId: string;
-    followedAt: string;
+type PersistedAccount = {
+  id__c: string;
+  email__c: string;
+  username__c: string;
+  password__c: string;
+  followers__c: {
+    id__c: string;
+    follower_id__c: string;
+    followed_at__c: string;
   }[];
 };
 
 // In-memory store
 // ---------------
 
-const accounts: Account | LegacyAccount[] = [];
+const accounts: PersistedAccount[] = [];
 
 // Mappers
 // -------
 
-const mapToEntity = (persistenceData: any): Account => {
+const mapToEntity = (persistenceData: any): any => {
   // TODO: COMPLETE ME!
 };
 
-const mapToPersistenceData = (account: Account): any => {
+const mapToPersistenceData = (account: any): any => {
   // TODO: COMPLETE ME!
 };
 
 // Repository
 // ----------
 
-export const accountRepository: AccountRepository = {
+export const accountRepository = {
   save: async (account) => {
     // TODO: COMPLETE ME!
   },

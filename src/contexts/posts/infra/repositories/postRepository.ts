@@ -1,22 +1,12 @@
 import { Post } from "~/contexts/posts/core/entities/post";
 
-// Types
-// -----
+const posts: Record<Post["id"], Post> = {};
 
-type PostRepository = {
-  // TODO: COMPLETE ME!
-  save: (post: any) => Promise<void>;
-  getById: (id: any) => Promise<any>;
-};
-
-// In-memory store
-// ---------------
-
-const accounts: Post[] = [];
-
-// Repository
-// ----------
-
-export const postRepository: PostRepository = {
-  // TODO: COMPLETE ME!
+export const postRepository = {
+  save: () => {
+    // TODO: COMPLETE ME!
+  },
+  getById: () => {
+    // TODO: COMPLETE ME!
+  },
 };
