@@ -4,13 +4,13 @@
 
 ## Context
 
-In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used events, commands and entities to design a solution for the problems our business is currently focused on.
+In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used events, commands and entities to design a solution for the problems our business is currently focused on...
 
-![EventStorming Diagram](./images/event-storming-solution.png)
+![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
 
-In this section, we're going translate this solution into code...
+In this section, we're going translate our command and event blocks into code...
 
-### Commands... With Payloads
+### Command Payloads
 
 When we were EventStorming, we described commands as an intent to change the state of our system. Let's complete the picture here and acknowledge that most commands will also require a payload (a fancy word for data) to be meaningful. For example:
 
@@ -28,16 +28,22 @@ type SettleInvoiceCommand = {
 
 ### Command Handlers
 
-A command handler is simply a function or method which processes a specific command. command handlers primarily operate on a single entity, resulting in an event (or an error, or a no-op, which we'll see below).
+A command handler is simply a function or method which carries out the work associated with a command. command handlers primarily operate on a single entity, resulting in an event (if everything goes according to plan).
 
-For this section of the workshop we'll define a command handler as a function which performs the following 4 steps:
+For this section of the workshop we'll define a command handler as a function which carries out the following 4 steps:
 
 1. Validate the command data
-2. Use the command data to fetch any entities from persistence required to make the change in our system - going forward, let's refer to everything fetched from the existing system as state for convenience
-3. Using the command data and state, derive an outcome (an event, an error or a no-op)
-4. If the outcome is an event, update the state of the system
+2. Use the command data to fetch entities required to make the change from persistence (going forward, let's refer to everything fetched via a repository as 'state')
+3. Using the command data and state, derive an 'outcome'
+4. Depending on the outcome, update the state of the system
 
-As an alternative visualisation of this process, check out the following example function:
+Note that an outcome can be one of 3 things:
+
+- An event (processing the command was successful - these are the orange blocks on our EventStorming diagram)
+- An error (processing the command was unsuccessful)
+- A No-Op (processing the command was ??? - nothing needs to change about our system)
+
+As an alternative visualisation of the above 4 step process, let's check out the following pseudocode:
 
 ```ts
 const handleSettleInvoice = (unvalidatedData: Record<string, unknown>) => {
