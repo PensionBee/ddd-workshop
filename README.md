@@ -8,70 +8,110 @@ In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstor
 
 ![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
 
-In this section, we're going translate our command and event blocks into code...
+We've already modelled our entities as code in the [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers) section and built a mechanism for fetching and persisting entities in the [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers) section. In this section, we're going turn our command and event blocks into code...
 
 ### Command Payloads
 
-When we were EventStorming, we described commands as an intent to change the state of our system. Let's complete the picture here and acknowledge that most commands will also require a payload (a fancy word for data) to be meaningful. For example:
+We've already identifies commands as an intent to change the state of our system but let's complete the picture by acknowledging that most commands are only meaningful when there's some relevant data attached (often referred to as a 'payload'). For example:
 
 ```ts
-// An arbitrary representation of a command
-
-type SettleInvoiceCommand = {
-  type: "SETTLE_INVOICE",
+type PayInvoiceCommand = {
+  type: "PAY_INVOICE",
   payload: {
     invoiceId: string,
-    paymentDetails: string
+    paymentCurrency: "GBP" | "EUR" | "USD",
+    amount: string,
+    paymentDetails: {
+      accountNumber: number,
+      sortCode: number,
+    }
   }
 }
 ```
 
+Without the payload, this command would be meaningless to our system.
+
 ### Command Handlers
 
-A command handler is simply a function or method which carries out the work associated with a command. command handlers primarily operate on a single entity, resulting in an event (if everything goes according to plan).
+A command handler is a function (or class if you're working in OOP-land) which processes a specific command. There are many ways we could generalise a command handler but for this workshop, let's say that all command handlers must do the following:
 
-For this section of the workshop we'll define a command handler as a function which carries out the following 4 steps:
+1. Validate the incoming command data
+2. Use the command data to fetch relevant system 'state', i.e. existing entities and data necessary to process the command
+3. Use the command data and fetched state to 'derive an outcome'
+4. For 'success outcomes', update the state of the system
 
-1. Validate the command data
-2. Use the command data to fetch entities required to make the change from persistence (going forward, let's refer to everything fetched via a repository as 'state')
-3. Using the command data and state, derive an 'outcome'
-4. Depending on the outcome, update the state of the system
+Note that an 'outcome' can be one of 3 categories:
 
-Note that an outcome can be one of 3 things:
+- An event (captures a successful change in the system)
+- An error (a business error - not a technical error)
+- A no-op (stands for "no operation" - nothing about the system needs to change)
 
-- An event (processing the command was successful - these are the orange blocks on our EventStorming diagram)
-- An error (processing the command was unsuccessful)
-- A No-Op (processing the command was ??? - nothing needs to change about our system)
+You could also argue that all outcomes are just events (just not always successful ones) that fall into the following categories:
 
-As an alternative visualisation of the above 4 step process, let's check out the following pseudocode:
+- A success event
+- An error event
+- A no-op event
+
+But that's getting into details and potential conflict territory prematurely...
+
+Let's take a step back and visualise this four step process with an example:
 
 ```ts
-const handleSettleInvoice = (unvalidatedData: Record<string, unknown>) => {
-  const data = ... // Do some validation on unvalidatedData
+// A zod schema describing the expected command data
+const commandDataSchema = z.object({
+  ...
+})
 
-  const state = ... // Fetch necessary entities via repositories. In this case we'll likely fetch the specific 'Invoice' entity but we might need others too
+// A command handler which processes the 'pay invoice' command
+const handlePayInvoice = async (commandData: Record<string, unknown>) => {
+  // STEP 1: Validate the incoming command data
+  const data = commandDataSchema.parse(commandData)
 
-  const outcome = ... // Check some business rules and generate an event outcome, error outcome or no-op outcome
-
-  // Update state on a successful/event outcome
-  switch (outcome.type) {
-    case 'INVOICE_SETTLED':
-      // Update and persist our Invoice entity
+  // STEP 2: Use the command data to fetch relevant system 'state', i.e. existing entities and data necessary to process the command
+  const state = {
+    invoice: await invoiceRepository.findById(data.invoiceId),
   }
+
+  // STEP 3: Use the command data and fetched state to 'derive an outcome'
+  const outcome = deriveOutcome(data, state) // 'deriveOutcome' captures all the business logic in one place
+
+  // STEP 4: For 'success outcomes', update the state of the system
+  switch (outcome.type) {
+    case 'INVOICE_PAID': // A success outcome: The full invoice balance was paid off
+      await basketRepository.save({
+        ...state.invoice, // The existing invoice
+        status: outcome.payload.status, // Probably something like "Paid"
+        remainingBalance: outcome.payload.remainingBalance, // Likely zero
+      })
+      break
+    case 'INVOICE_PARTIALLY_PAID': // A success outcome: Some of the outstanding invoice balance was paid off
+      await basketRepository.save({
+        ...state.invoice, // The existing invoice
+        status: outcome.payload.status, // Probably something like "Partially Paid"
+        remainingBalance: outcome.payload.remainingBalance, // Likely non-zero
+      })
+      break
+  }
+
+  return outcome
 }
 ```
 
 That's a lot to unpack but it will make more sense once you've gone through 'The Practical Bit' below.
 
-Before we get to that though, let's talk about derivers...
+Before we get to that though, let's dig into derivers a little more...
 
 ### Derivers
 
-Of the 4 steps highlighted above, the one that ***really*** matters is step 3 - the 'derive outcome' step. In this step, we want to enforce all the business rules that apply to a given command, such as `Invoices cannot be paid with the first 5 days of being issued`. This is where a large part of the *essential complexity* in our code comes from (as opposed to *accidental complexity*) so it can be useful to centralise it as an independent function - a deriver function.
+In step 3 above, `Use the command data and state to 'derive an outcome'`, we want to enforce all the business rules relevant for the specific command being handled, such as `Invoices cannot be paid within a 'cool off' period (the first 48 hours after being issued)`.
 
-In general, derivers simply take data and state as arguments and return an outcome.
+This is where a large part of the *essential complexity* in our code comes from, i.e. the stuff we can't easily simplify or improve (as opposed to *accidental complexity*, which is essentially technical debt), so it can be useful to extract it to an independent function and let it grow organically over time as business rules change.
 
-Before we move on, let's cover the format of an outcome, which might help clarify this concept. To keep things consistent, let's assume our deriver will return an outcome matching the following structure:
+As we seen above, derivers generally take data and state as arguments and return an outcome (an event, error or no-op). We can visualise this process like so:
+
+![Deriver](./images/deriver.png)
+
+Let's look at one approach to modelling / structuring outcomes generally:
 
 ```ts
 type Outcome = {
@@ -80,51 +120,109 @@ type Outcome = {
 }
 ```
 
-An event outcome might look like this:
+Here's are two examples of event outcomes:
 
 ```ts
-type EventOutcome = {
-  type: 'INVOICE_SETTLED',
+type InvoicePaidEvent = {
+  type: "INVOICE_PAID",
   payload: {
     invoiceId: string,
-    invoiceStatus: 'SETTLED'
-  } // Event Outcome payloads contain all relevant information about the state change in our system
+    remainingBalanceUSD: 0,
+    status: "Pai"'
+  } // Important data related to the event is captured in the payload
+}
+```
+
+```ts
+type InvoicePartiallyPaidEvent = {
+  type: "INVOICE_PARTIALLY_PAID",
+  payload: {
+    invoiceId: string,
+    remainingBalanceUSD: 34,
+    status: "Partially Pai"'
+  }  // Important data related to the event is captured in the payload
 }
 ```
 
 An error outcome might look like this:
 
 ```ts
-type ErrorOutcome = {
-  type: 'ERROR/CANNOT_SETTLE_INVOICE',
+type InvoiceInCoolOffPeriodError = {
+  type: "ERROR/INVOICE_IN_COOL_OFF_PERIOD",
   payload: {
     invoiceId: string,
-    reason: 'Invoices cannot be paid with the first 5 days of being issued'
-  } // Error Outcome payloads contain relevant information related to the error
+    daysRemaining: number
+  }  // Important data related to the error is captured in the payload
 }
 ```
 
 An no-op outcome might look like this:
 
 ```ts
-type NoOpOutcome = {
-  type: 'NO_OP/INVOICE_ALREADY_PAID',
+type InvoiceAlreadyPaidNoOp = {
+  type: "NO_OP/INVOICE_ALREADY_PAID",
   payload: {
     invoiceId: string,
-  } // No-Op Outcome payloads contain basic information related to the no-op
+  }  // Important data related to the no-op is captured in the payload
+}
+```
+
+Derivers can simply be functions which carry out a set of business logic checks. If any check fails, the relevant error or no-op outcome is returned. If all checks pass, additional business logic can be checked to identify which event outcome should be returned. Here's an example deriver which we could use in the command handler code example above.
+
+```ts
+const derivePayInvoiceOutcome = (data, state) => {
+  const { amount, currency } = data
+  const { invoice } = state
+
+  if (invoice.status === "Paid") {
+    return {
+      type: "NO_OP/INVOICE_ALREADY_PAID",
+      payload: {
+        ...
+      }
+    }
+  }
+
+  const now = new Date()
+  const hoursSinceIssued = getDifferenceInHours(invoice.issuedAt, now)
+  if (hoursSinceIssued < 48) {
+    return {
+      type: "ERROR/INVOICE_IN_COOL_OFF_PERIOD",
+      payload: {
+        ...
+      }
+    }
+  }
+
+  const amountInUSD = convertCurrencyToUSD(amount, currency)
+  if (amountInUSD < invoice.remainingBalanceUSD) {
+    return {
+      type: 'INVOICE_PARTIALLY_PAID',
+      payload: {
+        ...
+      }
+    }
+  }
+
+  return {
+      type: 'INVOICE_PAID',
+      payload: {
+        ...
+      }
+    }
 }
 ```
 
 ## Resources
 
-Feel free to check these out now or after completing 'The Practical Bit' below.
+Feel free to check these out before or after completing 'The Practical Bit' below.
 
-- [Functional Domain Driven Design: Simplified (15 minute read)](https://antman-does-software.com/functional-domain-driven-design-simplified)
-- [Functional Event Sourcing Decider (15 minute read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) (this one get's pretty gnarly in the second half)
+- [Functional Domain Driven Design: Simplified (15 minute read - well worth the time!)](https://antman-does-software.com/functional-domain-driven-design-simplified)
+- [Functional Event Sourcing Decider (15 minute read - get's gnarlier the further you read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider)
 
 ## The Practical Bit
 
-*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the following section.*
+*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
 
 ### Part 1: Validating Data
 
