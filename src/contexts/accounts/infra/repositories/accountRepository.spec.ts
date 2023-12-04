@@ -22,6 +22,18 @@ describe("accountRepository", () => {
 
     expect(persistedAccount).toEqual(validAccount);
   });
+  test("It fetches the correct account entity when fetching by email", async () => {
+    const persistedAccountByEmail =
+      await accountRepository.getByEmail("testemail@test.com");
+
+    expect(persistedAccountByEmail).toEqual(validAccount);
+  });
+  test("It fetches the correct account entity when fetching by username", async () => {
+    const persistedAccountByUsername =
+      await accountRepository.getByUsername("testusername");
+
+    expect(persistedAccountByUsername).toEqual(validAccount);
+  });
   test("It throws an error if trying to persist an invalid account entity", async () => {
     const saveInvalidAccount = async () =>
       await accountRepository.save(invalidAccount);

@@ -82,11 +82,15 @@ export const accountRepository = {
     return account ? mapToAccount(account) : null; // Map to a valid account before returning
   },
   getByEmail: async (email: Account["email"]) => {
-    const account = accounts[email]; // Fetch account from persistence (may be undefined)
+    const account = Object.values(accounts).find(
+      (acc) => acc.email__c === email
+    ); // Fetch account from persistence (may be undefined)
     return account ? mapToAccount(account) : null; // Ensure account is valid before returning
   },
   getByUsername: async (username: Account["username"]) => {
-    const account = accounts[username]; // Fetch account from persistence (may be undefined)
+    const account = Object.values(accounts).find(
+      (acc) => acc.username__c === username
+    ); // Fetch account from persistence (may be undefined)
     return account ? mapToAccount(account) : null; // Ensure account is valid before returning
   },
 };
