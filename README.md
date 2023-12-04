@@ -15,3 +15,8 @@
 ## EventStorming Timeline with Bounded Contexts
 
 ![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+
+## Questions Worth Pondering
+
+- Is `Account` the best choice of entity for the `Follow Account` command?
+- Given the following statement: `Posts are written by authors`, is our EventStorming diagram accurate?
