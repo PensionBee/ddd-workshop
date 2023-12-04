@@ -1,13 +1,13 @@
-// In-memory data store
-// --------------------
+// Types
+// -----
 
 /**
- * Represents a database schema. The in-memory data store
- * below only accepts account entity data in this format,
- * which requires us to map between the two formats in our
+ * This type is a fake representation of a NoSQL database schema.
+ * The in-memory data store below only allows account entity data
+ * in this format, which requires us to map between the two in the
  * repository.
  */
-type PersistedAccount = {
+type AccountPersistenceData = {
   id__c: string;
   email__c: string;
   username__c: string;
@@ -19,16 +19,22 @@ type PersistedAccount = {
   }[];
 };
 
-const accounts: Record<PersistedAccount["id__c"], PersistedAccount> = {};
+// In-memory data store
+// --------------------
+
+const accounts: Record<
+  AccountPersistenceData["id__c"],
+  AccountPersistenceData
+> = {};
 
 // Mappers
 // -------
 
-const mapToEntity = (persistenceData: any): any => {
+const mapToAccount = (accountPersistenceData: any): any => {
   // TODO: COMPLETE ME!
 };
 
-const mapToPersistenceData = (account: any): any => {
+const mapToAccountPersistenceData = (account: any): any => {
   // TODO: COMPLETE ME!
 };
 
@@ -36,16 +42,16 @@ const mapToPersistenceData = (account: any): any => {
 // ----------
 
 export const accountRepository = {
-  save: async (account: any) => {
+  save: async () => {
     // TODO: COMPLETE ME!
   },
-  getById: async (id: any) => {
+  getById: async () => {
     // TODO: COMPLETE ME!
   },
-  getByEmail: async (email: any) => {
+  getByEmail: async () => {
     // TODO: COMPLETE ME!
   },
-  getByUsername: async (username: any) => {
+  getByUsername: async () => {
     // TODO: COMPLETE ME!
   },
 };

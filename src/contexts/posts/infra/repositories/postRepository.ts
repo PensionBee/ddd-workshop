@@ -9,10 +9,10 @@ const posts: Record<Post["id"], Post> = {};
 // ----------
 
 export const postRepository = {
-  save: (post: Post) => {
+  save: async () => {
     // TODO: COMPLETE ME!
   },
-  getById: () => {
+  getById: async () => {
     // TODO: COMPLETE ME!
   },
 };

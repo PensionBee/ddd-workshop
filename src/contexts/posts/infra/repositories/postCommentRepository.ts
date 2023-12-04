@@ -9,10 +9,10 @@ const postComments: Record<PostComment["id"], PostComment> = {};
 // ----------
 
 export const postCommentRepository = {
-  save: () => {
+  save: async () => {
     // TODO: COMPLETE ME!
   },
-  getById: () => {
+  getById: async () => {
     // TODO: COMPLETE ME!
   },
 };
