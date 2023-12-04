@@ -106,5 +106,5 @@ Let's add the third repository responsibility on top of the other two:
 
 - What are the trade-offs of using the repository pattern? Are the trade-offs worth it?
 - How would SQL databases compare with NoSQL databases for persisting entites (especially nested entities)?
-- What's the value of writing tests at this level?
 - How would you describe the tests written at this level (unit, integration, e2e, regression, acceptance)?
+- What's the value of writing tests at this level?
