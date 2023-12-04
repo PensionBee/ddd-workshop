@@ -287,6 +287,6 @@ Let's incorporate Test-Driven Development (TDD) into our workflow, by flipping t
 
 ## Questions Worth Pondering
 
-- What's the value of writing tests at this level?
 - How would you describe the tests written at this level (unit, integration, e2e, regression, acceptance)?
+- What's the value of writing tests at this level?
 - How could we write tests at this level, without actually interacting with any external infrastructure (DBs, APIs, etc.)?
