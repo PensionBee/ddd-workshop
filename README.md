@@ -41,6 +41,8 @@ Feel free to check out these resources before or after tackling 'The Practical B
 
 ## The Practical Bit
 
+*Note: Example solutions to this section can be found [here](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions)*
+
 *Note: you can do this activity with a sheet of paper and some sticky notes, or digitally using any whiteboarding tool.*
 
 Let's revisit our CEO's initial requirements as the focus for our EventStorming session. Here's a reminder of those requirements:
