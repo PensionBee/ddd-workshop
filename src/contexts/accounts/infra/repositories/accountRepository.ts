@@ -1,7 +1,7 @@
-// In-memory data store
-// --------------------
-
 import { Account, parseAccount } from "../../core/entities/account";
+
+// Types
+// -----
 
 /**
  * This type is a fake representation of a NoSQL database schema.
@@ -20,6 +20,9 @@ type AccountPersistenceData = {
     followed_at__c: string;
   }[];
 };
+
+// In-memory data store
+// --------------------
 
 const accounts: Record<
   AccountPersistenceData["id__c"],
