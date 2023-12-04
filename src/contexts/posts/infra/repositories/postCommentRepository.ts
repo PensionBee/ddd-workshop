@@ -3,7 +3,7 @@ import { PostComment } from "../../core/entities/postComment";
 // In-memory data store
 // --------------------
 
-const postComments: PostComment[] = [];
+const postComments: Record<PostComment["id"], PostComment> = {};
 
 // Repository
 // ----------

@@ -19,7 +19,7 @@ type PersistedAccount = {
   }[];
 };
 
-const accounts: PersistedAccount[] = [];
+const accounts: Record<PersistedAccount["id__c"], PersistedAccount> = {};
 
 // Mappers
 // -------
