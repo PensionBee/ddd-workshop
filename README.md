@@ -198,4 +198,7 @@ Let's start by testing our low-level parser functions.
 
 ## Questions Worth Pondering
 
-- ?
+- What benefits might you get from explicitly declaring entity types, rather than inferring them?
+- Are there any potential downside of using zod here?
+- How would you describe the tests written at this level (unit, integration, e2e, regression, acceptance)?
+- What's the value of writing tests at this level?
