@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
     "skipLibCheck": true,
+    "noErrorTruncation": true,
     "paths": {
       "~/*": ["src/*"]
     }
