@@ -4,10 +4,9 @@ import { Account, parseAccount } from "../../core/entities/account";
 // -----
 
 /**
- * This type is a fake representation of a NoSQL database schema.
- * The in-memory data store below only allows account entity data
- * in this format, which requires us to map between the two in the
- * repository.
+ * This type is a fake representation of a database schema. The in-memory
+ * data store below only allows account entity data in this format, which
+ * requires us to map between the two in the repository.
  */
 type AccountPersistenceData = {
   id__c: string;
