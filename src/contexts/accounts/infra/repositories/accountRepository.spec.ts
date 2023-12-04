@@ -2,14 +2,20 @@ import { describe, expect, test } from "@jest/globals";
 import { accountRepository } from "./accountRepository";
 
 describe("accountRepository", () => {
+  const validAccount = {
+    id: "account-1",
+    email: "testemail@test.com",
+    username: "testusername",
+    password: "password123",
+    followers: [],
+  };
+
+  const invalidAccount = {
+    ...validAccount,
+    id: "INVALID_ID",
+  };
+
   test("It persists a valid account entity", async () => {
-    const validAccount = {
-      id: "account-1",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      followers: [],
-    };
     await accountRepository.save(validAccount);
 
     const persistedAccount = await accountRepository.getById("account-1");
@@ -17,16 +23,9 @@ describe("accountRepository", () => {
     expect(persistedAccount).toEqual(validAccount);
   });
   test("It throws an error if trying to persist an invalid account entity", async () => {
-    const invalidAccount = {
-      id: "INVALID_ID",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      followers: [],
-    };
+    const saveInvalidAccount = async () =>
+      await accountRepository.save(invalidAccount);
 
-    expect(
-      async () => await accountRepository.save(invalidAccount)
-    ).rejects.toThrowError();
+    expect(saveInvalidAccount).rejects.toThrowError();
   });
 });

@@ -2,12 +2,18 @@ import { describe, expect, test } from "@jest/globals";
 import { postCommentRepository } from "./postCommentRepository";
 
 describe("postCommentRepository", () => {
+  const validPostComment = {
+    id: "postComment-1",
+    postId: "post-1",
+    content: "A post comment",
+  };
+
+  const invalidPostComment = {
+    ...validPostComment,
+    id: "INVALID_ID",
+  };
+
   test("It persists a valid postComment entity", async () => {
-    const validPostComment = {
-      id: "postComment-1",
-      postId: "post-1",
-      content: "A post comment",
-    };
     await postCommentRepository.save(validPostComment);
 
     const persistedPostComment =
@@ -16,14 +22,9 @@ describe("postCommentRepository", () => {
     expect(persistedPostComment).toEqual(validPostComment);
   });
   test("It throws an error if trying to persist an invalid postComment entity", async () => {
-    const invalidPostComment = {
-      id: "INVALID_ID",
-      postId: "post-1",
-      content: "A post comment",
-    };
+    const saveInvalidPostComment = async () =>
+      await postCommentRepository.save(invalidPostComment);
 
-    expect(
-      async () => await postCommentRepository.save(invalidPostComment)
-    ).rejects.toThrowError();
+    expect(saveInvalidPostComment).rejects.toThrowError();
   });
 });
