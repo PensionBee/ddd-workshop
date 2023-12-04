@@ -35,9 +35,6 @@ describe("parsePost", () => {
       parsePost({ ...validData, content: undefined })
     ).toThrowError();
     expect(() =>
-      parsePost({ ...validData, imageUrl: undefined })
-    ).toThrowError();
-    expect(() =>
       parsePost({ ...validData, authorId: undefined })
     ).toThrowError();
   });
