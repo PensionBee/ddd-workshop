@@ -224,32 +224,22 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 
 *Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
 
-### Part 1: Validating Data
+### Part 1: Creating a Post
 
-- In **src/contexts/posts/core/commands/createPost.handler**:
-  - Complete the zod schema assigned to the `dataSchema` variable - think about what data is necessary for posting a comment. *Hint: it will likely be similar to the `postSchema` we defined previously.*
-  - In the `handleCreatePost` function, validate the incoming data using the schema and assign the result to the `data` variable.
+In **src/contexts/posts/core/commands/createPost.handler**:
 
-### Part 2: Fetching State
+- Validate the incoming command data:
+  - Complete the `dataSchema` variable using zod - think about what data is necessary for posting a comment. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
+- Use the command data to fetch relevant system 'state':
+  - Update the `fetchState` function - use the repositories we built previously to fetch the state we need to properly process this command.
+- Use the command data and fetched state to 'derive an outcome':
+  - Update the `deriveOutcome` function - create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create. Feel free to use Math.random() or any other mechanism to achieve this, but remember our entity IDs have restrictions on what they start with.*
+- For 'success outcomes', update the state of the system:
+  - Update the `updateState` function - complete the switch statement, creating/modifying and persisting entities via repositories for any successful outcome.
 
-- In **src/contexts/posts/core/commands/createPost.handler**:
-  - Use the repositories we built previously to fetch the state we need to properly process this command.
+#### Part 2: Creating a Post Tests
 
-### Part 3: Deriving an Outcome
-
-- In **src/contexts/posts/core/commands/createPost.handler.ts**:
-  - Update the argument types in the `deriveOutcome` function to match the data and state we need in order to derive an outcome.
-  - Create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create.*
-
-### Part 4: Updating State
-
-- In **src/contexts/posts/core/commands/createPost.handler.ts**:
-  - Complete the switch statement in the `handleCreatePost` function, creating/modifying and persisting entities via repositories for any event outcomes.
-  - Return the outcome from the handler so it can be used in our tests and by calling code in later sections of the workshop.
-
-### Part 5: Testing command handlers
-
-In general, writing great tests is a challenge for many developers and teams. However, we've just made it a lot easier by creating a standalone function, `handleCreatePost`, which independent of any API concerns and fully encapsulates a single, logical, scoped change within our system, including all the business rules we should be testing.
+Writing great tests is a common challenge which many teams struggle with. However, we've just made it a whole lot easier by creating a standalone function, `handleCreatePost`, which is independent of any API concerns and fully encapsulates a single, logical, scoped change within our system, including all the business rules we should be testing.
 
 - In **src/contexts/posts/core/commands/createPost.handler.spec.ts**:
   - Write tests using the 'Arrange - Act - Assert' testing approach:
@@ -267,7 +257,7 @@ Actually, let's be empowered and go ahead and do it since we hardly ever get to 
 
 *Caveat: There are (probably a lot of) times when you want the confidence you get from having these extra, low-level tests. The thing to take away from this is that some tests ARE more valuable than others and focusing on the high value ones is a better use of your time than the low value ones.*
 
-### Part 6: Repeat
+### Part 3: Commenting on a Post
 
 This can be a lot to take in so let's go through the process again, this time with the `Create Post Comment` command. We're going to revisit these a few more times in later sections of the workshop so it's worth becoming familiar with how they work.
 
