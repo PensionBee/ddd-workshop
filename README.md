@@ -33,17 +33,17 @@ Without the payload, this command would be meaningless to our system.
 
 ### Command Handlers
 
-A command handler is a function (or class if you're working in OOP-land) which processes a specific command. There are many ways we could generalise a command handler but for this workshop, let's say that all command handlers must do the following:
+A command handler is a function which processes a specific command. There's no single definition of what a command handler is but, for this workshop, let's say that all command handlers must do the following:
 
 1. Validate the incoming command data
-2. Use the command data to fetch relevant system 'state', i.e. existing entities and data necessary to process the command
+2. Use the command data to fetch relevant system 'state', i.e. existing entities necessary to process the command
 3. Use the command data and fetched state to 'derive an outcome'
 4. For 'success outcomes', update the state of the system
 
 Note that an 'outcome' can be one of 3 categories:
 
 - An event (captures a successful change in the system)
-- An error (a business error - not a technical error)
+- An error (a business rule error - not a technical error)
 - A no-op (stands for "no operation" - nothing about the system needs to change)
 
 You could also argue that all outcomes are just events (just not always successful ones) that fall into the following categories:
@@ -52,9 +52,9 @@ You could also argue that all outcomes are just events (just not always successf
 - An error event
 - A no-op event
 
-But that's getting into details and potential conflict territory prematurely...
+Use whatever one helps you reason about the concept best.
 
-Let's take a step back and visualise this four step process with an example:
+Let's visualise this four step process with an example:
 
 ```ts
 // A zod schema describing the expected command data
@@ -67,28 +67,21 @@ const handlePayInvoice = async (commandData: Record<string, unknown>) => {
   // STEP 1: Validate the incoming command data
   const data = commandDataSchema.parse(commandData)
 
-  // STEP 2: Use the command data to fetch relevant system 'state', i.e. existing entities and data necessary to process the command
+  // STEP 2: Use the command data to fetch relevant system 'state', i.e. existing entities necessary to process the command
   const state = {
     invoice: await invoiceRepository.findById(data.invoiceId),
   }
 
   // STEP 3: Use the command data and fetched state to 'derive an outcome'
-  const outcome = deriveOutcome(data, state) // 'deriveOutcome' captures all the business logic in one place
+  // 'deriveOutcome' contains all the business logic in one place - we'll dive into this below.
+  const outcome = deriveOutcome(data, state)
 
   // STEP 4: For 'success outcomes', update the state of the system
   switch (outcome.type) {
-    case 'INVOICE_PAID': // A success outcome: The full invoice balance was paid off
+    case 'INVOICE_PAYMENT_PENDING':
       await basketRepository.save({
         ...state.invoice, // The existing invoice
-        status: outcome.payload.status, // Probably something like "Paid"
-        remainingBalance: outcome.payload.remainingBalance, // Likely zero
-      })
-      break
-    case 'INVOICE_PARTIALLY_PAID': // A success outcome: Some of the outstanding invoice balance was paid off
-      await basketRepository.save({
-        ...state.invoice, // The existing invoice
-        status: outcome.payload.status, // Probably something like "Partially Paid"
-        remainingBalance: outcome.payload.remainingBalance, // Likely non-zero
+        status: outcome.payload.status, // Probably something like "Payment Pending"
       })
       break
   }
@@ -99,117 +92,104 @@ const handlePayInvoice = async (commandData: Record<string, unknown>) => {
 
 That's a lot to unpack but it will make more sense once you've gone through 'The Practical Bit' below.
 
-Before we get to that though, let's dig into derivers a little more...
+Before we get to that though, let's dig into outcomes (events) and derivers a little more...
 
-### Derivers
+### Outcomes (Events)
 
-In step 3 above, `Use the command data and state to 'derive an outcome'`, we want to enforce all the business rules relevant for the specific command being handled, such as `Invoices cannot be paid within a 'cool off' period (the first 48 hours after being issued)`.
+Outcomes (events) capture information about state changes in our system as well as information about change attempts which failed or didn't actually require any system changes.
 
-This is where a large part of the *essential complexity* in our code comes from, i.e. the stuff we can't easily simplify or improve (as opposed to *accidental complexity*, which is essentially technical debt), so it can be useful to extract it to an independent function and let it grow organically over time as business rules change.
-
-As we seen above, derivers generally take data and state as arguments and return an outcome (an event, error or no-op). We can visualise this process like so:
-
-![Deriver](./images/deriver.png)
-
-Let's look at one approach to modelling / structuring outcomes generally:
+Let's generalise an outcome structure to be:
 
 ```ts
 type Outcome = {
-  type: Uppercase<string> | `ERROR/${Uppercase<string>}` | `NO_OP/${Uppercase<string>}`,
-  payload: Record<string, unknown>
+  type: Uppercase<string>, // Specific outcome identifier
+  payload: Record<string, unknown> // Important data related to the outcome
 }
 ```
 
-Here's are two examples of event outcomes:
+Here's an example of a success outcome:
 
 ```ts
-type InvoicePaidEvent = {
-  type: "INVOICE_PAID",
+type InvoicePaymentPendingEvent = {
+  type: "INVOICE_PAYMENT_PENDING",
   payload: {
     invoiceId: string,
-    remainingBalanceUSD: 0,
-    status: "Pai"'
-  } // Important data related to the event is captured in the payload
+    status: "Payment Pending",
+    paymentAmount: number,
+  }
 }
 ```
+
+Here's an example of an error outcome:
 
 ```ts
-type InvoicePartiallyPaidEvent = {
-  type: "INVOICE_PARTIALLY_PAID",
+type InvoiceCoolOffError = {
+  type: "PAY_INVOICE_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
   payload: {
     invoiceId: string,
-    remainingBalanceUSD: 34,
-    status: "Partially Pai"'
-  }  // Important data related to the event is captured in the payload
+    hoursSinceIssued: number
+  }
 }
 ```
 
-An error outcome might look like this:
-
-```ts
-type InvoiceInCoolOffPeriodError = {
-  type: "ERROR/INVOICE_IN_COOL_OFF_PERIOD",
-  payload: {
-    invoiceId: string,
-    daysRemaining: number
-  }  // Important data related to the error is captured in the payload
-}
-```
-
-An no-op outcome might look like this:
+Here's an example of a no-op outcome:
 
 ```ts
 type InvoiceAlreadyPaidNoOp = {
-  type: "NO_OP/INVOICE_ALREADY_PAID",
+  type: "PAY_INVOICE_NO_OP/INVOICE_ALREADY_PAID",
   payload: {
     invoiceId: string,
-  }  // Important data related to the no-op is captured in the payload
+  }
 }
 ```
 
-Derivers can simply be functions which carry out a set of business logic checks. If any check fails, the relevant error or no-op outcome is returned. If all checks pass, additional business logic can be checked to identify which event outcome should be returned. Here's an example deriver which we could use in the command handler code example above.
+### Derivers
+
+In step 3 of our command handling process, `Use the command data and fetched state to 'derive an outcome'`, we need to enforce all the business rules relevant to the command being handled, such as this one: `Invoices cannot be paid within a 'cool off' period; the first 48 hours after being issued`.
+
+*Note: Business rules are where a large part of the *essential complexity* in software systems comes from, i.e. the stuff we can't easily simplify or improve (as opposed to *accidental complexity*, which you could argue is the same as technical debt).*
+
+Derivers generally take data and state as arguments and return an outcome (an event, error or no-op). We can visualise this process like so:
+
+![Deriver](./images/deriver.png)
+
+Derivers can simply be functions which carry out a set of business logic checks one by one. If any check fails, the relevant error or no-op outcome is returned. If all checks pass, a success outcome is returned or additional business logic is checked to identify which of several success outcomes should be returned.
+
+Here's an example deriver which we could use in the command handler code example above:
 
 ```ts
 const derivePayInvoiceOutcome = (data, state) => {
-  const { amount, currency } = data
-  const { invoice } = state
-
   if (invoice.status === "Paid") {
     return {
-      type: "NO_OP/INVOICE_ALREADY_PAID",
+      type: "PAY_INVOICE_NO_OP/INVOICE_ALREADY_PAID",
       payload: {
-        ...
+        invoiceId: state.invoice.id
       }
     }
   }
 
   const now = new Date()
-  const hoursSinceIssued = getDifferenceInHours(invoice.issuedAt, now)
+  const hoursSinceIssued = getDifferenceInHours(state.invoice.issuedAt, now)
   if (hoursSinceIssued < 48) {
     return {
-      type: "ERROR/INVOICE_IN_COOL_OFF_PERIOD",
+      type: "PAY_INVOICE_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
       payload: {
-        ...
+        invoiceId: state.invoice.id,
+        hoursSinceIssued
       }
     }
   }
 
-  const amountInUSD = convertCurrencyToUSD(amount, currency)
-  if (amountInUSD < invoice.remainingBalanceUSD) {
-    return {
-      type: 'INVOICE_PARTIALLY_PAID',
-      payload: {
-        ...
-      }
-    }
-  }
+  // Other business rule checks go here
 
   return {
-      type: 'INVOICE_PAID',
-      payload: {
-        ...
-      }
+    type: 'INVOICE_PAYMENT_PENDING',
+    payload: {
+      invoiceId: state.invoice.id,
+      status: "Payment Pending",
+      paymentAmount: state.data.paymentAmount
     }
+  }
 }
 ```
 
