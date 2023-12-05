@@ -19,4 +19,4 @@
 ## Questions Worth Pondering
 
 - Is `Account` the best choice of entity for the `Follow Account` command?
-- Given the following statement: `Posts are written by authors`, is our EventStorming diagram accurate?
+- Given the following statement: `Posts are written by Authors`, is our EventStorming diagram sufficient?
