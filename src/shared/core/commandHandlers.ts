@@ -4,12 +4,12 @@
 type HandlerFns<
   TData extends Record<string, unknown>,
   TState extends Record<string, unknown>,
-  TOutcomeEvent extends Event,
+  TOutcome extends Event,
 > = {
   parseData: (data: TData | Record<string, unknown>) => TData;
   fetchState: (data: TData) => Promise<TState>;
-  deriveOutcome: (data: TData, state: TState) => TOutcomeEvent;
-  updateState: (state: TState, outcome: TOutcomeEvent) => Promise<void>;
+  deriveOutcome: (data: TData, state: TState) => TOutcome;
+  updateState: (state: TState, outcome: TOutcome) => Promise<void>;
 };
 
 /**
@@ -24,11 +24,11 @@ export const createCommandHandler =
   <
     TData extends Record<string, unknown>,
     TState extends Record<string, unknown>,
-    TOutcomeEvent extends Event,
+    TOutcome extends Event,
   >(
-    handlerFns: HandlerFns<TData, TState, TOutcomeEvent>
+    handlerFns: HandlerFns<TData, TState, TOutcome>
   ) =>
-  async (rawData: TData | Record<string, unknown>): Promise<TOutcomeEvent> => {
+  async (rawData: TData): Promise<TOutcome> => {
     const { parseData, fetchState, deriveOutcome, updateState } = handlerFns;
 
     const data = parseData(rawData);

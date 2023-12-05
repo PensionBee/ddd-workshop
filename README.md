@@ -228,55 +228,41 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 
 In **src/contexts/posts/core/commands/createPost.handler**:
 
-- Validate the incoming command data:
-  - Complete the `dataSchema` variable using zod - think about what data is necessary for posting a comment. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
-- Use the command data to fetch relevant system 'state':
+- Step 1: Validate the incoming command data:
+  - Complete the `commandDataSchema` using zod - think about what data is necessary for posting a comment. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
+- Step 2: Use the command data to fetch relevant system 'state':
   - Update the `fetchState` function - use the repositories we built previously to fetch the state we need to properly process this command.
-- Use the command data and fetched state to 'derive an outcome':
+- Step 3: Use the command data and fetched state to 'derive an outcome':
   - Update the `deriveOutcome` function - create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create. Feel free to use Math.random() or any other mechanism to achieve this, but remember our entity IDs have restrictions on what they start with.*
-- For 'success outcomes', update the state of the system:
+- Step 4: For 'success outcomes', update the state of the system:
   - Update the `updateState` function - complete the switch statement, creating/modifying and persisting entities via repositories for any successful outcome.
 
-#### Part 2: Creating a Post Tests
+Finally, let's write some tests for this command handler. This might seem a bit daunting at first but we've actually just made testing at a feature level pretty simple by creating a standalone function, `handleCreatePost`, which is independent of any infrastructure or API concerns and fully encapsulates a single, logical, manageable change within our system, including all the business rules we should be testing.
 
-Writing great tests is a common challenge which many teams struggle with. However, we've just made it a whole lot easier by creating a standalone function, `handleCreatePost`, which is independent of any API concerns and fully encapsulates a single, logical, scoped change within our system, including all the business rules we should be testing.
-
-- In **src/contexts/posts/core/commands/createPost.handler.spec.ts**:
+- In **src/contexts/posts/core/commandHandlers/createPost.handler.spec.ts**:
   - Write tests using the 'Arrange - Act - Assert' testing approach:
-    - Arrange: Set up the initial state (if any) required for the test using the available repositories.
-    - Act: Trigger `handleCreatePost` with some relevant data.
+    - Arrange: Set up the initial state (if any) required for the test using the in-memory repositories we built previously.
+    - Act: Trigger `handleCreatePost` with the relevant command data.
     - Assert:
       - Check that the command handler outcome is as expected.
       - Check that entities were correctly persisted or not persisted, depending on the test.
 
-That's it! Theoretically, at this point, we could get rid of our `parsePost` tests and `postsRepository` tests and still have high confidence that the core functionality of our system works.
+### Part 2: Commenting on a Post
 
-Actually, let's be empowered and go ahead and do it since we hardly ever get to delete tests in real projects...
+Repeat the above steps but for the `Comment on Post` command. You'll need to create the following files:
 
-- Delete **src/contexts/accounts/core/entities/account.spec.ts** and **src/contexts/posts/core/entities/post.spec.ts**
+- **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.ts**:
+- **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.spec.ts**:
 
-*Caveat: There are (probably a lot of) times when you want the confidence you get from having these extra, low-level tests. The thing to take away from this is that some tests ARE more valuable than others and focusing on the high value ones is a better use of your time than the low value ones.*
+### Part 3: Following an Account + Test-Driven Development (TDD)
 
-### Part 3: Commenting on a Post
+Repeat the above steps but for the `Follow Account` command but this time let's incorporate Test-Driven Development (TDD) principles into our workflow, by flipping the process on it's head and writing our tests ***before*** we write the code. You'll need to create the following files:
 
-This can be a lot to take in so let's go through the process again, this time with the `Create Post Comment` command. We're going to revisit these a few more times in later sections of the workshop so it's worth becoming familiar with how they work.
-
-- In **src/contexts/posts/core/commands/CommentOnPost.handler.ts**:
-  - Repeat steps 1 to 4, this time starting with step 3.
-- In **src/contexts/posts/core/commands/CommentOnPost.handler.spec.ts**:
-  - Repeat step 5.
-
-### Part 7: Repeat w/ TDD
-
-Let's incorporate Test-Driven Development (TDD) into our workflow, by flipping the process on it's head and writing our tests before we write the code. This time we'll focus on the `Follow Account` command.
-
-- In **src/contexts/accounts/core/commands/followAccount.handler.spec.ts**:
-  - Repeat step 5. (Your tests should all be failing because we haven't written the code yet)
-- In **src/contexts/accounts/core/commands/followAccount.handler.ts**:
-  - Repeat steps 1 to 4.
+- **src/contexts/posts/core/commandHandlers/followAccount.handler.spec.ts**:
+- **src/contexts/posts/core/commandHandlers/followAccount.handler.ts**:
 
 ## Questions Worth Pondering
 
-- How would you describe the tests written at this level (unit, integration, e2e, regression, acceptance)?
-- What's the value of writing tests at this level?
-- How could we write tests at this level, without actually interacting with any external infrastructure (DBs, APIs, etc.)?
+- Which kind of tests (unit, integration, e2e, regression, acceptance, etc.) are command handler tests?
+- How can we write command handler tests efficiently?
+- What value do we get from writing command handler tests?
