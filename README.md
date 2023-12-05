@@ -105,6 +105,8 @@ Let's add the third repository responsibility on top of the other two:
 ## Questions Worth Pondering
 
 - What are the trade-offs of using the repository pattern? Are the trade-offs worth it?
-- How would SQL databases compare with NoSQL databases for persisting entites (especially nested entities)?
-- How would you describe the tests written at this level (unit, integration, e2e, regression, acceptance)?
-- What's the value of writing tests at this level?
+- How would a SQL database compare with a NoSQL database for persisting entities (especially nested entities)?
+- Which kind of tests (unit, integration, e2e, regression, acceptance) are repository tests?
+- What value do we get from writing repository tests?
+- How can we write repository tests efficiently?
+- Let’s say we decide to use a in-memory repository for both local development and automated testing, and a real database repository in staging and production, how could we ensure the in-memory repository exhibits the exact same behaviour as the real repository.
