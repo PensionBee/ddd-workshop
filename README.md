@@ -246,5 +246,5 @@ Repeat the above steps but for the `Follow Account` command but this time let's 
 ## Questions Worth Pondering
 
 - Which kind of tests (unit, integration, e2e, regression, acceptance, etc.) are command handler tests?
-- What kind of things do we NOT want to test in command handler tests? Why?
 - What value do we get from writing command handler tests?
+- What kind of things do we NOT want to test in command handler tests? Why?
