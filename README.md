@@ -227,7 +227,7 @@ Finally, let's write some tests for this command handler. This might seem a bit 
     - Act: Trigger `handleCreatePost` with the relevant command data.
     - Assert:
       - Check that the command handler outcome is as expected.
-      - Check that entities were correctly persisted or not persisted, depending on the test.
+      - Check that entities were correctly persisted (or not persisted if relevant)
 
 ### Part 2: Commenting on a Post
 
@@ -246,5 +246,5 @@ Repeat the above steps but for the `Follow Account` command but this time let's 
 ## Questions Worth Pondering
 
 - Which kind of tests (unit, integration, e2e, regression, acceptance, etc.) are command handler tests?
-- How can we write command handler tests efficiently?
+- What kind of things do we NOT want to test in command handler tests? Why?
 - What value do we get from writing command handler tests?
