@@ -211,8 +211,10 @@ In **src/contexts/posts/core/commands/createPost.handler**:
 - Step 1: Validate the incoming command data:
   - Complete the `commandDataSchema` using zod - think about what data is necessary for posting a comment. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
 - Step 2: Use the command data to fetch relevant system 'state':
+  - Update the `State` type - define the entities, if any, which are required to process this command.
   - Update the `fetchState` function - use the repositories we built previously to fetch the state we need to properly process this command.
 - Step 3: Use the command data and fetched state to 'derive an outcome':
+  - Update the `Outcome` type - define the possible outcomes using the structure outlined above.
   - Update the `deriveOutcome` function - create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create. Feel free to use Math.random() or any other mechanism to achieve this, but remember our entity IDs have restrictions on what they start with.*
 - Step 4: For 'success outcomes', update the state of the system:
   - Update the `updateState` function - complete the switch statement, creating/modifying and persisting entities via repositories for any successful outcome.
