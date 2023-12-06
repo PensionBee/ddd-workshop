@@ -28,7 +28,7 @@ const deriveOutcome = (data: Data, state: State): Outcome => {
   // TODO: COMPLETE ME!
 };
 
-const updateState = (state: State, outcome: Outcome): Promise<void> => {
+const updateState = async (state: State, outcome: Outcome): Promise<void> => {
   // TODO: COMPLETE ME!
 };
 

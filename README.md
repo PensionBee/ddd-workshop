@@ -79,7 +79,7 @@ const handlePayInvoice = async (commandData: Record<string, unknown>) => {
   // STEP 4: For 'success outcomes', update the state of the system
   switch (outcome.type) {
     case 'INVOICE_PAYMENT_PENDING':
-      await basketRepository.save({
+      await invoiceRepository.save({
         ...state.invoice, // The existing invoice
         status: outcome.payload.status, // Probably something like "Payment Pending"
       })
@@ -209,7 +209,7 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 In **src/contexts/posts/core/commands/createPost.handler**:
 
 - Step 1: Validate the incoming command data:
-  - Complete the `commandDataSchema` using zod - think about what data is necessary for posting a comment. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
+  - Complete the `commandDataSchema` using zod - think about what data is necessary for creating a post. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
 - Step 2: Use the command data to fetch relevant system 'state':
   - Update the `State` type - define the entities, if any, which are required to process this command.
   - Update the `fetchState` function - use the repositories we built previously to fetch the state we need to properly process this command.
