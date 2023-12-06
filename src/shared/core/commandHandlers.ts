@@ -1,3 +1,5 @@
+import { type Event } from "../common/events";
+
 // Types
 // -----
 
@@ -6,7 +8,7 @@ type HandlerFns<
   TState extends Record<string, unknown>,
   TOutcome extends Event,
 > = {
-  parseData: (data: TData | Record<string, unknown>) => TData;
+  parseData: (data: TData) => TData;
   fetchState: (data: TData) => Promise<TState>;
   deriveOutcome: (data: TData, state: TState) => TOutcome;
   updateState: (state: TState, outcome: TOutcome) => Promise<void>;
