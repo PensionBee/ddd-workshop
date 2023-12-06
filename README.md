@@ -201,5 +201,5 @@ Let's start by testing our low-level parser functions.
 - Are there any potential benefits from explicitly declaring entity types, rather than inferring them from zod schemas?
 - What are the potential downsides of using zod in our domain code?
 - Which kind of tests (unit, integration, e2e, regression, acceptance) are parser tests?
-- What kind of things do we NOT want to test in parser tests? Why?
 - What value do we get from writing parser tests?
+- What kind of things do we NOT want to test in parser tests? Why?
