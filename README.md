@@ -15,16 +15,13 @@ We've already modelled our entities as code in the [Values, Entities & Parsers](
 We've already identifies commands as an intent to change the state of our system but let's complete the picture by acknowledging that most commands are only meaningful when there's some relevant data attached (often referred to as a 'payload'). For example:
 
 ```ts
-type PayInvoiceCommand = {
-  type: "PAY_INVOICE",
+type InitiateInvoicePaymentCommand = {
+  type: "INITIATE_INVOICE_PAYMENT",
   payload: {
     invoiceId: string,
+    amountUSD: number,
     paymentCurrency: "GBP" | "EUR" | "USD",
-    amount: string,
-    paymentDetails: {
-      accountNumber: number,
-      sortCode: number,
-    }
+    paymentCardId: string
   }
 }
 ```
@@ -69,7 +66,16 @@ const handlePayInvoice = async (commandData: Record<string, unknown>) => {
 
   // STEP 2: Use the command data to fetch relevant system 'state', i.e. existing entities necessary to process the command
   const state = {
-    invoice: await invoiceRepository.findById(data.invoiceId),
+    invoice: await invoiceRepository.findById(data.invoiceId), // Returns an invoice or null
+    paymentCard: await paymentCardRepository.findById(data.paymentCardId) // Returns a payment card or null
+  }
+  
+  // Throw if state is invalid.
+  if (!state.invoice) {
+    throw new Error("Invoice not found")
+  }
+  if (!state.paymentCard) {
+    throw new Error("Payment card not found")
   }
 
   // STEP 3: Use the command data and fetched state to 'derive an outcome'
@@ -78,10 +84,10 @@ const handlePayInvoice = async (commandData: Record<string, unknown>) => {
 
   // STEP 4: For 'success outcomes', update the state of the system
   switch (outcome.type) {
-    case 'INVOICE_PAYMENT_PENDING':
+    case 'INVOICE_PAYMENT_INITIATED':
       await invoiceRepository.save({
-        ...state.invoice, // The existing invoice
-        status: outcome.payload.status, // Probably something like "Payment Pending"
+        ...state.invoice, // Spread the existing invoice
+        status: outcome.payload.status, // Update the status using the outcome payload, e.g. "Awaiting Payment Completion"
       })
       break
   }
@@ -102,7 +108,7 @@ Let's generalise an outcome structure to be:
 
 ```ts
 type Outcome = {
-  type: Uppercase<string>, // Specific outcome identifier
+  type: Uppercase<string>, // The specific outcome identifier
   payload: Record<string, unknown> // Important data related to the outcome
 }
 ```
@@ -111,11 +117,13 @@ Here's an example of a success outcome:
 
 ```ts
 type InvoicePaymentPendingEvent = {
-  type: "INVOICE_PAYMENT_PENDING",
+  type: "INVOICE_PAYMENT_INITIATED",
   payload: {
     invoiceId: string,
-    status: "Payment Pending",
-    paymentAmount: number,
+    status: "Awaiting Payment Completion",
+    amountUSD: number,
+    paymentCurrency: "GBP" | "EUR" | "USD",
+    paymentCardId: string
   }
 }
 ```
@@ -124,10 +132,10 @@ Here's an example of an error outcome:
 
 ```ts
 type InvoiceCoolOffError = {
-  type: "PAY_INVOICE_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
+  type: "INITIATE_INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
   payload: {
     invoiceId: string,
-    hoursSinceIssued: number
+    hoursUntilCoolOffPeriodEnds: number
   }
 }
 ```
@@ -136,7 +144,7 @@ Here's an example of a no-op outcome:
 
 ```ts
 type InvoiceAlreadyPaidNoOp = {
-  type: "PAY_INVOICE_NO_OP/INVOICE_ALREADY_PAID",
+  type: "INITIATE_INVOICE_PAYMENT_NO_OP/INVOICE_ALREADY_PAID",
   payload: {
     invoiceId: string,
   }
@@ -161,7 +169,7 @@ Here's an example deriver which we could use in the command handler code example
 const derivePayInvoiceOutcome = (data, state) => {
   if (invoice.status === "Paid") {
     return {
-      type: "PAY_INVOICE_NO_OP/INVOICE_ALREADY_PAID",
+      type: "INITIATE_INVOICE_PAYMENT_NO_OP/INVOICE_ALREADY_PAID",
       payload: {
         invoiceId: state.invoice.id
       }
@@ -172,10 +180,10 @@ const derivePayInvoiceOutcome = (data, state) => {
   const hoursSinceIssued = getDifferenceInHours(state.invoice.issuedAt, now)
   if (hoursSinceIssued < 48) {
     return {
-      type: "PAY_INVOICE_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
+      type: "INITIATE_INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
       payload: {
         invoiceId: state.invoice.id,
-        hoursSinceIssued
+        hoursUntilCoolOffPeriodEnds: 48 - hoursSinceIssued
       }
     }
   }
@@ -183,11 +191,13 @@ const derivePayInvoiceOutcome = (data, state) => {
   // Other business rule checks go here
 
   return {
-    type: 'INVOICE_PAYMENT_PENDING',
+    type: 'INVOICE_PAYMENT_INITIATED',
     payload: {
       invoiceId: state.invoice.id,
-      status: "Payment Pending",
-      paymentAmount: state.data.paymentAmount
+      status: "Awaiting Payment Completion",
+      amountUSD: data.amountUSD,
+      paymentCurrency: data.paymentCurrency
+      paymentCardId: state.paymentCard.id
     }
   }
 }
