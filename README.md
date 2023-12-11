@@ -325,6 +325,35 @@ In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**,
 - (ASSERT) Check that the command handler outcome is as expected
 - (ASSERT) Check that entities were correctly persisted or not persisted, depending on the test
 
+### Part 4: Blocking an Account
+
+In **src/contexts/accounts/core/commands/blockAccount.handler.ts**:
+
+**Step 1: Validate the incoming command data:**
+
+- Complete the `commandDataSchema` using zod.
+
+**Step 2: Use the command data to fetch relevant system 'state':**
+
+- Complete the `State` type.
+- Complete the `fetchState` function.
+
+**Step 3: Use the command data and fetched state to 'derive an outcome':**
+
+- Complete the `Outcome` type.
+- Complete the `deriveOutcome` function.
+
+**Step 4: For 'success outcomes', update the state of the system:**
+
+- Complete the `updateState` function
+
+In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts**, let's use the 'Arrange - Act - Assert' testing approach. For each test:
+
+- (ARRANGE) Set up initial state relevant to the test.
+- (ACT) Trigger `handleBlockAccount` with relevant command data
+- (ASSERT) Check that the command handler outcome is as expected
+- (ASSERT) Check that entities were correctly persisted or not persisted, depending on the test
+
 ## Questions Worth Pondering
 
 - Which kind of tests (unit, integration, e2e, regression, acceptance, etc.) are command handler tests?
