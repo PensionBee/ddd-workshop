@@ -216,42 +216,114 @@ Feel free to check these out before or after completing 'The Practical Bit' belo
 
 ### Part 1: Creating a Post
 
-In **src/contexts/posts/core/commands/createPost.handler**:
+*For now, let's only focus on success outcomes to get used to the general pattern, i.e. assume `Post Created` is the only possible outcome.*
 
-- Step 1: Validate the incoming command data:
-  - Complete the `commandDataSchema` using zod - think about what data is necessary for creating a post. *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though.*
-- Step 2: Use the command data to fetch relevant system 'state':
-  - Update the `State` type - define the entities, if any, which are required to process this command.
-  - Update the `fetchState` function - use the repositories we built previously to fetch the state we need to properly process this command.
-- Step 3: Use the command data and fetched state to 'derive an outcome':
-  - Update the `Outcome` type - define the possible outcomes using the structure outlined above.
-  - Update the `deriveOutcome` function - create and return the necessary outcome(s) for this command, using the format defined above. *Hint: Since the payload for an event outcome is intended to capture the state change in the system, we need to generate IDs as part of the payload for any new entities we create. Feel free to use Math.random() or any other mechanism to achieve this, but remember our entity IDs have restrictions on what they start with.*
-- Step 4: For 'success outcomes', update the state of the system:
-  - Update the `updateState` function - complete the switch statement, creating/modifying and persisting entities via repositories for any successful outcome.
+In **src/contexts/posts/core/commands/createPost.handler.ts**:
 
-Finally, let's write some tests for this command handler. This might seem a bit daunting at first but we've actually just made testing at a feature level pretty simple by creating a standalone function, `handleCreatePost`, which is independent of any infrastructure or API concerns and fully encapsulates a single, logical, manageable change within our system, including all the business rules we should be testing.
+**Step 1: Validate the incoming command data:**
 
-- In **src/contexts/posts/core/commandHandlers/createPost.handler.spec.ts**:
-  - Write tests using the 'Arrange - Act - Assert' testing approach:
-    - Arrange: Set up the initial state (if any) required for the test using the in-memory repositories we built previously.
-    - Act: Trigger `handleCreatePost` with the relevant command data.
-    - Assert:
-      - Check that the command handler outcome is as expected.
-      - Check that entities were correctly persisted (or not persisted if relevant)
+- Complete the `commandDataSchema` using zod.
+  - *Hint: think about what data is necessary for creating a post.*
+  - *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though, especially when a command operates on an existing entity.*
+
+**Step 2: Use the command data to fetch relevant system 'state':**
+
+- Complete the `State` type, defining the entities, if any, which are required to process this command.
+  - *Hint: Do we need to make sure the `Account` entity exists before we create a post?*
+- Complete the `fetchState` function, using the repositories we built previously to fetch the state we need.
+
+**Step 3: Use the command data and fetched state to 'derive an outcome':**
+
+- Complete the `Outcome` type, defining the possible outcomes using the structure outlined above.
+  - *Hint: Remember, for now, we only care about the `Post Created` outcome.*
+- Complete the `deriveOutcome` function, generating and return the possible outcomes.
+  - *Hint: Since the payload for a successful outcome needs to capture the state change in the system, we'll likely need to generate a IDs in our deriver when new entities are created (unless you force calling code to provide the ID as part of the command data). In a production system, you'd probably want to use something like UUIDs or Nano IDs to create IDs but feel free to use something like `Math.random()` for now.*
+
+**Step 4: For 'success outcomes', update the state of the system:**
+
+- Complete the `updateState` function - complete the switch statement, creating/modifying and persisting entities via repositories for any successful outcome.
+
+Finally, let's write some tests for this command handler. This might seem a bit daunting at first but we've actually just made testing at a feature level pretty simple by creating a standalone function, which is independent of any infrastructure or API concerns and fully encapsulates a atomic change within our system, including all the relevant business rules for that change.
+
+In **src/contexts/posts/core/commandHandlers/createPost.handler.spec.ts**, let's use the 'Arrange - Act - Assert' testing approach:
+
+- (ARRANGE) Set up the initial state by adding an account to the in-memory account store via the `accountRepository.save` method.
+- (ACT) Trigger `handleCreatePost` with the relevant command data
+  - *Hint: the account ID should be the ID of the account we just created.*
+- (ASSERT) Check that the command handler outcome type is `Post Created` and the payload is as expected
+- (ASSERT) Check that a `Post` entity was correctly persisted
+  - *Hint: You can use the `postRepository.getById` method*
 
 ### Part 2: Commenting on a Post
 
-Repeat the above steps but for the `Comment on Post` command. You'll need to create the following files:
+*Again, let's only focus on success outcomes to reinforce the pattern, i.e. assume `Comment Added to Post` is the only outcome.*
 
-- **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.ts**:
-- **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.spec.ts**:
+In **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.ts**:
 
-### Part 3: Following an Account + Test-Driven Development (TDD)
+**Step 1: Validate the incoming command data:**
 
-Repeat the above steps but for the `Follow Account` command but this time let's incorporate Test-Driven Development (TDD) principles into our workflow, by flipping the process on it's head and writing our tests ***before*** we write the code. You'll need to create the following files:
+- Complete the `commandDataSchema` using zod.
 
-- **src/contexts/posts/core/commandHandlers/followAccount.handler.spec.ts**:
-- **src/contexts/posts/core/commandHandlers/followAccount.handler.ts**:
+**Step 2: Use the command data to fetch relevant system 'state':**
+
+- Complete the `State` type.
+- Complete the `fetchState` function.
+
+**Step 3: Use the command data and fetched state to 'derive an outcome':**
+
+- Complete the `Outcome` type.
+- Complete the `deriveOutcome` function.
+
+**Step 4: For 'success outcomes', update the state of the system:**
+
+- Complete the `updateState` function
+
+In **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.spec.ts**, let's use the 'Arrange - Act - Assert' testing approach:
+
+- (ARRANGE) Set up the initial state.
+- (ACT) Trigger `handleCommentOnPost` with the relevant command data
+- (ASSERT) Check that the command handler outcome type is as expected
+- (ASSERT) Check that relevant entities were correctly persisted
+
+### Part 3: Following an Account
+
+Just as you're about to start writing the `Follow Account` handler, the CEO pulls you aside...
+
+> Hey, I was just thinking that my mum might try to follow my account after we get the MVP out there. I love her and all but I just can't have her all up in my social media business, you know? Anyway, if we can stop accounts from following accounts that have blocked them, that would be great.
+
+We also have an explicit business rule, `Account A can't follow Account B if Account B has blocked Account A`
+
+In **src/contexts/accounts/core/entities/account.ts**:
+
+- Add a `blockedAccounts` attribute.
+  - *Hint: Feel free to use an array of account IDs rather than a dedicated `Blocked Account` entity. This way our design stays simple until we know we need the extra complexity.*
+
+In **src/contexts/accounts/core/commands/followAccount.handler.ts**:
+
+**Step 1: Validate the incoming command data:**
+
+- Complete the `commandDataSchema` using zod.
+
+**Step 2: Use the command data to fetch relevant system 'state':**
+
+- Complete the `State` type.
+- Complete the `fetchState` function.
+
+**Step 3: Use the command data and fetched state to 'derive an outcome':**
+
+- Complete the `Outcome` type.
+- Complete the `deriveOutcome` function.
+
+**Step 4: For 'success outcomes', update the state of the system:**
+
+- Complete the `updateState` function
+
+In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**, let's use the 'Arrange - Act - Assert' testing approach. For each test:
+
+- (ARRANGE) Set up initial state relevant to the test.
+- (ACT) Trigger `handleFollowAccount` with relevant command data
+- (ASSERT) Check that the command handler outcome is as expected
+- (ASSERT) Check that entities were correctly persisted or not persisted, depending on the test
 
 ## Questions Worth Pondering
 
