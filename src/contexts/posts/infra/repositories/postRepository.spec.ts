@@ -1,4 +1,5 @@
 import { describe, expect, test } from "@jest/globals";
+
 import { postRepository } from "./postRepository";
 
 describe("postRepository", () => {

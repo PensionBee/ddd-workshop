@@ -1,10 +1,12 @@
 import { describe, expect, test } from "@jest/globals";
+
 import { postCommentRepository } from "./postCommentRepository";
 
 describe("postCommentRepository", () => {
   const validPostComment = {
     id: "postComment-1",
     postId: "post-1",
+    authorId: "account-1",
     content: "A post comment",
   };
 

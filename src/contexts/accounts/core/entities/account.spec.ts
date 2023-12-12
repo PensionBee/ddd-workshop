@@ -3,65 +3,126 @@ import { describe, expect, test } from "@jest/globals";
 import { parseAccount } from "./account";
 
 describe("parseAccount", () => {
-  test("It returns a valid entity if the data to parse is valid", () => {
-    const data = {
-      id: "account-1",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      followers: [
-        {
-          id: "accountFollower-1",
-          followerId: "account-2",
-          followedAt: "2008-09-10T12:34:56Z",
-        },
-      ],
-    };
-    const account = parseAccount(data);
-    expect(account).toEqual(data);
+  const validAccountData = {
+    id: "account-1",
+    email: "test@test.com",
+    username: "username",
+    password: "password123",
+    followers: [
+      {
+        id: "accountFollower-1",
+        followerId: "account-2",
+        followedAt: "2008-09-10T12:34:56Z",
+      },
+    ],
+  };
+
+  test("it returns a valid entity if the data to parse is valid", () => {
+    expect(parseAccount(validAccountData)).toEqual(validAccountData);
   });
-  test("It throws an error if required data is missing", () => {
-    const validData = {
-      id: "account-1",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      followers: [],
-    };
-    expect(() => parseAccount({ ...validData, id: undefined })).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, email: undefined })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, username: undefined })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, password: undefined })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, followers: undefined })
-    ).toThrowError();
+
+  test("it throws an error if 'id' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "notPost-1",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parseAccount({ ...validAccountData, id: invalidValue })
+      ).toThrowError();
+    });
   });
-  test("It throws an error if data is invalid", () => {
-    const validData = {
-      id: "account-1",
-      email: "testemail@test.com",
-      username: "testusername",
-      password: "password123",
-      followers: [],
-    };
-    expect(() => parseAccount({ ...validData, id: "abc123" })).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, email: "testemail" })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, username: "user" })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, password: "passwd" })
-    ).toThrowError();
-    expect(() =>
-      parseAccount({ ...validData, followers: ["abc123"] })
-    ).toThrowError();
+
+  test("it throws an error if 'email' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "something@something",
+      "something.something",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parseAccount({ ...validAccountData, email: invalidValue })
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'username' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "x".repeat(33),
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parseAccount({ ...validAccountData, username: invalidValue })
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'password' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "x".repeat(65),
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parseAccount({ ...validAccountData, password: invalidValue })
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'followers' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      {
+        id: "notAccountFollower-1",
+        followerId: "account-2",
+        followedAt: "2008-09-10T12:34:56Z",
+      },
+      {
+        id: "accountFollower-1",
+        followerId: "notAccount-2",
+        followedAt: "2008-09-10T12:34:56Z",
+      },
+      {
+        id: "accountFollower-1",
+        followerId: "notAccount-2",
+        followedAt: "not-a-date-string",
+      },
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parseAccount({ ...validAccountData, followers: invalidValue })
+      ).toThrowError();
+    });
   });
 });
