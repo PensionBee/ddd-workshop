@@ -3,51 +3,88 @@ import { describe, expect, test } from "@jest/globals";
 import { parsePostComment } from "./postComment";
 
 describe("parsePostComment", () => {
-  test("It returns a valid entity if the data to parse is valid", () => {
-    const postComment = parsePostComment({
-      id: "postComment-1",
-      postId: "post-1",
-      content: "A post comment",
-    });
+  const validPostCommentData = {
+    id: "postComment-1",
+    postId: "post-1",
+    authorId: "account-1",
+    content: "A post comment",
+  };
 
-    expect(postComment).toEqual({
-      id: "postComment-1",
-      postId: "post-1",
-      content: "A post comment",
+  test("it returns a valid entity if the data to parse is valid", () => {
+    expect(parsePostComment(validPostCommentData)).toEqual(
+      validPostCommentData
+    );
+  });
+
+  test("it throws an error if 'id' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "notPostComment-1",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePostComment({ ...validPostCommentData, id: invalidValue })
+      ).toThrowError();
     });
   });
-  test("It throws an error if required data is missing", () => {
-    const validData = {
-      id: "postComment-1",
-      postId: "post-1",
-      content: "A post comment",
-    };
 
-    expect(() =>
-      parsePostComment({ ...validData, id: undefined })
-    ).toThrowError();
-    expect(() =>
-      parsePostComment({ ...validData, postId: undefined })
-    ).toThrowError();
-    expect(() =>
-      parsePostComment({ ...validData, content: undefined })
-    ).toThrowError();
+  test("it throws an error if 'postId' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "notPost-1",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePostComment({ ...validPostCommentData, postId: invalidValue })
+      ).toThrowError();
+    });
   });
-  test("It throws an error if data is invalid", () => {
-    const validData = {
-      id: "postComment-1",
-      postId: "post-1",
-      content: "A post comment",
-    };
 
-    expect(() =>
-      parsePostComment({ ...validData, id: "abc123" })
-    ).toThrowError();
-    expect(() =>
-      parsePostComment({ ...validData, postId: "abc123" })
-    ).toThrowError();
-    expect(() =>
-      parsePostComment({ ...validData, content: "test" })
-    ).toThrowError();
+  test("it throws an error if 'authorId' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "notAccount-1",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePostComment({ ...validPostCommentData, authorId: invalidValue })
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'content' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "x".repeat(513),
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePostComment({ ...validPostCommentData, content: invalidValue })
+      ).toThrowError();
+    });
   });
 });
