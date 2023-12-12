@@ -1,13 +1,31 @@
 import { describe, expect, test } from "@jest/globals";
 
+import { parsePost } from "./post";
+
 describe("parsePost", () => {
-  test("It returns a valid Post entity if the data to parse is valid", () => {
+  const validPostData = {};
+
+  test("it returns a valid entity if the data to parse is valid", () => {
+    expect(parsePost(validPostData)).toEqual(validPostData);
+  });
+
+  test("it throws an error if 'id' is invalid", () => {
     // TODO: COMPLETE ME!
   });
-  test("It throws an error if required data is missing", () => {
+
+  test("it throws an error if 'title' is invalid", () => {
     // TODO: COMPLETE ME!
   });
-  test("It throws an error if the data to parse is invalid", () => {
+
+  test("it throws an error if 'content' is invalid", () => {
+    // TODO: COMPLETE ME!
+  });
+
+  test("it throws an error if 'imageUrl' is invalid", () => {
+    // TODO: COMPLETE ME!
+  });
+
+  test("it throws an error if 'authorId' is invalid", () => {
     // TODO: COMPLETE ME!
   });
 });

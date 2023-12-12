@@ -163,38 +163,40 @@ Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn t
 
 When modelling entities, we're trying to capture the essential attributes which uniquely define a particular domain concept. Too few attributes and we miss out important information. Too many and we clutter our entities with redundant information, especially when that information lives on related entities.
 
-- In **src/contexts/posts/core/entities/post.ts**:
-  - Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)). This will serve as the primary 'definition' of what a `Post` entity actually is, while providing us with the ability to perform runtime parsing.
+In **src/contexts/posts/core/entities/post.ts**:
+
+- Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)). This will serve as the primary 'definition' of what a `Post` entity actually is, while providing us with the ability to perform runtime parsing.
 
 *Note that we're using `zod`'s `infer` utility type to generate a `Post` entity type that we can use in other areas of code in future sections.*
 
+*Note that we've also created a `parsePost` function which simply calls `postSchema.parse` internally. This isn't essential but `parsePost({ ... })` is clearer and more explicit than `postSchema.parse({ ... })`.*
+
+In **src/contexts/posts/core/entities/post.spec.ts**:
+
+- Complete the tests to ensure the `parsePost` function works as expected.
+
 ### Part 2: Modelling Post Comments
 
-- In **src/contexts/posts/core/entities/postComment.ts**:
-  - Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
-  - Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the system.
+In **src/contexts/posts/core/entities/postComment.ts**:
+
+- Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
+- Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the system.
+
+In **src/contexts/posts/core/entities/postComment.spec.ts**:
+
+- Complete the tests to ensure the `parsePostComment` function works as expected.
 
 ### Part 3: Modelling Account Followers
 
 We already have an existing `Account` entity in our `Accounts` bounded context but it doesn't currently capture the concept of 'account followers'. Let's rectify that...
 
-- In **src/contexts/accounts/core/entities/account.ts**:
-  - Update `accountSchema` to include a `follower` attribute that holds information about all the followers of an account.
+In **src/contexts/accounts/core/entities/account.ts**:
 
-### Part 4: Testing our Parsers
+- Update `accountSchema` to include a `follower` attribute that holds information about all the followers of an account.
 
-Although tests are really important in software, it's not always obvious what we should be testing. Should we test every piece of functionality in isolation? Should we only write tests against API endpoints? What about integration and end-to-end tests?
+In **src/contexts/accounts/core/entities/account.spec.ts**:
 
-In this workshop, we'll cover some of these questions by writing tests at various levels and then comparing them to each other to see how much value we're really getting out of each.
-
-Let's start by testing our low-level parser functions.
-
-- In **src/contexts/posts/core/entities/post.spec.ts**:
-  - Complete the tests to ensure the `parsePost` function works as expected.
-- In **src/contexts/posts/core/entities/postComment.spec.ts**:
-  - Write the tests to ensure the `parsePostComment` function works as expected.
-- In **src/contexts/accounts/core/entities/account.spec.ts**:
-  - Update the tests to ensure the `parseAccount` function works as expected
+- Complete the tests to ensure the `parseAccount` function works as expected
 
 ## Questions Worth Pondering
 
