@@ -31,15 +31,15 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 2. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
 3. [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
 4. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
-5. [Chaining Commands](https://github.com/PensionBee/ddd-workshop/tree/chaining-commands)
+5. (WIP) [Chaining Commands](https://github.com/PensionBee/ddd-workshop/tree/chaining-commands)
 6. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
 
 ### Part 2: Cross-Context Communication
 
-1. (WIP) [Cross-Context Data Pulling using Repositories & Clients](https://github.com/PensionBee/ddd-workshop/tree/inter-context-data-fetching) (Business Rule: If basic account then max 5 posts per day)
-2. (WIP) [Cross-Context Data Pushing using a Message Bus](https://github.com/PensionBee/ddd-workshop/tree/integration-events) (Business Rule: If first account post created then A Free Month of Premium)
+1. (WIP) [Cross-Context Data Pulling](https://github.com/PensionBee/ddd-workshop/tree/cross-context-data-pulling)
+2. (WIP) [Cross-Context Data Pushing](https://github.com/PensionBee/ddd-workshop/tree/cross-context-data-pushing)
 
-### Part 3: Useful Abstractions
+### Part 3: Making a Production-Ready App
 
 1. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
-2. (WIP) [Dependency Inversion & Dependency Injection](https://github.com/PensionBee/ddd-workshop/tree/dependency-inversion-injection)
+2. (WIP) [Adding a Real Database](https://github.com/PensionBee/ddd-workshop/tree/adding-a-real-database)
