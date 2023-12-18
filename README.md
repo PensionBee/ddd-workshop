@@ -27,7 +27,7 @@ You return to your desk (coffeeless) looking dazed and confused, worried about h
 
 ### Part 1: DDD Foundations
 
-1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) -> [solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions)
+1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) ([solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions))
 2. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
 3. [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
 4. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
