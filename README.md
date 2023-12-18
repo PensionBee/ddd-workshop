@@ -270,7 +270,7 @@ Just as you're about to start writing the `Follow Account` handler, the CEO pull
 
 We now have a new business rule we need to handle: `If Account A has blocked Account B, then Account B should not be able to follow Account A`.
 
-Usually an additional business rule means at least one additional outcome that our deriver needs to handle. If we wanted, we could capture this on our EventStorming diagram. Here's an example:
+An additional business rule usually results in an additional outcome that our deriver needs to handle. If we wanted, we could capture this on our EventStorming diagram. For example:
 
 ![EventStorming Timeline with Account Blocking](./images/eventstorming-timeline-with-account-blocking.png)
 
