@@ -1,5 +1,17 @@
 # DDD Workshop
 
+Welcome to PensionBee's DDD Workshop! This is a training programme designed to increasing confidence writing event-driven DDD-centric code by bridging the gap between EventStorming and the downstream code one step at a time.
+
+A couple of notes about the workshop:
+
+- TypeScript is the language of choice (there's a `TypeScript Foundations` prerequisites section in the workshop for those who are unfamiliar with TS or need a refresher)
+- The content is heavily inspired by Anthony Manning-Franklin's [Functional Domain Driven Design: Simplified](https://antman-does-software.com/functional-domain-driven-design-simplified) article. Additional inspiration has been taken from Jeremie Chassaing's [Functional Event Sourcing Decider](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) article and Scott Wlaschin's [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/) book.
+- Examples and exercises are somewhat specific to the way PensionBee have chosen to implement DDD tactical patterns. These does not conform to either Object-Oriented Programming (OOP) or Functional Programming (FP), which are both common in the DDD community, but instead embraces more general pragmatic software design principles applicable to both paradigms.
+
+We genuinely hope you find this workshop as useful as we've found it. Feel free to use it, fork it or modify it to suits your own needs.
+
+Let's get to it...
+
 ## Context
 
 It’s your first day at `SocialBuzz`, the next big social media app. Promise.
@@ -11,35 +23,33 @@ You’re apprehended by the CEO you at the coffee machine, just as you’re on t
 > Right, here’s what I’m going to need from you pronto:
 >
 > 1. People need to be able to register with their email address and a password.
-> 2. Users should be able to write short posts, possibly including images, which we’re going to display on the ‘Feed’ page of our app.
-> 3. Folk also need to be able to follow accounts they like.
+> 2. Users should be able to write short posts, possibly including images, which we’re going to display on the app's home page.
+> 3. They also need to be able to follow accounts they like.
 > 4. Ohh, and comments. Being able to comment on a post is important too.
 >
-> That’s about it for now but I’ve got loads of ideas that’ll keep you on your toes so make sure you build something that’s easy to change when I innevitably chuck some curveballs at you. Alright then, chop chop, let’s get to it.
+> Alright then, chop chop, let’s get to it.
 
-You return to your desk (coffeeless) looking dazed and confused, worried about how you’re going to get started - how you’re going to show that you can do this well - when one of your colleagues turns to you and whispers three words: Domain. Driven. Design. Those 3 words lead you down a Google rabbit hole and, eventually, to the DDD Workshop…
+You return to your desk (coffeeless), feeling a little overwhelmed. As you calm your breathing, you remember that you recently discovered Domain-Driven Design, an approach to building great software which looked very promising. Time to put it to the test...
 
-## DDD Workshop Overview
+## Workshop Overview
 
 ### Prerequisites
 
-1. [Typescript Foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript)
+- [TypeScript Foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript)
 
-### Part 1: DDD Foundations
+### Part 1: Strategic Design
 
-1. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) ([solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions))
-2. [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
-3. [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
-4. [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
-5. (WIP) [Chaining Commands](https://github.com/PensionBee/ddd-workshop/tree/chaining-commands)
-6. (WIP) [Query Handlers](https://github.com/PensionBee/ddd-workshop/tree/query-handlers)
+- [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) ([example solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions))
 
-### Part 2: Cross-Context Communication
+### Part 2: Foundational Tactical Patterns
 
-1. (WIP) [Cross-Context Data Pulling](https://github.com/PensionBee/ddd-workshop/tree/cross-context-data-pulling)
-2. (WIP) [Cross-Context Data Pushing](https://github.com/PensionBee/ddd-workshop/tree/cross-context-data-pushing)
+- [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
+- [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
+- [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
+- (WIP) Command-Event Chains
+- (WIP) Query Handlers
 
-### Part 3: Making a Production-Ready App
+### Part 3: Cross-Context Communication
 
-1. (WIP) [Adding API Endpoints](https://github.com/PensionBee/ddd-workshop/tree/adding-api-endpoints)
-2. (WIP) [Adding a Real Database](https://github.com/PensionBee/ddd-workshop/tree/adding-a-real-database)
+- (WIP) Request-Response Communication
+- (WIP) Pub/Sub Communication
