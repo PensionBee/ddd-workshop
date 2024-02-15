@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { parseAccount } from "./account";
+import { Account, parseAccount } from "./account";
 
 describe("parseAccount", () => {
-  const validAccountData = {
+  const validAccount: Account = {
     id: "account-1234",
     email: "test@test.com",
     username: "account1234",
@@ -11,7 +11,7 @@ describe("parseAccount", () => {
   };
 
   test("it returns a valid entity if the data to parse is valid", () => {
-    expect(parseAccount(validAccountData)).toEqual(validAccountData);
+    expect(parseAccount(validAccount)).toEqual(validAccount);
   });
 
   test("it throws an error if 'id' is invalid", () => {
@@ -19,7 +19,7 @@ describe("parseAccount", () => {
 
     expect(
       parseAccount({
-        ...validAccountData,
+        ...validAccount,
         id: invalidId,
       } as any)
     ).toThrow();
