@@ -1,14 +1,16 @@
 import { describe, expect, test } from "@jest/globals";
 
+import { Account } from "../../core/entities/account";
 import { accountRepository } from "./accountRepository";
 
 describe("accountRepository", () => {
-  const validAccount = {
+  const validAccount: Account = {
     id: "account-1",
     email: "testemail@test.com",
     username: "testusername",
     password: "password123",
     followers: [],
+    blockedAccounts: [],
   };
 
   const invalidAccount = {

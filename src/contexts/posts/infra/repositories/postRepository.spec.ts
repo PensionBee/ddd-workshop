@@ -1,14 +1,15 @@
 import { describe, expect, test } from "@jest/globals";
 
+import { Post } from "../../core/entities/post";
 import { postRepository } from "./postRepository";
 
 describe("postRepository", () => {
-  const validPost = {
+  const validPost: Post = {
     id: "post-1",
+    authorId: "account-1",
     title: "Post Title",
     content: "Some post content",
     imageUrl: "https://images.com/image1",
-    authorId: "account-1",
   };
 
   const invalidPost = {

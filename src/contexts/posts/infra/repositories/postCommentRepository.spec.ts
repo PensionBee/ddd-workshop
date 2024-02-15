@@ -1,9 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
 
+import { PostComment } from "../../core/entities/postComment";
 import { postCommentRepository } from "./postCommentRepository";
 
 describe("postCommentRepository", () => {
-  const validPostComment = {
+  const validPostComment: PostComment = {
     id: "postComment-1",
     postId: "post-1",
     authorId: "account-1",

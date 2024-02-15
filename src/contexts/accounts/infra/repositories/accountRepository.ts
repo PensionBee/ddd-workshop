@@ -9,22 +9,19 @@ import { Account, parseAccount } from "../../core/entities/account";
  * requires us to map between the two in the repository.
  */
 type AccountPersistenceData = {
-  id__c: string;
-  email__c: string;
-  username__c: string;
-  password__c: string;
-  followers__c: {
-    id__c: string;
-    follower_id__c: string;
-    followed_at__c: string;
-  }[];
+  id__field: string;
+  email__field: string;
+  username__field: string;
+  password__field: string;
+  followers__field: string[];
+  blocked_accounts__field: string[];
 };
 
 // In-memory data store
 // --------------------
 
 const accounts: Record<
-  AccountPersistenceData["id__c"],
+  AccountPersistenceData["id__field"],
   AccountPersistenceData
 > = {};
 
@@ -35,15 +32,12 @@ const mapToAccount = (
   accountPersistenceData: AccountPersistenceData
 ): Account => {
   const account: Account = {
-    id: accountPersistenceData.id__c,
-    email: accountPersistenceData.email__c,
-    username: accountPersistenceData.username__c,
-    password: accountPersistenceData.password__c,
-    followers: accountPersistenceData.followers__c.map((f) => ({
-      id: f.id__c,
-      followerId: f.follower_id__c,
-      followedAt: f.followed_at__c,
-    })),
+    id: accountPersistenceData.id__field,
+    email: accountPersistenceData.email__field,
+    username: accountPersistenceData.username__field,
+    password: accountPersistenceData.password__field,
+    followers: accountPersistenceData.followers__field,
+    blockedAccounts: accountPersistenceData.blocked_accounts__field,
   };
 
   return parseAccount(account);
@@ -55,15 +49,12 @@ const mapToAccountPersistenceData = (
   const parsedAccount = parseAccount(account);
 
   const accountPersistenceData: AccountPersistenceData = {
-    id__c: parsedAccount.id,
-    email__c: parsedAccount.email,
-    username__c: parsedAccount.username,
-    password__c: parsedAccount.password,
-    followers__c: parsedAccount.followers.map((f) => ({
-      id__c: f.id,
-      follower_id__c: f.followerId,
-      followed_at__c: f.followedAt,
-    })),
+    id__field: parsedAccount.id,
+    email__field: parsedAccount.email,
+    username__field: parsedAccount.username,
+    password__field: parsedAccount.password,
+    followers__field: parsedAccount.followers,
+    blocked_accounts__field: parsedAccount.blockedAccounts,
   };
 
   return accountPersistenceData;
@@ -75,7 +66,7 @@ const mapToAccountPersistenceData = (
 export const accountRepository = {
   save: async (account: Account) => {
     const accountPersistenceData = mapToAccountPersistenceData(account); // Parse and map account to persistence data format before persisting
-    accounts[accountPersistenceData.id__c] = accountPersistenceData; // Persist account data
+    accounts[accountPersistenceData.id__field] = accountPersistenceData; // Persist account data
   },
   getById: async (id: Account["id"]) => {
     const account = accounts[id]; // Fetch account from persistence (may be undefined)
@@ -83,13 +74,13 @@ export const accountRepository = {
   },
   getByEmail: async (email: Account["email"]) => {
     const account = Object.values(accounts).find(
-      (acc) => acc.email__c === email
+      (acc) => acc.email__field === email
     ); // Fetch account from persistence (may be undefined)
     return account ? mapToAccount(account) : null; // Ensure account is valid before returning
   },
   getByUsername: async (username: Account["username"]) => {
     const account = Object.values(accounts).find(
-      (acc) => acc.username__c === username
+      (acc) => acc.username__field === username
     ); // Fetch account from persistence (may be undefined)
     return account ? mapToAccount(account) : null; // Ensure account is valid before returning
   },
