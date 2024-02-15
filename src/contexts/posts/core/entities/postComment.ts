@@ -18,5 +18,5 @@ const postCommentSchema = z.object({
 // Parser
 // ------
 
-export const parsePostComment = (data: Record<string, unknown>): PostComment =>
+export const parsePostComment = (data: PostComment): PostComment =>
   postCommentSchema.parse(data);

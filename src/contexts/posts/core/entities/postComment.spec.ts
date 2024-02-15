@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { parsePostComment } from "./postComment";
+import { PostComment, parsePostComment } from "./postComment";
 
 describe("parsePostComment", () => {
-  const validPostCommentData = {
+  const validPostComment: PostComment = {
     id: "postComment-1",
     postId: "post-1",
     authorId: "account-1",
@@ -11,9 +11,7 @@ describe("parsePostComment", () => {
   };
 
   test("it returns a valid entity if the data to parse is valid", () => {
-    expect(parsePostComment(validPostCommentData)).toEqual(
-      validPostCommentData
-    );
+    expect(parsePostComment(validPostComment)).toEqual(validPostComment);
   });
 
   test("it throws an error if 'id' is invalid", () => {
@@ -29,7 +27,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, id: invalidValue })
+        parsePostComment({
+          ...validPostComment,
+          id: invalidValue,
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -47,7 +48,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, postId: invalidValue })
+        parsePostComment({
+          ...validPostComment,
+          postId: invalidValue,
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -65,7 +69,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, authorId: invalidValue })
+        parsePostComment({
+          ...validPostComment,
+          authorId: invalidValue,
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -83,7 +90,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, content: invalidValue })
+        parsePostComment({
+          ...validPostComment,
+          content: invalidValue,
+        } as PostComment)
       ).toThrowError();
     });
   });
