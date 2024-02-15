@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { parsePostComment } from "./postComment";
+import { PostComment, parsePostComment } from "./postComment";
 
 describe("parsePostComment", () => {
-  const validPostCommentData = {
+  const validPostCommentData: PostComment = {
     id: "postComment-1",
     postId: "post-1",
     authorId: "account-1",
@@ -29,7 +29,7 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, id: invalidValue })
+        parsePostComment({ ...validPostCommentData, id: invalidValue } as any)
       ).toThrowError();
     });
   });
@@ -47,7 +47,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, postId: invalidValue })
+        parsePostComment({
+          ...validPostCommentData,
+          postId: invalidValue,
+        } as any)
       ).toThrowError();
     });
   });
@@ -65,7 +68,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, authorId: invalidValue })
+        parsePostComment({
+          ...validPostCommentData,
+          authorId: invalidValue,
+        } as any)
       ).toThrowError();
     });
   });
@@ -83,7 +89,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, content: invalidValue })
+        parsePostComment({
+          ...validPostCommentData,
+          content: invalidValue,
+        } as any)
       ).toThrowError();
     });
   });

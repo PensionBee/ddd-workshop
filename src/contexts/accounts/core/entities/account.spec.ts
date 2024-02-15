@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { parseAccount } from "./account";
+import { Account, parseAccount } from "./account";
 
 describe("parseAccount", () => {
-  const validAccountData = {
+  const validAccountData: Account = {
     id: "account-1",
     email: "test@test.com",
     username: "username",
@@ -13,6 +13,13 @@ describe("parseAccount", () => {
         id: "accountFollower-1",
         followerId: "account-2",
         followedAt: "2008-09-10T12:34:56Z",
+      },
+    ],
+    blockedAccounts: [
+      {
+        id: "blockedAccount-1",
+        blockedAccountId: "account-3",
+        blockedAt: "2010-09-10T12:34:56Z",
       },
     ],
   };
@@ -34,7 +41,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, id: invalidValue })
+        parseAccount({ ...validAccountData, id: invalidValue } as any as any)
       ).toThrowError();
     });
   });
@@ -53,7 +60,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, email: invalidValue })
+        parseAccount({ ...validAccountData, email: invalidValue } as any)
       ).toThrowError();
     });
   });
@@ -71,7 +78,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, username: invalidValue })
+        parseAccount({ ...validAccountData, username: invalidValue } as any)
       ).toThrowError();
     });
   });
@@ -89,7 +96,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, password: invalidValue })
+        parseAccount({ ...validAccountData, password: invalidValue } as any)
       ).toThrowError();
     });
   });
@@ -121,7 +128,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, followers: invalidValue })
+        parseAccount({ ...validAccountData, followers: invalidValue } as any)
       ).toThrowError();
     });
   });

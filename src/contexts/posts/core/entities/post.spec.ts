@@ -1,9 +1,9 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { parsePost } from "./post";
+import { Post, parsePost } from "./post";
 
 describe("parsePost", () => {
-  const validPostData = {
+  const validPostData: Post = {
     id: "post-1",
     title: "Post Title",
     content: "Some post content",
@@ -28,60 +28,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, id: invalidValue })
-      ).toThrowError();
-    });
-  });
-
-  test("it throws an error if 'title' is invalid", () => {
-    const invalidValues = [
-      undefined,
-      null,
-      true,
-      false,
-      1,
-      {},
-      "x",
-      "x".repeat(65),
-    ];
-    invalidValues.forEach((invalidValue) => {
-      expect(() =>
-        parsePost({ ...validPostData, title: invalidValue })
-      ).toThrowError();
-    });
-  });
-
-  test("it throws an error if 'content' is invalid", () => {
-    const invalidValues = [
-      undefined,
-      null,
-      true,
-      false,
-      1,
-      {},
-      "x",
-      "x".repeat(257),
-    ];
-    invalidValues.forEach((invalidValue) => {
-      expect(() =>
-        parsePost({ ...validPostData, content: invalidValue })
-      ).toThrowError();
-    });
-  });
-
-  test("it throws an error if 'imageUrl' is invalid", () => {
-    const invalidValues = [
-      null,
-      true,
-      false,
-      1,
-      {},
-      "x",
-      "images.com/an-image.png",
-    ];
-    invalidValues.forEach((invalidValue) => {
-      expect(() =>
-        parsePost({ ...validPostData, imageUrl: invalidValue })
+        parsePost({ ...validPostData, id: invalidValue } as any)
       ).toThrowError();
     });
   });
@@ -99,7 +46,60 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, authorId: invalidValue })
+        parsePost({ ...validPostData, authorId: invalidValue } as any)
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'title' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "x".repeat(65),
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePost({ ...validPostData, title: invalidValue } as any)
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'content' is invalid", () => {
+    const invalidValues = [
+      undefined,
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "x".repeat(257),
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePost({ ...validPostData, content: invalidValue } as any)
+      ).toThrowError();
+    });
+  });
+
+  test("it throws an error if 'imageUrl' is invalid", () => {
+    const invalidValues = [
+      null,
+      true,
+      false,
+      1,
+      {},
+      "x",
+      "images.com/an-image.png",
+    ];
+    invalidValues.forEach((invalidValue) => {
+      expect(() =>
+        parsePost({ ...validPostData, imageUrl: invalidValue } as any)
       ).toThrowError();
     });
   });
