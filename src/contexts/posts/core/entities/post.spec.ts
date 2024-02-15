@@ -10,6 +10,19 @@ describe("parsePost", () => {
   });
 
   test("it throws an error if 'id' is invalid", () => {
+    const invalidId = null;
+
+    expect(() =>
+      parsePost({
+        ...validPostData,
+        id: invalidId,
+      })
+    ).toThrow();
+
+    // Maybe we want to test other invalid IDs?
+  });
+
+  test("it throws an error if 'authorId' is invalid", () => {
     // TODO: COMPLETE ME!
   });
 
@@ -22,10 +35,6 @@ describe("parsePost", () => {
   });
 
   test("it throws an error if 'imageUrl' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'authorId' is invalid", () => {
     // TODO: COMPLETE ME!
   });
 });

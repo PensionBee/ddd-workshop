@@ -6,14 +6,13 @@
 
 ### What is an Entity?
 
-An **Entity** represents anything which has a lifecycle and can be modelled with a unique identifier. A simple entity can be made up of primitive **Values** (attributes) only, which may change throughout the entity's lifecycle. For example:
+An **Entity** represents anything which has a lifecycle and can be modelled with a unique identifier. An entity can be made up of simple **Values** (attributes), which may change throughout the entity's lifecycle. For example:
 
 ```sh
 Order                      # 'Order' is an entity - even when the attributes of an order change, it's still the same order
     ID                       # 'ID' is a simple value that uniquely identifies the specific order throughout its lifecycle
     Buyer ID                 # 'Buyer ID' is a simple value that references the 'Buyer' entity by it's unique ID
     Estimated Delivery Date  # 'Estimated Delivery Date' is a simple value that could change throughout the Order's lifecycle
-  ...
 ```
 
 Entities can also contain more complex (nested) values...
@@ -28,7 +27,6 @@ Order
         Street
         City
         Postcode
-  ...
 ```
 
 ### Nested Entities (Aggregates)
@@ -58,8 +56,6 @@ Order
             Product Price
             Quantity
             Total Price
-    ...
-  ...
 ```
 
 Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's own values as well as a collection of `Order Line` entities.
@@ -94,7 +90,6 @@ Transaction
     Amount
     Sending Account ID
     Receiving Account ID
-  ...
 ```
 
 ### What is a Parser?
@@ -125,7 +120,6 @@ type Account = {
     city: string;     // Required
     postcode: string; // Required - should be in the format AB11 1AB
   }
-  ...
 }
 ```
 
@@ -149,7 +143,7 @@ Let's have another look at the EventStorming diagram we're using to guide the co
 
 ![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
 
-Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn those concepts into code.
+Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn those into code, bearing in mind the associated commands they'll need to support.
 
 ### Part 1: Modelling Posts
 
@@ -157,38 +151,51 @@ When we model entities in our domain, we're trying to capture the essential attr
 
 In **src/contexts/posts/core/entities/post.ts**:
 
-- Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)) in particular. This schema serves as the primary definition of what a `Post` entity is, while providing us with the ability to perform runtime parsing (and autogenerate TypeScript definitions).
+- Complete the `postSchema` using the popular typescript parsing library [zod](https://github.com/colinhacks/zod). The schema has been partially completed to get you started but it currently allows all data with `z.any()`.
 
-*Note that we're using `zod`'s `infer` utility type to generate a `Post` entity type that we can use in other areas of code in future sections.*
+This schema now serves as a source-of-truth representation of what a `Post` entity is within our bounded context. It provides us with the ability to perform runtime parsing of posts, autogenerate TypeScript types and, ultimately, acts as living documentation. Winning!
 
-*Note that we've also created a `parsePost` function which simply calls `postSchema.parse` internally. This isn't essential but `parsePost({ ... })` is clearer and more explicit than `postSchema.parse({ ... })`.*
+Note that we're using `zod`'s `infer` utility type to generate a TypeScript compliant `Post` type. We can now use this type in other areas of our codebase to make our code more readable and type-safe.
+
+We also have a `parsePost` function which simply calls `postSchema.parse` (native zod functionality) under the hood. This isn't essential but it allows us to completely encapsulate the details of parsing within this file only, meaning other areas of our code have a clean interface to interact with via `parsePost({ ... })`, i.e if we ever decide to swap out `zod` for something else, we only need to change `post.ts` since no zod functionality has leaked into the rest of our system which depends on post entities..
 
 In **src/contexts/posts/core/entities/post.spec.ts**:
 
-- Complete the tests to ensure the `parsePost` function works as expected.
+- Complete the test suite to ensure the `parsePost` function works as expected.
+
+**Note that this test suite can be run via `npm test src/contexts/posts/core/entities/post.spec.ts`. All test suites can be run via `npm test`.**
 
 ### Part 2: Modelling Post Comments
 
 In **src/contexts/posts/core/entities/postComment.ts**:
 
 - Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
-- Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the system.
+- Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the codebase.
 
 In **src/contexts/posts/core/entities/postComment.spec.ts**:
 
-- Complete the tests to ensure the `parsePostComment` function works as expected.
+- Complete the test suite to ensure the `parsePostComment` function works as expected.
 
-### Part 3: Modelling Account Followers
+### Part 3: Modelling Account Followers and Blocked Accounts
 
-We already have an existing `Account` entity in our `Accounts` bounded context but it doesn't currently capture the concept of 'account followers'. Let's rectify that...
+We already have an existing `Account` entity in our `Accounts` bounded context but it doesn't currently have the ability to capture changes resulting from the `Follow Account` command or `Block Account` command. Let's rectify that...
 
 In **src/contexts/accounts/core/entities/account.ts**:
 
-- Update `accountSchema` to include a `follower` attribute that holds information about all the followers of an account.
+- Update `accountSchema` to include a `followers` attribute which holds information about all the followers of an account.
+- Update `accountSchema` to include a `blockedAccounts` attribute which holds information about all the accounts an account has blocked..
 
 In **src/contexts/accounts/core/entities/account.spec.ts**:
 
-- Complete the tests to ensure the `parseAccount` function works as expected
+- Complete the test suite to ensure the `parseAccount` function works as expected
+
+## Questions Worth Pondering
+
+**Note: There are no straightforward answers to these questions - everything comes with a trade-off.**
+
+- Are there any potential benefits from explicitly declaring entity types, rather than inferring them from zod schemas?
+- What are the potential long-term downsides of using zod in our domain code?
+- What value do we get from writing parser tests? Do they have any value?
 
 ## Additional Resources
 

@@ -19,9 +19,4 @@ const accountSchema = z.object({
 // Parser
 // ------
 
-/**
- * This is a convenience function. Calling `parseAccount({...})` elsewhere in
- * our code is a little more explicit than accountSchema.parse({...})
- */
-export const parseAccount = (data: Record<string, unknown>) =>
-  accountSchema.parse(data);
+export const parseAccount = (data: Account) => accountSchema.parse(data);
