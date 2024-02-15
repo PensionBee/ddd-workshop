@@ -6,13 +6,13 @@
 
 ### What is an Entity?
 
-In Domain-Driven Design, an **entity** is a representation of anything in a domain which can be defined by a unique identifier that remains constant throughout it's lifecycle. A simple entity can be made up of primitive **values** (attributes), some of which will change throughout the entity's lifecycle. For example:
+An **Entity** represents anything which has a lifecycle and can be modelled with a unique identifier. A simple entity can be made up of primitive **Values** (attributes) only, which may change throughout the entity's lifecycle. For example:
 
 ```sh
 Order                      # 'Order' is an entity - even when the attributes of an order change, it's still the same order
-  ID                       # 'ID' is a simple value that uniquely identifies the specific order throughout its lifecycle
-  Buyer ID                 # 'Buyer ID' is a simple value that references the 'Buyer' entity by it's unique ID
-  Estimated Delivery Date  # 'Estimated Delivery Date' is a simple value that could change throughout the Order's lifecycle
+    ID                       # 'ID' is a simple value that uniquely identifies the specific order throughout its lifecycle
+    Buyer ID                 # 'Buyer ID' is a simple value that references the 'Buyer' entity by it's unique ID
+    Estimated Delivery Date  # 'Estimated Delivery Date' is a simple value that could change throughout the Order's lifecycle
   ...
 ```
 
@@ -20,57 +20,57 @@ Entities can also contain more complex (nested) values...
 
 ```sh
 Order
-  ID
-  Buyer ID
-  Estimated Delivery Date
-  Delivery Address         # 'Delivery Address' is a nested value that could change throughout the Order's lifecycle
-    Number
-    Street
-    City
-    Postcode
+    ID
+    Buyer ID
+    Estimated Delivery Date
+    Delivery Address         # 'Delivery Address' is a nested value that could change throughout the Order's lifecycle. Note the lack of a Delivery Address ID. 
+        Number
+        Street
+        City
+        Postcode
   ...
 ```
 
 ### Nested Entities (Aggregates)
 
-A nested entity is essentially a group of closely related entities which **always** need to change as a single unit (think ACID transactions if that's useful) because they **always** need to be immediately consistent with each other. For example:
+A nested entity is essentially a group of closely related entities which **always** need to change as a single unit because they **always** need to be immediately consistent with each other (think "ACID transactions" if that's a familiar concept). For example:
 
 ```sh
 Order
-  ID
-  Buyer ID
-  Estimated Delivery Date
-  Delivery Address
-    Number
-    Street
-    City
-    Postcode
-  Order Lines              # 'Order Lines' is a collection of 'Order Line' Entities
-    Order Line 1
-      ID                   # Each 'Order Line' has it's own unique ID
-      Product ID           # 'Product ID' is likely a reference to a specific `Product` instance
-      Product Price
-      Quantity             # 'Quantity' could change throughout the lifecycle of an 'Order Line' (a customer could edit this before dispatch)
-      Total Price          # 'Total Price' could change throughout the lifecycle of an 'Order Line' (e.g. if the 'Quantity' changes)
-    Order Line 2
-      ID
-      Product ID
-      Product Price
-      Quantity
-      Total Price
+    ID
+    Buyer ID
+    Estimated Delivery Date
+    Delivery Address
+        Number
+        Street
+        City
+        Postcode
+    Order Lines              # 'Order Lines' is a collection of 'Order Line' Entities
+        Order Line 1
+            ID               # Each 'Order Line' has it's own unique ID
+            Product ID       # 'Product ID' is likely a reference to a specific `Product` instance
+            Product Price
+            Quantity         # 'Quantity' could change throughout the lifecycle of an 'Order Line' (a customer could edit this before dispatch)
+            Total Price      # 'Total Price' could change throughout the lifecycle of an 'Order Line' (e.g. if the 'Quantity' changes or a discount is applied because the order is delayed)
+        Order Line 2
+            ID
+            Product ID
+            Product Price
+            Quantity
+            Total Price
     ...
   ...
 ```
 
 Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's own values as well as a collection of `Order Line` entities.
 
-**IN THE WILD, YOU'LL LIKELY COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN DDD BOOKS/POSTS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' SO WE DON'T HAVE TO EXPLICITLY DISTINGUISH BETWEEN AGGREGATES AND ENTITIES.**
+**YOU'RE GUARANTEED TO COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN MOST DDD BOOKS/ARTICLES/TALKS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' HERE SO WE DON'T HAVE TO EXPLICITLY DISTINGUISH BETWEEN AGGREGATES AND ENTITIES.**
 
 But why do we need this? Why can't we just model all our entities in isolation?
 
-Good question! There's nothing stopping us doing exactly that. But there can be some downsides to this approach...
+Good question! There's absolutely nothing stopping you doing exactly that but there can be some downsides to this approach...
 
-Let's say we have several business rules focused around orders:
+Let's say we have several business rules centred around an order:
 
 - Spend more than £50 and get speedy delivery
 - Buy 5 or more of the same item and get 15% off that item item
@@ -79,9 +79,9 @@ Let's say we have several business rules focused around orders:
 - Customers with an 'Eco' status pay £1 extra per delivery, after discounts, to support the environment
 - etc.
 
-As the number of business rules increases, it becomes easier for our `Order` and `Order line` entities to get into an inconsistent state and we might end up with some gnarly bugs or confusing code kicking about, especially if we treat them all as independent units. To reduce the chances of this happening, we can group these entities together and treat them as a single unit any time anything about those entities needs to change. This makes it easier to enforce our business rules across all relevant entities.
+As the number of business rules increases, it becomes easier for our `Order` and `Order line` entities to get into an inconsistent state and we might end up with some gnarly data inconsistency bugs if we treat each entity as an independent unit. To reduce the chances of this happening, we can group these entities together and treat them as a single unit when anything about those entities changes. This makes it easier to enforce business rules across all relevant entities.
 
-*Note: 'invariants' is a fancy word for business rules you'll often come across in the wild.*
+Note that, from a code perspective, it's generally easier to deal with standalone entities than nested ones. In many cases, it's reasonable to design entities like this but there are certainly cases where the benefits of grouping entities together will outweigh the code overhead.
 
 ### Abstract Entities
 
@@ -89,17 +89,17 @@ Entities all fall somewhere on an 'abstractness' scale. Some are very easy to re
 
 ```sh
 Transaction
-  ID
-  Status
-  Amount
-  Sending Account ID
-  Receiving Account ID
+    ID
+    Status
+    Amount
+    Sending Account ID
+    Receiving Account ID
   ...
 ```
 
 ### What is a Parser?
 
-In the context of DDD entities, a parser turns some unknown, unvalidated data into a valid entity (or throws/returns an error). As an example, let's say we have a `/register` API endpoint which internally creates an `Account` entity in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
+In the context of DDD entities, a parser turns unvalidated data into a valid entity (or throws/returns an error). As an example, let's say we have a `/register` API endpoint which results in an `Account` entity being created in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
 
 ```json
 {
@@ -129,21 +129,13 @@ type Account = {
 }
 ```
 
-When creating a new `Account` entity, we need to validate the incoming data used to create it, potentially transforming the structure/format/data types to match our internal representation of that entity. This is exactly what parsers are for!
+When our system creates a new `Account` entity, we need to validate the data used to create it, and potentially transform the structure/format/data types in some way to match our internal representation. This is exactly where parsers come in.
 
-In practice, we can roll your own validation/transformation functions or use an off-the-shelf parsing library (which is what we'll do in the 'The Practical Bit' below).
-
-## Resources
-
-Feel free to check these out before or after completing 'The Practical Bit' below.
-
-- [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects)
-- [Entities & values (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
-- [The One Question To Haunt Everyone: What is a DDD Aggregate? (25 minute video)](https://www.youtube.com/watch?v=zlFqjD2LKlE)
+In practice, we could roll your own validation/transformation functions or use an off-the-shelf parsing library (which is what we'll do in the 'The Practical Bit' below).
 
 ## Directory Structure Overview
 
-At this point, it's worth touching upon the directory structure we're using. We currently have 2 bounded contexts, `Accounts` and `Posts`, which live in the **src/contexts/** directory and have the same structure:
+At this point, it's worth touching upon the directory structure we're using. We currently have 2 bounded contexts, `Accounts` and `Posts`, which live in the **src/contexts/** directory. Each of these have the same structure:
 
 - **core/**: This is our "application core", where we'll model our entities and build out our system's capabilities (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. (*If you're already familiar with onion/clean/hexagonal/ports-and-adapters architecture, this layer is essentially the "domain" and "application" layers squashed into one for simplicity.*)
 - **infra/**: Short for "infrastructure" - this is where we'll write the code which allows the application core to interact with the external world (e.g. accessing the database, the file system or a 3rd party system).
@@ -161,11 +153,11 @@ Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn t
 
 ### Part 1: Modelling Posts
 
-When modelling entities, we're trying to capture the essential attributes which uniquely define a particular domain concept. Too few attributes and we miss out important information. Too many and we clutter our entities with redundant information, especially when that information lives on related entities.
+When we model entities in our domain, we're trying to capture the essential attributes which define that domain concept. Too few attributes and we miss important details. Too many and we clutter our entities with redundant details.
 
 In **src/contexts/posts/core/entities/post.ts**:
 
-- Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)). This will serve as the primary 'definition' of what a `Post` entity actually is, while providing us with the ability to perform runtime parsing.
+- Complete the `postSchema` using the **zod** parsing library ([zod primitives](https://github.com/colinhacks/zod#primitives) and [zod objects](https://github.com/colinhacks/zod#objects)) in particular. This schema serves as the primary definition of what a `Post` entity is, while providing us with the ability to perform runtime parsing (and autogenerate TypeScript definitions).
 
 *Note that we're using `zod`'s `infer` utility type to generate a `Post` entity type that we can use in other areas of code in future sections.*
 
@@ -198,10 +190,8 @@ In **src/contexts/accounts/core/entities/account.spec.ts**:
 
 - Complete the tests to ensure the `parseAccount` function works as expected
 
-## Questions Worth Pondering
+## Additional Resources
 
-- Are there any potential benefits from explicitly declaring entity types, rather than inferring them from zod schemas?
-- What are the potential downsides of using zod in our domain code?
-- Which kind of tests (unit, integration, e2e, regression, acceptance) are parser tests?
-- What value do we get from writing parser tests?
-- What kind of things do we NOT want to test in parser tests? Why?
+- [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects)
+- [Entities & values (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
+- [The One Question To Haunt Everyone: What is a DDD Aggregate? (25 minute video)](https://www.youtube.com/watch?v=zlFqjD2LKlE)
