@@ -3,7 +3,7 @@ import { describe, expect, test } from "@jest/globals";
 import { Post, parsePost } from "./post";
 
 describe("parsePost", () => {
-  const validPostData: Post = {
+  const validPost: Post = {
     id: "post-1",
     title: "Post Title",
     content: "Some post content",
@@ -12,7 +12,7 @@ describe("parsePost", () => {
   };
 
   test("it returns a valid entity if the data to parse is valid", () => {
-    expect(parsePost(validPostData)).toEqual(validPostData);
+    expect(parsePost(validPost)).toEqual(validPost);
   });
 
   test("it throws an error if 'id' is invalid", () => {
@@ -28,7 +28,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, id: invalidValue } as any)
+        parsePost({ ...validPost, id: invalidValue } as Post)
       ).toThrowError();
     });
   });
@@ -46,7 +46,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, authorId: invalidValue } as any)
+        parsePost({ ...validPost, authorId: invalidValue } as Post)
       ).toThrowError();
     });
   });
@@ -64,7 +64,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, title: invalidValue } as any)
+        parsePost({ ...validPost, title: invalidValue } as Post)
       ).toThrowError();
     });
   });
@@ -82,7 +82,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, content: invalidValue } as any)
+        parsePost({ ...validPost, content: invalidValue } as Post)
       ).toThrowError();
     });
   });
@@ -99,7 +99,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPostData, imageUrl: invalidValue } as any)
+        parsePost({ ...validPost, imageUrl: invalidValue } as Post)
       ).toThrowError();
     });
   });

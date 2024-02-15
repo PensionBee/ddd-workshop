@@ -3,7 +3,7 @@ import { describe, expect, test } from "@jest/globals";
 import { PostComment, parsePostComment } from "./postComment";
 
 describe("parsePostComment", () => {
-  const validPostCommentData: PostComment = {
+  const validPostComment: PostComment = {
     id: "postComment-1",
     postId: "post-1",
     authorId: "account-1",
@@ -11,9 +11,7 @@ describe("parsePostComment", () => {
   };
 
   test("it returns a valid entity if the data to parse is valid", () => {
-    expect(parsePostComment(validPostCommentData)).toEqual(
-      validPostCommentData
-    );
+    expect(parsePostComment(validPostComment)).toEqual(validPostComment);
   });
 
   test("it throws an error if 'id' is invalid", () => {
@@ -29,7 +27,10 @@ describe("parsePostComment", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePostComment({ ...validPostCommentData, id: invalidValue } as any)
+        parsePostComment({
+          ...validPostComment,
+          id: invalidValue,
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -48,9 +49,9 @@ describe("parsePostComment", () => {
     invalidValues.forEach((invalidValue) => {
       expect(() =>
         parsePostComment({
-          ...validPostCommentData,
+          ...validPostComment,
           postId: invalidValue,
-        } as any)
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -69,9 +70,9 @@ describe("parsePostComment", () => {
     invalidValues.forEach((invalidValue) => {
       expect(() =>
         parsePostComment({
-          ...validPostCommentData,
+          ...validPostComment,
           authorId: invalidValue,
-        } as any)
+        } as PostComment)
       ).toThrowError();
     });
   });
@@ -90,9 +91,9 @@ describe("parsePostComment", () => {
     invalidValues.forEach((invalidValue) => {
       expect(() =>
         parsePostComment({
-          ...validPostCommentData,
+          ...validPostComment,
           content: invalidValue,
-        } as any)
+        } as PostComment)
       ).toThrowError();
     });
   });
