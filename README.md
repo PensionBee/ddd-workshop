@@ -2,21 +2,29 @@
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
-**DO NOT** treat the following diagrams as definitive solutions to the EventStorming exercise! They are potentially naive (on purpose), which we'll use to faciliate discussions around entity design in the next section, especially around the `Account` entity associated with the `Follow Account` command (hint: maybe a separate `Subscription`, `Follower`, `Follow` or `Connection` entity would be better?).
+**DO NOT** treat the following as definitive solutions to the EventStorming exercise!
 
-## EventStorming Timeline
+## Part 1
 
-![EventStorming Timeline](./images/eventstorming-timeline.png)
+![EventStorming Timeline](./images/eventstorming-part-1.png)
 
-## Bounded Context Groups
+## Part 2
 
-![Bounded Context Groups](./images/bounded-context-groups.png)
+![EventStorming Timeline](./images/eventstorming-part-2.png)
 
-## EventStorming Timeline with Bounded Contexts
+## Part 3
 
-![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+![EventStorming Timeline](./images/eventstorming-part-3.png)
 
-## Questions Worth Pondering
+## Part 4
 
-- Is `Account` the best choice of entity for the `Follow Account` command?
-- Given the following statement: `Posts are written by Authors`, is our EventStorming diagram sufficient?
+![EventStorming Timeline](./images/eventstorming-part-4.png)
+
+## Part 5
+
+![EventStorming Timeline](./images/eventstorming-part-5.png)
+
+## Part 6
+
+![EventStorming Timeline](./images/eventstorming-part-6a.png)
+![EventStorming Timeline](./images/eventstorming-part-6b.png)
