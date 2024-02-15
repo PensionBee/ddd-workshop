@@ -56,10 +56,6 @@ Persistence data often doesn't perfectly match our domain models for various rea
 
 Okay, but how and where do we actually do this? One practical solution to this problem is to utilise two **mappers** in each of our repositories. The first mapper converts an entity into data which can be inserted into whatever persistence technology we're using, in whatever shape it expects. The second mapper takes data from whatever persistence technology we're using and reconstructs a valid entity from it.
 
-## Resources
-
-[Martin Fowler: Repository (1 minute read)](https://martinfowler.com/eaaCatalog/repository.html)
-
 ## The Practical Bit
 
 *Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
@@ -105,8 +101,10 @@ Let's add the third repository responsibility on top of the other two:
 ## Questions Worth Pondering
 
 - What are the trade-offs of using the repository pattern? Are the trade-offs worth it?
-- How would a SQL database compare with a NoSQL database for persisting entities (especially nested entities)?
-- Which kind of tests (unit, integration, e2e, regression, acceptance) are repository tests?
-- What value do we get from writing repository tests?
-- What kind of things do we NOT want to test in repository tests? Why?
-- Let’s say we decide to use a in-memory repository for both local development and automated testing, and a real database repository in staging and production, how could we ensure the in-memory repository exhibits the exact same behaviour as the real repository.
+- How would a SQL database compare with a NoSQL database for persisting entities (especially nested entities / aggregates)?
+- What value do we get from writing repository tests? Do we get any value at all?
+- Let’s say we decide to use an in-memory repository for both local development and automated testing, and a cloud-based database repository in staging and production, how could we ensure the in-memory repository exhibits the exact same behaviour as the real repository?
+
+## Additional Resources
+
+[Martin Fowler: Repository (1 minute read)](https://martinfowler.com/eaaCatalog/repository.html)
