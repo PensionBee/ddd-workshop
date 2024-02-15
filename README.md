@@ -143,7 +143,7 @@ Although this process is more of an art than a science, there are a couple of tr
 
 The sweet spot is context dependent but likely somewhere in-between these extremes.
 
-### Solutions
+## Solutions
 
 "Solutions" to the above exercises (there isn't just one solution) can be found [here](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions).
 
