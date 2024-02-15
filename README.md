@@ -376,13 +376,6 @@ export const handlePayInvoice = async (commandData: Data): Promise<Event> => {
 
 Feel free to come back to this example as often as you need.
 
-## Resources
-
-Feel free to check these out before or after completing 'The Practical Bit' below.
-
-- [Functional Domain Driven Design: Simplified (15 minute read - well worth the time!)](https://antman-does-software.com/functional-domain-driven-design-simplified)
-- [Functional Event Sourcing Decider (15 minute read - get's gnarlier the further you read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider)
-
 ## The Practical Bit
 
 *Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
@@ -420,7 +413,7 @@ In **src/contexts/posts/core/commands/createPost.handler.ts**:
 
 Finally, let's write some tests for this command handler. This might seem a bit daunting at first but we've actually made testing at a feature level pretty simple by creating a standalone function, independent of infrastructure and API concerns, which fully encapsulates an atomic change within our system, including all the relevant business rules associated with that change.
 
-The first test (for the success event) has already been written, using the 'Arrange - Act - Assert' testing approach, to illustrate how you might test command handlers. Let's add additional tests for each possible event (there should be one tests per event in our spec file).
+The first test (for the success event) has already been written, using the 'Arrange - Act - Assert' testing approach, to illustrate one way to test command handlers. Let's add additional tests for each possible event (there should be one tests per event in our spec file).
 
 In **src/contexts/posts/core/commandHandlers/createPost.handler.spec.ts**, for each event:
 
@@ -439,25 +432,6 @@ In **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.spec.ts**, co
 
 ### Part 3: Following an Account
 
-Just as you're about to start writing the `Follow Account` handler, the CEO pulls you aside...
-
-> Hey, I was just thinking that my mum might try to follow my account after we get the MVP out there. I love her and all but I just can't have her all up in my social media business, you know? Anyway, if we can stop accounts from following accounts that have blocked them, that would be great.
-
-We now have a new business rule we need to handle: `If Account A has blocked Account B, then Account B should not be able to follow Account A`.
-
-An additional business rule usually results in an additional event that our deriver needs to handle. If we wanted, we could capture this on our EventStorming diagram. For example:
-
-![EventStorming Timeline with Account Blocking](./images/eventstorming-timeline-with-account-blocking.png)
-
-We can ignore the `Block Account` section of the diagram for now and focus only the `Follow Account` section. To do this though, we'll need to modify our `Account` entity to capture 'account blocking' information.
-
-*note that we could choose to model 'account blocking' information as a separate entity - something descriptive like a `Blocked Account` entity could work. For now though, let's just add that information to the `Account` entity directly, similarly to how we added 'account following' information earlier in the workshop.*
-
-In **src/contexts/accounts/core/entities/account.ts**:
-
-- Add a `blockedAccounts` attribute.
-  - *Hint: Feel free to use an array of account IDs rather than a dedicated `Blocked Account` entity. This way our design stays simple until we know we need the extra complexity.*
-
 In **src/contexts/accounts/core/commands/followAccount.handler.ts**, complete the command handler functions like we did in parts 1 and 2
 
 In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**, complete the command handler tests like we did in parts 1 and 2.
@@ -467,3 +441,8 @@ In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**,
 In **src/contexts/accounts/core/commands/blockAccount.handler.ts**, complete the command handler functions like we did in parts 1, 2 and 3
 
 In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts**, complete the command handler tests like we did in parts 1, 2 and 3.
+
+## Additional Resources
+
+- [Functional Domain Driven Design: Simplified (15 minute read - well worth the time!)](https://antman-does-software.com/functional-domain-driven-design-simplified)
+- [Functional Event Sourcing Decider (15 minute read - get's gnarlier the further you read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider)
