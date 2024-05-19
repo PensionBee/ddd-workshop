@@ -18,40 +18,25 @@ Let's get to it...
 
 It’s your first day at `SocialBuzz`, the next big social media app. Promise.
 
-The company has big plans to revolutionise this space but first they’ve got to get on the radar, which means they need to get an MVP out the door ASAP.
+You’re apprehended by the CEO at the coffee machine, just as you’re on the verge of figuring out how the damn thing works...
 
-You’re apprehended by the CEO you at the coffee machine, just as you’re on the verge of figuring out how the damn thing works...
-
-> Right, here’s what I’m going to need from you pronto:
+> Right, here’s what we're going to need from you ASAP:
 >
-> 1. People need to be able to register with their email address and a password.
+> 1. People need to be able to register an account with their email address and a password.
 > 2. Users should be able to write short posts, possibly including images, which we’re going to display on the app's home page.
 > 3. They also need to be able to follow accounts they like.
 > 4. Ohh, and comments. Being able to comment on a post is important too.
 >
 > Alright then, chop chop, let’s get to it.
 
-You return to your desk (coffeeless), feeling a little overwhelmed. As you calm your breathing, you remember that you recently discovered Domain-Driven Design, an approach to building great software which looked very promising. Time to put it to the test...
+You return to your desk (coffeeless). This feels like a good time to try out this "Domain-Driven Design" thing you've heard so much about...
 
 ## Workshop Overview
 
-### Prerequisites
-
-- [TypeScript Foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript)
-
-### Part 1: Strategic Design
-
-- [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) ([example solutions](https://github.com/PensionBee/ddd-workshop/tree/eventstorming-solutions))
-
-### Part 2: Foundational Tactical Patterns
-
-- [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers)
-- [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
-- [Command Handlers & Derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
-- (WIP) Command-Event Chains
-- (WIP) Query Handlers
-
-### Part 3: Cross-Context Communication
-
-- (WIP) Request-Response Communication
-- (WIP) Pub/Sub Communication
+1. [TypeScript foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript)
+2. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
+3. [Entities](https://github.com/PensionBee/ddd-workshop/tree/entities)
+4. [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
+5. [Command handlers & derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
+6. [Policies](https://github.com/PensionBee/ddd-workshop/tree/policies)
+7. [External systems](https://github.com/PensionBee/ddd-workshop/tree/external-systems)
