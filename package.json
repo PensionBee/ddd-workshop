@@ -1,13 +1,14 @@
 {
   "name": "ddd-workshop",
   "scripts": {
-    "check-types": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-typescript": "^7.23.2",
+    "@total-typescript/tsconfig": "^1.0.4",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "babel-jest": "^29.7.0",
@@ -20,8 +21,5 @@
   },
   "dependencies": {
     "zod": "^3.21.4"
-  },
-  "nodemonConfig": {
-    "ext": "js,ts,json"
   }
 }
