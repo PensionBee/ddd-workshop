@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { Post, parsePost } from "./post";
+import { parsePost, type Post } from "./post";
 
 describe("parsePost", () => {
   const validPost: Post = {};
@@ -10,31 +10,17 @@ describe("parsePost", () => {
   });
 
   test("it throws an error if 'id' is invalid", () => {
-    const invalidId = null;
+    const invalidIds = [null, undefined, {}, true, false];
 
-    expect(() =>
-      parsePost({
-        ...validPost,
-        id: invalidId,
-      })
-    ).toThrow();
-
-    // Maybe we want to test other invalid IDs?
+    invalidIds.forEach((invalidId) => {
+      expect(() =>
+        parsePost({
+          ...validPost,
+          id: invalidId,
+        })
+      ).toThrow();
+    });
   });
 
-  test("it throws an error if 'authorId' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'title' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'content' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'imageUrl' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
+  // TODO: complete me
 });

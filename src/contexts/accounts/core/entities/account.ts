@@ -13,10 +13,12 @@ const accountSchema = z.object({
   email: z.string().email(),
   username: z.string().min(6).max(32),
   password: z.string().min(8).max(64),
-  // TODO: COMPLETE ME!
+  // TODO: Complete me
 });
 
 // Parser
 // ------
 
-export const parseAccount = (data: Account) => accountSchema.parse(data);
+export const parseAccount = (
+  data: Account | Record<string, unknown>
+): Account => accountSchema.parse(data);

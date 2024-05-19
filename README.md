@@ -1,4 +1,4 @@
-# Values, Entities & Parsers
+# Entities
 
 [Back to the workshop overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
@@ -6,32 +6,32 @@
 
 ### What is an Entity?
 
-An **Entity** represents anything which has a lifecycle and can be modelled with a unique identifier. An entity can be made up of simple **Values** (attributes), which may change throughout the entity's lifecycle. For example:
+**Entities** represent the concepts which exist in our domain. Every **Entity** must have some kind of ID which uniquely identifies it throughout its lifecycle. An **Entity** can be made up of simple values (attributes), which may change throughout the entity's lifecycle. For example:
 
 ```sh
-Order                      # 'Order' is an entity - even when the attributes of an order change, it's still the same order
-    ID                       # 'ID' is a simple value that uniquely identifies the specific order throughout its lifecycle
-    Buyer ID                 # 'Buyer ID' is a simple value that references the 'Buyer' entity by it's unique ID
-    Estimated Delivery Date  # 'Estimated Delivery Date' is a simple value that could change throughout the Order's lifecycle
+Order # An Entity - even when the attributes of an order change, it's still the same order
+    ID # A simple value that uniquely identifies the specific order throughout its lifecycle
+    Buyer ID # A simple value that references the 'Buyer' Entity by it's unique ID
+    Estimated Delivery Date # A simple value that could change throughout the Order's lifecycle
 ```
 
-Entities can also contain more complex (nested) values...
+**Entities** can also contain more 'complex' values...
 
 ```sh
 Order
     ID
     Buyer ID
     Estimated Delivery Date
-    Delivery Address         # 'Delivery Address' is a nested value that could change throughout the Order's lifecycle. Note the lack of a Delivery Address ID. 
+    Delivery Address # A 'complex' value that could change throughout the Order's lifecycle.
         Number
         Street
         City
         Postcode
 ```
 
-### Nested Entities (Aggregates)
+### Aggregates (i.e. Nested Entities)
 
-A nested entity is essentially a group of closely related entities which **always** need to change as a single unit because they **always** need to be immediately consistent with each other (think "ACID transactions" if that's a familiar concept). For example:
+An **Aggregate** is essentially a group of closely coupled **Entities** which *need* to change as a single unit for the sake of immediate consistency (similar to "ACID transactions" at the database level). For example:
 
 ```sh
 Order
@@ -43,13 +43,13 @@ Order
         Street
         City
         Postcode
-    Order Lines              # 'Order Lines' is a collection of 'Order Line' Entities
+    Order Lines # A collection of 'Order Line' Entities, which are independent of each other but may affect the overall `Order` Entity
         Order Line 1
-            ID               # Each 'Order Line' has it's own unique ID
-            Product ID       # 'Product ID' is likely a reference to a specific `Product` instance
+            ID # Each 'Order Line' has it's own unique ID
+            Product ID
             Product Price
-            Quantity         # 'Quantity' could change throughout the lifecycle of an 'Order Line' (a customer could edit this before dispatch)
-            Total Price      # 'Total Price' could change throughout the lifecycle of an 'Order Line' (e.g. if the 'Quantity' changes or a discount is applied because the order is delayed)
+            Quantity
+            Total Price
         Order Line 2
             ID
             Product ID
@@ -58,30 +58,30 @@ Order
             Total Price
 ```
 
-Here, the `Order` entity is the primary entity which creates a consistency boundary encapsulating both it's own values as well as a collection of `Order Line` entities.
+Here, the `Order` **Entity** is the "root **Entity**" of the `Order` **Aggregate**, the consistency boundary encapsulating every attribute and entity within it.
 
-**YOU'RE GUARANTEED TO COME ACROSS THE CONCEPT OF AN 'AGGREGATE' IN MOST DDD BOOKS/ARTICLES/TALKS/VIDEOS. THIS IS ESSENTIALLY WHAT WE HAVE ABOVE, WE'RE JUST CALLING THEM 'NESTED ENTITIES' HERE SO WE DON'T HAVE TO EXPLICITLY DISTINGUISH BETWEEN AGGREGATES AND ENTITIES.**
+But why do we need this? Why can't we just model all our **Entities** independently?
 
-But why do we need this? Why can't we just model all our entities in isolation?
-
-Good question! There's absolutely nothing stopping you doing exactly that but there can be some downsides to this approach...
+Good question! There's absolutely nothing stopping us doing exactly that. But there can be some downsides to this approach...
 
 Let's say we have several business rules centred around an order:
 
-- Spend more than £50 and get speedy delivery
-- Buy 5 or more of the same item and get 15% off that item item
+- Spend more than £50 and get speedy delivery on orders
+- Buy 5 or more of the same item and get 15% off that item
 - Spend more than £100 and get 10% off 'special' items
 - Discounts are capped at £50
-- Customers with an 'Eco' status pay £1 extra per delivery, after discounts, to support the environment
+- Customers with an 'Eco' status pay £1 extra per order line with an 'eco item', to support the environment
 - etc.
 
-As the number of business rules increases, it becomes easier for our `Order` and `Order line` entities to get into an inconsistent state and we might end up with some gnarly data inconsistency bugs if we treat each entity as an independent unit. To reduce the chances of this happening, we can group these entities together and treat them as a single unit when anything about those entities changes. This makes it easier to enforce business rules across all relevant entities.
+As the number of business rules increases, it becomes easier for our `Order` and `Order line` **Entities** to get into an inconsistent state and we might end up with some messy bugs if we treat each **Entity** as an independent unit. To reduce the chances of this happening, we can group these **Entities** together and treat them as a single unit when anything about those **Entities** changes. This makes it easier to enforce business rules across all relevant **Entities**.
 
-Note that, from a code perspective, it's generally easier to deal with standalone entities than nested ones. In many cases, it's reasonable to design entities like this but there are certainly cases where the benefits of grouping entities together will outweigh the code overhead.
+Note that, from a code perspective, it's often easier to deal with standalone **Entities** than complex **Aggregates**. In many cases, it's reasonable to design standalone **Entities**. But there are certainly cases where the benefits of grouping **Entities** together will be worth it.
 
 ### Abstract Entities
 
-Entities all fall somewhere on an 'abstractness' scale. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` entity) whereas others are more difficult - but that doesn't mean they aren't valid entities. For example, in a banking application, we might choose to model the process of moving money between two `Bank Account` entities using a seaprate `Transaction` entity, which might look something like this:
+**Entities** all fall somewhere on an scale of abstraction. Some are very easy to reason about and visualise in the physical world (e.g. a `Customer` **Entity**) whereas others are more difficult reason about and visualise, and therefore require more exploration of the domain to discover.
+
+For example, in a banking domain, we might choose to model the process of moving money between two `Bank Account` **Entities** using a seaprate `Transaction` **Entity**, which might look something like this:
 
 ```sh
 Transaction
@@ -92,113 +92,135 @@ Transaction
     Receiving Account ID
 ```
 
-### What is a Parser?
+The alternative might be to just add and subtract money from the relevant `Account` **Entities**, which *could* work except that you start seeing `Accounts` with more or less money than they should have because the change in balance of one `Account` was successful, while the other was unsuccessful.
 
-In the context of DDD entities, a parser turns unvalidated data into a valid entity (or throws/returns an error). As an example, let's say we have a `/register` API endpoint which results in an `Account` entity being created in our system. The payload sent to that endpoint by a client (web app, mobile app, etc.) might look like this:
+This is why EventStorming is such an important tool in DDD. This kind of domain discovery can take a little time and energy, which isn't going to happen if you dive into coding or designing database tables. Getting the important stuff out of our heads and onto an EventStorming diagram makes it easy for us to start thinking about these kinds of things sooner rather than later, giving us the best chance of making good decision when it comes to **Entity** design.
+
+### Parsing
+
+The process of taking unvalidated data as input and outputing valid (and potentially transformed) data is known as parsing. Failure to validate/transform input data usually results in an error being thrown or returned.
+
+We can create parsers for our **Entities** to ensure they are always in a valid state. This is an extremely powerful way to prevent all sorts of edge case bugs and improve data integrity over the lifetime of the system.
+
+As an example, let's say we have a `/register` API endpoint which a client (web app, mobile app, etc.) sends the following data to:
 
 ```json
 {
   "email": "abc123@test.com",
   "password": "password1",
-  "houseNumber": "1",
-  "streetName": "Main Street",
-  "city": null,
-  "postcode": "1234 567"
-}
-```
-
-However, internally, an `Account` entity might look like this:
-
-```ts
-type Account = {
-  id: string;         // Required but generated internally
-  email: string;      // Required
-  password: string;   // Required
-  address: {
-    number: number;   // Required
-    street: string;   // Required
-    city: string;     // Required
-    postcode: string; // Required - should be in the format AB11 1AB
+  "address": {
+    "addressLine1": "1",
+    "addressLine2": null,
+    "postcode": "1234 567"
   }
 }
 ```
 
-When our system creates a new `Account` entity, we need to validate the data used to create it, and potentially transform the structure/format/data types in some way to match our internal representation. This is exactly where parsers come in.
+Internally, we'll process this request as a **Command**, resulting in an `Account Registered` **Event** and an `Account` **Entity** being created if the request is successful.
 
-In practice, we could roll your own validation/transformation functions or use an off-the-shelf parsing library (which is what we'll do in the 'The Practical Bit' below).
+But let's imagine our `Account` **Entity** should look like the following:
 
-## Directory Structure Overview
+```ts
+type Account = {
+  id: string; // Required - should be a uuid - generated internally
+  email: string; // Required - should be in a valid email format
+  password: string; // Required - should contain between 8 and 64 characters
+  address: {
+    addressLine1: string; // Required
+    addressLine2: string; // Required
+    addressLine3: string | null; // Optional
+    city: string; // Required
+    postcode: string; // Required - should be in the format AB11 1AB
+  } // Required
+}
+```
 
-At this point, it's worth touching upon the directory structure we're using. We currently have 2 bounded contexts, `Accounts` and `Posts`, which live in the **src/contexts/** directory. Each of these have the same structure:
+When we create a new `Account` **Entity** in our system (or update one), we should always parse the data being used before persisting it.
 
-- **core/**: This is our "application core", where we'll model our entities and build out our system's capabilities (e.g. creating a post or following another account). We want to keep the code in this layer focused on business concepts and business rules as much as possible. (*If you're already familiar with onion/clean/hexagonal/ports-and-adapters architecture, this layer is essentially the "domain" and "application" layers squashed into one for simplicity.*)
-- **infra/**: Short for "infrastructure" - this is where we'll write the code which allows the application core to interact with the external world (e.g. accessing the database, the file system or a 3rd party system).
-- **interface/**: This is the opposite of infrastructure; a way for the outside world to interact with our application. This is where we'll write our API code.
+However, note that TypeScript types aren't great at capturing all the validation logic belongs to the `Account` **Entity**. While types are a great tool for improving codebase understanding and help us write high-quality code, they can't do everything, especially since they're usually stripped out at runtime.
 
-## The Practical Bit
+Enter `zod`, an incredible TypeScript-first utility library which we'll use throughout the rest of the workshop. Using `zod` means we don't have to roll our own low-level validation functionality (which is a lot more complex than you might think). Here's how the above `Account` **Entity** might be represented using a `zod` schema:
 
-*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
+```ts
+const accountSchema = z.object({
+  id: z.string().uuid(),
+  email: z.string().email(),
+  password: z.string().min(8).max(64),
+  address: z.object({
+    addressLine1: z.string();
+    addressLine2: z.string(),
+    addressLine3: z.string().nullish().default(null)
+    city: z.string(),
+    postcode: z.string().regex(/^...$/),
+  })
+})
+```
 
-Let's have another look at the EventStorming diagram we're using to guide the code we write...
+Notice how easy it is to capture validation rules for an `Account` which doubles as documentation that can't go out of sync. This is the pinnacle of "living documentation"! Goodbye bugs - hello clarity!
 
-![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+Best of all, `zod` provides a `z.infer` TypeScript utility which can infer the specific TypeScript types corresponding with a schema, giving us the best of both worlds in terms of runtime validation and compile-time type safety. Here's all you need to know to get started...
 
-Note that we have 3 entities: `Account`, `Post` and `Post Comment`. Let's turn those into code, bearing in mind the associated commands they'll need to support.
+```ts
+type Account = z.infer<typeof accountSchema> 
+```
 
-### Part 1: Modelling Posts
-
-When we model entities in our domain, we're trying to capture the essential attributes which define that domain concept. Too few attributes and we miss important details. Too many and we clutter our entities with redundant details.
-
-In **src/contexts/posts/core/entities/post.ts**:
-
-- Complete the `postSchema` using the popular typescript parsing library [zod](https://github.com/colinhacks/zod). The schema has been partially completed to get you started but it currently allows all data with `z.any()`.
-
-This schema now serves as a source-of-truth representation of what a `Post` entity is within our bounded context. It provides us with the ability to perform runtime parsing of posts, autogenerate TypeScript types and, ultimately, acts as living documentation. Winning!
-
-Note that we're using `zod`'s `infer` utility type to generate a TypeScript compliant `Post` type. We can now use this type in other areas of our codebase to make our code more readable and type-safe.
-
-We also have a `parsePost` function which simply calls `postSchema.parse` (native zod functionality) under the hood. This isn't essential but it allows us to completely encapsulate the details of parsing within this file only, meaning other areas of our code have a clean interface to interact with via `parsePost({ ... })`, i.e if we ever decide to swap out `zod` for something else, we only need to change `post.ts` since no zod functionality has leaked into the rest of our system which depends on post entities..
-
-In **src/contexts/posts/core/entities/post.spec.ts**:
-
-- Complete the test suite to ensure the `parsePost` function works as expected.
-
-**Note that this test suite can be run via `npm test src/contexts/posts/core/entities/post.spec.ts`. All test suites can be run via `npm test`.**
-
-### Part 2: Modelling Post Comments
-
-In **src/contexts/posts/core/entities/postComment.ts**:
-
-- Define the `PostComment` type, `postCommentSchema` and `parsePostComment` function.
-- Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other parts of the codebase.
-
-In **src/contexts/posts/core/entities/postComment.spec.ts**:
-
-- Complete the test suite to ensure the `parsePostComment` function works as expected.
-
-### Part 3: Modelling Account Followers and Blocked Accounts
-
-We already have an existing `Account` entity in our `Accounts` bounded context but it doesn't currently have the ability to capture changes resulting from the `Follow Account` command or `Block Account` command. Let's rectify that...
-
-In **src/contexts/accounts/core/entities/account.ts**:
-
-- Update `accountSchema` to include a `followers` attribute which holds information about all the followers of an account.
-- Update `accountSchema` to include a `blockedAccounts` attribute which holds information about all the accounts an account has blocked..
-
-In **src/contexts/accounts/core/entities/account.spec.ts**:
-
-- Complete the test suite to ensure the `parseAccount` function works as expected
-
-## Questions Worth Pondering
-
-**Note: There are no straightforward answers to these questions - everything comes with a trade-off.**
-
-- Are there any potential benefits from explicitly declaring entity types, rather than inferring them from zod schemas?
-- What are the potential long-term downsides of using zod in our domain code?
-- What value do we get from writing parser tests? Do they have any value?
+🤯🤯🤯
 
 ## Additional Resources
 
 - [Domain-Driven Design: Entities, values, and How To Distinguish Them (5 minutes read)](https://blog.jannikwempe.com/domain-driven-design-entities-value-objects)
 - [Entities & values (2.5 minute video)](https://www.youtube.com/watch?v=r8q5DD9rd3M)
 - [The One Question To Haunt Everyone: What is a DDD Aggregate? (25 minute video)](https://www.youtube.com/watch?v=zlFqjD2LKlE)
+
+## Codebase Structure
+
+At this point, it's worth touching upon the directory structure we're using. We currently have 2 **Bounded Contexts**, `Accounts` and `Posts`, which live in the **src/contexts/** directory. Each of these have the same directory structure inside (most of which is empty for the moment):
+
+- **core/**: This is our "application core", where we'll model our **Entities** and build out **Command Handlers** exposing our system's capabilities (i.e. publishing a post or following an account). We want to keep the code in this layer focused on business concepts and business rules.
+  - *If you're familiar with onion/clean/hexagonal/ports-and-adapters architecture, this layer is essentially the "domain" and "application" layers squashed into one for simplicity.*
+- **infra/**: Short for "infrastructure" - this is where we'll write the code which allows our system to interact with the external world (e.g. accessing databases and the file system or making HTTP calls to external systems).
+- **interface/**: This is the opposite of infrastructure - a way for the outside world to make use of the functionality exposed from our application core. This is where we'll write lightweight API code.
+
+## The Practical Bit
+
+*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
+
+Let's have another look at the EventStorming diagram we're using to guide the code we write.
+
+![EventStorming Timeline with Bounded Contexts](./assets/eventstorming-final.png)
+
+We have 3 entities at play: `Account`, `Post` and `Post Comment`. Let's turn those into code.
+
+### Part 1: Modelling a Post
+
+When we model **Entities** in our domain, we're trying to capture the essential attributes which define that domain concept. Too few attributes and we miss important details. Too many and we might clutter our **Entities** with redundant details. We want to capture everything we *need* now and embrace that we'll likely need to modify the definition of our **Entities** over time.
+
+1. In **src/contexts/posts/core/entities/post.ts**, complete the `postSchema` using [zod](https://github.com/colinhacks/zod).
+
+This schema now serves as a source-of-truth representation of what a `Post` **Entity** is within *this* **Bounded Context** (we might have different definitions of this entity in other **Bounded Contexts** in the future). 
+
+Note that we have a `Post` type being generated using `z.infer` and we also have a `parsePost` function. The latter simply calls `postSchema.parse` (native zod functionality) under the hood but provides us with a cleaner way to parse `Posts` from other parse of our code. Also, if we ever decide to move away from using `zod` in the future, we only need to change the `parsePost` function itself since no zod functionality has leaked into the rest of our system.
+
+2. In **src/contexts/posts/core/entities/post.spec.ts**, complete the test suite to ensure the schema captures `Post` validation rules and that the `parsePost` function works as expected.
+
+**Note that this test suite can be run via `npm test src/contexts/posts/core/entities/post.spec.ts` and all test suites can be run via `npm test`.**
+
+### Part 2: Modelling a Post Comment
+
+1. In **src/contexts/posts/core/entities/postComment.ts**, define the `PostComment` type, `postCommentSchema` and `parsePostComment` function. Ensure the `PostComment` type and the `parsePostComment` function are exported so they can be used in other areas of the codebase.
+2. In **src/contexts/posts/core/entities/postComment.spec.ts**, complete the test suite to ensure the schema captures `PostComment` validation rules and that the `parsePostComment` function works as expected.
+
+### Part 3: Updating the Account model to facilitate followers and blocked Accounts
+
+We already have an existing `Account` **Entity** in our `Accounts` bounded context but it doesn't currently capture any details about followers or blocked `Accounts`. Let's rectify that...
+
+1. In **src/contexts/accounts/core/entities/account.ts**, update `accountSchema` to include a `followers` attribute which holds information about all the followers of an account. You're free to model `followers` as simple/complex values or as **Entities** in their own right, turning this into an `Account` **Aggregate**. 
+2. In **src/contexts/accounts/core/entities/account.ts**, update `accountSchema` to include a `blockedAccounts` attribute which holds information about all the accounts an account has blocked. As above, you're free to model `blockedAccounts` as simple/complex values or as **Entities** in their own right.
+3. In **src/contexts/accounts/core/entities/account.spec.ts**, complete the test suite to ensure the schema captures `Account` validation rules and that the `parseAccount` function works as expected.
+
+## Questions Worth Pondering
+
+**Note: There are no straightforward answers to these questions - everything comes with a trade-off.**
+
+- What value are we getting from our parser tests? Do they have value here?
+- If you're answer to the above was "no" (which is neither right or wrong), are there situations where theses tests *would* be valuable?

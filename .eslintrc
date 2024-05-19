@@ -5,7 +5,6 @@
     "ecmaVersion": 2022
   },
   "env": {
-    "browser": true,
     "es2022": true,
     "node": true
   },
@@ -13,9 +12,5 @@
     "prettier",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
-  ],
-  "plugins": ["@typescript-eslint"],
-  "rules": {
-    "@typescript-eslint/no-explicit-any": 1
-  }
+  ]
 }

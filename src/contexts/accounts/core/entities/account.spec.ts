@@ -1,6 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { Account, parseAccount } from "./account";
+import { parseAccount, type Account } from "./account";
 
 describe("parseAccount", () => {
   const validAccount: Account = {
@@ -15,35 +15,17 @@ describe("parseAccount", () => {
   });
 
   test("it throws an error if 'id' is invalid", () => {
-    const invalidId = null;
+    const invalidIds = [null, undefined, {}, true, false, "fail-1234", 1234];
 
-    expect(
-      parseAccount({
-        ...validAccount,
-        id: invalidId,
-      } as any)
-    ).toThrow();
-
-    // Maybe we want to test other invalid IDs?
+    invalidIds.forEach((invalidId) => {
+      expect(
+        parseAccount({
+          ...validAccount,
+          id: invalidId,
+        })
+      ).toThrow();
+    });
   });
 
-  test("it throws an error if 'email' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'username' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'password' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'followers' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
-
-  test("it throws an error if 'blockedAccounts' is invalid", () => {
-    // TODO: COMPLETE ME!
-  });
+  // TODO: complete me
 });
