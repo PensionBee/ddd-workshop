@@ -95,7 +95,7 @@ Let's add the second repository responsibility on top of the first:
 
 1. In **contexts/posts/infra/repositories/postCommentRepository.ts**, complete the `postCommentRepository` as in **Part 1**.
 2. In **contexts/posts/infra/repositories/postCommentRepository.ts**, call `parsePostComment` in all repository methods (tip: do this at the beginning of the `save` method and at the end of the `getById` method).
-3. In **contexts/posts/infra/repositories/postCommentRepository.spec.ts**, complete the test suite to make sure `parsePostComment` is called on all repository interactions and that the repository saves and loads valid `PostComment` **Entities** as expected.
+3. In **contexts/posts/infra/repositories/postCommentRepository.spec.ts**, complete the test suite to make sure the repository saves and loads valid `PostComment` **Entities** as expected.
 
 ### Part 3: Complete the Account Repository (Responsibility 3)
 
@@ -105,7 +105,7 @@ Let's add the third repository responsibility on top of the other two:
 
 1. In **contexts/accounts/infra/repositories/accountRepository.ts**, complete the `accountRepository` as in **Part 2** (you'll likely have TypeScript errors - it's fine, we'll deal with those next).
 2. In **contexts/accounts/infra/repositories/accountRepository.ts**, complete the two mapper functions, converting `Account` **Entities** into persistence data and vice versa. Call the relevant mapper in each of the repository's methods (tip: call `toAccountData` in the `save` method and `toAccount` in the `getBy...` methods).
-3. In **contexts/posts/infra/repositories/accountRepository.spec.ts**, complete the test suite to make sure `parseAccount` is called on all repository interactions and that the repository saves and loads valid `Account` **Entities** as expected.
+3. In **contexts/posts/infra/repositories/accountRepository.spec.ts**, complete the test suite to make sure the repository saves and loads valid `Account` **Entities** as expected.
 
 Notice that the test suite for this repository doesn't do anything conceptually different compared to the `postCommentRepository` test suite, even though it requires mappers to function as expected. This is because the `accountRepository` is encapsulating all of that complexity effectively, hiding it from the calling code as we would expect. 
 

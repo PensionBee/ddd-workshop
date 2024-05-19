@@ -1,20 +1,20 @@
 import { describe, expect, test } from "@jest/globals";
 
-describe("accountRepository", () => {
-  test("Should call `parseAccount` on every interaction", () => {
+describe("accountRepository", async () => {
+  test("Should save a valid Account and fetch it by it's ID", () => {
     // TODO: complete me
     expect(true).toBe(false);
   });
 
-  test("Should save a valid Account and fetch it by it's ID", () => {
+  test("Should not save an invalid Account", async () => {
     // TODO: complete me
   });
 
-  test("Should fetch an Account by it's email", () => {
+  test("Should fetch an Account by it's email", async () => {
     // TODO: complete me
   });
 
-  test("Should fetch an Account by it's username", () => {
+  test("Should fetch an Account by it's username", async () => {
     // TODO: complete me
   });
 });
