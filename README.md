@@ -1,4 +1,4 @@
-# Repositories & Persistence
+# Repositories
 
 [Back to the training overview](https://github.com/PensionBee/ddd-workshop#ddd-workshop-overview)
 
