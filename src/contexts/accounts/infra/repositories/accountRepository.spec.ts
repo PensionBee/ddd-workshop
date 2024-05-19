@@ -1,7 +1,17 @@
 import { describe, expect, test } from "@jest/globals";
 
+import { type Account } from "../../core/entities/account";
+
 describe("accountRepository", async () => {
-  test("Should save a valid Account and fetch it by it's ID", () => {
+  const VALID_ACCOUNT: Account = {
+    // TODO: complete me
+  };
+
+  const INVALID_ACCOUNT: Account = {
+    // TODO: complete me
+  };
+
+  test("Should save a valid Account and fetch it by it's ID", async () => {
     // TODO: complete me
     expect(true).toBe(false);
   });
