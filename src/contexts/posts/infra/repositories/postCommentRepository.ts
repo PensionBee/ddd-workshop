@@ -1,4 +1,4 @@
-import { PostComment } from "../../core/entities/postComment";
+import { type PostComment } from "../../core/entities/postComment";
 
 // Types
 // -----
@@ -10,7 +10,7 @@ type PostCommentRepository = {
 // In-memory data store
 // --------------------
 
-const postComments: Record<PostComment["id"], PostComment> = {};
+const postCommentsDataStore: Record<PostComment["id"], PostComment> = {};
 
 // Repository
 // ----------

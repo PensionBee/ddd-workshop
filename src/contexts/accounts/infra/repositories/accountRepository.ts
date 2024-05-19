@@ -30,7 +30,7 @@ type AccountData = {
 // In-memory data store
 // --------------------
 
-const accounts: Record<AccountData["id"], AccountData> = {};
+const accountsDataStore: Record<AccountData["id"], AccountData> = {};
 
 // Mappers
 // -------

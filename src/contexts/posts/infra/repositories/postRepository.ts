@@ -1,4 +1,4 @@
-import { Post } from "~/contexts/posts/core/entities/post";
+import { type Post } from "../../core/entities/post";
 
 // Types
 // -----
@@ -10,7 +10,7 @@ type PostRepository = {
 // In-memory data store
 // --------------------
 
-const posts: Record<Post["id"], Post> = {};
+const postsDataStore: Record<Post["id"], Post> = {};
 
 // Repository
 // ----------
