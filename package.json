@@ -1,6 +1,7 @@
 {
   "name": "ddd-workshop",
   "scripts": {
+    "typecheck": "tsc --noEmit",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
   },
   "devDependencies": {
