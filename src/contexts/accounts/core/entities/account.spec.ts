@@ -18,21 +18,21 @@ describe("parseAccount", () => {
 
   test("it throws an error if 'id' is invalid", () => {
     const invalidValues = [
-      undefined,
       null,
+      undefined,
+      {},
       true,
       false,
-      1,
-      {},
       "x",
-      "notPost-1",
+      "notAccount-1234",
+      1234,
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
         parseAccount({
           ...validAccountData,
           id: invalidValue,
-        } as Account)
+        })
       ).toThrowError();
     });
   });
@@ -51,7 +51,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, email: invalidValue } as Account)
+        parseAccount({ ...validAccountData, email: invalidValue })
       ).toThrowError();
     });
   });
@@ -69,7 +69,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, username: invalidValue } as Account)
+        parseAccount({ ...validAccountData, username: invalidValue })
       ).toThrowError();
     });
   });
@@ -87,7 +87,7 @@ describe("parseAccount", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parseAccount({ ...validAccountData, password: invalidValue } as Account)
+        parseAccount({ ...validAccountData, password: invalidValue })
       ).toThrowError();
     });
   });
@@ -99,7 +99,7 @@ describe("parseAccount", () => {
         parseAccount({
           ...validAccountData,
           followers: invalidValue,
-        } as Account)
+        })
       ).toThrowError();
     });
   });
@@ -111,7 +111,7 @@ describe("parseAccount", () => {
         parseAccount({
           ...validAccountData,
           blockedAccounts: invalidValue,
-        } as Account)
+        })
       ).toThrowError();
     });
   });

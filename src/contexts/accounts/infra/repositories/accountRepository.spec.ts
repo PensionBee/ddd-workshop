@@ -1,10 +1,10 @@
 import { describe, expect, test } from "@jest/globals";
 
-import { Account } from "../../core/entities/account";
+import { type Account } from "../../core/entities/account";
 import { accountRepository } from "./accountRepository";
 
 describe("accountRepository", () => {
-  const validAccount: Account = {
+  const VALID_TEST_ACCOUNT: Account = {
     id: "account-1",
     email: "testemail@test.com",
     username: "testusername",
@@ -13,34 +13,41 @@ describe("accountRepository", () => {
     blockedAccounts: [],
   };
 
-  const invalidAccount = {
-    ...validAccount,
+  const INVALID_TEST_ACCOUNT: Account = {
+    ...VALID_TEST_ACCOUNT,
     id: "INVALID_ID",
   };
 
-  test("It persists a valid account entity", async () => {
-    await accountRepository.save(validAccount);
+  test("Should save a valid Account and fetch it by it's ID", async () => {
+    await accountRepository.save(VALID_TEST_ACCOUNT);
 
-    const persistedAccount = await accountRepository.getById("account-1");
+    const persistedAccount = await accountRepository.getById(
+      VALID_TEST_ACCOUNT.id
+    );
 
-    expect(persistedAccount).toEqual(validAccount);
+    expect(persistedAccount).toEqual(VALID_TEST_ACCOUNT);
   });
-  test("It fetches the correct account entity when fetching by email", async () => {
-    const persistedAccountByEmail =
-      await accountRepository.getByEmail("testemail@test.com");
 
-    expect(persistedAccountByEmail).toEqual(validAccount);
-  });
-  test("It fetches the correct account entity when fetching by username", async () => {
-    const persistedAccountByUsername =
-      await accountRepository.getByUsername("testusername");
-
-    expect(persistedAccountByUsername).toEqual(validAccount);
-  });
-  test("It throws an error if trying to persist an invalid account entity", async () => {
+  test("Should not save an invalid Account", async () => {
     const saveInvalidAccount = async () =>
-      await accountRepository.save(invalidAccount);
+      await accountRepository.save(INVALID_TEST_ACCOUNT);
 
     expect(saveInvalidAccount).rejects.toThrowError();
+  });
+
+  test("Should fetch an Account by it's email", async () => {
+    const persistedAccountByEmail = await accountRepository.getByEmail(
+      VALID_TEST_ACCOUNT.email
+    );
+
+    expect(persistedAccountByEmail).toEqual(VALID_TEST_ACCOUNT);
+  });
+
+  test("Should fetch an Account by it's username", async () => {
+    const persistedAccountByUsername = await accountRepository.getByUsername(
+      VALID_TEST_ACCOUNT.username
+    );
+
+    expect(persistedAccountByUsername).toEqual(VALID_TEST_ACCOUNT);
   });
 });

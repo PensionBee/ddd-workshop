@@ -20,5 +20,6 @@ const accountSchema = z.object({
 // Parser
 // ------
 
-export const parseAccount = (data: Account): Account =>
-  accountSchema.parse(data);
+export const parseAccount = (
+  data: Account | Record<string, unknown>
+): Account => accountSchema.parse(data);

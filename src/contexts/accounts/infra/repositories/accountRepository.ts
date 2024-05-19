@@ -1,15 +1,22 @@
-import { Account, parseAccount } from "../../core/entities/account";
+import { parseAccount, type Account } from "../../core/entities/account";
 
 // Types
 // -----
 
+type AccountRepository = {
+  save: (account: Account) => Promise<void>;
+  getById: (id: Account["id"]) => Promise<Account | null>;
+  getByEmail: (email: Account["email"]) => Promise<Account | null>;
+  getByUsername: (username: Account["username"]) => Promise<Account | null>;
+};
+
 /**
- * This type is a fake representation of a database schema. The in-memory
- * data store below only allows account entity data in this format, which
- * requires us to map between the two in the repository.
+ * This is a fake representation of a database schema. The in-memory
+ * data store below only allows account entity data in this format,
+ * which may require us to map between the two.
  */
-type AccountPersistenceData = {
-  id__field: string;
+type AccountData = {
+  id: string;
   email__field: string;
   username__field: string;
   password__field: string;
@@ -20,68 +27,56 @@ type AccountPersistenceData = {
 // In-memory data store
 // --------------------
 
-const accounts: Record<
-  AccountPersistenceData["id__field"],
-  AccountPersistenceData
-> = {};
+const accountsDataStore: Record<AccountData["id"], AccountData> = {};
 
 // Mappers
 // -------
 
-const mapToAccount = (
-  accountPersistenceData: AccountPersistenceData
-): Account => {
-  const account: Account = {
-    id: accountPersistenceData.id__field,
-    email: accountPersistenceData.email__field,
-    username: accountPersistenceData.username__field,
-    password: accountPersistenceData.password__field,
-    followers: accountPersistenceData.followers__field,
-    blockedAccounts: accountPersistenceData.blocked_accounts__field,
-  };
+const toAccount = (accountData: AccountData): Account =>
+  parseAccount({
+    id: accountData.id,
+    email: accountData.email__field,
+    username: accountData.username__field,
+    password: accountData.password__field,
+    followers: accountData.followers__field,
+    blockedAccounts: accountData.blocked_accounts__field,
+  });
 
-  return parseAccount(account);
-};
-
-const mapToAccountPersistenceData = (
-  account: Account
-): AccountPersistenceData => {
+const toAccountData = (account: Account): AccountData => {
   const parsedAccount = parseAccount(account);
 
-  const accountPersistenceData: AccountPersistenceData = {
-    id__field: parsedAccount.id,
+  return {
+    id: parsedAccount.id,
     email__field: parsedAccount.email,
     username__field: parsedAccount.username,
     password__field: parsedAccount.password,
     followers__field: parsedAccount.followers,
     blocked_accounts__field: parsedAccount.blockedAccounts,
   };
-
-  return accountPersistenceData;
 };
 
 // Repository
 // ----------
 
-export const accountRepository = {
-  save: async (account: Account) => {
-    const accountPersistenceData = mapToAccountPersistenceData(account); // Parse and map account to persistence data format before persisting
-    accounts[accountPersistenceData.id__field] = accountPersistenceData; // Persist account data
+export const accountRepository: AccountRepository = {
+  save: async (account) => {
+    const accountData = toAccountData(account);
+    accountsDataStore[accountData.id] = accountData;
   },
-  getById: async (id: Account["id"]) => {
-    const account = accounts[id]; // Fetch account from persistence (may be undefined)
-    return account ? mapToAccount(account) : null; // Map to a valid account before returning
+  getById: async (id) => {
+    const account = accountsDataStore[id];
+    return account ? toAccount(account) : null;
   },
-  getByEmail: async (email: Account["email"]) => {
-    const account = Object.values(accounts).find(
+  getByEmail: async (email) => {
+    const account = Object.values(accountsDataStore).find(
       (acc) => acc.email__field === email
-    ); // Fetch account from persistence (may be undefined)
-    return account ? mapToAccount(account) : null; // Ensure account is valid before returning
+    );
+    return account ? toAccount(account) : null;
   },
-  getByUsername: async (username: Account["username"]) => {
-    const account = Object.values(accounts).find(
-      (acc) => acc.username__field === username
-    ); // Fetch account from persistence (may be undefined)
-    return account ? mapToAccount(account) : null; // Ensure account is valid before returning
+  getByUsername: async (username) => {
+    const account = Object.values(accountsDataStore).find(
+      (acc) => acc.email__field === username
+    );
+    return account ? toAccount(account) : null;
   },
 };
