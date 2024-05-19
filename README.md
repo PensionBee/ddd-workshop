@@ -48,9 +48,7 @@ An additional step has also been added to each command handler. This step calls 
 
 ## The Practical Bit
 
-*Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
-
-Let's start out by adding our new command handler and the associated **Events**
+Let's start out by adding our new command handler and the associated **Events**.
 
 1. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.ts**, complete the command handler.
 2. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.spec.ts**, complete the test suite.
