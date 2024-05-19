@@ -1,20 +1,31 @@
-import { PostComment, parsePostComment } from "../../core/entities/postComment";
+import {
+  parsePostComment,
+  type PostComment,
+} from "../../core/entities/postComment";
+
+// Types
+// -----
+
+type PostCommentRepository = {
+  save: (postComment: PostComment) => Promise<void>;
+  getById: (id: PostComment["id"]) => Promise<PostComment | null>;
+};
 
 // In-memory data store
 // --------------------
 
-const postComments: Record<PostComment["id"], PostComment> = {};
+const postCommentsDataStore: Record<PostComment["id"], PostComment> = {};
 
 // Repository
 // ----------
 
-export const postCommentRepository = {
-  save: async (postComment: PostComment) => {
-    const parsedPostComment = parsePostComment(postComment); // Ensure post comment is valid before persisting
-    postComments[parsedPostComment.id] = parsedPostComment; // Persist post comment
+export const postCommentRepository: PostCommentRepository = {
+  save: async (postComment) => {
+    const parsedPostComment = parsePostComment(postComment);
+    postCommentsDataStore[parsedPostComment.id] = parsedPostComment;
   },
-  getById: async (id: PostComment["id"]) => {
-    const postComment = postComments[id]; // Fetch post comment from persistence (may be undefined)
-    return postComment ? parsePostComment(postComment) : null; // Ensure post comment is valid before returning
+  getById: async (id) => {
+    const postComment = postCommentsDataStore[id];
+    return postComment ? parsePostComment(postComment) : null;
   },
 };

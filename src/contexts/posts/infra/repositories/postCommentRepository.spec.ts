@@ -4,29 +4,31 @@ import { PostComment } from "../../core/entities/postComment";
 import { postCommentRepository } from "./postCommentRepository";
 
 describe("postCommentRepository", () => {
-  const validPostComment: PostComment = {
+  const VALID_POST_COMMENT: PostComment = {
     id: "postComment-1",
     postId: "post-1",
     authorId: "account-1",
     content: "A post comment",
   };
 
-  const invalidPostComment = {
-    ...validPostComment,
+  const INVALID_POST_COMMENT = {
+    ...VALID_POST_COMMENT,
     id: "INVALID_ID",
   };
 
-  test("It persists a valid postComment entity", async () => {
-    await postCommentRepository.save(validPostComment);
+  test("Should save a valid Post Comment and fetch it by it's ID", async () => {
+    await postCommentRepository.save(VALID_POST_COMMENT);
 
-    const persistedPostComment =
-      await postCommentRepository.getById("postComment-1");
+    const persistedPostComment = await postCommentRepository.getById(
+      VALID_POST_COMMENT.id
+    );
 
-    expect(persistedPostComment).toEqual(validPostComment);
+    expect(persistedPostComment).toEqual(VALID_POST_COMMENT);
   });
-  test("It throws an error if trying to persist an invalid postComment entity", async () => {
+
+  test("Should not save an invalid Post Comment", async () => {
     const saveInvalidPostComment = async () =>
-      await postCommentRepository.save(invalidPostComment);
+      await postCommentRepository.save(INVALID_POST_COMMENT);
 
     expect(saveInvalidPostComment).rejects.toThrowError();
   });

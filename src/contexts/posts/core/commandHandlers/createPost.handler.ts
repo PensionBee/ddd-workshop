@@ -5,12 +5,12 @@ import { z } from "zod";
 
 type Data = z.infer<typeof commandDataSchema>;
 type State = {
-  // TODO: COMPLETE ME!
+  // TODO: complete me
 };
 type Event = {
   type: "POST_CREATED";
   payload: {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   };
 };
 // TODO: ADD FAIL EVENTS
@@ -19,14 +19,14 @@ type Event = {
 // -------------------
 
 const commandDataSchema = z.object({
-  // TODO: COMPLETE ME!
+  // TODO: complete me
 });
 
 // Deriver
 // -------
 
 const deriveEvent = (data: Data, state: State): Event => {
-  // TODO: COMPLETE ME!
+  // TODO: complete me
 };
 
 // Command handler
@@ -40,7 +40,7 @@ export const handleCreatePost = async (commandData: Data): Promise<Event> => {
   // Step 2: Fetch relevant system 'state' (existing entities necessary to process the command)
   // ------------------------------------------------------------------------------------------
   const state: State = {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   };
 
   // Step 3: 'Derive an event' (given command data and fetched state)
@@ -51,7 +51,7 @@ export const handleCreatePost = async (commandData: Data): Promise<Event> => {
   // -------------------------------------------------------------
   switch (event.type) {
     case "POST_CREATED":
-      // TODO: COMPLETE ME!
+      // TODO: complete me
       break;
   }
 

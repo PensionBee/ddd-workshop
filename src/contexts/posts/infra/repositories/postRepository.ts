@@ -1,20 +1,24 @@
-import { Post, parsePost } from "~/contexts/posts/core/entities/post";
+import { type Post } from "../../core/entities/post";
+
+// Types
+// -----
+
+type PostRepository = {
+  save: (post: Post) => Promise<void>;
+  getById: (id: Post["id"]) => Promise<Post | null>;
+};
 
 // In-memory data store
 // --------------------
 
-const posts: Record<Post["id"], Post> = {};
+const postsDataStore: Record<Post["id"], Post> = {};
 
 // Repository
 // ----------
 
-export const postRepository = {
-  save: async (post: Post) => {
-    const parsedPost = parsePost(post); // Ensure post is valid before persisting
-    posts[parsedPost.id] = parsedPost; // Persist post
+export const postRepository: PostRepository = {
+  save: async (post) => {
+    postsDataStore[post.id] = post;
   },
-  getById: async (id: Post["id"]) => {
-    const post = posts[id]; // Fetch post from persistence (may be undefined)
-    return post ? parsePost(post) : null; // Ensure post is valid before returning
-  },
+  getById: async (id) => postsDataStore[id] ?? null,
 };

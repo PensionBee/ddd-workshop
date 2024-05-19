@@ -4,14 +4,15 @@ describe("handleCommentOnPost", () => {
   test("It successfully comments on a post", async () => {
     // Arrange
     // -------
-    // TODO: COMPLETE ME!
+    // TODO: complete me
     // Act
     // ---
-    // TODO: COMPLETE ME!
+    // TODO: complete me
     // Assert
     // ------
-    // TODO: COMPLETE ME!
+    // TODO: complete me
+    expect(true).toBe(false);
   });
 
-  // TODO: ADD TESTS FOR ALL POTENTIAL EVENTS!
+  // TODO: complete me
 });

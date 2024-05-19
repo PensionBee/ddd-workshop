@@ -75,7 +75,7 @@ export const accountRepository: AccountRepository = {
   },
   getByUsername: async (username) => {
     const account = Object.values(accountsDataStore).find(
-      (acc) => acc.email__field === username
+      (acc) => acc.username__field === username
     );
     return account ? toAccount(account) : null;
   },
