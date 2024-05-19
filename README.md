@@ -397,7 +397,7 @@ Remember to refer back to the EventStorming diagram often since we already did a
 
 For now, let's only focus on success **Events** to get used to the framework we're working with, i.e. assume `Post Published` is the only possible event.
 
-In **src/contexts/posts/core/commands/publishPost.handler.ts**:
+In **src/contexts/posts/core/commandHandlers/publishPost.handler.ts**:
 
 **Step 1: Parse incoming Command data...**
 
@@ -445,13 +445,13 @@ In **src/contexts/posts/core/commandHandlers/commentOnPost.handler.spec.ts**, co
 
 ### Part 3: Following an Account
 
-In **src/contexts/accounts/core/commands/followAccount.handler.ts**, complete the command handler as before.
+In **src/contexts/accounts/core/commandHandlers/followAccount.handler.ts**, complete the command handler as before.
 
 In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**, complete the test suite as before.
 
 ### Part 4: Blocking an Account
 
-In **src/contexts/accounts/core/commands/blockAccount.handler.ts**, complete the command handler as before.
+In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.ts**, complete the command handler as before.
 
 In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts**, complete the test suite as before.
 
@@ -461,6 +461,6 @@ Remember we mentioned that a command handler captures an "atomic change". Here's
 
 In all seriousness though, the oractical takeaway from this is that once you're relatively happy with an EventStorming diagram, you can basically go ahead and build each part in isolation of every other part, and in any order you want to or need to. And your tests will give you high confidence that things are going to work out relatively well when the time comes to hooking everything up into an end-to-end flow.
 
-In **src/contexts/accounts/core/commands/registerAccount.handler.ts**, complete the command handler as before.
+In **src/contexts/accounts/core/commandHandlers/registerAccount.handler.ts**, complete the command handler as before.
 
 In **src/contexts/accounts/core/commandHandlers/registerAccount.handler.spec.ts**, complete the test suite as before.
