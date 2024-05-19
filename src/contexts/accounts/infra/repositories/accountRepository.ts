@@ -1,56 +1,62 @@
+import { type Account } from "../../core/entities/account";
+
 // Types
 // -----
 
+type AccountRepository = {
+  save: (account: Account) => Promise<void>;
+  getById: (id: Account["id"]) => Promise<Account | null>;
+  getByEmail: (email: Account["email"]) => Promise<Account | null>;
+  getByUsername: (username: Account["username"]) => Promise<Account | null>;
+};
+
 /**
- * This type is a fake representation of a database schema. The in-memory
- * data store below only allows account entity data in this format, which
- * requires us to map between the two in the repository.
+ * This is a fake representation of a database schema. The in-memory
+ * data store below only allows account entity data in this format,
+ * which may require us to map between the two.
  */
-type AccountPersistenceData = {
-  id__c: string;
-  email__c: string;
-  username__c: string;
-  password__c: string;
-  followers__c: {
-    id__c: string;
-    follower_id__c: string;
-    followed_at__c: string;
+type AccountData = {
+  id: string;
+  email: string;
+  username: string;
+  password: string;
+  followers: {
+    id: string;
+    follower_id: string;
+    followed_at: string;
   }[];
 };
 
 // In-memory data store
 // --------------------
 
-const accounts: Record<
-  AccountPersistenceData["id__c"],
-  AccountPersistenceData
-> = {};
+const accounts: Record<AccountData["id"], AccountData> = {};
 
 // Mappers
 // -------
 
-const mapToAccount = (accountPersistenceData: any): any => {
-  // TODO: COMPLETE ME!
+const toAccount = (accountData: AccountData): Account => {
+  // TODO: complete me
 };
 
-const mapToAccountPersistenceData = (account: any): any => {
-  // TODO: COMPLETE ME!
+const toAccountData = (account: Account): AccountData => {
+  // TODO: complete me
 };
 
 // Repository
 // ----------
 
-export const accountRepository = {
+export const accountRepository: AccountRepository = {
   save: async () => {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   },
   getById: async () => {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   },
   getByEmail: async () => {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   },
   getByUsername: async () => {
-    // TODO: COMPLETE ME!
+    // TODO: complete me
   },
 };

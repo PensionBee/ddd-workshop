@@ -19,4 +19,5 @@ const postSchema = z.object({
 // Parser
 // ------
 
-export const parsePost = (data: Post): Post => postSchema.parse(data);
+export const parsePost = (data: Post | Record<string, unknown>): Post =>
+  postSchema.parse(data);

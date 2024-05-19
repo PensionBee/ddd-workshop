@@ -28,7 +28,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPost, id: invalidValue } as Post)
+        parsePost({ ...validPost, id: invalidValue })
       ).toThrowError();
     });
   });
@@ -46,7 +46,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPost, authorId: invalidValue } as Post)
+        parsePost({ ...validPost, authorId: invalidValue })
       ).toThrowError();
     });
   });
@@ -64,7 +64,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPost, title: invalidValue } as Post)
+        parsePost({ ...validPost, title: invalidValue })
       ).toThrowError();
     });
   });
@@ -82,7 +82,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPost, content: invalidValue } as Post)
+        parsePost({ ...validPost, content: invalidValue })
       ).toThrowError();
     });
   });
@@ -99,7 +99,7 @@ describe("parsePost", () => {
     ];
     invalidValues.forEach((invalidValue) => {
       expect(() =>
-        parsePost({ ...validPost, imageUrl: invalidValue } as Post)
+        parsePost({ ...validPost, imageUrl: invalidValue })
       ).toThrowError();
     });
   });
