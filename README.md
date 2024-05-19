@@ -4,92 +4,92 @@
 
 ## Context
 
-In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used events, commands and entities to design a solution for the problems our business is currently focused on...
+In the [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming) section of the workshop, we used **Events**, **Commands** and **Entities** to design a solution for the problems our business is currently focused on.
 
-![EventStorming Timeline with Bounded Contexts](./images/eventstorming-timeline-with-bounded-contexts.png)
+![EventStorming Timeline with Bounded Contexts](./assets/eventstorming-final.png)
 
-We've already modelled our entities as code in the [Values, Entities & Parsers](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers) section and built a mechanism for fetching and saving entities in the [Repositories & Persistence](https://github.com/PensionBee/ddd-workshop/tree/values-entities-and-parsers) section. In this section, we're going turn our command and event blocks into code via "Command Handlers".
+Now that we've modelled our **Entities** and added repositories for saving and fetching them in an "always valid" way, we can now turn our **Command** and **Event** elements into code using "command handlers".
 
-### Command Payloads
+But first, let's talk about payloads...
 
-We've already identified commands as an intent to change the state of our system but let's complete the picture by acknowledging that most commands are only meaningful when there's relevant data attached. For example:
+### Payloads
+
+We've already identified **Commands** as an intent to change the state of our system but we need to complete this picture by acknowledging that most **Commands** are only meaningful when there's relevant data attached. For example:
 
 ```ts
-type PayInvoiceCommand = {
-  type: "PAY_INVOICE";
-  data: {
-    invoiceId: string;
-    amountUSD: number;
-    paymentCurrency: "GBP" | "EUR" | "USD";
-    paymentCardId: string;
-  };
+type PayInvoicePayload = {
+  invoiceId: string;
+  amountUSD: number;
+  currency: "GBP" | "EUR" | "USD";
+  paymentCardId: string;
 };
 ```
 
-Without this data (also known as a payload), the `PAY_INVOICE` command would be meaningless to our system.
+Without this data, the `Pay Invoice` **Command** wouldn't be much use. Note that we'll use "command data" and "command payload" to mean the same thing moving forward.
 
 ### Command Handlers
 
-A command handler is a function which processes one specific command (with its data). Command handlers are not a universal concept but for this workshop we're going to lean on the two articles referenced in the "Resources" section below. As a result, we're defining a command handler as a function which carries out the following steps:
+A command handler is a function which processes one specific **Command** (with its payload). Command handlers are *not* a standard concept but we're borrowing heavily from the [Functional Domain Driven Design: Simplified](https://antman-does-software.com/functional-domain-driven-design-simplified) article to keep us away from "hardcore" Object-Oriented Programming or Functional Programming.
 
-1. Parse/validate incoming command data
-2. Fetch relevant system 'state' (existing entities necessary to process the command)
-3. 'Derive an event' (given command data and fetched state)
-4. Update the state of the system (for success events)
+As a result, we're going to define a command handler as a function which carries out the following steps:
 
-NB: we're assuming 2 main categories of events:
+1. Parse incoming **Command** data
+2. Fetch relevant 'state' (previously persisted **Entities** necessary to process the command)
+3. Derive an **Event** (given **Command** data and fetched state)
+4. Update the state of the system (for success **Events**)
 
-- Success events (capture change in the system)
-- Fail events (capture business rule violations; NOT technical errors)
+Remember we're assuming 2 types of **Events**:
+
+- Success **Events** (which result in changes to the system)
+- Fail **Events** (which explicitly capture business rule violations, *not* technical errors)
 
 Let's visualise this four step process with a JavaScript example:
 
 ```js
 import z from "zod";
 
-import { invoiceRepository } from "path/to/repositories/invoiceRepository.ts";
+import { invoiceRepository } from "path/to/repositories/invoiceRepository.ts"; // Repositories are about to be put to good use
 import { paymentCardRepository } from "path/to/repositories/paymentCardRepository.ts";
-import { InvalidCommandStateError } from "path/to/errors.ts";
 
-
-// COMMAND DATA SCHEMA
+// Command Data Schema
 // -------------------
 
-// Describes the expected command data (we're using zod here)
 const commandDataSchema = z.object({
   invoiceId: z.string().startsWith("invoice-"), // e.g. 'invoice-abjskPG188Ddkd2'
   amountUSD: z.number().positive(),
-  paymentCurrency: z.enum(["GBP", "EUR", "USD"]), // Must be one of these 3 values
+  currency: z.enum(["GBP", "EUR", "USD"]), // Must be one of these 3 values
   paymentCardId: z.string().startsWith("paymentCard-"), // e.g. 'paymentCard-18387stpPidDQ'
 });
 
-// DERIVER
+// Deriver
 // -------
 
 const deriveEvent = (data, state) => {
-  // We'll dive into this function a little later
+  // We'll look into this function shortly
 };
 
-// COMMAND HANDLER
+// Command Handler
 // ---------------
 
-// Processes the 'Pay Invoice' command
+// Processes the 'Pay Invoice' Command
 export const handlePayInvoice = async (commandData) => {
-  // Step 1: Parse/validate incoming command data
-  // --------------------------------------------
+  // Step 1: Parse incoming Command data
+  // -----------------------------------
+
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant system 'state' (existing entities necessary to process the command)
-  // ------------------------------------------------------------------------------------------
+  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
+  // -----------------------------------------------------------------------------------------------
+
   const invoice = await invoiceRepository.findById(data.invoiceId); // Returns an invoice or null
   const paymentCard = await paymentCardRepository.findById(data.paymentCardId); // Returns a payment card or null
 
-  // Throw an error if state doesn't meet basic requirements.
+  // Throw an error if 'state' doesn't meet essential basic requirements.
   if (!invoice) {
-    throw new InvalidCommandStateError("Invoice not found");
+    throw new Error("Invoice not found");
   }
   if (!paymentCard) {
-    throw new InvalidCommandStateError("Payment card not found");
+    throw new Error("Payment card not found");
   }
 
   const state = {
@@ -97,17 +97,19 @@ export const handlePayInvoice = async (commandData) => {
     paymentCard,
   };
 
-  // Step 3: 'Derive an event' (given command data and fetched state)
-  // ----------------------------------------------------------------------
-  const event = deriveEvent(data, state); // We'll dive into this function a little later
+  // Step 3: 'Derive an event' (given Command data and fetched state)
+  // ----------------------------------------------------------------
 
-  // Step 4: Update the state of the system (for success events)
-  // -------------------------------------------------------------
+  const Event = deriveEvent(data, state);
+
+  // Step 4: Update the state of the system (for success Events)
+  // -----------------------------------------------------------
+
   switch (event.type) {
     case "INVOICE_PAYMENT_INITIATED":
       await invoiceRepository.save({
         ...state.invoice,
-        status: event.payload.status, // Update the status using the event payload, e.g. "Initiated"
+        status: event.payload.status, // Use the Event payload to update the invoice
       });
       break;
   }
@@ -116,13 +118,13 @@ export const handlePayInvoice = async (commandData) => {
 };
 ```
 
-That's a lot to unpack but let's keep powering through for now. There's a more complete example a little further on.
+That's a lot to unpack but let's keep powering through for now.
 
 ### Events
 
-Events capture information about state changes in our system or change attempts which failed due to business rule violations.
+Events are first-class citizens in our system. They capture information about state changes or state change attempts which failed due to business rule violations.
 
-We can generalise an event like so:
+We can generalise an **Event** like so:
 
 ```ts
 type Event = {
@@ -131,7 +133,7 @@ type Event = {
 };
 ```
 
-This is what a success event might look like:
+Here's an example of a success **Event**:
 
 ```ts
 type InvoicePaymentInitiatedEvent = {
@@ -140,68 +142,72 @@ type InvoicePaymentInitiatedEvent = {
     invoiceId: string;
     status: "Initiated";
     amountUSD: number;
-    paymentCurrency: "GBP" | "EUR" | "USD";
+    currency: "GBP" | "EUR" | "USD";
     paymentCardId: string;
   };
 };
 ```
 
-NB: We also have the option to couple event payloads to their corresponding entities, e.g. `invoiceId: Invoice['id']` or `amountUSD: Invoice['amount']`. Coupling isn't always a bad thing and that's true here where events are generally coupled to entities anyway. This approach just makes the relationship more explicit.
+NB: We also have the option to couple **Event** payloads to their corresponding **Entities**, e.g. `invoiceId: Invoice['id']` or `amountUSD: Invoice['amount']`. Coupling isn't always a bad thing and that's true here given **Events** are strongly coupled to **Entities** anyway. This approach just makes the relationship more explicit.
 
-This is what a fail event might look like (here we're using a union to capture multiple possible fail events):
+Here are two examples of fail **Events** (note we're using a union to capture multiple possible reasons for a single failure):
 
 ```ts
-type InvoicePaymentFailedEvent =
+type InvoiceNotPaidEvent =
   | {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_ALREADY_PAID";
+      type: "INVOICE_NOT_PAID/ALREADY_PAID";
       payload: {
-        invoiceId: string;
+        invoiceId: Invoice['id'];
       };
     }
   | {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD";
+      type: "INVOICE_NOT_PAID/COOL_OFF_PERIOD_ACTIVE";
       payload: {
-        invoiceId: string;
+        invoiceId: Invoice['id'];
         hoursUntilCoolOffPeriodEnds: number;
       };
     };
 ```
 
+For fail events, the **Event** payload simply contains whatever information is useful for downstream processing of that failure.
+
 ### Derivers
 
-Derivers are functions dedicated to handling the business rules governing our domain. For example: `Invoices cannot be paid within a 'cool off' period - currently the first 48 hours after being issued` (this is a fake business rule for illustration purposes only).
+Derivers are functions dedicated to handling the business rules governing our domain. For example: `Invoices cannot be paid within a 'cool off' period of 48 hours after being issued`.
 
-*NB: Business rules are where a large part of the *essential complexity* in software systems comes from, i.e. the stuff we can't easily simplify or improve because the world is inherently complex. This is in contrast to *accidental complexity* (i.e. tech debt), which arises from things like poor coding standards, insufficient QA, poor architecture patterns, a lack of problem/solution exploration or excessive time pressure.*
+*Note that business rules are where a large part of the *essential complexity* in software systems comes from, i.e. the stuff we can't easily simplify or improve because the world is inherently complex. This is in contrast to *accidental complexity* (i.e. tech debt), which arises from things like poor coding standards, insufficient automated testing, poor architecture patterns, a lack of problem/solution exploration or excessive time pressure.*
 
-Derivers generally take data and state as arguments and return an event (a success event or a fail event). We can visualise this process like so:
+Derivers take data and state as arguments and return an **Event** (a success **Event** or a fail **Event**). We can visualise this process like so:
 
-![Deriver](./images/deriver.png)
+![Deriver](./assets/deriver.png)
 
-Derivers are simple functions. They carry out business logic checks one by one and if any check fails, the relevant fail event is returned. If all checks pass, a success event is returned. Additional business logic checks may be required if there are several possible success event for a given command.
+Derivers are simple functions by nature. They carry out business logic checks one at a time and if any check fails, the relevant fail **Event** is returned. If all checks pass, a success **Event** is returned. Additional business logic may be required if there are several possible success **Event** for a given **Command**.
 
-Here's an example deriver which we could call from the above command handler:
+Here's an example of a deriver for the above `handlePayInvoice` example
 
 ```js
 import { getDifferenceInHours } from "path/to/timeUtils.ts";
 
 const deriveEvent = (data, state) => {
-  const { amountUSD, paymentCurrency } = data;
+  const { amountUSD, currency } = data;
   const { invoice, paymentCard } = state;
 
+  // Check 1: has the invoice already been paid?
   if (invoice.status === "Paid") {
     return {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_ALREADY_PAID",
+      type: "INVOICE_NOT_PAID/ALREADY_PAID",
       payload: {
         invoiceId: invoice.id,
       },
     };
   }
 
+  // Check 2: is the invoice in it's cool off period?
   const now = new Date();
   const hoursSinceIssued = getDifferenceInHours(invoice.issuedAt, now);
   if (hoursSinceIssued < 48) {
     return {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
+      type: "INVOICE_NOT_PAID/COOL_OFF_PERIOD_ACTIVE",
       payload: {
         invoiceId: invoice.id,
         hoursUntilCoolOffPeriodEnds: 48 - hoursSinceIssued,
@@ -212,9 +218,13 @@ const deriveEvent = (data, state) => {
   // Additional business rule checks go here...
 
   /**
-   * NB: It's not unreasonable for a downstream process to be responsible for actually taking the payment.
-   * As a result, we're using an "INVOICE_PAYMENT_INITIATED" success event here rather than an "INVOICE_PAID"
-   * event. This leads us down the path towards event-driven systems, which we'll cover in a future session.
+   * All checks passed so return the relevant success event.
+   * 
+   * NB: It's not unreasonable for a downstream process to be responsible for actually
+   * taking the payment (using an 3rd party payment provider). As a result, we're using
+   * an "INVOICE_PAYMENT_INITIATED" success **Event** here rather than an "INVOICE_PAID"
+   * event. This leads us down the path towards event-driven systems, which we'll cover
+   * in the 'policies' section of the workshop.
    */
   return {
     type: "INVOICE_PAYMENT_INITIATED",
@@ -222,17 +232,16 @@ const deriveEvent = (data, state) => {
       invoiceId: invoice.id,
       status: "Initiated",
       amountUSD: amountUSD,
-      paymentCurrency: paymentCurrency,
+      currency: currency,
       paymentCardId: paymentCard.id,
     },
   };
 };
-
 ```
 
 ## TypeScriptification
 
-Let's pull everything together into a single example using TypeScript:
+Let's pull everything together into a single example and sprinkle in some TypeScript:
 
 ```ts
 import z from "zod";
@@ -241,10 +250,9 @@ import { type Invoice } from "path/to/entities/invoice.ts";
 import { type PaymentCard } from "path/to/entities/paymentCard.ts";
 import { invoiceRepository } from "path/to/repositories/invoiceRepository.ts";
 import { paymentCardRepository } from "path/to/repositories/paymentCardRepository.ts";
-import { InvalidCommandStateError } from "path/to/errors.ts";
 import { getDifferenceInHours } from "path/to/timeUtils.ts";
 
-// TYPES
+// Types
 // -----
 
 type Data = z.infer<typeof commandDataSchema>;
@@ -256,48 +264,47 @@ type Event =
   | {
       type: "INVOICE_PAYMENT_INITIATED";
       payload: {
-        invoiceId: string;
-        status: "Initiated";
-        amountUSD: number;
-        paymentCurrency: "GBP" | "EUR" | "USD";
-        paymentCardId: string;
+        invoiceId: Invoice['id'];
+        status: "Initiated" & Invoice['status']; // Ensures "Initiated" is a valid Invoice status
+        amountUSD: Invoice['amount'];
+        currency: Invoice['currency']
+        paymentCardId: Invoice['paymentCardId'];
       };
     }
   | {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_ALREADY_PAID";
+      type: "INVOICE_NOT_PAID/ALREADY_PAID";
       payload: {
-        invoiceId: string;
+        invoiceId: Invoice['id'];
       };
     }
   | {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD";
+      type: "INVOICE_NOT_PAID/COOL_OFF_PERIOD_ACTIVE";
       payload: {
-        invoiceId: string;
+        invoiceId: Invoice['id'];
         hoursUntilCoolOffPeriodEnds: number;
       };
     };
 
-// COMMAND DATA SCHEMA
+// Command Data Schema
 // -------------------
 
-// Describes the expected command data (we're using zod here)
 const commandDataSchema = z.object({
-  invoiceId: z.string().startsWith("invoice-"), // e.g. 'invoice-abjskPG188Ddkd2'
+  invoiceId: z.string().startsWith("invoice-"),
   amountUSD: z.number().positive(),
-  paymentCurrency: z.enum(["GBP", "EUR", "USD"]), // Must be one of these 3 values
-  paymentCardId: z.string().startsWith("paymentCard-"), // e.g. 'paymentCard-18387stpPidDQ'
+  currency: z.enum(["GBP", "EUR", "USD"]),
+  paymentCardId: z.string().startsWith("paymentCard-"),
 });
 
-// DERIVER
+// Deriver
 // -------
 
 const deriveEvent = (data: Data, state: State): Event => {
-  const { amountUSD, paymentCurrency } = data;
+  const { amountUSD, currency } = data;
   const { invoice, paymentCard } = state;
 
   if (invoice.status === "Paid") {
     return {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_ALREADY_PAID",
+      type: "INVOICE_NOT_PAID/ALREADY_PAID",
       payload: {
         invoiceId: invoice.id,
       },
@@ -308,7 +315,7 @@ const deriveEvent = (data: Data, state: State): Event => {
   const hoursSinceIssued = getDifferenceInHours(invoice.issuedAt, now);
   if (hoursSinceIssued < 48) {
     return {
-      type: "INVOICE_PAYMENT_FAILED/INVOICE_IN_COOL_OFF_PERIOD",
+      type: "INVOICE_NOT_PAID/COOL_OFF_PERIOD_ACTIVE",
       payload: {
         invoiceId: invoice.id,
         hoursUntilCoolOffPeriodEnds: 48 - hoursSinceIssued,
@@ -322,32 +329,32 @@ const deriveEvent = (data: Data, state: State): Event => {
       invoiceId: invoice.id,
       status: "Initiated",
       amountUSD: amountUSD,
-      paymentCurrency: paymentCurrency,
+      currency: currency,
       paymentCardId: paymentCard.id,
     },
   };
 };
 
-// COMMAND HANDLER
+// Command Handler
 // ---------------
 
-// Processes the 'Pay Invoice' command
 export const handlePayInvoice = async (commandData: Data): Promise<Event> => {
-  // Step 1: Parse/validate incoming command data
-  // --------------------------------------------
+  // Step 1: Parse incoming Command data
+  // -----------------------------------
+
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant system 'state' (existing entities necessary to process the command)
-  // ------------------------------------------------------------------------------------------
-  const invoice = await invoiceRepository.findById(data.invoiceId); // Returns an invoice or null
-  const paymentCard = await paymentCardRepository.findById(data.paymentCardId); // Returns a payment card or null
+  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
+  // -----------------------------------------------------------------------------------------------
 
-  // Throw an error if state doesn't meet basic requirements.
+  const invoice = await invoiceRepository.findById(data.invoiceId);
+  const paymentCard = await paymentCardRepository.findById(data.paymentCardId);
+
   if (!invoice) {
-    throw new InvalidCommandStateError("Invoice not found");
+    throw new Error("Invoice not found");
   }
   if (!paymentCard) {
-    throw new InvalidCommandStateError("Payment card not found");
+    throw new Error("Payment card not found");
   }
 
   const state: State = {
@@ -355,17 +362,19 @@ export const handlePayInvoice = async (commandData: Data): Promise<Event> => {
     paymentCard,
   };
 
-  // Step 3: 'Derive an event' (given command data and fetched state)
-  // ----------------------------------------------------------------------
-  const event = deriveEvent(data, state); // We'll dive into this function a little later
+  // Step 3: 'Derive an event' (given Command data and fetched state)
+  // ----------------------------------------------------------------
 
-  // Step 4: Update the state of the system (for success events)
-  // -------------------------------------------------------------
+  const Event = deriveEvent(data, state);
+
+  // Step 4: Update the state of the system (for success Events)
+  // -----------------------------------------------------------
+
   switch (event.type) {
     case "INVOICE_PAYMENT_INITIATED":
       await invoiceRepository.save({
         ...state.invoice,
-        status: event.payload.status, // Update the status using the event payload, e.g. "Initiated"
+        status: event.payload.status, 
       });
       break;
   }
@@ -374,75 +383,84 @@ export const handlePayInvoice = async (commandData: Data): Promise<Event> => {
 };
 ```
 
-Feel free to come back to this example as often as you need.
+## Additional Resources
+
+- ["Functional Domain Driven Design: Simplified" by Anthony Manning-Franklin](https://antman-does-software.com/functional-domain-driven-design-simplified)
 
 ## The Practical Bit
 
 *Note: each section of the workshop builds upon the previous one. You can check your solutions against the code found in the next section.*
 
-### Part 1: Creating a Post
+Remember to refer back to the EventStorming diagram often since we already did a lot of the hard work by thinking about possible **Events** and which **Entities** they belong to. Now we just need to map it into code.
 
-For now, let's only focus on success events to get used to the general pattern, i.e. assume `Post Created` is the only possible event.
+### Part 1: Publishing a Post
 
-In **src/contexts/posts/core/commands/createPost.handler.ts**:
+For now, let's only focus on success **Events** to get used to the framework we're working with, i.e. assume `Post Published` is the only possible event.
 
-**Step 1: Validate the incoming command data...**
+In **src/contexts/posts/core/commands/publishPost.handler.ts**:
 
-- Complete the `commandDataSchema` using zod.
+**Step 1: Parse incoming Command data...**
+
+1. Complete the `commandDataSchema` using `zod`.
   - *Hint: think about what data is necessary for creating a post.*
-  - *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though, especially when a command operates on an existing entity.*
+  - *Hint: It will likely be similar to the `postSchema` we defined previously. This won't always be the case though so best to keep them separate and accept a little duplication.*
 
-**Step 2: Use the command data to fetch relevant system 'state'...**
+**Step 2: Fetch relevant 'state'...**
 
-- Complete the `State` type, defining the entities, if any, which are required to process this command.
-  - *Hint: Do we need to make sure the `Account` entity exists before we create a post? i.e. is that something we expect to exist before we even process business rules.*
-- Complete the `fetchState` function, using the repositories we built previously to fetch the state we need.
+2. Complete the `State` type, defining the **Entities**, if any, which are required to process this command.
+  - *Hint: Do we need to make sure the `Account` **Entity** exists before we create a `Post`? Or can we just assume it exists?*
+3. Complete the `fetchState` function, using the repositories we built previously to fetch the state we need.
 
-**Step 3: Use the command data and fetched state to 'derive an event'...**
+**Step 3: Derive an Event...**
 
-- Complete the `Event` type, defining the possible events using the structure outlined above.
-  - *Hint: Remember, for now, we only care about the `Post Created` event.*
-- Complete the `deriveEvent` function, generating and return the possible events.
-  - *Hint: Since the payload for a successful event needs to capture the state change in the system, we'll likely need to generate a IDs in our deriver when new entities are created (unless you force calling code to provide the ID as part of the command data). In a production system, you'd probably want to use something like UUIDs or Nano IDs but feel free to use something like `Math.random()` for ease here.*
+4. Follow the `PostPublishedEvent` type definition to it's source and complete the payload.
+5. Complete the `deriveEvent` function, generating and returning a `PostPublishedEvent`.
+  - *Hint: Since the payload for a successful **Event** needs to capture the state change in the system, we'll need to generate an ID in our deriver when new **Entities** are created. In a production system, you'd probably want to use something like UUIDs or Nano IDs but feel free to use something like `Math.random()` for ease here.*
 
-**Step 4: For success events, update the state of the system...**
+**Step 4: Update the state of the system...**
 
-- Complete the `updateState` function - add a switch statement (or use 'if' logic), creating/modifying and persisting entities via repositories for any successful event.
+1. Complete the `updateState` function creating and persisting a `Post` **Entity** via the `postRepository`.
 
-**Step 5: Adding Tests...**
+**Step 5: Test it works...**
 
-Finally, let's write some tests for this command handler. This might seem a bit daunting at first but we've actually made testing at a feature level pretty simple by creating a standalone function, independent of infrastructure and API concerns, which fully encapsulates an atomic change within our system, including all the relevant business rules associated with that change.
+Finally, let's write some tests. This might seem like a daunting task but we've actually made testing at a feature level very simple by creating a standalone function responsible for fully encapsulating an atomic change within our system, including all the relevant business rules associated with the change. They're also particularly suited to *Arrange - Act - Assert* or *Given - When - Then* approaches to testing.
 
-The first test (for the success event) has already been written, using the 'Arrange - Act - Assert' testing approach, to illustrate one way to test command handlers. Let's add additional tests for each possible event (there should be one tests per event in our spec file).
+*Note that command handlers may be the most important area to focus your testing time and energy on if you have a limited supply of that. Sure, Entities, repositories, utilities, APIs and end-to-end user flows are all worth testing in their own right, but if the command handlers do what they're supposed to do, you can move onto those other tests with a lot of confidence and peace of mind.*
 
-In **src/contexts/posts/core/commandHandlers/createPost.handler.spec.ts**, for each event:
+The first test (for the success event) has already been set up using the *Arrange - Act - Assert* testing approach, to illustrate one way to test command handlers (*Given - When - Then* being the other primary candidate).
 
-- (ARRANGE) Set up the initial state by adding an account to the in-memory account store via the `accountRepository.save` method.
-- (ACT) Trigger `handleCreatePost` with the relevant command data.
-  - *Hint: the account ID should be the ID of the account we just created.*
-- (ASSERT) Check that the command handler event and payload is as expected.
-- (ASSERT) Check that a `Post` entity was correctly persisted.
-    *Hint: There should be a test for each event and in some tests we may need to assert that entities were NOT persisted.*
+In **src/contexts/posts/core/commandHandlers/publishPost.handler.spec.ts**, for each event:
+
+- (ARRANGE) Set up the initial state by adding an `Account` to the in-memory store via the `accountRepository.save` method.
+- (ACT) Trigger `handlePublishPost` with the relevant **Command** data.
+  - *Hint: the auther ID should be the ID of the account we just created.*
+- (ASSERT) Check that the  **Event** type and payload is as expected.
+- (ASSERT) Check that a `Post` **Entity** was correctly persisted by calling the `postRepository.getById` method and asserting on the response.
 
 ### Part 2: Commenting on a Post
 
-In **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.ts**, complete the command handler functions like we did in part 1 (Again, let's only focus on success events to reinforce the general pattern, i.e. assume `Comment Added to Post` is the only event.)
+In **src/contexts/posts/core/commandHandlers/commentOnPost.handler.ts**, complete the command handler like we did in part 1. This time, add fail **Events** in **src/contexts/posts/core/events/postComment.events.ts** and use those as potential responses from your `deriveEvent` function, i.e. turn `type Event = ...` into a union of all possible outcomes.
 
-In **src/contexts/posts/core/commandHandlers/CommentOnPost.handler.spec.ts**, complete the command handler tests like we did in part 1.
+In **src/contexts/posts/core/commandHandlers/commentOnPost.handler.spec.ts**, complete the test suite as before, only this time you should have 1 test per possible outcome, which ensures you cover all possible business rule violations.
 
 ### Part 3: Following an Account
 
-In **src/contexts/accounts/core/commands/followAccount.handler.ts**, complete the command handler functions like we did in parts 1 and 2
+In **src/contexts/accounts/core/commands/followAccount.handler.ts**, complete the command handler as before.
 
-In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**, complete the command handler tests like we did in parts 1 and 2.
+In **src/contexts/accounts/core/commandHandlers/followAccount.handler.spec.ts**, complete the test suite as before.
 
 ### Part 4: Blocking an Account
 
-In **src/contexts/accounts/core/commands/blockAccount.handler.ts**, complete the command handler functions like we did in parts 1, 2 and 3
+In **src/contexts/accounts/core/commands/blockAccount.handler.ts**, complete the command handler as before.
 
-In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts**, complete the command handler tests like we did in parts 1, 2 and 3.
+In **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts**, complete the test suite as before.
 
-## Additional Resources
+### Part 5: Registering an Account
 
-- [Functional Domain Driven Design: Simplified (15 minute read - well worth the time!)](https://antman-does-software.com/functional-domain-driven-design-simplified)
-- [Functional Event Sourcing Decider (15 minute read - get's gnarlier the further you read)](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider)
+Remember we mentioned that a command handler captures an "atomic change". Here's the proof. We've got everything else up and running and we haven't even written account registration functionality! It's a beautiful thing when it all comes together.
+
+In all seriousness though, the oractical takeaway from this is that once you're relatively happy with an EventStorming diagram, you can basically go ahead and build each part in isolation of every other part, and in any order you want to or need to. And your tests will give you high confidence that things are going to work out relatively well when the time comes to hooking everything up into an end-to-end flow.
+
+In **src/contexts/accounts/core/commands/registerAccount.handler.ts**, complete the command handler as before.
+
+In **src/contexts/accounts/core/commandHandlers/registerAccount.handler.spec.ts**, complete the test suite as before.

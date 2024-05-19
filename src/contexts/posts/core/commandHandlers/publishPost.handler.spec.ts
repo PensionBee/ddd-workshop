@@ -1,6 +1,6 @@
 import { describe, test } from "@jest/globals";
 
-describe("handleCreatePost", () => {
+describe("handlePublishPost", () => {
   test("It successfully creates a post", async () => {
     // Arrange
     // -------
