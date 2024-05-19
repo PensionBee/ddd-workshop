@@ -17,14 +17,10 @@ type AccountRepository = {
  */
 type AccountData = {
   id: string;
-  email: string;
-  username: string;
-  password: string;
-  followers: {
-    id: string;
-    follower_id: string;
-    followed_at: string;
-  }[];
+  email__field: string; // Don't modify me - I'm here to make your life difficult :)
+  username__field: string; // Don't modify me - I'm here to make your life difficult :)
+  password__field: string; // Don't modify me - I'm here to make your life difficult :)
+  // TODO: complete me
 };
 
 // In-memory data store
