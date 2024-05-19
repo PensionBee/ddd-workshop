@@ -134,7 +134,7 @@ function followUser(followerId: string, userToFollowId: string) {
     return "FAIL/USER_BLOCKED";
   }
 
-  // This is where we'd normally update the user's followers and persist the change (skipping here since the implementation isn't important)
+  // This is where we might update a user's followers in the database (skipping here since the implementation isn't important)
 
   return "SUCCESS/USER_FOLLOWED";
 }
@@ -159,22 +159,22 @@ followUser("user-1", "user-2"); // user with ID 'user-1' wants to follow user wi
  *
  * -----------------------------------------------------------------------------------------------------
  *
- * Write a utility type that takes a type that conforms to Record<string, unknown> type as an argument and returns a union of that type with null and undefined, i.e. SomeType ---> SomeType | null | undefined
+ * Write a 'utility type' that takes a type argument which must be either a User or a Post and returns a
+ * union of that specific type with both null and undefined, e.g. User ---> User | null | undefined
  *
  * Hint: Search for 'TS generics'
  * Hint: Search for 'TS generics extends'
  * Hint: Search for 'TS custom utility types with generics'
  */
 
-type NullishObject<T> = any;
+type NullishUserOrPost<T extends any> = any;
 
 // Example usage
-type NullishUser = NullishObject<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
-type NullishPost = NullishObject<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
+type NullishUser = NullishUserOrPost<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
+type NullishPost = NullishUserOrPost<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
 
-type ErrorTest1 = NullishObject<1>; // This should be an error because 1 is not an object
-type ErrorTest2 = NullishObject<"test">; // This should be an error because 'test' is not an object
-type ErrorTest3 = NullishObject<[5, 6, 7]>; // This should be an error because [5, 6, 7] is not an object
-
-// Export to make TS happy
-export {};
+// Expected errors
+type Error1 = NullishUserOrPost<{ test: "test" }>; // This should show an error because {test: 'test'} is neither a User or Post
+type Error2 = NullishUserOrPost<1>; // This should show an error because 1 is neither a User or Post
+type Error3 = NullishUserOrPost<"test">; // This should show an error because 'test' is neither a User or Post
+type Error4 = NullishUserOrPost<[1, 2, 3]>; // This should show an error because [1, 2, 3] is neither a User or Post

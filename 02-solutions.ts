@@ -122,7 +122,7 @@ function followUser(followerId: string, userToFollowId: string) {
     return "FAIL/USER_BLOCKED";
   }
 
-  // This is where we'd normally update the user's followers in the database (skipping here since the implementation isn't important)
+  // This is where we might update a user's followers in the database (skipping here since the implementation isn't important)
 
   return "SUCCESS/USER_FOLLOWED";
 }
@@ -134,15 +134,14 @@ followUser("user-1", "user-2");
  * BONUS PROBLEM SOLUTION
  */
 
-type NullishObject<T extends Record<string, unknown>> = T | null | undefined;
+type NullishUserOrPost<T extends User | Post> = T | null | undefined;
 
 // Example usage
-type NullishUser = NullishObject<User>; // Hovering over 'NullishUser' should show 'User | null | undefined'
-type NullishPost = NullishObject<Post>; // Hovering over 'NullishPost' should show 'Post | null | undefined'
+type NullishUser = NullishUserOrPost<User>;
+type NullishPost = NullishUserOrPost<Post>;
 
-type ErrorTest1 = NullishObject<1>; // This should be an error because 1 is not an object
-type ErrorTest2 = NullishObject<"test">; // This should be an error because 'test' is not an object
-type ErrorTest3 = NullishObject<[5, 6, 7]>; // This should be an error because [5, 6, 7] is not an object
-
-// Export to make TS happy
-export {};
+// Expected errors
+type Error1 = NullishUserOrPost<{ test: "test" }>;
+type Error2 = NullishUserOrPost<1>;
+type Error3 = NullishUserOrPost<"test">;
+type Error4 = NullishUserOrPost<[1, 2, 3]>;
