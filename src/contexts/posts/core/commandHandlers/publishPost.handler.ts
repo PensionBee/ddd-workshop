@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { publishEvent } from "../../../../shared/infra/pubSub";
 import { type PostPublishedEvent } from "../events/post.events";
 
 // Types
@@ -54,6 +55,11 @@ export const handlePublishPost = async (commandData: Data): Promise<Event> => {
       // TODO: complete me
       break;
   }
+
+  // Step 5: Publish the Event
+  // -------------------------
+
+  publishEvent(event);
 
   return event;
 };
