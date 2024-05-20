@@ -1,16 +1,14 @@
 # DDD Workshop
 
-Welcome to PensionBee's DDD Workshop! This training programme is designed to increasing confidence writing event-driven, DDD-centric code by bridging the gap between EventStorming and the downstream code one step at a time.
+Welcome to PensionBee's DDD Workshop! This training programme is designed to increasing confidence writing event-driven, DDD-centric code by bridging the gap between EventStorming and the code one step at a time.
 
-It's currently a work in progress but we expect it to be "complete" (we'll continue to tweak over time) in the coming weeks.
-
-A couple of notes about the workshop:
+A couple of notes:
 
 - TypeScript is the language of choice (there's a `TypeScript Foundations` section at the beginning of the workshop for those who are unfamiliar with TS or need a refresher.)
-- The content is heavily inspired by Anthony Manning-Franklin's [Functional Domain Driven Design: Simplified](https://antman-does-software.com/functional-domain-driven-design-simplified) article. Additional inspiration has been taken from Jeremie Chassaing's [Functional Event Sourcing Decider](https://thinkbeforecoding.com/post/2021/12/17/functional-event-sourcing-decider) article and Scott Wlaschin's [Domain Modeling Made Functional](https://pragprog.com/titles/swdddf/domain-modeling-made-functional/) book.
-- Examples and exercises are somewhat specific to the way PensionBee have chosen to implement DDD tactical patterns. Our approach embraces general pragmatic software design principles which are applicable to Object-Oriented Programming (OOP), Functional Programming (FP) and anything in-between.
+- The content is heavily inspired by Anthony Manning-Franklin's [Functional Domain Driven Design: Simplified](https://antman-does-software.com/functional-domain-driven-design-simplified) article.
+- Examples and exercises are somewhat specific to the way PensionBee have chosen to implement DDD tactical patterns. Our approach embraces pragmatic software design which is applicable to Object-Oriented Programming (OOP), Functional Programming (FP) and everything in-between.
 
-We genuinely hope you find this workshop as useful and fun as we've found it. Feel free to use it directly or fork it and modify it to suit your own needs.
+We genuinely hope you find this workshop as useful and as fun as we've found it. Feel free to use it directly or fork it and modify it to suit your own needs.
 
 Let's get to it...
 
