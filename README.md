@@ -29,14 +29,18 @@ You’re apprehended by the CEO at the coffee machine, just as you’re on the v
 >
 > Alright then, chop chop, let’s get to it.
 
-You return to your desk (coffeeless). This feels like a good time to try out this "Domain-Driven Design" thing you've heard so much about...
+You return to your desk (coffeeless). But you're excited. You feel it's time to try out this "Domain-Driven Design" thing you've heard so much about...
 
 ## Workshop Overview
 
-1. [TypeScript foundations](https://github.com/PensionBee/ddd-workshop/tree/typescript)
-2. [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/eventstorming)
-3. [Entities](https://github.com/PensionBee/ddd-workshop/tree/entities)
-4. [Repositories](https://github.com/PensionBee/ddd-workshop/tree/repositories-and-persistence)
-5. [Command handlers & derivers](https://github.com/PensionBee/ddd-workshop/tree/command-handlers-and-derivers)
-6. [Policies](https://github.com/PensionBee/ddd-workshop/tree/policies)
-7. [External systems](https://github.com/PensionBee/ddd-workshop/tree/external-systems)
+[01: TypeScript foundations](https://github.com/PensionBee/ddd-workshop/tree/01-typescript)
+
+[02: EventStorming](https://github.com/PensionBee/ddd-workshop/tree/02-eventstorming)
+
+[03: Entities](https://github.com/PensionBee/ddd-workshop/tree/03-entities)
+
+[04: Repositories](https://github.com/PensionBee/ddd-workshop/tree/04-repositories)
+
+[05: Command handlers](https://github.com/PensionBee/ddd-workshop/tree/05-command-handlers)
+
+[06: Policies](https://github.com/PensionBee/ddd-workshop/tree/06-policies)
