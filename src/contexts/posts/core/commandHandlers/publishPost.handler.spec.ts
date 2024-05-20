@@ -1,7 +1,7 @@
-import { describe, test } from "@jest/globals";
+import { describe, expect, test } from "@jest/globals";
 
 describe("handlePublishPost", () => {
-  test("It successfully creates a post", async () => {
+  test("It successfully publishes a post", async () => {
     // Arrange
     // -------
     // TODO: complete me
@@ -13,6 +13,4 @@ describe("handlePublishPost", () => {
     // TODO: complete me
     expect(true).toBe(false);
   });
-
-  // TODO: complete me
 });
