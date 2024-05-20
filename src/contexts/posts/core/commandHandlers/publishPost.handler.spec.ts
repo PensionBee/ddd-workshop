@@ -1,7 +1,7 @@
 import { describe, expect, test } from "@jest/globals";
 
 describe("handlePublishPost", () => {
-  test("It successfully publishes a post", async () => {
+  test("should publish a post", async () => {
     // Arrange
     // -------
     // TODO: complete me
