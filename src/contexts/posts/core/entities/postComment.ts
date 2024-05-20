@@ -8,7 +8,7 @@ export type PostComment = z.infer<typeof postCommentSchema>;
 // Schema
 // ------
 
-const postCommentSchema = z.object({
+export const postCommentSchema = z.object({
   id: z.string().startsWith("postComment-"),
   postId: z.string().startsWith("post-"),
   authorId: z.string().startsWith("account-"),

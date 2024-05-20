@@ -8,7 +8,7 @@ export type Account = z.infer<typeof accountSchema>;
 // Schemas
 // -------
 
-const accountSchema = z.object({
+export const accountSchema = z.object({
   id: z.string().startsWith("account-"),
   email: z.string().email(),
   username: z.string().min(6).max(32),

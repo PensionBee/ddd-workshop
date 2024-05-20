@@ -1,3 +1,4 @@
+import { type Account } from "../../../accounts/core/entities/account";
 import { type PostComment } from "../entities/postComment";
 
 // Success events
@@ -7,11 +8,20 @@ export type CommentAddedToPostEvent = {
   type: "COMMENT_ADDED_TO_POST";
   payload: {
     id: PostComment["id"];
-    // TODO: complete me
+    postId: PostComment["postId"];
+    authorId: PostComment["authorId"];
+    content: PostComment["content"];
   };
 };
 
 // Fail events
 // -----------
 
-// TODO: complete me
+export type CommentNotAddedToPostEvent = {
+  type: "COMMENT_NOT_ADDED_TO_POST/ACCOUNT_BLOCKED";
+  payload: {
+    postId: PostComment["postId"];
+    blockingAccountId: Account["id"];
+    blockedAccountId: Account["id"];
+  };
+};

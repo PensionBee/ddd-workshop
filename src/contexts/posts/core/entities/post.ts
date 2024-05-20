@@ -8,7 +8,7 @@ export type Post = z.infer<typeof postSchema>;
 // Schema
 // ------
 
-const postSchema = z.object({
+export const postSchema = z.object({
   id: z.string().startsWith("post-"),
   authorId: z.string().startsWith("account-"),
   title: z.string().min(8).max(64),

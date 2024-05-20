@@ -1,46 +1,52 @@
 import { z } from "zod";
 
 import { publishEvent } from "../../../../shared/infra/pubSub";
-import { type Account } from "../../../accounts/core/entities/account";
-import { accountRepository } from "../../../accounts/infra/repositories/accountRepository";
-import { postRepository } from "../../infra/repositories/postRepository";
-import { postSchema } from "../entities/post";
-import { type PostPublishedEvent } from "../events/post.events";
+import { accountRepository } from "../../infra/repositories/accountRepository";
+import { accountSchema, type Account } from "../entities/account";
+import {
+  type FollowerNotRemovedEvent,
+  type FollowerRemovedEvent,
+} from "../events/account.events";
 
 // Types
 // -----
 
 type Data = z.infer<typeof commandDataSchema>;
 type State = {
-  author: Account;
+  account: Account;
 };
-type Event = PostPublishedEvent;
+type Event = FollowerRemovedEvent | FollowerNotRemovedEvent;
 
 // Command data schema
 // -------------------
 
-const commandDataSchema = postSchema.pick({
-  authorId: true,
-  title: true,
-  content: true,
-  imageUrl: true,
+const commandDataSchema = z.object({
+  followerId: accountSchema.shape.id,
+  accountId: accountSchema.shape.id,
 });
 
 // Deriver
 // -------
 
 const deriveEvent = (data: Data, state: State): Event => {
-  const { title, content, imageUrl } = data;
-  const { author } = state;
+  const { followerId } = data;
+  const { account } = state;
+
+  if (account.followers.includes(followerId)) {
+    return {
+      type: "FOLLOWER_NOT_REMOVED/NOT_FOLLOWING",
+      payload: {
+        accountId: account.id,
+        followerId,
+      },
+    };
+  }
 
   return {
-    type: "POST_PUBLISHED",
+    type: "FOLLOWER_REMOVED",
     payload: {
-      id: Math.random().toString(), // Use something like UUID or NanoID in a real app
-      authorId: author.id,
-      title,
-      content,
-      imageUrl,
+      accountId: account.id,
+      followerId,
     },
   };
 };
@@ -48,7 +54,9 @@ const deriveEvent = (data: Data, state: State): Event => {
 // Command handler
 // ---------------
 
-export const handlePublishPost = async (commandData: Data): Promise<Event> => {
+export const handleRemoveFollower = async (
+  commandData: Data
+): Promise<Event> => {
   // Step 1: Parse incoming Command data
   // -----------------------------------
 
@@ -56,14 +64,14 @@ export const handlePublishPost = async (commandData: Data): Promise<Event> => {
 
   // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
   // -----------------------------------------------------------------------------------------------
-  const author = await accountRepository.getById(data.authorId);
 
-  if (!author) {
-    throw new Error("Author not found");
+  const account = await accountRepository.getById(data.accountId);
+  if (!account) {
+    throw new Error(`Account not found`);
   }
 
   const state: State = {
-    author,
+    account,
   };
 
   // Step 3: 'Derive an event' (given Command data and fetched state)
@@ -75,8 +83,11 @@ export const handlePublishPost = async (commandData: Data): Promise<Event> => {
   // -----------------------------------------------------------
 
   switch (event.type) {
-    case "POST_PUBLISHED":
-      postRepository.save(event.payload);
+    case "FOLLOWER_REMOVED":
+      accountRepository.save({
+        ...account,
+        followers: account.followers.filter((id) => id !== data.followerId),
+      });
       break;
   }
 

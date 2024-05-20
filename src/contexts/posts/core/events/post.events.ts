@@ -7,6 +7,9 @@ export type PostPublishedEvent = {
   type: "POST_PUBLISHED";
   payload: {
     id: Post["id"];
-    // TODO: complete me
+    authorId: Post["authorId"];
+    title: Post["title"];
+    content: Post["content"];
+    imageUrl: Post["imageUrl"];
   };
 };
