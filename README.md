@@ -44,3 +44,5 @@ You return to your desk (coffeeless). But you're excited. You feel it's time to 
 [05: Command handlers](https://github.com/PensionBee/ddd-workshop/tree/05-command-handlers)
 
 [06: Policies](https://github.com/PensionBee/ddd-workshop/tree/06-policies)
+
+[Final](https://github.com/PensionBee/ddd-workshop/tree/final)
