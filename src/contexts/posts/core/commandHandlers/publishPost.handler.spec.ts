@@ -5,36 +5,38 @@ import { Post } from "../entities/post";
 import { handlePublishPost } from "./publishPost.handler";
 
 describe("handlePublishPost", () => {
-  test("It successfully publishes a post", async () => {
+  test("should publish a post", async () => {
     // Arrange
     // -------
 
+    // Create test entities
     const POST_AUTHOR: Account = {
-      id: "account-123",
-      username: "johndoe",
-      email: "johndoe@test.com",
+      id: `account-${Math.random()}`,
+      username: `${Math.random()}`,
+      email: `${Math.random()}@test.com`,
       password: "password",
       followers: [],
       blockedAccounts: [],
     };
 
-    const POST_TO_PUBLISH: Post = {
-      id: "post-123",
+    // Persist entities
+    await accountRepository.save(POST_AUTHOR);
+
+    // Define command data
+    const PUBLISH_POST_DATA: Omit<Post, "id"> = {
       authorId: POST_AUTHOR.id,
       title: "My first post",
       content: "This is my first post",
       imageUrl: null,
     };
 
-    await accountRepository.save(POST_AUTHOR);
-
     // Act
     // ---
 
     const event = await handlePublishPost({
       authorId: POST_AUTHOR.id,
-      title: POST_TO_PUBLISH.title,
-      content: POST_TO_PUBLISH.content,
+      title: PUBLISH_POST_DATA.title,
+      content: PUBLISH_POST_DATA.content,
       imageUrl: null,
     });
 
@@ -45,9 +47,9 @@ describe("handlePublishPost", () => {
     expect(event.payload).toMatchObject({
       id: expect.any(String),
       authorId: POST_AUTHOR.id,
-      title: POST_TO_PUBLISH.title,
-      content: POST_TO_PUBLISH.content,
-      imageUrl: POST_TO_PUBLISH.imageUrl,
+      title: PUBLISH_POST_DATA.title,
+      content: PUBLISH_POST_DATA.content,
+      imageUrl: PUBLISH_POST_DATA.imageUrl,
     });
   });
 });

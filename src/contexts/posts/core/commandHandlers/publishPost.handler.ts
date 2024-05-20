@@ -36,7 +36,7 @@ const deriveEvent = (data: Data, state: State): Event => {
   return {
     type: "POST_PUBLISHED",
     payload: {
-      id: Math.random().toString(), // Use something like UUID or NanoID in a real app
+      id: `post-${Math.random()}`, // Use something like UUID or NanoID in a real app
       authorId: author.id,
       title,
       content,

@@ -54,7 +54,7 @@ const deriveEvent = (data: Data, state: State): Event => {
   return {
     type: "COMMENT_ADDED_TO_POST",
     payload: {
-      id: Math.random().toString(), // Use something like UUID or NanoID in a real app
+      id: `postComment-${Math.random()}`, // Use something like UUID or NanoID in a real app
       postId: post.id,
       authorId: commentor.id,
       content,
