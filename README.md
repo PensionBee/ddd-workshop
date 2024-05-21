@@ -115,3 +115,7 @@ Notice that the test suite for this repository doesn't do anything conceptually 
 - How would a SQL database compare with a NoSQL database for persisting **Entities** (especially complex **Aggregates**)?
 - What value do we get from writing repository tests? Do we get any value at all?
 - Let’s say we decide to use an in-memory repository for both local development and automated testing, and a cloud-based database repository in staging and production, how could we ensure the in-memory repository exhibits the exact same behaviour as the real repository?
+
+## Next Up
+
+That's us finished with the repositories section. Next up, [command handlers](https://github.com/PensionBee/ddd-workshop/tree/05-command-handlers)
