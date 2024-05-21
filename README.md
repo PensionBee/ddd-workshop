@@ -464,3 +464,7 @@ In all seriousness though, the oractical takeaway from this is that once you're 
 In **src/contexts/accounts/core/commandHandlers/registerAccount.handler.ts**, complete the command handler as before.
 
 In **src/contexts/accounts/core/commandHandlers/registerAccount.handler.spec.ts**, complete the test suite as before.
+
+## Next Up
+
+That's us finished with the command handlers section. Next up, [policies](https://github.com/PensionBee/ddd-workshop/tree/06-policies)
