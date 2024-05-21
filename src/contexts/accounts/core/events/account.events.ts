@@ -31,6 +31,14 @@ export type AccountBlockedEvent = {
   };
 };
 
+export type FollowerRemovedEvent = {
+  type: "FOLLOWER_REMOVED";
+  payload: {
+    accountId: Account["id"];
+    followerId: Account["id"];
+  };
+};
+
 // Fail events
 // -----------
 
@@ -62,5 +70,13 @@ export type AccountNotBlockedEvent = {
   payload: {
     blockerId: Account["id"];
     blockeeId: Account["id"];
+  };
+};
+
+export type FollowerNotRemovedEvent = {
+  type: "FOLLOWER_NOT_REMOVED/NOT_FOLLOWING";
+  payload: {
+    accountId: Account["id"];
+    followerId: Account["id"];
   };
 };
