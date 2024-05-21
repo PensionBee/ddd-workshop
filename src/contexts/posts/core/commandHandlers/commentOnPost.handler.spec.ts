@@ -4,10 +4,9 @@ import { type Account } from "../../../accounts/core/entities/account";
 import { accountRepository } from "../../../accounts/infra/repositories/accountRepository";
 import { postRepository } from "../../infra/repositories/postRepository";
 import { type Post } from "../entities/post";
-import { type PostComment } from "../entities/postComment";
 import { handleCommentOnPost } from "./commentOnPost.handler";
 
-describe("handlePublishPost", () => {
+describe("handleCommentOnPost", () => {
   test("should comment on a post", async () => {
     // Arrange
     // -------
@@ -54,11 +53,7 @@ describe("handlePublishPost", () => {
     // Act
     // ---
 
-    const event = await handleCommentOnPost({
-      postId: COMMENT_ON_POST_DATA.postId,
-      authorId: COMMENT_ON_POST_DATA.authorId,
-      content: COMMENT_ON_POST_DATA.content,
-    });
+    const event = await handleCommentOnPost(COMMENT_ON_POST_DATA);
 
     // Assert
     // ------
@@ -118,11 +113,7 @@ describe("handlePublishPost", () => {
     // Act
     // ---
 
-    const event = await handleCommentOnPost({
-      postId: COMMENT_ON_POST_DATA.postId,
-      authorId: COMMENT_ON_POST_DATA.authorId,
-      content: COMMENT_ON_POST_DATA.content,
-    });
+    const event = await handleCommentOnPost(COMMENT_ON_POST_DATA);
 
     // Assert
     // ------

@@ -68,13 +68,12 @@ const deriveEvent = (data: Data, state: State): Event => {
 export const handleCommentOnPost = async (
   commandData: Data
 ): Promise<Event> => {
-  // Step 1: Parse incoming Command data
-  // -----------------------------------
+  // Step 1: Parse command data
 
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
-  // -----------------------------------------------------------------------------------------------
+  // Step 2: Fetch state
+
   const post = await postRepository.getById(data.postId);
   if (!post) {
     throw new Error("Post not found");
@@ -93,13 +92,11 @@ export const handleCommentOnPost = async (
     commentor,
   };
 
-  // Step 3: 'Derive an event' (given Command data and fetched state)
-  // ----------------------------------------------------------------
+  // Step 3: Derive an event
 
   const event = deriveEvent(data, state);
 
-  // Step 4: Update the state of the system (for success Events)
-  // -----------------------------------------------------------
+  // Step 4: Update state
 
   switch (event.type) {
     case "COMMENT_ADDED_TO_POST":
@@ -107,8 +104,7 @@ export const handleCommentOnPost = async (
       break;
   }
 
-  // Step 5: Publish the Event
-  // -------------------------
+  // Step 5: Publish and return the event
 
   publishEvent(event);
 

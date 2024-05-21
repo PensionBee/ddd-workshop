@@ -45,7 +45,7 @@ const deriveEvent = (data: Data, state: State): Event => {
   return {
     type: "ACCOUNT_REGISTERED",
     payload: {
-      id: Math.random().toString(), // Use something like UUID or NanoID in a real app
+      id: `account-${Math.random()}`, // Use something like UUID or NanoID in a real app
       email,
       username,
       password, // Hash this in a real app
@@ -61,13 +61,12 @@ const deriveEvent = (data: Data, state: State): Event => {
 export const handleRegisterAccount = async (
   commandData: Data
 ): Promise<Event> => {
-  // Step 1: Parse incoming Command data
-  // -----------------------------------
+  // Step 1: Parse command data
 
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
-  // -----------------------------------------------------------------------------------------------
+  // Step 2: Fetch state
+
   const existingAccountByEmail = await accountRepository.getByEmail(data.email);
   const existingAccountByUsername = await accountRepository.getByUsername(
     data.username
@@ -78,13 +77,11 @@ export const handleRegisterAccount = async (
       existingAccountByEmail || existingAccountByUsername || null,
   };
 
-  // Step 3: 'Derive an event' (given Command data and fetched state)
-  // ----------------------------------------------------------------
+  // Step 3: Derive an event
 
   const event = deriveEvent(data, state);
 
-  // Step 4: Update the state of the system (for success Events)
-  // -----------------------------------------------------------
+  // Step 4: Update state
 
   switch (event.type) {
     case "ACCOUNT_REGISTERED":
@@ -92,8 +89,7 @@ export const handleRegisterAccount = async (
       break;
   }
 
-  // Step 5: Publish the Event
-  // -------------------------
+  // Step 5: Publish and return the event
 
   publishEvent(event);
 

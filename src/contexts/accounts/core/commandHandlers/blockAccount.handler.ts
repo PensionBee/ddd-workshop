@@ -13,8 +13,8 @@ import {
 
 type Data = z.infer<typeof commandDataSchema>;
 type State = {
-  blockingAccount: Account;
-  accountToBlock: Account;
+  blocker: Account;
+  blockee: Account;
 };
 type Event = AccountBlockedEvent | AccountNotBlockedEvent;
 
@@ -23,21 +23,21 @@ type Event = AccountBlockedEvent | AccountNotBlockedEvent;
 
 const commandDataSchema = z.object({
   blockerId: accountSchema.shape.id,
-  accountToBlockId: accountSchema.shape.id,
+  blockeeId: accountSchema.shape.id,
 });
 
 // Deriver
 // -------
 
-const deriveEvent = (data: Data, state: State): Event => {
-  const { blockingAccount, accountToBlock } = state;
+const deriveEvent = (_data: Data, state: State): Event => {
+  const { blocker, blockee } = state;
 
-  if (blockingAccount.blockedAccounts.includes(accountToBlock.id)) {
+  if (blocker.blockedAccounts.includes(blockee.id)) {
     return {
       type: "ACCOUNT_NOT_BLOCKED/ALREADY_BLOCKED",
       payload: {
-        blockerId: blockingAccount.id,
-        blockedAccountId: accountToBlock.id,
+        blockerId: blocker.id,
+        blockeeId: blockee.id,
       },
     };
   }
@@ -45,8 +45,8 @@ const deriveEvent = (data: Data, state: State): Event => {
   return {
     type: "ACCOUNT_BLOCKED",
     payload: {
-      blockerId: blockingAccount.id,
-      blockedAccountId: accountToBlock.id,
+      blockerId: blocker.id,
+      blockeeId: blockee.id,
     },
   };
 };
@@ -55,50 +55,46 @@ const deriveEvent = (data: Data, state: State): Event => {
 // ---------------
 
 export const handleBlockAccount = async (commandData: Data): Promise<Event> => {
-  // Step 1: Parse incoming Command data
-  // -----------------------------------
+  // Step 1: Parse command data
 
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
-  // -----------------------------------------------------------------------------------------------
-  const blockingAccount = await accountRepository.getById(data.blockerId);
-  if (!blockingAccount) {
+  // Step 2: Fetch state
+
+  const blocker = await accountRepository.getById(data.blockerId);
+  if (!blocker) {
     throw new Error("Blocking account not found");
   }
 
-  const accountToBlock = await accountRepository.getById(data.accountToBlockId);
-  if (!accountToBlock) {
+  const blockee = await accountRepository.getById(data.blockeeId);
+  if (!blockee) {
     throw new Error("Account to blcok not found");
   }
 
   const state: State = {
-    blockingAccount,
-    accountToBlock,
+    blocker,
+    blockee,
   };
 
-  // Step 3: 'Derive an event' (given Command data and fetched state)
-  // ----------------------------------------------------------------
+  // Step 3: Derive an event
 
   const event = deriveEvent(data, state);
 
-  // Step 4: Update the state of the system (for success Events)
-  // -----------------------------------------------------------
+  // Step 4: Update state
 
   switch (event.type) {
     case "ACCOUNT_BLOCKED":
       accountRepository.save({
-        ...state.blockingAccount,
+        ...state.blocker,
         blockedAccounts: [
-          ...state.blockingAccount.blockedAccounts,
-          event.payload.blockedAccountId,
+          ...state.blocker.blockedAccounts,
+          event.payload.blockeeId,
         ],
       });
       break;
   }
 
-  // Step 5: Publish the Event
-  // -------------------------
+  // Step 5: Publish and return the event
 
   publishEvent(event);
 

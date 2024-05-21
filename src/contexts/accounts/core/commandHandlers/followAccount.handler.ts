@@ -13,8 +13,8 @@ import {
 
 type Data = z.infer<typeof commandDataSchema>;
 type State = {
-  followerAccount: Account;
-  accountToFollow: Account;
+  follower: Account;
+  followee: Account;
 };
 type Event = AccountFollowedEvent | AccountNotFollowedEvent;
 
@@ -22,32 +22,32 @@ type Event = AccountFollowedEvent | AccountNotFollowedEvent;
 // -------------------
 
 const commandDataSchema = z.object({
-  blockerId: accountSchema.shape.id,
-  accountToFollowId: accountSchema.shape.id,
+  followerId: accountSchema.shape.id,
+  followeeId: accountSchema.shape.id,
 });
 
 // Deriver
 // -------
 
 const deriveEvent = (data: Data, state: State): Event => {
-  const { followerAccount, accountToFollow } = state;
+  const { follower, followee } = state;
 
-  if (accountToFollow.followers.includes(followerAccount.id)) {
+  if (followee.followers.includes(follower.id)) {
     return {
       type: "ACCOUNT_NOT_FOLLOWED/ALREADY_FOLLOWING",
       payload: {
-        followererId: followerAccount.id,
-        accountToFollowId: accountToFollow.id,
+        followerId: follower.id,
+        followeeId: followee.id,
       },
     };
   }
 
-  if (accountToFollow.blockedAccounts.includes(followerAccount.id)) {
+  if (followee.blockedAccounts.includes(follower.id)) {
     return {
       type: "ACCOUNT_NOT_FOLLOWED/BLOCKED",
       payload: {
-        followererId: followerAccount.id,
-        accountToFollowId: accountToFollow.id,
+        followerId: follower.id,
+        followeeId: followee.id,
       },
     };
   }
@@ -55,8 +55,8 @@ const deriveEvent = (data: Data, state: State): Event => {
   return {
     type: "ACCOUNT_FOLLOWED",
     payload: {
-      followererId: followerAccount.id,
-      accountFollowed: accountToFollow.id,
+      followerId: follower.id,
+      followeeId: followee.id,
     },
   };
 };
@@ -67,52 +67,43 @@ const deriveEvent = (data: Data, state: State): Event => {
 export const handleFollowAccount = async (
   commandData: Data
 ): Promise<Event> => {
-  // Step 1: Parse incoming Command data
-  // -----------------------------------
+  // Step 1: Parse command data
 
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
-  // -----------------------------------------------------------------------------------------------
-  const followerAccount = await accountRepository.getById(data.blockerId);
-  if (!followerAccount) {
+  // Step 2: Fetch state
+
+  const follower = await accountRepository.getById(data.followerId);
+  if (!follower) {
     throw new Error("Blocking account not found");
   }
 
-  const accountToFollow = await accountRepository.getById(
-    data.accountToFollowId
-  );
-  if (!accountToFollow) {
+  const followee = await accountRepository.getById(data.followeeId);
+  if (!followee) {
     throw new Error("Account to blcok not found");
   }
 
   const state: State = {
-    followerAccount,
-    accountToFollow,
+    follower,
+    followee,
   };
 
-  // Step 3: 'Derive an event' (given Command data and fetched state)
-  // ----------------------------------------------------------------
+  // Step 3: Derive an event
 
   const event = deriveEvent(data, state);
 
-  // Step 4: Update the state of the system (for success Events)
-  // -----------------------------------------------------------
+  // Step 4: Update state
 
   switch (event.type) {
     case "ACCOUNT_FOLLOWED":
       accountRepository.save({
-        ...state.followerAccount,
-        followers: [
-          ...state.followerAccount.followers,
-          event.payload.followererId,
-        ],
+        ...state.followee,
+        followers: [...state.followee.followers, event.payload.followerId],
       });
       break;
   }
 
-  // Step 5: Publish the Event
-  // -------------------------
+  // Step 5: Publish and return the event
 
   publishEvent(event);
 

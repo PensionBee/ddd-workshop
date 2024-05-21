@@ -49,13 +49,12 @@ const deriveEvent = (data: Data, state: State): Event => {
 // ---------------
 
 export const handlePublishPost = async (commandData: Data): Promise<Event> => {
-  // Step 1: Parse incoming Command data
-  // -----------------------------------
+  // Step 1: Parse command data
 
   const data = commandDataSchema.parse(commandData);
 
-  // Step 2: Fetch relevant 'state' (previously persisted Entities necessary to process the Command)
-  // -----------------------------------------------------------------------------------------------
+  // Step 2: Fetch state
+
   const author = await accountRepository.getById(data.authorId);
 
   if (!author) {
@@ -66,13 +65,11 @@ export const handlePublishPost = async (commandData: Data): Promise<Event> => {
     author,
   };
 
-  // Step 3: 'Derive an event' (given Command data and fetched state)
-  // ----------------------------------------------------------------
+  // Step 3: Derive an event
 
   const event = deriveEvent(data, state);
 
-  // Step 4: Update the state of the system (for success Events)
-  // -----------------------------------------------------------
+  // Step 4: Update state
 
   switch (event.type) {
     case "POST_PUBLISHED":
@@ -80,8 +77,7 @@ export const handlePublishPost = async (commandData: Data): Promise<Event> => {
       break;
   }
 
-  // Step 5: Publish the Event
-  // -------------------------
+  // Step 5: Publish and return the event
 
   publishEvent(event);
 

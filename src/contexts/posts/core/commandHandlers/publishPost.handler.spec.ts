@@ -1,7 +1,6 @@
 import { describe, expect, test } from "@jest/globals";
 import { Account } from "../../../accounts/core/entities/account";
 import { accountRepository } from "../../../accounts/infra/repositories/accountRepository";
-import { Post } from "../entities/post";
 import { handlePublishPost } from "./publishPost.handler";
 
 describe("handlePublishPost", () => {
@@ -23,22 +22,17 @@ describe("handlePublishPost", () => {
     await accountRepository.save(POST_AUTHOR);
 
     // Define command data
-    const PUBLISH_POST_DATA: Omit<Post, "id"> = {
+    const PUBLISH_POST_DATA = {
       authorId: POST_AUTHOR.id,
       title: "My first post",
       content: "This is my first post",
       imageUrl: null,
-    };
+    } satisfies Parameters<Awaited<typeof handlePublishPost>>[0];
 
     // Act
     // ---
 
-    const event = await handlePublishPost({
-      authorId: POST_AUTHOR.id,
-      title: PUBLISH_POST_DATA.title,
-      content: PUBLISH_POST_DATA.content,
-      imageUrl: null,
-    });
+    const event = await handlePublishPost(PUBLISH_POST_DATA);
 
     // Assert
     // ------
