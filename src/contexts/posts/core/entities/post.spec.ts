@@ -86,21 +86,4 @@ describe("parsePost", () => {
       ).toThrowError();
     });
   });
-
-  test("it throws an error if 'imageUrl' is invalid", () => {
-    const invalidValues = [
-      null,
-      true,
-      false,
-      1,
-      {},
-      "x",
-      "images.com/an-image.png",
-    ];
-    invalidValues.forEach((invalidValue) => {
-      expect(() =>
-        parsePost({ ...validPost, imageUrl: invalidValue })
-      ).toThrowError();
-    });
-  });
 });

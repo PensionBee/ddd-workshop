@@ -2,7 +2,7 @@ import { describe, expect, test } from "@jest/globals";
 
 import { type Account } from "../../core/entities/account";
 
-describe("accountRepository", async () => {
+describe("accountRepository", () => {
   const VALID_ACCOUNT: Account = {
     // TODO: complete me
   };
