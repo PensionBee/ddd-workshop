@@ -166,3 +166,7 @@ THe chances are you've managed to create a useful model of the problem space whi
 ## Example Solutions
 
 Example solutions, which we'll use for the coming sections of the workshop, can be found in **SOLUTIONS.md** on this branch.
+
+## Next Up
+
+That's us finished with the EventStorming section. Next up, [Entities](https://github.com/PensionBee/ddd-workshop/tree/03-entities)
