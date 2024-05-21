@@ -12,3 +12,7 @@
 1. First, run `nvm use` then `npm install` to make sure you have the necessary typescript support to work through the problem set.
 2. Tackle the 6 problems (plus the bonus problem if you're feeling up to it) in **01-problems.ts**.
 3. Compare your solutions with those in **02-solutions.ts**.
+
+## Next Up
+
+That's us finished with the TypeScript foundations section. Next up, [EventStorming](https://github.com/PensionBee/ddd-workshop/tree/02-eventstorming)
