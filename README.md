@@ -224,3 +224,7 @@ We already have an existing `Account` **Entity** in our `Accounts` bounded conte
 
 - What value are we getting from our parser tests? Do they have value here?
 - If you're answer to the above was "no" (which is neither right or wrong), are there situations where theses tests *would* be valuable?
+
+## Next Up
+
+That's us finished with the **Entities** section. Next up, [repositories](https://github.com/PensionBee/ddd-workshop/tree/04-repositories)
