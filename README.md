@@ -14,7 +14,7 @@ We now have the foundational building blocks to start moving into event-driven t
 >
 > "Lasagne, but that's not the point. The point is that I blocked her on Tuesday but she's still seeing my stuff."
 >
-> "Ohh, right. Whoops. Sorry..."
+> "Ohh, right. Whoops..."
 
 We've failed to account for the requirement that blocking an account should automatically remove that follower from your account. Let's rectify that. But not in the code, that'd be jumping the gun a little. Let's head back over to our EventStorming diagram to sanity check that what we're doing makes sense in the wider context. We might discover various different ways to approach this problem and we can do that 'cheaply' on our diagram.
 
@@ -36,11 +36,11 @@ Easy peelers, right? Now we just have to turn it into code...
 
 ### Publish / Subscribe
 
-Let's lean on a long standing pattern, the "Publish / Subscribe" pattern. The concept is pretty simple. Subscribers subscribe to **Events** they care about on a message bus. When an **Event** a subscriber cares about is published on the bus, the subscriber is notified and runs whatever code it needs to run.
+Let's lean on the long standing "Publish / Subscribe" pattern, which is conceptually pretty simple. Subscribers specify the **Events** they care about and when that **Event** is published on a message bus, the subscriber is notified so it can do whatever it needs to do.
 
-Two functions, `publishEvent` and `subscribeToEvent` have been added in **src/shared/infra/pubSub.ts** to make it easy to use this pattern. It uses Node's built-in `EventEmitter` under the hood to hook things up. Go check it out if you're interested.
+To get this working in practice, we've added a 5th step to all of our command handlers, which calls a `publishEvent` utility function (defined in **src/shared/infra/pubSub.ts**) with whichever **Event** was returned from the `deriveEvent` function. Under the hood, `publishEvent` just uses Node's `EventEmitter` class.
 
-An additional step has also been added to each command handler. This step calls `publishEvent(event)` to push the **Event** returned from the deriver onto the "message bus".
+We've also added a `configurePolicy` utility in **src/shared/core/policies.ts**, which hooks up policies to work with the same `EventEmitter` instance that `publishEvent` uses. With this, we can now configure which **Commands** we want to run when specific **Events** occur.
 
 ## Additional Resources
 
@@ -48,22 +48,30 @@ An additional step has also been added to each command handler. This step calls 
 
 ## The Practical Bit
 
-Let's start out by adding our new command handler and the associated **Events**.
+Let's start out by adding our new command handler and it's associated **Events**.
 
-1. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.ts**, complete the command handler.
-2. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.spec.ts**, complete the test suite.
+1. In **src/contexts/accounts/core/events/account.events.ts**, add representations of the new **Events**.
+2. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.ts**, complete the command handler.
+3. In **src/contexts/accounts/core/commandHandlers/removeFollower.handler.spec.ts**, complete the test suite.
 
-Next, we need to set up the policy.
+Next, we need to configure the policy.
 
-3. In **src/contexts/accounts/core/policies.ts**, update the three "update me" placeholders in the `subscribeToEvent` function call by **a)** passing in the `Account Blocked` **Event** type as the "type argument" in the angled brackets, **b)** modifying the `type` value to be the type (name) of the **Event** we're subscribing to, and **c)** updating the policy name to be representative of the action we're taking off the back of the account being blocked.
-4. Next, complete the the event handler function by calling the `removeFollower` command handler we just set up. Note that we can access the payload of the **Event** we're subscribing to in order to achieve this.
+4. In **src/contexts/accounts/core/policies.ts**, update the three "update me" placeholders in the `configurePolicy` function call by...
 
-That's it, we're pretty much done. Now all we'd need to do is call `setUpAccountPolicies` as part of this backend service's "bootstrap" code and our policy would be up and running as expected.
+**a)** passing in the `Account Blocked` **Event** type as the "type argument" (inside the angled brackets)
 
-In fact, go ahead and add `setUpAccountPolicies()` near the top of **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts** and run that test suite. You should see something in the terminal similar to this:
+**b)** modifying the `event` value to be the type (name) of the **Event** we care about
 
-> REMOVE_FOLLOWER handler successfully handled BLOCK_ACCOUNT event
+**c)** updating the "action name" to represent the action we're taking.
 
-We now have enough knowledge to start building much more complex event-driven systems. This comes with a bunch of challenges in it's own right but that's simply the trade-off against being able to write highly atomic, testable command handlers (which one day might live in different microservices).
+5. Next, complete the the action function by calling the `handleRemoveFollower` function we just created. Note that we can access the payload of the **Event** that triggered the action in order to achieve this.
 
-Remember though, you can explore a whole lot more in a much shorter time on an EventStorming diagram than you can in code. This holds true for event-driven systems as it does for simple systems with standalone functionality. Use it to your advantage.
+That's it, we're pretty much done. Now all we'd need to do is call `configureAccountPolicies` as part of this service's setup code and our policy would be up and running.
+
+In fact, go ahead and add `configureAccountPolicies()` near the top of **src/contexts/accounts/core/commandHandlers/blockAccount.handler.spec.ts** and run that test suite. You should see something like this in the terminal:
+
+> REMOVE_FOLLOWER action executed successfully in response to ACCOUNT_BLOCKED event
+
+We now have enough knowledge to start building out much more complex event-driven systems. This comes with challenges of it's own but that's a trade-off that's often worth accepting given we can now write highly testable, atomic command handlers.
+
+Remember that you can explore complex event-driven systems much more effectively in an EventStorming session than you can by writing code. Now that you've seen how easy it is to convert EventStorming diagrams into code, use it to your advantage as often as you can.

@@ -1,9 +1,9 @@
-import { subscribeToEvent } from "../../../shared/infra/pubSub";
+import { configurePolicy } from "../../../shared/core/policies";
 
-export const setUpAccountPolicies = () => {
-  subscribeToEvent<UpdateMe>({
-    type: "UPDATE_ME",
-    handlers: {
+export const configureAccountPolicies = () => {
+  configurePolicy<UpdateMe>({
+    event: "UPDATE_ME",
+    actions: {
       UPDATE_ME: async (eventPayload) => {
         // TODO: complete me
       },
