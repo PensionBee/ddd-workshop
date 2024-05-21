@@ -2,7 +2,10 @@ import { describe, expect, test } from "@jest/globals";
 
 import { accountRepository } from "../../infra/repositories/accountRepository";
 import { type Account } from "../entities/account";
+import { configureAccountPolicies } from "../policies";
 import { handleBlockAccount } from "./blockAccount.handler";
+
+configureAccountPolicies();
 
 describe("handleBlockAccount", () => {
   test("should block an account", async () => {
@@ -103,7 +106,7 @@ describe("handleBlockAccount", () => {
       blockeeId: BLOCKEE.id,
     });
 
-    const updatedBlocker = await accountRepository.getById(BLOCKER.id);
-    expect(updatedBlocker!.blockedAccounts).toContain(BLOCKEE.id);
+    const nonUpdatedBlocker = await accountRepository.getById(BLOCKER.id);
+    expect(nonUpdatedBlocker!.blockedAccounts).toContain(BLOCKEE.id);
   });
 });

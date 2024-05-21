@@ -1,11 +1,18 @@
-import { subscribeToEvent } from "../../../shared/infra/pubSub";
+import { configurePolicy } from "../../../shared/core/policies";
+import { handleRemoveFollower } from "./commandHandlers/removeFollower.handler";
+import { AccountBlockedEvent } from "./events/account.events";
 
-export const setUpAccountPolicies = () => {
-  subscribeToEvent<UpdateMe>({
-    type: "UPDATE_ME",
-    handlers: {
-      UPDATE_ME: async (eventPayload) => {
-        // TODO: complete me
+export const configureAccountPolicies = () => {
+  configurePolicy<AccountBlockedEvent>({
+    event: "ACCOUNT_BLOCKED",
+    actions: {
+      REMOVE_FOLLOWER: async (eventPayload) => {
+        const { blockerId: accountId, blockeeId: followerId } = eventPayload;
+
+        handleRemoveFollower({
+          accountId,
+          followerId,
+        });
       },
     },
   });

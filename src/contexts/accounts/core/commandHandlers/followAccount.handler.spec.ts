@@ -103,8 +103,8 @@ describe("handleFollowAccount", () => {
       followeeId: FOLLOWEE.id,
     });
 
-    const updatedFollowee = await accountRepository.getById(FOLLOWEE.id);
-    expect(updatedFollowee!.followers).not.toContain(FOLLOWER.id);
+    const nonUpdatedFollowee = await accountRepository.getById(FOLLOWEE.id);
+    expect(nonUpdatedFollowee!.followers).not.toContain(FOLLOWER.id);
   });
 
   test("should not follow an account if the follower is already following the followee", async () => {
@@ -154,7 +154,7 @@ describe("handleFollowAccount", () => {
       followeeId: FOLLOWEE.id,
     });
 
-    const updatedFollowee = await accountRepository.getById(FOLLOWEE.id);
-    expect(updatedFollowee!.followers).toContain(FOLLOWER.id);
+    const nonUpdatedFollowee = await accountRepository.getById(FOLLOWEE.id);
+    expect(nonUpdatedFollowee!.followers).toContain(FOLLOWER.id);
   });
 });
