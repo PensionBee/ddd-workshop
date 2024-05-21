@@ -39,21 +39,3 @@ export const configurePolicy = <TEvent extends Event>(args: {
     eventEmitter.on(event, handleEvent);
   });
 };
-
-export const logPoliciesOverview = () => {
-  const overview =
-    "-".repeat(75) +
-    "\n" +
-    Object.entries(policies)
-      .map(
-        ([event, actions]) =>
-          `${event} event has been configured to trigger...\n` +
-          actions.map((action) => `    ${action}`).join("\n")
-      )
-      .join("\n") +
-    "\n" +
-    "-".repeat(75) +
-    "\n";
-
-  console.log(overview);
-};
