@@ -75,3 +75,7 @@ In fact, go ahead and add `configureAccountPolicies()` near the top of **src/con
 We now have enough knowledge to start building out much more complex event-driven systems. This comes with challenges of it's own but that's a trade-off that's often worth accepting given we can now write highly testable, atomic command handlers.
 
 Remember that you can explore complex event-driven systems much more effectively in an EventStorming session than you can by writing code. Now that you've seen how easy it is to convert EventStorming diagrams into code, use it to your advantage as often as you can.
+
+## Next Up
+
+That's us finished with the policies section. Check out the [final solutions](https://github.com/PensionBee/ddd-workshop/tree/final)
