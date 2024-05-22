@@ -55,6 +55,7 @@ type Post = {
   content?: string;
   imageUrl?: string;
 };
+
 const post1: Post = {
   id: 1,
   userId: 1,
@@ -139,7 +140,7 @@ function followUser(followerId: string, userToFollowId: string) {
     return "FAIL/USER_BLOCKED";
   }
 
-  // This is where we might update a user's followers in the database (skipping here since the implementation isn't important)
+  // Update the user's followers...
 
   return "SUCCESS/USER_FOLLOWED";
 }
