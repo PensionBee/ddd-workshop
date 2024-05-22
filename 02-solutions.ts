@@ -1,5 +1,7 @@
 /**
- * PROBLEM 1 SOLUTION
+ * ---------
+ * PROBLEM 1
+ * ---------
  */
 
 const id: number = 1;
@@ -12,7 +14,9 @@ const favouriteTopics: string[] = [
 ];
 
 /**
- * PROBLEM 2 SOLUTION
+ * ---------
+ * PROBLEM 2
+ * ---------
  */
 
 type User = {
@@ -38,7 +42,9 @@ const user2: User = {
 };
 
 /**
- * PROBLEM 3 SOLUTION
+ * ---------
+ * PROBLEM 3
+ * ---------
  */
 
 type Post = {
@@ -66,7 +72,9 @@ const post2: Post = {
 };
 
 /**
- * PROBLEM 4 SOLUTION
+ * ---------
+ * PROBLEM 4
+ * ---------
  */
 
 const allPosts = [post1, post2];
@@ -75,9 +83,6 @@ function getPostsByUserId(userId: number): Post[] {
   return allPosts.filter((post) => post.userId === userId);
 }
 
-// Example usage
-const userPosts = getPostsByUserId(1);
-
 async function getPostById(id: number | string): Promise<Post | undefined> {
   if (typeof id === "string") {
     return allPosts.find((post) => post.id === parseInt(id));
@@ -85,12 +90,17 @@ async function getPostById(id: number | string): Promise<Post | undefined> {
   return allPosts.find((post) => post.id === id);
 }
 
-// Example usage
+// USAGE
+// -----
+
+const userPosts = getPostsByUserId(1);
 const postByNumberId = getPostById(1);
 const postByStringId = getPostById("1");
 
 /**
- * PROBLEM 5 SOLUTION
+ * ---------
+ * PROBLEM 5
+ * ---------
  */
 
 type UnknownData = Record<string, unknown>;
@@ -99,14 +109,21 @@ function processAPIRequest(data: UnknownData): string {
   return `API request processed with data: ${JSON.stringify(data)}`;
 }
 
-// Example usage
+// USAGE
+// -----
+
 processAPIRequest({
   foo: "foo",
   bar: "bar",
 });
+processAPIRequest({
+  baz: "baz",
+});
 
 /**
- * PROBLEM 6 SOLUTION
+ * ---------
+ * PROBLEM 6
+ * ---------
  */
 
 type FollowUserPossibleOutcomes = ReturnType<typeof followUser>;
@@ -131,16 +148,22 @@ function followUser(followerId: string, userToFollowId: string) {
 followUser("user-1", "user-2");
 
 /**
- * BONUS PROBLEM SOLUTION
+ * -------------
+ * BONUS PROBLEM
+ * -------------
  */
 
 type NullishUserOrPost<T extends User | Post> = T | null | undefined;
 
-// Example usage
+// USAGE
+// -----
+
 type NullishUser = NullishUserOrPost<User>;
 type NullishPost = NullishUserOrPost<Post>;
 
-// Expected errors
+// ERRORS
+// ------
+
 type Error1 = NullishUserOrPost<{ test: "test" }>;
 type Error2 = NullishUserOrPost<1>;
 type Error3 = NullishUserOrPost<"test">;
