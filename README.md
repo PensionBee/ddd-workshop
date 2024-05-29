@@ -191,9 +191,11 @@ Let's have another look at the EventStorming diagram we're using to guide the co
 
 We have 3 entities at play: `Account`, `Post` and `Post Comment`. Let's turn those into code.
 
-### Part 1: Modelling a Post
+When we model **Entities** in our software, we're trying to capture the essential attributes (and relationships) which define that domain concept. To do this, it can be helpful to look at all of the events associated with each entity and evaluate how each event impacts it. How can those changes be captured on the entities themself. For example:
 
-When we model **Entities** in our domain, we're trying to capture the essential attributes which define that domain concept. Too few attributes and we miss important details. Too many and we might clutter our **Entities** with redundant details. We want to capture everything we *need* now and embrace that we'll likely need to modify the definition of our **Entities** over time.
+![Account with Events](./assets/entities-with-events.png)
+
+### Part 1: Modelling a Post
 
 1. In **src/contexts/posts/core/entities/post.ts**, complete the `postSchema` using [zod](https://github.com/colinhacks/zod).
 
